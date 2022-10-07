@@ -1,0 +1,75 @@
+$background_color:#f5f5f5;
+$brand_color:#1363DF;
+
+
+main{
+    background-color: $background_color;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+//special heading
+.special-heading{
+    &:after{
+        content:"";
+        width: 75px;
+        height: 3px;
+        background-color: $brand_color;
+        display: block;
+        margin-top: 10px;
+        
+   
+  
+
+    }
+}
+
+
+.cart{
+    .product{
+        .product-image{
+            height: 100%;
+            img{
+                width: 100%;    
+                height: 100%;
+            }
+        }
+        .product-info{
+
+           
+        }
+        .product-price-quantity
+        {
+            .quantity{
+                .plus{
+                    background-color: $brand_color;;
+                    cursor: pointer;
+                    color:#FFF;
+                }
+                .minus{
+                    background-color: $brand_color;;
+                    cursor: pointer;
+                    color: #FFF;
+                }
+            }
+        }
+    }
+    .payment{
+
+        .custom-btn{
+            color: #333;
+            font-size: 17px;
+            font-weight: 400;
+            outline: none;
+            border: none;
+            background-color: $brand_color;
+            color: #FFF;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+            &:hover{
+                color:$brand_color;
+                background-color: $background_color;
+            }
+        }
+    }
+}
