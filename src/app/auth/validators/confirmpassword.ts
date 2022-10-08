@@ -1,6 +1,6 @@
 import { AbstractControl } from "@angular/forms";
 
-export function ConfirmPasswordValidator(control:AbstractControl)
+export function ConfirmPasswordValidator(control:AbstractControl )
 {
     const password=control.get('password');
     const confirmpassword=control.get('confirmpassword');
