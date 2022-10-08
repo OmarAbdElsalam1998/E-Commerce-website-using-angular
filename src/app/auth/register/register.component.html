@@ -10,18 +10,34 @@
                             </div>
                             </div>
                             <div class="login-form p-3">
-                                <form >
+                                <form [formGroup]="registerationForm">
                                     <div class="form-group py-2">
-                                        <input type="text" class="input-field" placeholder=" ">
+                                        <input [class.is-invalid]="userName?.invalid && userName?.touched" formControlName="username" name="textname" type="text" class="input-field" placeholder=" ">
                                         <label class="placeholder-lable"><i class="fa-light fa-user fa-fw"></i> username</label>
+                                        <div *ngIf="userName?.invalid && userName?.touched">
+                                            <small *ngIf="userName?.errors?.['required']"  class="text-danger">Name is Required</small>
+                                            <small *ngIf="userName?.errors?.['minlength']"  class="text-danger">Name Length must be minimum 3 characters </small>
+                                            <small *ngIf="userName?.errors?.['maxlength']"  class="text-danger">Name Length must be maximum 32 characters</small>
+
+                                
+                                        </div>
                                     </div>
                                     <div class="form-group py-2">
-                                        <input type="text" class="input-field" placeholder=" ">
+                                        <input [class.is-invalid]="userEmail?.invalid && userEmail?.touched" pattern="^([a-zA-Z0-9_-]+)@([a-zA-Z]+)\.(com|eg)$" formControlName="email" name="textemail" type="text" class="input-field" placeholder=" ">
                                         <label class="placeholder-lable"><i class="fa-light fa-envelope fa-fw"></i> Email</label>
+                                        <div *ngIf="userEmail?.invalid && userEmail?.touched">
+                                         <small class="text-danger" *ngIf="userEmail?.errors?.['required']"> Email is Required</small>
+                                         <small class="text-danger" *ngIf="userEmail?.errors?.['pattern']"  > Email should be in form xxx@gmail.com </small>
+                                        </div>
                                     </div>
+
                                     <div class="form-group py-2">
-                                        <input type="password" class="input-field" placeholder=" ">
+                                        <input pattern="^[a-zA-Z0-9_-]{6,32}$" [class.is-invalid]="Password?.invalid && Password?.touched" formControlName="password"  type="password" class="input-field" placeholder=" ">
                                         <label class="placeholder-lable"><i class="fa-light fa-lock-keyhole"></i> Password</label>
+                                        <div *ngIf="Password?.invalid && Password?.touched">
+                                         <small class="text-danger" *ngIf="Password?.errors?.['required']"> Password is Required</small>
+                                         <small class="text-danger" *ngIf="Password?.errors?.['pattern']"> Password should be in form like (capital & small letters ,at least 6 characters and maximum 32 characters)</small>
+                                         </div>
                                         <span class="show-password"><i class="fa-light fa-eye-slash fa-fw"></i></span>
 
                                     </div>
@@ -49,3 +65,28 @@
             </div>
         </div>
     </div>
+
+<!--
+            <div class="form-group">
+              <label> Password : </label> 
+              <input [class.is-invalid]="Password?.invalid && Password?.touched" formControlName="password" type="password"  class="form-control" >
+              <div *ngIf="Password?.invalid && Password?.touched">
+               <small class="text-danger" *ngIf="Password?.errors?.['required']"> Password is Required</small>
+               </div>
+            </div>
+
+            <div class="form-group">
+              <label> Confirm Password : </label> 
+              <input [class.is-invalid]="registerationForm.errors?.['misMatch']" formControlName="confirmpassword" type="password"  class="form-control" >
+               <small class="text-danger" *ngIf="registerationForm.errors?.['misMatch']"> Confirm Password don't match with Password</small>
+               <small class="text-danger" *ngIf="registerationForm.errors?.['Required'] "> Confirm Password is a required Flied</small>
+
+            </div>
+          <br>
+  
+
+        <br>
+        <input type="button" class="btn btn-danger" value="Register">
+        <!-- <input (click)="loadApiData()" type="Button" class="btn btn-danger" value="Log In"> -->
+
+    <!-- </form>  -->

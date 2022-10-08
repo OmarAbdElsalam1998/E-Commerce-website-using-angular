@@ -24,7 +24,7 @@
                                         </div>
                                         </div>
                                         <div class="form-group py-2">
-                                            <input id="pwd" type="password" class="input-field" placeholder="" [class.is-invalid]="userPassword?.invalid && userPassword?.touched" pattern="^([a-zA-Z0-9]+)[6,32]$" formControlName="userPassword" name="textpassword" >
+                                            <input id="pwd" type="password" class="input-field" placeholder="" [class.is-invalid]="userPassword?.invalid && userPassword?.touched" pattern="^([a-zA-Z0-9]+){6,32}$" formControlName="userPassword" name="textpassword" >
                                             <label class="placeholder-lable"><i class="fa-light fa-lock-keyhole"></i> Password</label>
                                             <div *ngIf="userPassword?.invalid && userPassword?.touched">
                                                 <small class="text-danger" *ngIf="userPassword?.errors?.['required']">Password is Required</small>
