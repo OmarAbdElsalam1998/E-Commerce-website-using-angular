@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product-details',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./product-details.component.scss']
 })
 export class ProductDetailsComponent implements OnInit {
-
-  constructor() { }
+   title="Products Details";
+  constructor(private titleService:Title) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle(this.title);
+
   //   $(function (){
   //     'use strict';
   //    $(".product-images .image img").each(image => {
@@ -19,21 +22,7 @@ export class ProductDetailsComponent implements OnInit {
       
   //    });      
   // });
-    var images=document.querySelectorAll(".product-images .image img");
-var mainImage=document.querySelector(" .main-image img");
-alert("ass");
-// images.forEach(image=>{
-//     console.log("ima")
-//     image.addEventListener("click",function(){
-//         var src=this.getAttribute("src");
-//         mainImage.setAttribute('src',src);
-//         var list=this.parentNode.parentNode.children;
-//         for(let child of list){
-//             child.classList.remove('active');
-//         }
-//         this.parentNode.classList.add('active');
-//     });
-// })
+   
   }
 
 }

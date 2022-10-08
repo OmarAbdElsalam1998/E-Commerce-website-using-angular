@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {  NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -10,6 +9,8 @@ import { HomeComponent } from './home/home.component';
 import { CartComponent } from './cart/cart.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductsComponent } from './products/products.component';
+import { PaymentComponent } from './payment/payment.component';
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,8 @@ import { ProductsComponent } from './products/products.component';
     CartComponent,
     ProductDetailsComponent,
     ProductsComponent,
+    PaymentComponent,
+    NotFoundPageComponent,
     
   ],
   imports: [
@@ -27,7 +30,7 @@ import { ProductsComponent } from './products/products.component';
     NgbModule,
     CarouselModule
   ],
-  providers: [],
+  providers: [Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

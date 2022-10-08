@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import * as $ from 'jquery';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 
@@ -8,8 +9,8 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
+   title="Market";
+  constructor(private titleService:Title) { }
   customOptions: OwlOptions = {
     loop: true,
     mouseDrag: false,
@@ -36,6 +37,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.titleService.setTitle(this.title);
 
   }
 
