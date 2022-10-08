@@ -1,0 +1,68 @@
+body {
+    background-image: url(https://api.urlbox.io/v1/ca482d7e-9417-4569-90fe-80f7c5e1c781/137c8dd050eb4c43d9955f1ad27aa0f50e82de53/jpeg?url=nytimes.com&height=1280&delay=5000&hide_selector=%23Top&retina=true&ttl=108000);
+    background-size: cover;
+    background-position: center -315px;
+  }
+  
+  .full-screen-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    background: var(--backdrop-background, radial-gradient(circle, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.4) 30%, rgba(0, 0, 0, 1) 100%));
+    opacity: 0;
+    animation: spinner-fade-in 1s ease-in forwards;
+    animation-delay: 3s;
+    
+    div {
+      position: relative;
+      margin: 0.25cm;
+      width: 5vh;
+      max-width: 0.5cm;
+      height: 5vh;
+      max-height: 0.5cm;
+      
+      background-color: var(--primary-color, rgba(150, 150, 150, 0.9));
+      border-radius: 50%;
+      border: var(--dots-border, 1px solid rgba(0, 0, 0, 0.2));
+      
+      animation: spinner-jumping-dots 1.5s ease-in-out infinite;
+      
+      &:nth-child(2) {
+        animation-delay: 0.15s;
+      }
+      
+      &:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+    }
+  }
+  
+  @keyframes spinner-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes spinner-jumping-dots {
+    0%, 50%, 100% {
+      top: 0;
+      margin: 0.25cm;
+      padding: 0;
+      background-color: var(--primary-color, rgba(150, 150, 150, 0.9));
+    }
+    20% {
+      top: -1vh;
+      margin: calc(0.25cm - 0.1em);
+      padding: 0.1em;
+      background-color: var(--secondary-color, rgb(200, 200, 200));
+    }
+  }
