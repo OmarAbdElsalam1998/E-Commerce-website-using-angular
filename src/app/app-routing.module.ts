@@ -1,6 +1,7 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CartComponent } from './cart/cart.component';
+import { AdminGuard } from './Guards/admin.guard';
 import { AuthGuard } from './Guards/auth.guard';
 import { HomeComponent } from './home/home.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
@@ -14,9 +15,8 @@ const routes: Routes = [
   {path:"product",component:ProductsComponent},
   {path:"product/:id",component:ProductDetailsComponent},
   {path:"payment",component:PaymentComponent,canActivate:[AuthGuard]},
-  {path:"auth",
-  loadChildren:()=>import("../app/auth/auth.module").then(m=>m.AuthModule)
-},
+  {path:"auth",loadChildren:()=>import("../app/auth/auth.module").then(m=>m.AuthModule)},
+  {path:"dashboard",loadChildren:()=>import("../app/dashboard/dashboard.module").then(m=>m.DashboardModule),canLoad:[AdminGuard]},
   {path:"**",component:NotFoundPageComponent}
  
   
