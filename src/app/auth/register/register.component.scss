@@ -26,16 +26,17 @@ a{
 // Start Log in
 .login{
     height: 100vh;
-    background-image:url("../../../assets/images/login.jpg") ;
-    background-size: cover;
+    // background-image:url("../../../assets/images/login.jpg") ;
+    // background-size: cover;
     .overlay{
         width: 100%;
         height: 100%;
-        background-color: rgb(125 123 164 / 84%);
+        // background-color: rgb(125 123 164 / 84%);
         .login-box{
             background-color: #FFF;
             border-radius: 7px;
             overflow: hidden;
+            box-shadow: 4px 4px 19px 0px #d5d5d5;
             .login-header{
                 position: relative;
                 height: 220px;

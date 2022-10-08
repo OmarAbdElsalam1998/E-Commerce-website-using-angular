@@ -22,7 +22,26 @@ export class ProductDetailsComponent implements OnInit {
       
   //    });      
   // });
-   
+    
+    
   }
 
+  // changeImage=()=>{
+  //   var images=document.querySelectorAll(".product-images .image img");
+  //   var mainImage=document.querySelector(".main-image img");
+  //   images.forEach(image=>{
+  //     image.addEventListener("click",function(){
+  //         let src=image.getAttribute("src");
+  //         mainImage.setAttribute('src',src);
+  //         var list=image.parentNode.parentNode.children;
+  //         for(let child of list){
+  //             child.classList.remove('active');
+  //         }
+  //         this.parentNode.classList.add('active');
+  //     });
+  // })
+  //   }
 }
+
+
+
