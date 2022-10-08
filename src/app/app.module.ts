@@ -11,6 +11,8 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { ProductsComponent } from './products/products.component';
 import { PaymentComponent } from './payment/payment.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +30,10 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    CarouselModule
+    CarouselModule,
+    BrowserAnimationsModule
+    
+  
   ],
   providers: [Title],
   bootstrap: [AppComponent]
