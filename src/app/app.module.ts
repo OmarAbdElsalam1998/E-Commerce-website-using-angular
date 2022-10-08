@@ -12,6 +12,7 @@ import { ProductsComponent } from './products/products.component';
 import { PaymentComponent } from './payment/payment.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ProductsComponent,
     PaymentComponent,
     NotFoundPageComponent,
+    ForbiddenComponent,
     
   ],
   imports: [
