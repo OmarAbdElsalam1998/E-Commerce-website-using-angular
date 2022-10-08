@@ -14,6 +14,6 @@ export class ProductsComponent implements OnInit {
      this.titleService.setTitle(this.title);
   }
 action(){
-  console.log("action");
+  
 }
 }
