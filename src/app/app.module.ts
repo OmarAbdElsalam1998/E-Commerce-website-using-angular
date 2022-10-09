@@ -13,9 +13,7 @@ import { PaymentComponent } from './payment/payment.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
-import { SpinnerComponent } from './spinner/spinner.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import {loaderInterceptor} from './spinner/loader-interceptor'
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -29,7 +27,6 @@ import {loaderInterceptor} from './spinner/loader-interceptor'
     PaymentComponent,
     NotFoundPageComponent,
     ForbiddenComponent,
-    SpinnerComponent,
     
   ],
   imports: [
@@ -38,11 +35,12 @@ import {loaderInterceptor} from './spinner/loader-interceptor'
     NgbModule,
     CarouselModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    
     
   
   ],
-  providers: [Title,{provide:HTTP_INTERCEPTORS,useClass:loaderInterceptor,multi:true}],
+  providers: [Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

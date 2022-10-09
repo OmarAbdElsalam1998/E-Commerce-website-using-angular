@@ -10,7 +10,7 @@
                             </div>
                             </div>
                             <div class="login-form p-3">
-                                <form [formGroup]="registerationForm">
+                                <form [formGroup]="registerationForm"  (ngSubmit)="userRegistering()">
                                     <div class="form-group py-2">
                                         <input [class.is-invalid]="userName?.invalid && userName?.touched" formControlName="username" name="textname" type="text" class="input-field" placeholder=" ">
                                         <label class="placeholder-lable"><i class="fa-light fa-user fa-fw"></i> username</label>
@@ -23,7 +23,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group py-2">
-                                        <input [class.is-invalid]="userEmail?.invalid && userEmail?.touched" pattern="^([a-zA-Z0-9_-]+)@([a-zA-Z]+)\.(com|eg)$" formControlName="email" name="textemail" type="text" class="input-field" placeholder=" ">
+                                        <input [class.is-invalid]="userEmail?.invalid && userEmail?.touched" formControlName="email" name="textemail" type="text" class="input-field" placeholder=" ">
                                         <label class="placeholder-lable"><i class="fa-light fa-envelope fa-fw"></i> Email</label>
                                         <div *ngIf="userEmail?.invalid && userEmail?.touched">
                                          <small class="text-danger" *ngIf="userEmail?.errors?.['required']"> Email is Required</small>
@@ -32,7 +32,7 @@
                                     </div>
 
                                     <div class="form-group py-2">
-                                        <input pattern="^[a-zA-Z0-9_-]{6,32}$" [class.is-invalid]="Password?.invalid && Password?.touched" formControlName="password"  type="password" class="input-field" placeholder=" ">
+                                        <input [class.is-invalid]="Password?.invalid && Password?.touched" formControlName="password"  type="password" class="input-field" placeholder=" ">
                                         <label class="placeholder-lable"><i class="fa-light fa-lock-keyhole"></i> Password</label>
                                         <div *ngIf="Password?.invalid && Password?.touched">
                                          <small class="text-danger" *ngIf="Password?.errors?.['required']"> Password is Required</small>
@@ -55,6 +55,7 @@
                                     
                                     <div class="button d-flex justify-content-center align-items-center">
                                         <button class=" my-button">Sign Up</button>
+                                        <!-- <button disabled="registerationForm.invalid" class=" my-button">Sign Up</button> -->
                                         <!-- <input (click)="loadApiData()" type="Button" class="btn btn-danger" value="Sign Up">  -->
 
                                     </div>
