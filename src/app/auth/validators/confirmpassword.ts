@@ -14,7 +14,7 @@ export function ConfirmPasswordValidator(control:AbstractControl )
     else
     {
         return password && confirmpassword && confirmpassword.value !== password.value ?
-        {'misMatch': true}                       //if condition true return mis match
+        {'misMatch' : true}                       //if condition true return mis match
         :null                                    //if condition false return null
 
     }                               

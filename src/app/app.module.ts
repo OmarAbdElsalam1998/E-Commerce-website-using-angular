@@ -13,6 +13,7 @@ import { PaymentComponent } from './payment/payment.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -33,7 +34,9 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
     AppRoutingModule,
     NgbModule,
     CarouselModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+    
     
   
   ],
