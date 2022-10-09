@@ -11,8 +11,21 @@
                             </div>
                             </div>
                             <div class="login-form p-3">
-                                    <form [formGroup]="registerationForm" (ngSubmit)="saveloginData()">
+                                    <!-- <form [formGroup]="loginForm"> -->
+                                     <form [formGroup]="loginForm" (ngSubmit)="saveloginData()">
+
                                         <div class="form-group py-2">
+                                            <input [class.is-invalid]="userEmail?.invalid && userEmail?.touched" formControlName="userEmail" name="textemail" type="text" class="input-field" placeholder=" ">
+                                            <label class="placeholder-lable"><i class="fa-light fa-envelope fa-fw"></i> Email</label>
+                                            <div *ngIf="userEmail?.invalid && userEmail?.touched">
+                                             <small class="text-danger" *ngIf="userEmail?.errors?.['required']"> Email is Required</small>
+                                             <small class="text-danger" *ngIf="userEmail?.errors?.['pattern']"  > Email should be in form xxx@gmail.com </small>
+                                            </div>
+                                        </div>
+
+
+
+                                        <!-- <div class="form-group py-2">
                                             <input class="form-control" [class.is-invalid]="userName?.invalid && userName?.touched"[style.borderColor]="userName?.invalid && userName?.touched ? 'red' : ''" formControlName="userName" name="textname"  type="text" class="input-field" placeholder=" ">
                                             <label class="placeholder-lable" [class.is-invalid]="userName?.invalid && userName?.touched"[style.color]="userName?.invalid && userName?.touched ? 'red' : ''"><i class="fa-light fa-user fa-fw"></i> UserName</label>
                                             <div *ngIf="userName?.invalid && userName?.touched">
@@ -21,7 +34,7 @@
                                                 <small class="text-danger" *ngIf="userName?.errors?.['maxlength']">Name Length must be maximum 32 characters </small>
     
                                         </div>
-                                        </div>
+                                        </div> -->
                                         <div class="form-group py-2">
                                             <input id="pwd" type="password" class="input-field form-control" placeholder=" " [style.borderColor]="userPassword?.invalid && userPassword?.touched ? 'red':''" formControlName="userPassword" name="textpassword" >
                                             <label class="placeholder-lable" [style.color]="userPassword?.invalid && userPassword?.touched ? 'red' : ''"><i class="fa-light fa-lock-keyhole"></i> Password</label>
@@ -41,7 +54,7 @@
                                         </div>
                                         <div class="button d-flex justify-content-center align-items-center">
                                             <!-- <button (click)="loadApiData()" class=" my-button">Log In</button> -->
-                                            <button  class=" my-button">Log In</button>
+                                            <button [disabled]="loginForm.invalid" class=" my-button">Log In</button>
 
     
                                         </div>

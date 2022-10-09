@@ -2,10 +2,10 @@ export class userDataRegister
 {
     constructor
     (
-        public username:string,
-        public email:string,
-        public password:string,
-        public confirnpassword:string,
+        public userName:string,
+        public userEmail:string,
+        public Password:string,
+        public confirmPassword:string,
         public role:string,
 
     )

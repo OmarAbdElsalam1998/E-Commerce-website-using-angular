@@ -1,0 +1,48 @@
+{
+  "users": [
+    {
+      "username": "انامن254",
+      "email": "jjjj@gggg.com",
+      "password": "Mn1234",
+      "confirmpassword": "Mn1234",
+      "id": 1
+    },
+    {
+      "username": "knlkn",
+      "email": "mmm@jjj.com",
+      "password": "Mn1234",
+      "confirmpassword": "Mn1234",
+      "id": 2
+    },
+    {
+      "username": "hh442j",
+      "email": "mmm@jjj.com",
+      "password": "Mn1234",
+      "confirmpassword": "Mn1234",
+      "id": 3
+    },
+    {
+      "username": "hkhih745",
+      "email": "jjjj@gggg.com",
+      "password": "Mn1234",
+      "confirmpassword": "Mn1234",
+      "id": 4
+    },
+    {
+      "username": "ujkhknlk",
+      "email": "jjjj@gggg.com",
+      "password": "Mn1234",
+      "confirmpassword": "Mn1234",
+      "role": "user",
+      "id": 5
+    },
+    {
+      "username": "Marina",
+      "email": "kkk@gggg.com",
+      "password": "Mn1234",
+      "confirmpassword": "Mn1234",
+      "role": "user",
+      "id": 6
+    }
+  ]
+}
