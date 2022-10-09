@@ -1,13 +1,13 @@
 <main>
-    <!-- Start breadcrumb -->
-    <section class="breadcrumb">
+     <!-- Start breadcrumb -->
+     <section class="breadcrumb">
         <div class="container">
             <div class="d-flex align-items-center justify-content-start  rounded bg-white p-3 my-3">
                 <nav aria-label="breadcrumb ">
                     <ol class="breadcrumb m-0">
-                      <li class="breadcrumb-item"><a href="#">Home</a></li>
-                      <li class="breadcrumb-item"><a href="#">Library</a></li>
-                      <li class="breadcrumb-item active" aria-current="page">Data</li>
+                      <li class="breadcrumb-item"><a style="text-decoration: none;" [routerLink]="['/']" routerLinkActive="router-link-active" >Home</a></li>
+                      <li class="breadcrumb-item"><a style="text-decoration: none;" [routerLink]="['/product']" routerLinkActive="router-link-active" >Products</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">{{title}}</li>
                     </ol>
                   </nav>
             </div>
@@ -22,23 +22,17 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="product-images">
-                                    <div class="image active mb-2" id="image1">
-                                      <img [src]="product?.images[0]">
+                                    
+                                    <div  *ngFor="let image of product?.images | slice:0:4;index as i"class="image  mb-2" id="image1" [class.active]="mainImage===image ||i==0" (click)="changeImage(image)">
+                                      <img [src]="image">
                                     </div>
-                                         <div class="image mb-2" id="image12">
-                                        <img [src]="product?.images[1]">
-                                    </div>
-                                    <div class="image mb-2" id="image3">
-                                        <img [src]="product?.images[2]">
-                                    </div>
-                                    <div class="image mb-2" id="image4">
-                                        <img [src]="product?.images[3]">
-                                    </div>
+                                         
+                                    
                                 </div>
                             </div>
                             <div class="col-md-9">
-                                <div class="main-image">
-                                    <img [src]="product?.images[0]" class="img-fluid">
+                                <div class="main-image" id="mainImage">
+                                    <img [src]="mainImage || product?.thumbnail" class="img-fluid">
                                 </div>
                             </div>
                         </div>

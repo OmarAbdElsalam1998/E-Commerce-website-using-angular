@@ -14,6 +14,7 @@ import { MainComponent } from './main/main.component';
   imports: [
     CommonModule,
     DashboardRoutingModule
-  ]
+  ],
+  bootstrap: [MainComponent]
 })
 export class DashboardModule { }

@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { ProductsApiService } from '../services/products-api.service';
+import * as $ from 'jquery';
 
+declare function slider():void;
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
@@ -13,8 +15,9 @@ export class ProductDetailsComponent implements OnInit {
   constructor(private titleService:Title,private productService:ProductsApiService,private activatedRoute:ActivatedRoute) { }
   productId:any;
   product:any;
+  mainImage:any;
   ngOnInit(): void {
-
+    slider();
    //get product Id From url
    this.activatedRoute.paramMap.subscribe((params:ParamMap)=>{
     this.productId=params.get("id");
@@ -34,10 +37,11 @@ export class ProductDetailsComponent implements OnInit {
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.
     
-    
+  }
 
-   }
-
+  changeImage(d:any){
+     this.mainImage=d;
+  }
 
   //   $(function (){
   //     'use strict';
