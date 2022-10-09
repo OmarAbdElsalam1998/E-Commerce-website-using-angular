@@ -214,240 +214,45 @@
                             <div class="row">
                            
                                 <!--Start Product  -->
-                                <div  class="col-md-6 col-lg-4">
+                                <div  class="col-md-6 col-lg-4" *ngFor="let product of productsList?.products;index as i">
                                     <div class="product-box p-2 mb-3">
                                         <div class="product">
                                             <div class="overlay"></div>
                                             <div class="product-image">
-                                                <img class="img-fluid"src="../../assets/images/catrgories/women.jpg" >
+                                                <img class="img-fluid" [src]="product.thumbnail" >
                                             </div>
                                             <div class="product-operations d-flex">
-                                                <div class="add-to-cart p-3 " >
+                                                <div class="add-to-cart p-3"(click)="addToCart(i)" >
                                                     <i class="fa-light fa-cart-shopping fa-2x"></i>
                                                 </div>
                                                 <div class="save p-3 ">
                                                     <i class="fa-light fa-heart fa-2x"></i>
                                                 </div>
-                                                <div class="details p-3 " (click)="action()" >
+                                                <div class="details p-3 " (click)="seeDetails(product.id)" >
                                                     <i class="fa-light fa-arrow-right fa-2x"></i>  
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="product-info py-3">
                                             <div class="product-name px-2 pt-2">
-                                                <h4 class="d-block m-0">Product Name</h4>
+                                                <h4 class=" m-0" [title]="product.title">{{product.title}}</h4>
                                   
                                             </div>
                                             <div class="product-price px-2 pt-3 d-flex align-items-center">
-                                               <span class="new-price">EGP <span >3599.00</span></span>
-                                               <span class="old-price ">EGP 3999.00</span>
+                                               <span class="new-price">EGP <span >{{product.price}}</span></span>
+                                               <span class="old-price ">EGP {{product.price}}</span>
                                                
                                             </div>
                                             <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
-                                                <span class="discount">11% OFF</span>
-                                                <span class="rate "><i class="fa-solid fa-star-sharp"></i>4.9 <span>(21)</span></span>
+                                                <span class="discount">{{product.discountPercentage/100  | percent }} OFF</span>
+                                                <span class="rate "><i class="fa-solid fa-star-sharp"></i>{{product.rating}} <span>(21)</span></span>
                                                 
                                             </div> 
                                         </div>
                                     </div>
                                 </div>
                                 <!-- End Product -->
-                                 <!--Start Product  -->
-                                 <div class="col-md-6 col-lg-4">
-                                    <div class="product-box p-2 mb-3">
-                                        <div class="product">
-                                            <div class="overlay"></div>
-                                            <div class="product-image">
-                                                <img class="img-fluid"src="../../assets/images/catrgories/men.jpg" >
-                                            </div>
-                                            <div class="product-operations d-flex">
-                                                <div class="add-to-cart p-3 ">
-                                                    <i class="fa-light fa-cart-shopping fa-2x"></i>
-                                                </div>
-                                                <div class="save p-3 ">
-                                                    <i class="fa-light fa-heart fa-2x"></i>
-                                                </div>
-                                                <div class="details p-3 ">
-                                                    <i class="fa-light fa-arrow-right fa-2x"></i>  
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="product-info py-3">
-                                            <div class="product-name px-2 pt-2">
-                                                <h4 class="d-block m-0">Product Name</h4>
-                                  
-                                            </div>
-                                            <div class="product-price px-2 pt-3 d-flex align-items-center  ">
-                                               <span class="new-price">EGP <span >3599.00.0</span></span>
-                                               <span class="old-price ">EGP 3999.00</span>
-                                               
-                                            </div>
-                                            <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
-                                                <span class="discount">11% OFF</span>
-                                                <span class="rate "><i class="fa-solid fa-star-sharp"></i>4.9 <span>(21)</span></span>
-                                                
-                                            </div> 
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Product -->
-                                 <!--Start Product  -->
-                                 <div class="col-md-6 col-lg-4">
-                                    <div class="product-box p-2 mb-3">
-                                        <div class="product">
-                                            <div class="overlay"></div>
-                                            <div class="product-image">
-                                                <img class="img-fluid"src="../../assets/images/catrgories/women.jpg" >
-                                            </div>
-                                            <div class="product-operations d-flex">
-                                                <div class="add-to-cart p-3 ">
-                                                    <i class="fa-light fa-cart-shopping fa-2x"></i>
-                                                </div>
-                                                <div class="save p-3 ">
-                                                    <i class="fa-light fa-heart fa-2x"></i>
-                                                </div>
-                                                <div class="details p-3 ">
-                                                    <i class="fa-light fa-arrow-right fa-2x"></i>  
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="product-info py-3">
-                                            <div class="product-name px-2 pt-2">
-                                                <h4 class="d-block m-0">Product Name</h4>
-                                  
-                                            </div>
-                                            <div class="product-price px-2 pt-3 d-flex align-items-center  ">
-                                               <span class="new-price">EGP <span >3599.00.0</span></span>
-                                               <span class="old-price ">EGP 3999.00</span>
-                                               
-                                            </div>
-                                            <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
-                                                <span class="discount">11% OFF</span>
-                                                <span class="rate "><i class="fa-solid fa-star-sharp"></i>4.9 <span>(21)</span></span>
-                                                
-                                            </div> 
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Product -->
-                                 <!--Start Product  -->
-                                 <div class="col-md-6 col-lg-4">
-                                    <div class="product-box p-2 mb-3">
-                                        <div class="product">
-                                            <div class="overlay"></div>
-                                            <div class="product-image">
-                                                <img class="img-fluid"src="../../assets/images/catrgories/men.jpg" >
-                                            </div>
-                                            <div class="product-operations d-flex">
-                                                <div class="add-to-cart p-3 ">
-                                                    <i class="fa-light fa-cart-shopping fa-2x"></i>
-                                                </div>
-                                                <div class="save p-3 ">
-                                                    <i class="fa-light fa-heart fa-2x"></i>
-                                                </div>
-                                                <div class="details p-3 ">
-                                                    <i class="fa-light fa-arrow-right fa-2x"></i>  
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="product-info py-3">
-                                            <div class="product-name px-2 pt-2">
-                                                <h4 class="d-block m-0">Product Name</h4>
-                                  
-                                            </div>
-                                            <div class="product-price px-2 pt-3 d-flex align-items-center  ">
-                                               <span class="new-price">EGP <span >3599.00.0</span></span>
-                                               <span class="old-price ">EGP 3999.00</span>
-                                               
-                                            </div>
-                                            <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
-                                                <span class="discount">11% OFF</span>
-                                                <span class="rate "><i class="fa-solid fa-star-sharp"></i>4.9 <span>(21)</span></span>
-                                                
-                                            </div> 
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Product -->
-                                 <!--Start Product  -->
-                                 <div class="col-md-6 col-lg-4">
-                                    <div class="product-box p-2 mb-3">
-                                        <div class="product">
-                                            <div class="overlay"></div>
-                                            <div class="product-image">
-                                                <img class="img-fluid"src="../../assets/images/catrgories/women.jpg" >
-                                            </div>
-                                            <div class="product-operations d-flex">
-                                                <div class="add-to-cart p-3 ">
-                                                    <i class="fa-light fa-cart-shopping fa-2x"></i>
-                                                </div>
-                                                <div class="save p-3 ">
-                                                    <i class="fa-light fa-heart fa-2x"></i>
-                                                </div>
-                                                <div class="details p-3 ">
-                                                    <i class="fa-light fa-arrow-right fa-2x"></i>  
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="product-info py-3">
-                                            <div class="product-name px-2 pt-2">
-                                                <h4 class="d-block m-0">Product Name</h4>
-                                  
-                                            </div>
-                                            <div class="product-price px-2 pt-3 d-flex align-items-center  ">
-                                               <span class="new-price">EGP <span >3599.00.0</span></span>
-                                               <span class="old-price ">EGP 3999.00</span>
-                                               
-                                            </div>
-                                            <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
-                                                <span class="discount">11% OFF</span>
-                                                <span class="rate "><i class="fa-solid fa-star-sharp"></i>4.9 <span>(21)</span></span>
-                                                
-                                            </div> 
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Product -->
-                                 <!--Start Product  -->
-                                 <div class="col-md-6 col-lg-4">
-                                    <div class="product-box p-2 mb-3">
-                                        <div class="product">
-                                            <div class="overlay"></div>
-                                            <div class="product-image">
-                                                <img class="img-fluid"src="../../assets/images/catrgories/men.jpg" >
-                                            </div>
-                                            <div class="product-operations d-flex">
-                                                <div class="add-to-cart p-3 ">
-                                                    <i class="fa-light fa-cart-shopping fa-2x"></i>
-                                                </div>
-                                                <div class="save p-3 ">
-                                                    <i class="fa-light fa-heart fa-2x"></i>
-                                                </div>
-                                                <div class="details p-3 ">
-                                                    <i class="fa-light fa-arrow-right fa-2x"></i>  
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="product-info py-3">
-                                            <div class="product-name px-2 pt-2">
-                                                <h4 class="d-block m-0">Product Name</h4>
-                                  
-                                            </div>
-                                            <div class="product-price px-2 pt-3 d-flex align-items-center  ">
-                                               <span class="new-price">EGP <span >3599.00.0</span></span>
-                                               <span class="old-price ">EGP 3999.00</span>
-                                               
-                                            </div>
-                                            <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
-                                                <span class="discount">11% OFF</span>
-                                                <span class="rate "><i class="fa-solid fa-star-sharp"></i>4.9 <span>(21)</span></span>
-                                                
-                                            </div> 
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Product -->
-
+                                
                                 
                                 
                                 
