@@ -11,8 +11,8 @@
             <div class="col-6 col-lg-6 d-none d-lg-block py-4">
                 <div>
                     <div class="input-group">
-                        <input type="text" class="form-control p-2" aria-label="Amount (to the nearest dollar)">
-                        <button class="btn btn-primary input-group-text">Go</button>
+                        <input #searchKeyword type="text" class="form-control p-2" aria-label="Amount (to the nearest dollar)">
+                        <button class="btn btn-primary input-group-text" (click)="search(searchKeyword)">Go</button>
                     </div>
                 </div>
             </div>

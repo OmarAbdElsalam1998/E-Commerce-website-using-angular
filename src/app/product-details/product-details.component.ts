@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ProductsApiService } from '../services/products-api.service';
 
 @Component({
   selector: 'app-product-details',
@@ -7,11 +9,35 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./product-details.component.scss']
 })
 export class ProductDetailsComponent implements OnInit {
-   title="Products Details";
-  constructor(private titleService:Title) { }
-
+   title:any;
+  constructor(private titleService:Title,private productService:ProductsApiService,private activatedRoute:ActivatedRoute) { }
+  productId:any;
+  product:any;
   ngOnInit(): void {
-    this.titleService.setTitle(this.title);
+
+   //get product Id From url
+   this.activatedRoute.paramMap.subscribe((params:ParamMap)=>{
+    this.productId=params.get("id");
+
+
+    //get Product from Api
+    this.productService.getProductById(this.productId).subscribe(data=>{
+      this.product=data,
+      this.title=this.product.title;
+      console.log(this.title)
+      this.titleService.setTitle(this.title);
+    },error=>{console.log(error)})
+
+   });
+  }
+   ngAfterViewInit(): void {
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
+    
+    
+
+   }
+
 
   //   $(function (){
   //     'use strict';
@@ -24,7 +50,7 @@ export class ProductDetailsComponent implements OnInit {
   // });
     
     
-  }
+  
 
   // changeImage=()=>{
   //   var images=document.querySelectorAll(".product-images .image img");
