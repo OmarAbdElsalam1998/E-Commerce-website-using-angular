@@ -1,0 +1,21 @@
+$background_color:#f5f5f5;
+$brand_color:#1363DF;
+main{
+    background-color: $background_color;
+    font-family: 'Roboto', sans-serif;
+}
+//special heading
+.special-heading{
+    &:after{
+        content:"";
+        width: 75px;
+        height: 3px;
+        background-color: $brand_color;
+        display: block;
+        margin-top: 10px;
+        
+   
+  
+
+    }
+}

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserAuthService } from '../services/user-auth.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { UserAuthService } from '../services/user-auth.service';
 })
 export class HeaderComponent implements OnInit {
   isLoggedIn:boolean;
-  constructor(private userauth:UserAuthService) { 
+  constructor(private userauth:UserAuthService,private router:Router) { 
     this.isLoggedIn=true;
   }
     
@@ -16,6 +17,9 @@ export class HeaderComponent implements OnInit {
     this.userauth.getLoggedStatus().subscribe(status=>{
       this.isLoggedIn=status;
     })
+  }
+  search(keyword:any){
+     this.router.navigate(['/search/'+keyword.value]);
   }
 
 }

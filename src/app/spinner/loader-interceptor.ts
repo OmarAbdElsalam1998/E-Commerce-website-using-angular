@@ -15,10 +15,9 @@ export class loaderInterceptor implements HttpInterceptor {
                if(event.type==HttpEventType.Response){
                     if(event.status==200){
                        this.Service.loader.next(false);
-                       setTimeout(() => {
                         this.productService.prloader.next(false);
 
-                       }, 2000);
+                       
                     }
                }
            })

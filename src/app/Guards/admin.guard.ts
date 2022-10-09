@@ -12,13 +12,14 @@ export class AdminGuard implements CanLoad {
   ngOnInit(): void {
      this.userServise.getIsAdminStatus().subscribe(status=>{
       this.isAdmin=status;
+      console.log(status)
      })
     
   }
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if(this.isAdmin){
+    if(!this.isAdmin){
         return true;
     }
     else{
