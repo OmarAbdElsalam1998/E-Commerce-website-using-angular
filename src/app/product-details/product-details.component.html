@@ -22,8 +22,8 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="product-images">
-                                    
-                                    <div  *ngFor="let image of product?.images | slice:0:4;index as i"class="image  mb-2" id="image1" [class.active]="mainImage===image ||i==0" (click)="changeImage(image)">
+
+                                    <div  *ngFor="let image of product?.images | slice:0:4;index as i"class="image  mb-2" id="image1" [class.active]="mainImage===image" (click)="changeImage(image)">
                                       <img [src]="image">
                                     </div>
                                          
@@ -32,7 +32,7 @@
                             </div>
                             <div class="col-md-9">
                                 <div class="main-image" id="mainImage">
-                                    <img [src]="mainImage || product?.thumbnail" class="img-fluid">
+                                    <img [src]="mainImage || product?.images[0]" class="img-fluid">
                                 </div>
                             </div>
                         </div>
@@ -58,10 +58,10 @@
                            
                             <div class="product-price px-2 pt-3 mb-2">
                                 <div class="new-price">
-                                    <span class="price d-block"><span>EGP 3599.00</span></span>
+                                <span class="new-price">EGP <span >{{product.price-product.price*product.discountPercentage/100 |number :'1.1-2'}}</span></span>
                                 </div>
                                 <div class="old-price pt-3">
-                                    <span class="price ">EGP {{product.price}}</span> 
+                                    <span class="price pe-3 ">EGP {{product.price}}</span> 
                                     <span class="discount">{{product.discountPercentage/100  | percent }} OFF</span>
                                 </div>
                                 
