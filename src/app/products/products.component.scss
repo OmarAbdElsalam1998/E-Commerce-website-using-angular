@@ -41,6 +41,20 @@ main{
                 } 
              }
             }
+            .product-info{
+                .product-name{
+                    width: 100%;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                   h4{
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                       
+                   }
+                  
+               }
+           }
             .product{
                 position: relative;
                 height: 300px;
@@ -69,6 +83,7 @@ main{
                     z-index: 2;
                     ;
                 }
+               
                 .product-operations{
                     position:absolute;
                     top:130%;
