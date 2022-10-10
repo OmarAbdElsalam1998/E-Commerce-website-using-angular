@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, throwError } from 'rxjs';
+import { newProduct } from '../dashboard/newproduct';
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +9,16 @@ import { BehaviorSubject, catchError, throwError } from 'rxjs';
 export class ProductsApiService {
  prloader:BehaviorSubject<boolean>;
    url:string="https://dummyjson.com/products";
+   url2:string="http://localhost:3000/addproducts";
+   httpOption;
   constructor(private http:HttpClient) { 
     this.prloader=new BehaviorSubject<boolean>(false)
+    this.httpOption = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+        // ,Authorization: 'my-auth-token'
+      })
+    };
   }
 
 
@@ -30,4 +39,14 @@ export class ProductsApiService {
       return throwError (()=>err.message ||"internal server error")
     }));
   }
+
+getcategories(){
+  return this.http.get<any>("https://dummyjson.com/products/categories").pipe(catchError((err)=>{
+    return throwError (()=>err.message ||"internal server error")
+  }));
+
+}
+saveproduct(product:any){
+  return this.http.post(this.url2,product )
+}
 }

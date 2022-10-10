@@ -18,6 +18,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { loaderInterceptor } from './spinner/loader-interceptor';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +41,7 @@ import { loaderInterceptor } from './spinner/loader-interceptor';
     CarouselModule,
     BrowserAnimationsModule,
     HttpClientModule,
+
     
     
   
