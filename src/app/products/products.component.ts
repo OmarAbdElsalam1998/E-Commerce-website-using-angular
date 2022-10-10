@@ -1,6 +1,12 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { IProudct } from 'Shared Classes and types/IProduct';
+import { Product } from 'Shared Classes and types/model/product';
+
+// import { IProudct } from 'Shared Classes and types/IProduct';
+// import { AddToCartService } from '../services/add-to-cart.service';
 import { ProductsApiService } from '../services/products-api.service';
 
 @Component({
@@ -12,7 +18,12 @@ export class ProductsComponent implements OnInit {
   title="Products Page";
   productsList:any;
   categories:any;
-  constructor(private titleService:Title,private productService:ProductsApiService,private router:Router) { }
+  items:any[] = [];
+  products: any = [];
+  constructor(private titleService:Title,private productService:ProductsApiService,private router:Router,
+    private data1:HttpClient
+   ) { }
+
 
   ngOnInit(): void {
      this.titleService.setTitle(this.title);
@@ -21,6 +32,10 @@ export class ProductsComponent implements OnInit {
      },error=>{console.log(error)});
       
 
+     this.productService.getProductData().subscribe(res => {
+      this.products = res;
+     })
+    
 
   }
   ngAfterViewInit(): void {
@@ -29,10 +44,23 @@ export class ProductsComponent implements OnInit {
     
     
   }
-addToCart(index:any){
-  
-}
+   addToCart(index:any){
+    
+    this.productService.addToCart(index);
+    window.alert('Your product has been added to the cart!');
+   
+    if (!this.productService.itemInCart(index)) {
+      index.id= 1;
+      this.productService.addToCart(index); //add items in cart
+      this.items = [...this.productService.getItems()];
+    }
+    
+
+  }
+   
 seeDetails(id:any){
    this.router.navigate(["product/",id]);
 }
-}
+  }
+
+

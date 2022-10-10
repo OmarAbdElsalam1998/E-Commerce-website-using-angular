@@ -16,6 +16,15 @@ export class CartComponent implements OnInit {
 
   }
 
+
+
+
+
+
+
+
+
+  
   goToPaymentPage(){
     this.router.navigate(['/payment']);
   }
