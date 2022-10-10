@@ -14,7 +14,7 @@ export class UserAuthService {
     this.isLoogedSubject=new BehaviorSubject<boolean> (false);
     this.isAdminSubject=new BehaviorSubject<boolean> (false);
     this.loader=new BehaviorSubject<boolean>(false);
-    this.userName=new BehaviorSubject<string>("dddd");
+    this.userName=new BehaviorSubject<string>("");
    }
 
 
@@ -22,9 +22,11 @@ export class UserAuthService {
     let token="12345";
     localStorage.setItem("token",token);
     this.isLoogedSubject.next(true);
+    this.isAdminSubject.next(false);
     console.log(username);
     this.userName.next(username)
     if(role=="admin"){
+      console.log("from admin");
       this.isAdminSubject.next(true);
     }
 

@@ -14,16 +14,13 @@ export class ProductsApiService {
    httpOption;
   constructor(private http:HttpClient) { 
     this.prloader=new BehaviorSubject<boolean>(false)
-<<<<<<< HEAD
     this.httpOption = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
         // ,Authorization: 'my-auth-token'
       })
     };
-=======
     this.searchResult=new BehaviorSubject<any>([1,2,3]);
->>>>>>> 7032f1f293c03408a4d3646d14280f01edc658dc
   }
 
 

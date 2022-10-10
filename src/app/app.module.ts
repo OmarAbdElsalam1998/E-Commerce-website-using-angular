@@ -18,6 +18,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { loaderInterceptor } from './spinner/loader-interceptor';
 import { SearchComponent } from './search/search.component';
 import { FormsModule } from '@angular/forms';
+import { FavouriteComponent } from './favourite/favourite.component';
 
 
 
@@ -33,7 +34,8 @@ import { FormsModule } from '@angular/forms';
     NotFoundPageComponent,
    ForbiddenComponent,
    SpinnerComponent,
-   SearchComponent
+   SearchComponent,
+   FavouriteComponent
 
     
   ],
@@ -44,11 +46,7 @@ import { FormsModule } from '@angular/forms';
     CarouselModule,
     BrowserAnimationsModule,
     HttpClientModule,
-<<<<<<< HEAD
-
-=======
     FormsModule,
->>>>>>> 7032f1f293c03408a4d3646d14280f01edc658dc
     
     
   

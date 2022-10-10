@@ -1,6 +1,7 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CartComponent } from './cart/cart.component';
+import { FavouriteComponent } from './favourite/favourite.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { AdminGuard } from './Guards/admin.guard';
 import { AuthGuard } from './Guards/auth.guard';
@@ -20,10 +21,7 @@ const routes: Routes = [
   {path:"auth",loadChildren:()=>import("../app/auth/auth.module").then(m=>m.AuthModule)},
   {path:"dashboard",loadChildren:()=>import("../app/dashboard/dashboard.module").then(m=>m.DashboardModule),canLoad:[AdminGuard]},
   {path:"search/:keyword",component:SearchComponent},
-  // {path:"search",component:SearchComponent},
-
-
-
+  {path:"favourite",component:FavouriteComponent},
   {path:"error",component:ForbiddenComponent},
   {path:"**",component:NotFoundPageComponent}, 
 ];

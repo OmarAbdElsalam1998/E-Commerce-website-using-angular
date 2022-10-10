@@ -8,18 +8,18 @@ import { UserAuthService } from '../services/user-auth.service';
 })
 export class AdminGuard implements CanLoad {
   isAdmin:boolean=false;
-  constructor(private userServise:UserAuthService,private router:Router){}
-  ngOnInit(): void {
-     this.userServise.getIsAdminStatus().subscribe(status=>{
-      this.isAdmin=status;
-      console.log(status)
-     })
+  constructor(private userServise:UserAuthService,private router:Router){
     
   }
+ 
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if(!this.isAdmin){
+      this.userServise.getIsAdminStatus().subscribe(status=>{
+        this.isAdmin=status;
+        console.log(this.isAdmin)
+       })
+    if(this.isAdmin===true){
         return true;
     }
     else{
