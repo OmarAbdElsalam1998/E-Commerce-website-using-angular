@@ -45,12 +45,13 @@ export class LoginComponent implements OnInit {
   saveloginData()
   {
     // console.log(this.loginForm.value)
-    this.userService.getLogData().subscribe(data=>{             
+      this.userService.getLogData().subscribe(data=>{             
       console.log(data)
       this.usersArr=data;
      
     },
-    error => {
+    error => 
+    {
       console.log("Fail login")
     }
     )

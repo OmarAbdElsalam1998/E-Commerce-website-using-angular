@@ -11,10 +11,22 @@
             <div class="col-6 col-lg-6 d-none d-lg-block py-4">
                 <div>
                     <div class="input-group">
-                        <input #searchKeyword type="text" class="form-control p-2" aria-label="Amount (to the nearest dollar)">
+                        <input #searchKeyword placeholder="Enter ur Product here " type="text" class="form-control p-2" aria-label="Amount (to the nearest dollar)">
+<!-- 
+                        <input type="text" [(ngModel)]="searchInput" #searchbar (keyup)="search($event)" placeholder="Enter the name of your series"/>
+                                   
+                    <ul>
+                        <li *ngFor="let show of searchResult">
+                           <p> {{ show.name }}</p>
+                        </li>
+                      </ul>
+                        <button class="btn btn-primary input-group-text" (click)="search(this)">Go</button> -->
+
                         <button class="btn btn-primary input-group-text" (click)="search(searchKeyword)">Go</button>
+
                     </div>
                 </div>
+                <!-- <app-search></app-search> -->
             </div>
             <div class="col-6 col-lg-3 text-end py-4">
                 <div class="icons text-end d-flex align-items-center justify-content-end">

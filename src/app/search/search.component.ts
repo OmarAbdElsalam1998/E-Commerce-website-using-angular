@@ -1,26 +1,50 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { UserAuthService } from '../services/user-auth.service';
+import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+import { ProductsApiService } from '../services/products-api.service';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  selector: 'app-search',
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.scss']
 })
-export class HeaderComponent implements OnInit {
-  isLoggedIn:boolean;
-  constructor(private userauth:UserAuthService,private router:Router) { 
-    this.isLoggedIn=true;
-  }
+export class SearchComponent implements OnInit {
+  public selectedInput :BehaviorSubject<any>
+
+  constructor(private productService : ProductsApiService,private router: Router,private activateRoute: ActivatedRoute,private titleService:Title) 
+  {this.selectedInput= new BehaviorSubject<any> ("") }
+
+  title="Search Page";
+  productsList:any;
+
+  keyword:any;
+  ngOnInit(): void 
+  {
     
-  ngOnInit(): void {
-    this.userauth.getLoggedStatus().subscribe(status=>{
-      this.isLoggedIn=status;
+    this.titleService.setTitle(this.title);
+    this.activateRoute.paramMap.subscribe((param:ParamMap)=>    //load all data with specific condition like in html line 8  with (id and it's data)
+    {
+      this.selectedInput.next(param.get("keyword"));
     })
+
+    this.productService.searchData(this.selectedInput).subscribe(data=>{
+      this.productsList=data;
+    },error=>{console.log(error)});
+
+ 
   }
+
+  addToCart(index:any){
+  
+  }
+  seeDetails(id:any){
+     this.router.navigate(["product/",id]);
+  }
+
   public searchInput: String = '';
   public searchResult:any;
-  public seriesList: Array<any> = [
+  public productList: Array<any> = [
     {
          "name": "Prison Break",
          "description": "Structural Engineer Michael Scofield turns himself into the Fox River Penitentiary in order to break out his brother Lincoln Burrows, who is on death row for the murder of the Vice President's brother. But Lincoln was set up by some of the Company (an agency formed by corrupt government officials) guys, headed by General Jonathan Krantz. Michael breaks out from Fox River with his brother Lincoln and other convicts.",
@@ -41,25 +65,33 @@ export class HeaderComponent implements OnInit {
      },
   
     ]
+  
+    public toggle: Boolean = false;
 
-  search (keyword: any) 
-  {
-    this.router.navigate(["search/" + keyword.value]);
+    fetchProduct(event: any)
+    {
+      if(event.target.value === '') 
+      {
+        return this.searchResult = []
+      }
+     else 
+     {
+      this.searchResult = this.productList.filter((product) => {
+        return product.name.toLowerCase().startsWith(event.target.value.toLowerCase());}
+     ) }
+      // this.toggle=false;
+      return this.searchResult;
+
+    }
+  
+  showDetails(product :any) {
+         this.selectedInput = product;
+         this.toggle = true;
+         this.searchInput = product.name;
   }
 
-  // fetchSeries (event: any) 
+  // searchData()
   // {
-  //     if (event.target.value === '') 
-  //     {
-  //       return this.searchResult = [];
-  //     }
-  //     else
-  //   {   this.searchResult = this.seriesList.filter((series) => {
-  //       return series.name.toLowerCase().startsWith(event.target.value.toLowerCase());}
-  //    ) }
 
-  //     return this.searchResult;
-  //   }
-  
-
+  // }
 }
