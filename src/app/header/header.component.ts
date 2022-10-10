@@ -11,6 +11,7 @@ import { UserAuthService } from '../services/user-auth.service';
 export class HeaderComponent implements OnInit {
   isLoggedIn:any;
   username:any;
+  isAdmin:any;
   constructor(private userauth:UserAuthService,private router:Router,private userAuth:UserAuthService,private productApi:ProductsApiService) { 
     this.isLoggedIn=this.userAuth.getLoggedStatus();
     console.log(this.username)
@@ -24,6 +25,8 @@ export class HeaderComponent implements OnInit {
     this.userauth.getUsername().subscribe(status=>{
       this.username=status;
     })
+   this.userAuth.getIsAdminStatus().subscribe(status=>{ this.isAdmin=status});
+
    
   }
   ngAfterViewInit(): void {

@@ -18,6 +18,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { loaderInterceptor } from './spinner/loader-interceptor';
 import { SearchComponent } from './search/search.component';
 import { FormsModule } from '@angular/forms';
+import { FavouriteComponent } from './favourite/favourite.component';
 
 
 
@@ -33,7 +34,8 @@ import { FormsModule } from '@angular/forms';
     NotFoundPageComponent,
    ForbiddenComponent,
    SpinnerComponent,
-   SearchComponent
+   SearchComponent,
+   FavouriteComponent
 
     
   ],
