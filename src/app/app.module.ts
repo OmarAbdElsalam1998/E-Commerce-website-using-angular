@@ -16,6 +16,8 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { loaderInterceptor } from './spinner/loader-interceptor';
+import { SearchComponent } from './search/search.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -30,7 +32,8 @@ import { loaderInterceptor } from './spinner/loader-interceptor';
     PaymentComponent,
     NotFoundPageComponent,
    ForbiddenComponent,
-   SpinnerComponent
+   SpinnerComponent,
+   SearchComponent
 
     
   ],
@@ -41,7 +44,11 @@ import { loaderInterceptor } from './spinner/loader-interceptor';
     CarouselModule,
     BrowserAnimationsModule,
     HttpClientModule,
+<<<<<<< HEAD
 
+=======
+    FormsModule,
+>>>>>>> 7032f1f293c03408a4d3646d14280f01edc658dc
     
     
   

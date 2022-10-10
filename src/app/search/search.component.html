@@ -1,0 +1,305 @@
+<!-- 
+<p>search works!</p>
+<div style="text-align: center; margin: 3% 30%">
+    <h1>Welcome to the Market searcher</h1>
+    <p>You can search for your favorite Product HERE</p>
+    <div class="searchbar">
+      <div class="bar">
+        <input type="text" [(ngModel)]="searchInput" #searchbar (keyup)="fetchSeries($event)" placeholder="Enter the name of your series"/>
+    </div><br>
+    <p> {{ searchInput }} </p>
+
+    <ul>
+        <li *ngFor="let show of searchResult" (click)="showDetails(show)" [hidden]="toggle" >
+            <p> {{ show.name }}</p>
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="toggle" class="details">
+        <h4 class="title">
+          Title: {{ selectedInput.name }}
+        </h4>
+        <p class="description">
+          <span class="sub-heading">Description: </span> {{selectedInput.description}}
+        </p>
+        <p class="release">
+          <span class="sub-heading">Release Date: </span>{{selectedInput.releaseDate}}
+        </p>
+        <p class="genre">
+          <span class="sub-heading">Genres: </span> {{selectedInput.genres}}
+        </p>
+      </div>
+   </div> -->
+
+
+
+
+
+<main class="show-products">
+    <!-- Start breadcrumb -->
+    <section class="breadcrumb">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-start  rounded bg-white p-3 my-3">
+                <nav aria-label="breadcrumb ">
+                    <ol class="breadcrumb m-0">
+                      <li class="breadcrumb-item"><a href="#">Home</a></li>
+                      <li class="breadcrumb-item"><a href="#">Library</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Data</li>
+                    </ol>
+                  </nav>
+            </div>
+        </div>
+    </section>
+    <!-- end breadcrumb -->
+
+    <section class="products-area">
+        <div class="container">
+            <div class="sort-products d-flex justify-content-end mb-3">
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                     Sorting
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                  </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="product-filteration p-3 bg-white">
+                        <div class="categories-filters  py-3 border-bottom">
+                            <div class="filteration-header d-flex align-items-center justify-content-between" data-toggle="categories">
+                                <h2 class="text-uppercase special-header">categories</h2>
+                                <span><i class="fa-light fa-chevron-down"></i></span>
+                            </div>
+                             <div class="category-filter d-flex align-items-center justify-content-between p-1 " id="categories" >
+                                <div class="select-filter">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                          category 1
+                                        </label>
+                                      </div>
+                                </div>
+                                <div class="num-of-products">
+                                    <span>(23)</span>
+                                </div>
+                             </div>
+                             <div class="category-filter d-flex align-items-center justify-content-between p-1 " id="categories" >
+                                <div class="select-filter">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                          category 2
+                                        </label>
+                                      </div>
+                                </div>
+                                <div class="num-of-products">
+                                    <span>(23)</span>
+                                </div>
+                             </div>
+                             <div class="category-filter d-flex align-items-center justify-content-between p-1 " id="categories" >
+                                <div class="select-filter">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                          category 3
+                                        </label>
+                                      </div>
+                                </div>
+                                <div class="num-of-products">
+                                    <span>(23)</span>
+                                </div>
+                             </div>
+                             <div class="category-filter d-flex align-items-center justify-content-between p-1 " id="categories" >
+                                <div class="select-filter">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                          category 4
+                                        </label>
+                                      </div>
+                                </div>
+                                <div class="num-of-products">
+                                    <span>(23)</span>
+                                </div>
+                             </div>
+                        </div>
+                        <div class="brand-filters py-3 border-bottom">
+                            <div class="filteration-header d-flex align-items-center justify-content-between" data-toggle="categories">
+                                <h2 class="text-uppercase special-header">brands</h2>
+                                <span><i class="fa-light fa-chevron-down"></i></span>
+                            </div>
+                             <div class="category-filter d-flex align-items-center justify-content-between p-1 " id="categories" >
+                                <div class="select-filter">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                          brand 1
+                                        </label>
+                                      </div>
+                                </div>
+                                <div class="num-of-products">
+                                    <span>(23)</span>
+                                </div>
+                             </div>
+                             <div class="category-filter d-flex align-items-center justify-content-between p-1 " id="categories" >
+                                <div class="select-filter">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                          brand 2
+                                        </label>
+                                      </div>
+                                </div>
+                                <div class="num-of-products">
+                                    <span>(23)</span>
+                                </div>
+                             </div>
+                             <div class="category-filter d-flex align-items-center justify-content-between p-1 " id="categories" >
+                                <div class="select-filter">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                          brand 3
+                                        </label>
+                                      </div>
+                                </div>
+                                <div class="num-of-products">
+                                    <span>(23)</span>
+                                </div>
+                             </div>
+                             <div class="category-filter d-flex align-items-center justify-content-between p-1 " id="categories" >
+                                <div class="select-filter">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                          brand 4
+                                        </label>
+                                      </div>
+                                </div>
+                                <div class="num-of-products">
+                                    <span>(23)</span>
+                                </div>
+                             </div>
+                        </div>
+                        <div class="size-filters py-3 border-bottom">
+                            <div class="filteration-header d-flex align-items-center justify-content-between" data-toggle="categories">
+                                <h2 class="text-uppercase special-header">Size</h2>
+                                <span><i class="fa-light fa-chevron-down"></i></span>
+                            </div>
+                             <div class="category-filter d-flex align-items-center justify-content-between p-1 " id="categories" >
+                                <div class="select-filter">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                          size 1
+                                        </label>
+                                      </div>
+                                </div>
+                                <div class="num-of-products">
+                                    <span>(23)</span>
+                                </div>
+                             </div>
+                             <div class="category-filter d-flex align-items-center justify-content-between p-1 " id="categories" >
+                                <div class="select-filter">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                          size 2
+                                        </label>
+                                      </div>
+                                </div>
+                                <div class="num-of-products">
+                                    <span>(23)</span>
+                                </div>
+                             </div>
+                             <div class="category-filter d-flex align-items-center justify-content-between p-1 " id="categories" >
+                                <div class="select-filter">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                          size 3
+                                        </label>
+                                      </div>
+                                </div>
+                                <div class="num-of-products">
+                                    <span>(23)</span>
+                                </div>
+                             </div>
+                             <div class="category-filter d-flex align-items-center justify-content-between p-1 " id="categories" >
+                                <div class="select-filter">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                          size 4
+                                        </label>
+                                      </div>
+                                </div>
+                                <div class="num-of-products">
+                                    <span>(23)</span>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="products ">
+                        <div class="products-list">
+                            <div class="row">
+                           
+                                <!--Start Product  -->
+                                <div  class="col-md-6 col-lg-4" *ngFor="let product of productsList?.products;index as i">
+                                    <div class="product-box p-2 mb-3">
+                                        <div class="product">
+                                            <div class="overlay"></div>
+                                            <div class="product-image">
+                                                <img class="img-fluid" [src]="product.thumbnail" >
+                                            </div>
+                                            <div class="product-operations d-flex">
+                                                <div class="add-to-cart p-3"(click)="addToCart(i)" >
+                                                    <i class="fa-light fa-cart-shopping fa-2x"></i>
+                                                </div>
+                                                <div class="save p-3 ">
+                                                    <i class="fa-light fa-heart fa-2x"></i>
+                                                </div>
+                                                <div class="details p-3 " (click)="seeDetails(product.id)" >
+                                                    <i class="fa-light fa-arrow-right fa-2x"></i>  
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="product-info py-3">
+                                            <div class="product-name px-2 pt-2">
+                                                <h4 class=" m-0" [title]="product.title">{{product.title}}</h4>
+                                  
+                                            </div>
+                                            <div class="product-price px-2 pt-3 d-flex align-items-center">
+                                               <span class="new-price">EGP <span >{{product.price-product.price*product.discountPercentage/100 |number :'1.1-2'}}</span></span>
+                                               <span class="old-price ">EGP {{product.price | number}}</span>
+                                               
+                                            </div>
+                                            <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
+                                                <span class="discount">{{product.discountPercentage/100  | percent }} OFF</span>
+                                                <span class="rate "><i class="fa-solid fa-star-sharp"></i>{{product.rating}} <span>(21)</span></span>
+                                                
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Product -->
+                                
+                                
+                                
+                                
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
