@@ -7,9 +7,11 @@ import { BehaviorSubject, catchError, throwError } from 'rxjs';
 })
 export class ProductsApiService {
  prloader:BehaviorSubject<boolean>;
+ searchResult:BehaviorSubject<any>;
    url:string="https://dummyjson.com/products";
   constructor(private http:HttpClient) { 
     this.prloader=new BehaviorSubject<boolean>(false)
+    this.searchResult=new BehaviorSubject<any>([1,2,3]);
   }
 
 
@@ -26,8 +28,16 @@ export class ProductsApiService {
 
   
   searchData(keyword:any){
-    return this.http.get<any>(this.url+"/search?q="+keyword).pipe(catchError((err)=>{
+       var data=this.http.get<any>(this.url+"/search?q="+keyword).pipe(catchError((err)=>{
       return throwError (()=>err.message ||"internal server error")
     }));
+    data.subscribe(value=>{
+      this.searchResult.next(value)
+    })
+    console.log(this.searchResult)
+  }
+  getsearchResultData(){
+     return this.searchResult;
   }
 }
+

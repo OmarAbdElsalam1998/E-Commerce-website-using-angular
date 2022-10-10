@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ProductsApiService } from '../services/products-api.service';
 import { UserAuthService } from '../services/user-auth.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { UserAuthService } from '../services/user-auth.service';
 export class HeaderComponent implements OnInit {
   isLoggedIn:any;
   username:any;
-  constructor(private userauth:UserAuthService,private router:Router,private userAuth:UserAuthService) { 
+  constructor(private userauth:UserAuthService,private router:Router,private userAuth:UserAuthService,private productApi:ProductsApiService) { 
     this.isLoggedIn=this.userAuth.getLoggedStatus();
     console.log(this.username)
    
@@ -61,7 +62,7 @@ export class HeaderComponent implements OnInit {
     ]
 
   search (keyword: any) 
-  {
+  { this.productApi.searchData(keyword.value);
     this.router.navigate(["search/" + keyword.value]);
   }
 
