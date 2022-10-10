@@ -43,6 +43,14 @@
       "confirmpassword": "Mn1234",
       "role": "user",
       "id": 6
+    },
+    {
+      "username": "omarabdelsalam",
+      "email": "omar@gmail.com",
+      "password": "omar123",
+      "confirmpassword": "omar123",
+      "role": "user",
+      "id": 7
     }
   ]
 }
