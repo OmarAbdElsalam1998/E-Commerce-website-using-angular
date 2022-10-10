@@ -25,7 +25,7 @@ export class ProductsApiService {
   }
 
   
-  search(keyword:any){
+  searchData(keyword:any){
     return this.http.get<any>(this.url+"/search?q="+keyword).pipe(catchError((err)=>{
       return throwError (()=>err.message ||"internal server error")
     }));

@@ -9,6 +9,7 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
 import { PaymentComponent } from './payment/payment.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductsComponent } from './products/products.component';
+import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
   {path:"",component:HomeComponent},
@@ -18,10 +19,13 @@ const routes: Routes = [
   {path:"cart/payment",component:PaymentComponent,canActivate:[AuthGuard]},
   {path:"auth",loadChildren:()=>import("../app/auth/auth.module").then(m=>m.AuthModule)},
   {path:"dashboard",loadChildren:()=>import("../app/dashboard/dashboard.module").then(m=>m.DashboardModule),canLoad:[AdminGuard]},
+  {path:"search/:keyword",component:SearchComponent},
+  // {path:"search",component:SearchComponent},
+
+
+
   {path:"error",component:ForbiddenComponent},
-  {path:"**",component:NotFoundPageComponent}
- 
-  
+  {path:"**",component:NotFoundPageComponent}, 
 ];
 
 @NgModule({

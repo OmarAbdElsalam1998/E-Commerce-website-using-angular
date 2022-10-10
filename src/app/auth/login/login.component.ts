@@ -61,6 +61,17 @@ export class LoginComponent implements OnInit {
   saveloginData()
   {
     // console.log(this.loginForm.value)
+
+      this.userService.getLogData().subscribe(data=>{             
+      console.log(data)
+      this.usersArr=data;
+     
+    },
+    error => 
+    {
+      console.log("Fail login")
+    }
+    )
     
     let checkUser=this.usersArr?.filter((user:any)=>
     user.email== this.userEmail?.value && user.password ==this.userPassword?.value
