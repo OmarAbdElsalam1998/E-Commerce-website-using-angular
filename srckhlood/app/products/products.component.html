@@ -6,7 +6,7 @@
                 <nav aria-label="breadcrumb ">
                     <ol class="breadcrumb m-0">
                       <li class="breadcrumb-item"><a href="#">Home</a></li>
-                      <li class="breadcrumb-item"><a href="#">{{selectedcategoty}}</a></li>
+                      <li class="breadcrumb-item"><a href="#">Library</a></li>
                       <li class="breadcrumb-item active" aria-current="page">Data</li>
                     </ol>
                   </nav>
@@ -38,30 +38,17 @@
                                 <span><i class="fa-light fa-chevron-down"></i></span>
                             </div>
 
-                             <!-- <div class="category-filter d-flex align-items-center justify-content-between p-1 " *ngFor="let cat of categorieslist">
+                             <div class="category-filter d-flex align-items-center justify-content-between p-1 " *ngFor="let cat of productsList?.products "id="categories" >
                                 <div class="select-filter">
                                     <div class="form-check"  >
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <input class="form-check-input" (change)="onchange($event)" type="checkbox" value="" id="flexCheckDefault">
                                         <label class="form-check-label"  for="flexCheckDefault">
-                                         {{cat}}
+                                         {{cat.category}}
                                         </label>
                                       </div>
                                 </div>
 
-                             </div> -->
-                             
-                             <div class="row " >
-                                <div class="my-2">
-                                    <select class="form-control" (change)="filtercat($event)" >
-                                        <option value="All" selected> All</option>
-                                        <option value="{{cat}}" *ngFor="let cat of categorieslist">
-                                            {{cat}}
-                                        </option>
-                                      </select>
-                                </div>
-
                              </div>
-
                         </div>
                         <div class="brand-filters py-3 border-bottom">
                             <div class="filteration-header d-flex align-items-center justify-content-between" data-toggle="categories">

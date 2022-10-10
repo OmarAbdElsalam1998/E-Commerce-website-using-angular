@@ -11,19 +11,18 @@ export class ProductsApiService {
  searchResult:BehaviorSubject<any>;
    url:string="https://dummyjson.com/products";
    url2:string="http://localhost:3000/addproducts";
+   url3:string="https://dummyjson.com/products/categories";
+   url4:string="https://dummyjson.com/products/category";
    httpOption;
   constructor(private http:HttpClient) { 
     this.prloader=new BehaviorSubject<boolean>(false)
-<<<<<<< HEAD
     this.httpOption = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
         // ,Authorization: 'my-auth-token'
       })
     };
-=======
     this.searchResult=new BehaviorSubject<any>([1,2,3]);
->>>>>>> 7032f1f293c03408a4d3646d14280f01edc658dc
   }
 
 
@@ -60,6 +59,25 @@ getcategories(){
 }
 saveproduct(product:any){
   return this.http.post(this.url2,product )
+}
+Getallproductscategories()
+{
+return this.http.get<any>(this.url3).pipe(catchError((err)=>{
+return throwError (()=>err.message ||"internal server error")
+}));
+}
+
+Getproductsbycategories(keyword:string)
+{
+return this.http.get<any>(this.url4+"/"+keyword).pipe(catchError((err)=>{
+return throwError (()=>err.message ||"internal server error")
+}));
+}
+
+Getallproductsbrand(prodbrand:any){
+  return this.http.get<any>(this.url+"/"+prodbrand).pipe(catchError((err)=>{
+    return throwError (()=>err.message ||"internal server error")
+  }));
 }
 }
 

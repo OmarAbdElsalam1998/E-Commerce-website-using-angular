@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import * as _ from 'lodash';
 import { ProductsApiService } from '../services/products-api.service';
 
 @Component({
@@ -12,26 +11,21 @@ import { ProductsApiService } from '../services/products-api.service';
 export class ProductsComponent implements OnInit {
   title="Products Page";
   productsList:any;
-  categories:any;
   categorieslist:any;
-  categorieslist2:any;
   brandlist:any;
-  arrayes:any;
-  uniquecat :any;
-  item: any;
-  uniqueObjectArray: any;
+  categories:any;
   constructor(private titleService:Title,private productService:ProductsApiService,private router:Router) { }
 
   ngOnInit(): void {
      this.titleService.setTitle(this.title);
      this.productService.getAllProducts().subscribe(data=>{
-     this.productsList=data;
-     this.categorieslist2=data;
+       this.productsList=data;
+       this.brandlist=data;
      },error=>{console.log(error)});
-    
+
      this.Getallproductscategories()
      this.filtercatogry()
-  
+    
   }
   ngAfterViewInit(): void {
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
@@ -45,15 +39,19 @@ addToCart(index:any){
 seeDetails(id:any){
    this.router.navigate(["product/",id]);
 }
+arrayes:any=[];
 Getallproductscategories()
 {
-    this.titleService.setTitle(this.title); 
+    this.titleService.setTitle(this.title);
     this.productService.Getallproductscategories().subscribe(res1=>{
-     this.categorieslist=res1;  
+    this.categorieslist=res1;
+    this.arrayes=res1;
+    console.log(this.arrayes);
   },error=>{console.log(error)});
  
   
 }
+
 filtercatogry()
 {
 // let value=event.target.value;
@@ -73,21 +71,5 @@ onchange(event:any){
 
   }
 }
-result:any=[];
 
-selectedcategoty="All";
-
-filtercat(event:any)
-{
-let value=event.target.value;
-this.getcats(value);
-this.selectedcategoty=value;
-}
-getcats(keyword:string)
-{
-  this.productService.Getproductsbycategories(keyword).subscribe(res=>{
-  this.productsList=res;
-})
-
-}
 }

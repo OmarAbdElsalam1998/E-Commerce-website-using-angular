@@ -1,0 +1,120 @@
+$button_background:#feee00;
+$button_background_hover:#d1c51b;
+@mixin writting_Style($color,$font_Size,$font_Weight:normal){
+    color:$color;
+    font-size:$font_Size ;
+    font-weight: $font_Weight;
+}//global style
+.my-button{
+    background-color: $button_background;
+    padding:10px 40px;
+    border-radius: 5px;;
+    outline: none;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    transition: all .2s ease-in-out;
+    &:hover{
+        background-color: $button_background_hover;
+    }
+}
+a{
+    text-decoration: none;
+    color: #0923ff;
+}
+
+// Start Log in
+.login{
+    height: 100vh;
+    // background-image:url("../../../assets/images/login.jpg") ;
+    // background-size: cover;
+    .overlay{
+        width: 100%;
+        height: 100%;
+        // background-color: rgb(125 123 164 / 84%);
+        .login-box{
+            background-color: #FFF;
+            border-radius: 7px;
+            overflow: hidden;
+            box-shadow: 4px 4px 19px 0px #d5d5d5;
+            .login-header{
+                position: relative;
+                height: 220px;
+                background-image: url('../../../assets//images/login-header.jpg');
+                background-size: cover;
+                font-size: 25px;
+                overflow: hidden;
+               
+                .login-header-overlay{
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgb(0 0 0 / 53%);
+                    color:#FFF;
+               
+                  }
+            
+            }
+            .login-form{
+               .form-group{
+                position: relative;
+                .input-field{
+                    width: 100%;
+                    padding: 15px;
+                    border:1px solid #e2e2e2;
+                    background-color: none;
+                    border-radius: 4px;
+                    z-index:1;
+                    outline: none;
+                    transition: all .4s ease-in-out;
+                    &:focus{
+                        border-color: dodgerblue;
+                        box-shadow: 0px 0px 6px -2px dodgerblue;
+                        & +.placeholder-lable{
+                            transform: scale(.9,.9);
+                            top:-4px;
+                            color:dodgerblue;
+                            font-weight: bold;
+                        }
+                        
+                    }
+                    
+                    &:not(:placeholder-shown){
+                        
+                        & +.placeholder-lable{
+                            transform: scale(.9,.9);
+                            top:-4px;
+                            font-weight: bold;
+                        }
+
+                    }
+
+                    }
+                    }
+                    .placeholder-lable{
+                        position: absolute;
+                        left: 12px;
+                        top: 25px;
+                        background-color: #FFF;
+                        padding:0 5px;
+                        z-index: 0;
+                        transition: all .3s ease-in-out;
+
+                        
+                            
+                            
+                    }
+                    .show-password{
+                        position:absolute;
+                        top:30px;
+                        right: 20px;
+                    }
+               }
+            }
+
+        }
+    }
+
+
+
+
+//End log in
