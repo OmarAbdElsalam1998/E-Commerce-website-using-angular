@@ -4,6 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { IProudct } from 'Shared Classes and types/IProduct';
 import { Product } from 'Shared Classes and types/model/product';
+import { CartService } from '../services/cart.service';
 
 // import { IProudct } from 'Shared Classes and types/IProduct';
 // import { AddToCartService } from '../services/add-to-cart.service';
@@ -21,7 +22,7 @@ export class ProductsComponent implements OnInit {
   items:any[] = [];
   products: any = [];
   constructor(private titleService:Title,private productService:ProductsApiService,private router:Router,
-    private data1:HttpClient
+    private data1:HttpClient,private cart :CartService
    ) { }
 
 
@@ -46,6 +47,7 @@ export class ProductsComponent implements OnInit {
   }
    addToCart(index:any){
     
+    this.cart.getProductById(index);
     this.productService.addToCart(index);
     window.alert('Your product has been added to the cart!');
    

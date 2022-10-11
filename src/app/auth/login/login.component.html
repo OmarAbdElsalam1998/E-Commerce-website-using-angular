@@ -15,8 +15,8 @@
                                      <form [formGroup]="loginForm" (ngSubmit)="saveloginData()">
 
                                         <div class="form-group py-2">
-                                            <input [class.is-invalid]="userEmail?.invalid && userEmail?.touched" formControlName="userEmail" name="textemail" type="text" class="input-field" placeholder=" ">
-                                            <label class="placeholder-lable"><i class="fa-light fa-envelope fa-fw"></i> Email</label>
+                                            <input [class.is-invalid]="userEmail?.invalid && userEmail?.touched" [style.borderColor]="userEmail?.invalid && userEmail?.touched ? 'red' : ''" formControlName="userEmail" name="textemail" type="text" class="input-field" placeholder=" ">
+                                            <label class="placeholder-lable" [style.color]="userEmail?.invalid && userEmail?.touched ? 'red' : ''"><i class="fa-light fa-envelope fa-fw"></i> Email</label>
                                             <div *ngIf="userEmail?.invalid && userEmail?.touched">
                                              <small class="text-danger" *ngIf="userEmail?.errors?.['required']"> Email is Required</small>
                                              <small class="text-danger" *ngIf="userEmail?.errors?.['pattern']"  > Email should be in form xxx@gmail.com </small>

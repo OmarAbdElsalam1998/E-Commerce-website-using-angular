@@ -56,44 +56,42 @@ export class RegisterComponent implements OnInit {
   get confirmPassword()
   {
     return this.registerationForm.get('confirmPassword')
-  }
-
-    // userRegistering()
-    // {
-    //   this.http.post<any>("http://localhost:4000/users",this.registerationForm.value)
-    //   .subscribe(res=>{
-    //           alert("Registeration is Successfull")
-    //           this.registerationForm.reset();
-    //           this.router.navigate(['login'])
-    //         },
-    //           error =>{
-    //             alert("Registeraion is failed , plz try again with another Email Account")} ,
-    //   )
-    // }
-                
+  }    
         
+
+  usersArr:any;
 
   userRegistering()
   {
     console.log(this.registerationForm.value)
     this.userService.postRegData(this.registerationForm.value).subscribe(data =>
       {
-      alert("Registeration is Successfull")
-          this.registerationForm.reset();
-          this.router.navigate([""])},
-     error =>{
-        console.log("Error" , error)
-      }
+        console.log(data)
+        // this.usersArr=data;
+      },
+      error =>
+        {
+          console.log("Error")
+        }
+        )
+
+        // let checkUser=this.usersArr?.filter((input:any)=>
+        // input.email == this.userEmail?.value && input.password == this.Password?.value
+        //   )
+
+        // console.log(checkUser)
+        if(this.registerationForm.valid){
+          alert("Hello" + this.registerationForm.value.userName + "Registeration is Successfull");
+            this.registerationForm.reset();
+            this.router.navigate([""])
+          }
+
+          else
+          { 
+            alert("Registertraion is failed , Plz try another account as not registered before")
+          }        
       
-      )
-
-  }
-
-
-// giveMeData(){
-//   this.httpClient.get('assets/sample.json').subscribe((resp)=>{
-//   this.var1 = resp;
-//   });
-//   }
+        }
+  
 
 }
