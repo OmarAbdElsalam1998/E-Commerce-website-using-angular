@@ -6,6 +6,7 @@ import { BehaviorSubject, catchError, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductsApiService {
+  
  prloader:BehaviorSubject<boolean>;
    url:string="https://dummyjson.com/products";
    url2:string="https://dummyjson.com/products/categories";
@@ -13,7 +14,10 @@ export class ProductsApiService {
     this.prloader=new BehaviorSubject<boolean>(false)
   }
 
+  
 
+
+  
   getAllProducts(){
     return this.http.get<any>(this.url).pipe(catchError((err)=>{
       return throwError (()=>err.message ||"internal server error")

@@ -61,7 +61,7 @@ export class ProductsApiService {
 //  }
 
 // Add products to cart
- addToCart(product: any) {
+ addToCartt(product: any) {
   this.items.push(product);
   this.productList.next(this.items);
   console.log(this.items);
@@ -104,9 +104,12 @@ getcategories(){
   }));
 
 }
+///server/////////////
 saveproduct(product:any){
   return this.http.post(this.url2,product )
 }
+
+
 Getallproductscategories()
 {
 return this.http.get<any>(this.url3).pipe(catchError((err)=>{

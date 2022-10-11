@@ -6,7 +6,8 @@
                 <nav aria-label="breadcrumb ">
                     <ol class="breadcrumb m-0">
                       <li class="breadcrumb-item"><a href="#">Home</a></li>
-                      <li class="breadcrumb-item"><a href="#">{{selectedcategoty}}</a></li>
+                      <!-- {{selectedcategoty}} -->
+                      <li class="breadcrumb-item"><a href="#"></a></li>
                       <li class="breadcrumb-item active" aria-current="page">Data</li>
                     </ol>
                   </nav>
@@ -52,7 +53,8 @@
                              
                              <div class="row " >
                                 <div class="my-2">
-                                    <select class="form-control" (change)="filtercat($event)" >
+                                    <!-- (change)="filtercat($event)" -->
+                                    <select class="form-control"  >
                                         <option value="All" selected> All</option>
                                         <option value="{{cat}}" *ngFor="let cat of categorieslist">
                                             {{cat}}

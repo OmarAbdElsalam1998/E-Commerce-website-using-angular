@@ -46,10 +46,7 @@ import { FavouriteComponent } from './favourite/favourite.component';
     CarouselModule,
     BrowserAnimationsModule,
     HttpClientModule,
-<<<<<<< HEAD
 
-=======
->>>>>>> b3b6afa148d98c517fa38f74edf98b6eaa0f88d2
     FormsModule,
     
   ],
