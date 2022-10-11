@@ -1,0 +1,16 @@
+$background_color:#f5f5f5;
+$brand_color:#1363DF;
+main{
+    font-family: 'Roboto', sans-serif;
+}
+
+.forbidden{
+    .icon{
+        color:$brand_color;
+    }
+    .error-num{
+        font-size: 120px;
+        color:$brand_color;
+        ;
+    }
+}

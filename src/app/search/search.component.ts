@@ -41,7 +41,7 @@ export class SearchComponent implements OnInit {
   
   }
   seeDetails(id:any){
-     this.router.navigate(["product/",id]);
+     this.router.navigate(["products/",id]);
   }
 
   // public searchInput: String = '';

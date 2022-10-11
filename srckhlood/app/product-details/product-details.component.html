@@ -1,0 +1,108 @@
+<main>
+    <!-- Start breadcrumb -->
+    <section class="breadcrumb">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-start  rounded bg-white p-3 my-3">
+                <nav aria-label="breadcrumb ">
+                    <ol class="breadcrumb m-0">
+                      <li class="breadcrumb-item"><a href="#">Home</a></li>
+                      <li class="breadcrumb-item"><a href="#">Library</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Data</li>
+                    </ol>
+                  </nav>
+            </div>
+        </div>
+    </section>
+    <!-- end breadcrumb -->
+    <section class="details py-5" *ngIf="product">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 mb-3 mb-lg-0 ">
+                    <div class="images-container bg-white p-5">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="product-images">
+                                    <div class="image active mb-2" id="image1">
+                                      <img [src]="product?.images[0]">
+                                    </div>
+                                         <div class="image mb-2" id="image12">
+                                        <img [src]="product?.images[1]">
+                                    </div>
+                                    <div class="image mb-2" id="image3">
+                                        <img [src]="product?.images[2]">
+                                    </div>
+                                    <div class="image mb-2" id="image4">
+                                        <img [src]="product?.images[3]">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="main-image">
+                                    <img [src]="product?.images[0]" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="product-details bg-white p-5">
+                   
+                            <div class="product-info px-2 pt-2">
+                                <span>{{product?.brand}}</span>
+                                <h2 class="d-block my-2 fw-bold ">{{product?.title}}</h2>
+                                <p>{{product?.description}}</p>
+                  
+                            </div>
+                            <div class="product-rate px-2 pt-3 ">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star-half-stroke"></i>
+                                <span class="rate px-3">({{product?.rating}})</span>
+                            </div> 
+                           
+                            <div class="product-price px-2 pt-3 mb-2">
+                                <div class="new-price">
+                                    <span class="price d-block"><span>EGP 3599.00</span></span>
+                                </div>
+                                <div class="old-price pt-3">
+                                    <span class="price ">EGP {{product.price}}</span> 
+                                    <span class="discount">{{product.discountPercentage/100  | percent }} OFF</span>
+                                </div>
+                                
+                            </div> 
+                                                           
+                            
+                            <div class="add-to-cart px-2 pt-4 d-flex justify-content-center ">
+                                <div class="quantity d-flex me-4">
+                                    <div class="minus px-4 py-3 "><i class="fa-solid fa-minus"></i></div>
+                                    <div class="num px-4 py-3 bg-light fw-bold">1</div>
+                                    <div class="plus px-4 py-3 "><i class="fa-solid fa-plus"></i></div>
+
+                                </div>  
+                                <button  class="custom-btn w-100"><i class="fa-light fa-cart-shopping fa-lg"></i> Add To Cart</button>
+                            </div>
+                            
+                       
+                    </div>
+                </div>
+                    
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Setion class -->
+    <section class="discription">
+        <div class="container">
+            <div class="links">
+
+            </div>
+        </div>
+    </section>
+
+
+    <!--End description -->
+</main>
+<script src="../../../node_modules/bootstrap/dist/js/productDetails.js"></script>

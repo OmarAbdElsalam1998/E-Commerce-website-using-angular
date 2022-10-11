@@ -48,8 +48,6 @@ import { FavouriteComponent } from './favourite/favourite.component';
     HttpClientModule,
     FormsModule,
     
-    
-  
   ],
   providers: [Title,{provide:HTTP_INTERCEPTORS,useClass:loaderInterceptor,multi:true}],
   bootstrap: [AppComponent]
