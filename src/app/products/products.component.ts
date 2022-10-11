@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import * as _ from 'lodash';
+// import * as _ from 'lodash'
 import { ProductsApiService } from '../services/products-api.service';
 
 @Component({
@@ -17,8 +17,6 @@ export class ProductsComponent implements OnInit {
   categorieslist2:any;
   brandlist:any;
   arrayes:any;
-  uniquecat :any;
-  item: any;
   uniqueObjectArray: any;
   constructor(private titleService:Title,private productService:ProductsApiService,private router:Router) { }
 
@@ -30,7 +28,6 @@ export class ProductsComponent implements OnInit {
      },error=>{console.log(error)});
     
      this.Getallproductscategories()
-     this.filtercatogry()
   
   }
   ngAfterViewInit(): void {
@@ -54,27 +51,6 @@ Getallproductscategories()
  
   
 }
-filtercatogry()
-{
-// let value=event.target.value;
-console.log(this.categorieslist);
-}
-temparray:any=[];
-newarray:any=[];
-onchange(event:any){
-  // let value=event.target.checked;
-  // console.log(value);
-  if(event.target.checked)
-  {
- this.temparray=this.arrayes.filter((e:any)=>e.i==event.target.value);
- console.log(this.temparray);
-  }
-  else{
-
-  }
-}
-result:any=[];
-
 selectedcategoty="All";
 
 filtercat(event:any)
@@ -82,12 +58,55 @@ filtercat(event:any)
 let value=event.target.value;
 this.getcats(value);
 this.selectedcategoty=value;
+
 }
 getcats(keyword:string)
 {
   this.productService.Getproductsbycategories(keyword).subscribe(res=>{
+  this.categorieslist2=res;
   this.productsList=res;
+  console.log(this.categorieslist2);
+  this.arrayes = Array.from(this.categorieslist2).sort();
+  console.log(this.arrayes);
 })
+}
+
+// sortbylowprice(event:any)
+// {
+//   let value=event.target.value;
+//   this.arrayes =this.categorieslist2.sort((a1:any,b1:any)=>a1.price-b1.price);
+//   this.categorieslist2=this.arrayes;
+//   this.productsList=this.arrayes;
+//   console.log(this.arrayes);
+// }
+
+sort(event: any) {
+
+  switch (event.target.value) {
+    case "Low":
+      {
+        this.productsList= this.arrayes.sort((low:any, high:any) => low.price - high.price);
+        console.log(this.productsList);
+        break;
+      }
+
+    case "High":
+      {
+        this.productsList = this.arrayes.sort((low:any, high:any) => high.price - low.price);
+        break;
+      }
+
+    default: {
+      this.productsList = this.arrayes.sort((low:any, high:any) => low.price - high.price);
+      break;
+    }
+
+  }
+  
+  return this.productsList;
+
+  // this.productsList=this.categorieslist2;
 
 }
+
 }

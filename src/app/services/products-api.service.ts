@@ -74,10 +74,12 @@ return throwError (()=>err.message ||"internal server error")
 }));
 }
 
-Getallproductsbrand(prodbrand:any){
-  return this.http.get<any>(this.url+"/"+prodbrand).pipe(catchError((err)=>{
-    return throwError (()=>err.message ||"internal server error")
-  }));
-}
+// Getallproductsbrand(prodbrand:any){
+//   return this.http.get<any>(this.url+"/"+prodbrand).pipe(catchError((err)=>{
+//     return throwError (()=>err.message ||"internal server error")
+//   }));
+// }
+
+
 }
 

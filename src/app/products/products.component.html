@@ -18,16 +18,21 @@
     <section class="products-area">
         <div class="container">
             <div class="sort-products d-flex justify-content-end mb-3">
-                <div class="dropdown">
+                <!-- <div class="dropdown">
                     <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                      Sorting
                     </button>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li><button class="dropdown-item" (click)= "sortbylowprice()" >sortbylowprice</button></li>
                       <li><a class="dropdown-item" href="#">Another action</a></li>
                       <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
-                  </div>
+                  </div> -->
+                  <select id="sort-by" (change)="sort($event)">
+                    <option value="" selected disabled hidden>Sort By</option>
+                    <option value="Low">Show Low to High Price</option>
+                    <option value="High">Show High to Low Price</option>
+                </select>
             </div>
             <div class="row">
                 <div class="col-lg-3">
