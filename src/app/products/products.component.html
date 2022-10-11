@@ -6,7 +6,7 @@
                 <nav aria-label="breadcrumb ">
                     <ol class="breadcrumb m-0">
                       <li class="breadcrumb-item"><a href="#">Home</a></li>
-                      <li class="breadcrumb-item"><a href="#">Library</a></li>
+                      <li class="breadcrumb-item"><a href="#">{{selectedcategoty}}</a></li>
                       <li class="breadcrumb-item active" aria-current="page">Data</li>
                     </ol>
                   </nav>
@@ -37,175 +37,50 @@
                                 <h2 class="text-uppercase special-header">categories</h2>
                                 <span><i class="fa-light fa-chevron-down"></i></span>
                             </div>
-                             <div class="category-filter d-flex align-items-center justify-content-between p-1 " id="categories" >
+
+                             <!-- <div class="category-filter d-flex align-items-center justify-content-between p-1 " *ngFor="let cat of categorieslist">
                                 <div class="select-filter">
-                                    <div class="form-check">
+                                    <div class="form-check"  >
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                          category 1
+                                        <label class="form-check-label"  for="flexCheckDefault">
+                                         {{cat}}
                                         </label>
                                       </div>
                                 </div>
-                                <div class="num-of-products">
-                                    <span>(23)</span>
+
+                             </div> -->
+                             
+                             <div class="row " >
+                                <div class="my-2">
+                                    <select class="form-control" (change)="filtercat($event)" >
+                                        <option value="All" selected> All</option>
+                                        <option value="{{cat}}" *ngFor="let cat of categorieslist">
+                                            {{cat}}
+                                        </option>
+                                      </select>
                                 </div>
+
                              </div>
-                             <div class="category-filter d-flex align-items-center justify-content-between p-1 " id="categories" >
-                                <div class="select-filter">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                          category 2
-                                        </label>
-                                      </div>
-                                </div>
-                                <div class="num-of-products">
-                                    <span>(23)</span>
-                                </div>
-                             </div>
-                             <div class="category-filter d-flex align-items-center justify-content-between p-1 " id="categories" >
-                                <div class="select-filter">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                          category 3
-                                        </label>
-                                      </div>
-                                </div>
-                                <div class="num-of-products">
-                                    <span>(23)</span>
-                                </div>
-                             </div>
-                             <div class="category-filter d-flex align-items-center justify-content-between p-1 " id="categories" >
-                                <div class="select-filter">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                          category 4
-                                        </label>
-                                      </div>
-                                </div>
-                                <div class="num-of-products">
-                                    <span>(23)</span>
-                                </div>
-                             </div>
+
                         </div>
                         <div class="brand-filters py-3 border-bottom">
                             <div class="filteration-header d-flex align-items-center justify-content-between" data-toggle="categories">
                                 <h2 class="text-uppercase special-header">brands</h2>
                                 <span><i class="fa-light fa-chevron-down"></i></span>
                             </div>
-                             <div class="category-filter d-flex align-items-center justify-content-between p-1 " id="categories" >
+                            
+                             <div class="category-filter d-flex align-items-center justify-content-between p-1 "  *ngFor="let product of productsList?.products" id="categories" >
                                 <div class="select-filter">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
-                                          brand 1
+                                            {{product.brand}}
                                         </label>
                                       </div>
-                                </div>
-                                <div class="num-of-products">
-                                    <span>(23)</span>
-                                </div>
-                             </div>
-                             <div class="category-filter d-flex align-items-center justify-content-between p-1 " id="categories" >
-                                <div class="select-filter">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                          brand 2
-                                        </label>
-                                      </div>
-                                </div>
-                                <div class="num-of-products">
-                                    <span>(23)</span>
-                                </div>
-                             </div>
-                             <div class="category-filter d-flex align-items-center justify-content-between p-1 " id="categories" >
-                                <div class="select-filter">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                          brand 3
-                                        </label>
-                                      </div>
-                                </div>
-                                <div class="num-of-products">
-                                    <span>(23)</span>
-                                </div>
-                             </div>
-                             <div class="category-filter d-flex align-items-center justify-content-between p-1 " id="categories" >
-                                <div class="select-filter">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                          brand 4
-                                        </label>
-                                      </div>
-                                </div>
-                                <div class="num-of-products">
-                                    <span>(23)</span>
                                 </div>
                              </div>
                         </div>
-                        <div class="size-filters py-3 border-bottom">
-                            <div class="filteration-header d-flex align-items-center justify-content-between" data-toggle="categories">
-                                <h2 class="text-uppercase special-header">Size</h2>
-                                <span><i class="fa-light fa-chevron-down"></i></span>
-                            </div>
-                             <div class="category-filter d-flex align-items-center justify-content-between p-1 " id="categories" >
-                                <div class="select-filter">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                          size 1
-                                        </label>
-                                      </div>
-                                </div>
-                                <div class="num-of-products">
-                                    <span>(23)</span>
-                                </div>
-                             </div>
-                             <div class="category-filter d-flex align-items-center justify-content-between p-1 " id="categories" >
-                                <div class="select-filter">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                          size 2
-                                        </label>
-                                      </div>
-                                </div>
-                                <div class="num-of-products">
-                                    <span>(23)</span>
-                                </div>
-                             </div>
-                             <div class="category-filter d-flex align-items-center justify-content-between p-1 " id="categories" >
-                                <div class="select-filter">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                          size 3
-                                        </label>
-                                      </div>
-                                </div>
-                                <div class="num-of-products">
-                                    <span>(23)</span>
-                                </div>
-                             </div>
-                             <div class="category-filter d-flex align-items-center justify-content-between p-1 " id="categories" >
-                                <div class="select-filter">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                          size 4
-                                        </label>
-                                      </div>
-                                </div>
-                                <div class="num-of-products">
-                                    <span>(23)</span>
-                                </div>
-                             </div>
-                        </div>
+
                     </div>
                 </div>
                 <div class="col-lg-9">
@@ -239,8 +114,8 @@
                                   
                                             </div>
                                             <div class="product-price px-2 pt-3 d-flex align-items-center">
-                                               <span class="new-price">EGP <span >{{product.price-product.price*product.discountPercentage/100 |number :'1.1-2'}}</span></span>
-                                               <span class="old-price ">EGP {{product.price | number}}</span>
+                                               <span class="new-price">EGP <span >{{product.price}}</span></span>
+                                               <span class="old-price ">EGP {{product.price}}</span>
                                                
                                             </div>
                                             <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">

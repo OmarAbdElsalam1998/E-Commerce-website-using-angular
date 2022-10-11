@@ -2,78 +2,16 @@
   "cart":[],
   "addproducts": [
     {
-      "brand": "",
-      "category": "",
-      "title": "",
-      "duscription": "",
-      "numofitems": 0,
-      "price": 0,
-      "discound": 0,
-      "image": "",
-      "id": 1
-    },
-    {
-      "brand": "",
-      "category": "",
-      "title": "",
-      "duscription": "",
-      "numofitems": 0,
-      "price": 0,
-      "discound": 0,
-      "image": "",
-      "id": 2
-    },
-    {
-      "brand": "",
-      "category": "",
-      "title": "",
-      "duscription": "",
-      "numofitems": 0,
-      "price": 0,
-      "discound": 0,
-      "image": "",
-      "id": 3
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 5
-    },
-    {
-      "brand": "",
-      "category": "",
-      "title": "",
-      "description": "",
-      "numofitems": 0,
-      "price": 0,
-      "discound": 0,
-      "image": "",
-      "id": 6
-    },
-    {
-      "brand": "qw",
-      "category": "tops",
-      "title": "qw",
-      "description": "qw",
-      "numofitems": 1,
-      "price": 2,
-      "subscribe": true,
-      "discound": 12,
-      "image": "C:\\fakepath\\Screenshot (9).png",
-      "id": 7
-    },
-    {
       "brand": "iphone",
       "category": "smartphones",
-      "title": "promax",
-      "description": "new",
-      "numofitems": 2,
-      "price": 25000,
+      "title": "iphone ",
+      "description": "The iPhone 14 Pro display has rounded corners that follow a beautiful curved design, and these corners are within a standard rectangle. When measured as a standard rectangular shape, the screen is 6.12 inches diagonally (actual viewable area is less).",
+      "numofitems": 100,
+      "price": 56000,
       "subscribe": true,
-      "discound": 12,
-      "image": "C:\\fakepath\\Screenshot (7).png",
-      "id": 8
+      "discound": 12.5,
+      "image": "C:\\fakepath\\mary-brennan-bnHvVXENDSY-unsplash.jpg",
+      "id": 1
     }
   ],
   "users": [
@@ -320,9 +258,8 @@
       "confirmpassword": "Mn1234",
       "role": "user",
       "id": 31
-
     },
-   {
+    {
       "username": "omarabdelsalam",
       "email": "omar@gmail.com",
       "password": "omar123",
