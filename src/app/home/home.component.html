@@ -3,12 +3,13 @@
         <div class="bottom-nav d-none d-lg-block">
             <div class="container">
                 <ul class="list-unstyled d-flex align-items-center justify-content-center m-0">
-                    <li class="px-3 py-4 fw-bold fs-lg "><a routerLink="/product" routerLinkActive="router-link-active" >Men Fashion</a></li>
+                    <li class="px-3 py-4 fw-bold fs-lg "><a routerLink="/products" routerLinkActive="router-link-active" >All Categories</a></li>
+                    <li class="px-3 py-4 fw-bold fs-lg"><a href="">Mens Fashion</a></li>
                     <li class="px-3 py-4 fw-bold fs-lg"><a href="">Women Fashion</a></li>
-                    <li class="px-3 py-4 fw-bold fs-lg"><a href="">Electronics</a></li>
                     <li class="px-3 py-4 fw-bold fs-lg"><a href="">Home Decore</a></li>
-                    <li class="px-3 py-4 fw-bold fs-lg"><a href="">Beauty</a></li>
-                    <li class="px-3 py-4 fw-bold fs-lg"><a href="">Gerocry</a></li>
+                    <li class="px-3 py-4 fw-bold fs-lg"><a href="">furniture</a></li>
+                    <li class="px-3 py-4 fw-bold fs-lg"><a href="">skincare</a></li>
+                    <li class="px-3 py-4 fw-bold fs-lg"><a href="">jewellery</a></li>
 
                 </ul>
 
@@ -77,7 +78,68 @@
                             </div>
                             <div class="category-name">
                                 <h3>Men's Fashion</h3>  
-                                 <a href="#">Shop Now!</a>
+                                 <a [routerLink]="['/products/category/men-shirts']" routerLinkActive="router-link-active" >Shop Now!</a>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template carouselSlide>
+                    <div class="category-box wow bounceInUp">
+                        <div class="category">
+                            <div class="overlay"></div>
+                            <div class="category-image">
+                                <img src="../../assets/images/catrgories/women-desses.jpg">
+                            </div>
+                            <div class="category-name">
+                                <h3>Women's Fashion</h3>  
+                                <a [routerLink]="['/products/category/women-dresses']" routerLinkActive="router-link-active" >Shop Now!</a>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template carouselSlide>
+                    <div class="category-box wow bounceInUp">
+                        <div class="category">
+                            <div class="overlay"></div>
+                            <div class="category-image">
+                                <img src="../../assets/images/catrgories/smart-phones.jpg">
+                            </div>
+                            <div class="category-name">
+                                <h3>Smart Phones </h3>  
+                                <a [routerLink]="['/products/category/smartphones']" routerLinkActive="router-link-active" >Shop Now!</a>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </ng-template>
+                <ng-template carouselSlide>
+                    <div class="category-box wow bounceInUp">
+                        <div class="category">
+                            <div class="overlay"></div>
+                            <div class="category-image">
+                                <img src="../../assets/images/catrgories/laptops.jpg">
+                            </div>
+                            <div class="category-name">
+                                <h3>Laptops</h3>  
+                                 <a [routerLink]="['/products/category/laptops']" routerLinkActive="router-link-active" >Shop Now!</a>
+                              
+                          
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template carouselSlide>
+                    <div class="category-box wow bounceInUp">
+                        <div class="category">
+                            <div class="overlay"></div>
+                            <div class="category-image">
+                                <img src="../../assets/images/catrgories/watches.jpg">
+                            </div>
+                            <div class="category-name">
+                                <h3>Watches</h3>  
+                                <a [routerLink]="['/products/category/mens-watches']" routerLinkActive="router-link-active" >Shop Now!</a>
+                              
+                                
                             </div>
                         </div>
                     </div>
@@ -90,8 +152,10 @@
                                 <img src="../../assets/images/catrgories/men.jpg">
                             </div>
                             <div class="category-name">
-                                <h3>Men's Fashion</h3>  
-                                 <a href="#">Shop Now!</a>
+                                <h3>Sunglasses</h3>  
+                                <a [routerLink]="['/products/category/sunglasses']" routerLinkActive="router-link-active" >Shop Now!</a>
+                              
+                                  
                             </div>
                         </div>
                     </div>
@@ -101,11 +165,13 @@
                         <div class="category">
                             <div class="overlay"></div>
                             <div class="category-image">
-                                <img src="../../assets/images/catrgories/men.jpg">
+                                <img src="../../assets/images/catrgories/automotive.jpg">
                             </div>
                             <div class="category-name">
-                                <h3>Men's Fashion</h3>  
-                                 <a href="#">Shop Now!</a>
+                                <h3>cars</h3>  
+                                <a [routerLink]="['/products/category/automotive']" routerLinkActive="router-link-active" >Shop Now!</a>
+                              
+                                  
                             </div>
                         </div>
                     </div>
@@ -115,11 +181,13 @@
                         <div class="category">
                             <div class="overlay"></div>
                             <div class="category-image">
-                                <img src="../../assets/images/catrgories/men.jpg">
+                                <img src="../../assets/images/catrgories/motorcycle.jpg">
                             </div>
                             <div class="category-name">
-                                <h3>Men's Fashion</h3>  
-                                 <a href="#">Shop Now!</a>
+                                <h3>Motocycle</h3>  
+                                <a [routerLink]="['/products/category/motorcycle']" routerLinkActive="router-link-active" >Shop Now!</a>
+                              
+                                  
                             </div>
                         </div>
                     </div>
@@ -129,11 +197,13 @@
                         <div class="category">
                             <div class="overlay"></div>
                             <div class="category-image">
-                                <img src="../../assets/images/catrgories/men.jpg">
+                                <img src="../../assets/images/catrgories/furnature.jpg">
                             </div>
                             <div class="category-name">
-                                <h3>Men's Fashion</h3>  
-                                 <a href="#">Shop Now!</a>
+                                <h3>Furniture</h3>  
+                                <a [routerLink]="['/products/category/furniture']" routerLinkActive="router-link-active" >Shop Now!</a>
+                              
+                                  
                             </div>
                         </div>
                     </div>
@@ -143,11 +213,29 @@
                         <div class="category">
                             <div class="overlay"></div>
                             <div class="category-image">
-                                <img src="../../assets/images/catrgories/men.jpg">
+                                <img src="../../assets/images/catrgories/groceries.jpg">
                             </div>
                             <div class="category-name">
-                                <h3>Men's Fashion</h3>  
-                                 <a href="#">Shop Now!</a>
+                                <h3>Groceries</h3>  
+                                <a [routerLink]="['/products/category/groceries']" routerLinkActive="router-link-active" >Shop Now!</a>
+                              
+                                  
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template carouselSlide>
+                    <div class="category-box wow bounceInUp">
+                        <div class="category">
+                            <div class="overlay"></div>
+                            <div class="category-image">
+                                <img src="../../assets/images/catrgories/skincare.jpg">
+                            </div>
+                            <div class="category-name">
+                                <h3>Skin Care</h3>  
+                                <a [routerLink]="['/products/category/skincare']" routerLinkActive="router-link-active" >Shop Now!</a>
+                              
+                                  
                             </div>
                         </div>
                     </div>
@@ -169,7 +257,7 @@
                             <div class="product">
                                 <div class="overlay"></div>
                                 <div class="product-image">
-                                    <img class="img-fluid"src="../../assets/images/catrgories/men.jpg" >
+                                    <img src="../../assets/images/catrgories/men.jpg">
                                 </div>
                                 <div class="product-operations d-flex">
                                     <div class="add-to-cart p-3 ">

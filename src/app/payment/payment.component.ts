@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProductsApiService } from '../services/products-api.service';
+=======
+import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+>>>>>>> 08710eeb811cb85d13dde89afa7fe3133dee023a
 
 @Component({
   selector: 'app-payment',
@@ -12,6 +17,7 @@ export class PaymentComponent implements OnInit {
   ckecked: boolean = false;
   constructor(private fb: FormBuilder, private router: Router, private ProductService: ProductsApiService) { }
 
+<<<<<<< HEAD
   paymentForm:FormGroup = this.fb.group(
     {
       firstname: ['', Validators.required],
@@ -25,6 +31,10 @@ export class PaymentComponent implements OnInit {
       street: ['', Validators.required],
       subscribewhenreciving: [true],
       subscribe: [false],
+=======
+  title="payment";
+  constructor(private titleService:Title,private router:Router) { }
+>>>>>>> 08710eeb811cb85d13dde89afa7fe3133dee023a
 
 
     });
@@ -45,6 +55,7 @@ export class PaymentComponent implements OnInit {
   
     // });
   ngOnInit(): void {
+<<<<<<< HEAD
   }
   get firstname() {
     return this.paymentForm.get('firstname')
@@ -125,4 +136,9 @@ addorder(){
 
     )
 }
+=======
+    this.titleService.setTitle(this.title);
+
+  }
+>>>>>>> 08710eeb811cb85d13dde89afa7fe3133dee023a
 }

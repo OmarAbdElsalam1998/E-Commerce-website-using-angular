@@ -23,6 +23,7 @@
     "@popperjs/core": "^2.10.2",
     "bootstrap": "^5.2.0",
     "jquery": "^3.6.1",
+    "ngx-order-pipe": "^2.2.0",
     "ngx-owl-carousel-o": "^14.0.1",
     "owl.carousel": "^2.3.4",
     "rxjs": "~7.5.0",

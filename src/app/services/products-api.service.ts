@@ -7,11 +7,20 @@ import { newProduct } from '../dashboard/newproduct';
   providedIn: 'root'
 })
 export class ProductsApiService {
+
+
+  productList = new BehaviorSubject<any>([]);
+  items:any[] = [];
  prloader:BehaviorSubject<boolean>;
  searchResult:BehaviorSubject<any>;
    url:string="https://dummyjson.com/products";
    url2:string="http://localhost:3000/addproducts";
+<<<<<<< HEAD
    url3:string="http://localhost:3000/orders";
+=======
+   url3:string="https://dummyjson.com/products/categories";
+   url4:string="https://dummyjson.com/products/category";
+>>>>>>> 08710eeb811cb85d13dde89afa7fe3133dee023a
    httpOption;
   constructor(private http:HttpClient) { 
     this.prloader=new BehaviorSubject<boolean>(false)
@@ -46,6 +55,49 @@ export class ProductsApiService {
     })
     console.log(this.searchResult)
   }
+
+
+//  addToCart(product: any) {
+//    this.items.push(product);
+//     localStorage.setItem('session',JSON.stringify(product));
+//     console.log(localStorage.getItem('session'));
+//     this.saveCart();
+//  }
+
+// Add products to cart
+ addToCart(product: any) {
+  this.items.push(product);
+  this.productList.next(this.items);
+  console.log(this.items);
+  ////store local Storage
+  localStorage.setItem('session',JSON.stringify(product));
+   console.log(localStorage.getItem('session'));
+  this.saveCart();
+}
+
+getProductData() {
+  return this.productList.asObservable();
+}
+ itemInCart(product: any) {
+   return this.items.findIndex(o => o.ID === product.ID) > -1;
+ }
+ getItems() {
+   return this.items;
+
+ }
+
+
+ saveCart(): void {
+   localStorage.setItem('session', JSON.stringify(this.items)); 
+ }
+
+
+
+
+
+ 
+
+
   getsearchResultData(){
      return this.searchResult;
   }
@@ -56,11 +108,38 @@ getcategories(){
   }));
 
 }
+///server/////////////
 saveproduct(product:any){
   return this.http.post(this.url2,product )
 }
+<<<<<<< HEAD
 saveorder(order:any){
   return this.http.post(this.url3,order )
 }
+=======
+
+
+Getallproductscategories()
+{
+return this.http.get<any>(this.url3).pipe(catchError((err)=>{
+return throwError (()=>err.message ||"internal server error")
+}));
+}
+
+Getproductsbycategories(keyword:string)
+{
+return this.http.get<any>(this.url4+"/"+keyword).pipe(catchError((err)=>{
+return throwError (()=>err.message ||"internal server error")
+}));
+}
+
+// Getallproductsbrand(prodbrand:any){
+//   return this.http.get<any>(this.url+"/"+prodbrand).pipe(catchError((err)=>{
+//     return throwError (()=>err.message ||"internal server error")
+//   }));
+// }
+
+
+>>>>>>> 08710eeb811cb85d13dde89afa7fe3133dee023a
 }
 

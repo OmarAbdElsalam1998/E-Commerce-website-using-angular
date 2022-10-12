@@ -21,7 +21,7 @@
                 <div class="products-list">
                     <div class="row">
                         <!--Start Product  -->
-                        <div  class="col-md-3" >
+                        <div  class="col-md-3" *ngFor="let product of productsList?.products;index as i" >
                             <div class="product-box p-2 mb-3">
                                 <div class="product">
                                     <div class="overlay"></div>
@@ -29,7 +29,7 @@
                                         <img class="img-fluid"src="../../assets/images/details/1.jpg" >
                                     </div>
                                     <div class="product-operations d-flex">
-                                        <div class="add-to-cart p-3" (click)="addToCart(1)" >
+                                        <div class="add-to-cart p-3" (click)="addTofavorites(i)" >
                                             <i class="fa-light fa-cart-shopping fa-2x"></i>
                                         </div>
                                        
@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="product-info py-3">
                                     <div class="product-name px-2 pt-2">
-                                        <h4 class=" m-0" >Product Name</h4>
+                                        <h4 class=" m-0" >{{product.Name}}</h4>
                             
                                     </div>
                                 

@@ -19,6 +19,7 @@ import { loaderInterceptor } from './spinner/loader-interceptor';
 import { SearchComponent } from './search/search.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FavouriteComponent } from './favourite/favourite.component';
+import { SortPipe } from './pipes/sort.pipe';
 
 
 
@@ -35,7 +36,8 @@ import { FavouriteComponent } from './favourite/favourite.component';
    ForbiddenComponent,
    SpinnerComponent,
    SearchComponent,
-   FavouriteComponent
+   FavouriteComponent,
+   SortPipe
 
     
   ],
@@ -46,11 +48,10 @@ import { FavouriteComponent } from './favourite/favourite.component';
     CarouselModule,
     BrowserAnimationsModule,
     HttpClientModule,
+
     FormsModule,
     ReactiveFormsModule,
     
-    
-  
   ],
   providers: [Title,{provide:HTTP_INTERCEPTORS,useClass:loaderInterceptor,multi:true}],
   bootstrap: [AppComponent]
