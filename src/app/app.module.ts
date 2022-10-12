@@ -17,7 +17,7 @@ import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common
 import { SpinnerComponent } from './spinner/spinner.component';
 import { loaderInterceptor } from './spinner/loader-interceptor';
 import { SearchComponent } from './search/search.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FavouriteComponent } from './favourite/favourite.component';
 import { SortPipe } from './pipes/sort.pipe';
 
@@ -50,6 +50,7 @@ import { SortPipe } from './pipes/sort.pipe';
     HttpClientModule,
 
     FormsModule,
+    ReactiveFormsModule,
     
   ],
   providers: [Title,{provide:HTTP_INTERCEPTORS,useClass:loaderInterceptor,multi:true}],
