@@ -1,24 +1,6 @@
 {
-  "cart": [
-    {
-      "productId": 2,
-      "title": "iPhone X",
-      "price": 899,
-      "thumbnail": "https://dummyjson.com/image/i/products/2/thumbnail.jpg",
-      "discount": 17.94,
-      "count": 1,
-      "id": 1
-    },
-    {
-      "productId": 2,
-      "title": "iPhone X",
-      "price": 899,
-      "thumbnail": "https://dummyjson.com/image/i/products/2/thumbnail.jpg",
-      "discount": 17.94,
-      "count": 1,
-      "id": 2
-    }
-  ],
+  "favourite": [],
+  "cart": [],
   "addproducts": [
     {
       "brand": "iphone",
@@ -389,6 +371,14 @@
       "confirmpassword": "omar123",
       "role": "user",
       "id": 35
+    },
+    {
+      "username": "aliaaaa",
+      "email": "omar@gmail.com",
+      "password": "omar123",
+      "confirmpassword": "omar123",
+      "role": "user",
+      "id": 36
     }
   ]
 }

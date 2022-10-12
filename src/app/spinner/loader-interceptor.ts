@@ -20,7 +20,7 @@ export class loaderInterceptor implements HttpInterceptor {
                this.cartService.cartLoader.next(true);
             //    this.loginService.Loginloader.next(true);
                if(event.type==HttpEventType.Response){
-                    if(event.status==200){
+                    if(event.status==200 || event.status==201){
                        this.Service.loader.next(false);
                         this.productService.prloader.next(false);
                         this.cartService.cartLoader.next(false);

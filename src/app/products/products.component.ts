@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { IProudct } from 'Shared Classes and types/IProduct';
 import { Product } from 'Shared Classes and types/model/product';
 import { CartService } from '../services/cart.service';
+import { FavouriteService } from '../services/favourite.service';
 
 // import { IProudct } from 'Shared Classes and types/IProduct';
 // import { AddToCartService } from '../services/add-to-cart.service';
@@ -14,6 +15,7 @@ import { CartService } from '../services/cart.service';
 // import * as _ from 'lodash';
 import { ProductsApiService } from '../services/products-api.service';
 import { Cart } from '../shares classes/cart';
+import { Favourite } from '../shares classes/favourite';
 
 @Component({
   selector: 'app-products',
@@ -25,10 +27,12 @@ export class ProductsComponent implements OnInit {
   productsList:any;
   categories:any;
   cartItem:any;
+  favouriteItem:any;
   items:any[] = [];
   products: any = [];
   constructor(private titleService:Title,private productService:ProductsApiService,private router:Router,
-    private data1:HttpClient,private cart :CartService
+    private data1:HttpClient,private cart :CartService,
+    private favouriteService:FavouriteService
    ) { }
 
   categorieslist:any;
@@ -58,7 +62,7 @@ export class ProductsComponent implements OnInit {
     
     //  this.Getallproductscategories()
     //  this.filtercatogry()
-     this.productList = this.PRODUCTS;
+     this.productList = this.productsList;
       this.productListShow = this.productList; 
       
 
@@ -120,21 +124,39 @@ export class ProductsComponent implements OnInit {
     
 
   }
+  addToFavorites(index:any){
+    this.favouriteService.getProductById(index).subscribe(res=>{
+      this.favouriteItem=res;
+      console.log(res);
+      console.log(this.favouriteItem)
+      var favourites =new Favourite(this.favouriteItem.id,this.favouriteItem.title,this.favouriteItem.thumbnail)
+    this.favouriteService.saveproduct(favourites).subscribe(data =>
+      {
+        // this.usersArr=data;
+      },
+      error =>
+        {
+        }
+        );
+
+
+    });
+  }
  
 
-  addToFavorites(index:any){
+  // addToFavorites(index:any){
     
-    this.cart.getProductById(index);
-    this.productService.addToCart(index);
-    window.alert('Your product has been added to the favorites!');
+  //   this.cart.getProductById(index);
+  //   this.productService.addToCart(index);
+  //   window.alert('Your product has been added to the favorites!');
    
-    if (!this.productService.itemInCart(index)) {
-      index.id= 1;
-      this.productService.addToCart(index); //add items in cart
-      this.items = [...this.productService.getItems()];
-    }
+  //   if (!this.productService.itemInCart(index)) {
+  //     index.id= 1;
+  //     this.productService.addToCart(index); //add items in cart
+  //     this.items = [...this.productService.getItems()];
+  //   }
     
-  }
+  // }
    
 seeDetails(id:any){
    this.router.navigate(["products/",id]);
@@ -162,12 +184,19 @@ Getallproductscategories()
 }
 selectedcategoty="All";
 
-filtercat(event:any)
+// filtercat(event:any)
+// {
+// let value=event.target.value;
+// this.getcats(value);
+// console.log(value);
+// this.selectedcategoty=value;
+
+// }
+filterByCategory(category:any)
 {
-let value=event.target.value;
-this.getcats(value);
-console.log(value);
-this.selectedcategoty=value;
+this.getcats(category);
+console.log(category);
+this.selectedcategoty=category;
 
 }
 getcats(keyword:string)
@@ -242,6 +271,20 @@ sort(event: any) {
   // this.productsList=this.categorieslist2;
 
 }
+// public filterProducts(): void {
+//   const filteredProductArray = new Array<any>();
+//   const activeProducts = this.productList.filter((c:any) => c.selected).map((c:any) => c.productColor);
+//   this.productList.forEach((prod: { product: any[]; }) => {
+//       const filteredSubProducts = prod.product.filter(p => activeProducts.includes(p.productColor));
+//        if(filteredSubProducts.length > 0){
+//            const clonedProduct = Object.assign({}, prod);
+//            clonedProduct.product = filteredSubProducts;
+//            filteredProductArray.push(clonedProduct);
+//        }
+//   });
+//   this.productListShow = filteredProductArray;
+//   console.log(this.productListShow);
+// }
 
 
 public colors: any[] = [
@@ -292,18 +335,5 @@ public colors: any[] = [
 ]
 
   
-    public filterProducts(): void {
-    const filteredProductArray = new Array<any>();
-    const activeColors = this.colors.filter(c => c.selected).map(c => c.productColor);
-    this.productList.forEach((prod: { product: any[]; }) => {
-        const filteredSubProducts = prod.product.filter(p => activeColors.includes(p.productColor));
-         if(filteredSubProducts.length > 0){
-             const clonedProduct = Object.assign({}, prod);
-             clonedProduct.product = filteredSubProducts;
-             filteredProductArray.push(clonedProduct);
-         }
-    });
-    this.productListShow = filteredProductArray;
-    console.log(this.productListShow);
-  }
+   
 }

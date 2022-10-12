@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
 import { Product } from 'Shared Classes and types/model/product';
@@ -16,6 +16,7 @@ export class CartService {
   // CartTotal=0;
   url:string="https://dummyjson.com/products";
   url2:string="http://localhost:3000/cart";
+  //  headers:HttpHeaders; 
   public productList=new BehaviorSubject<any>([]);
     constructor(private http:HttpClient) { 
       this.cartLoader= new BehaviorSubject<boolean>(false);
@@ -58,7 +59,7 @@ getCartProducts(){
   return this.cartProducts;
 }
 getCartProductsCounter(){
-  
+   this.getCartProducts();
    return  this.CartProductsCounter;
 }
 
@@ -86,6 +87,8 @@ getProductById(prodId:any){
 }
   
 saveproduct(product:Cart){
+  var headers= new HttpHeaders().set("Content-Type", "procademy");
+
   this.CartProductsCounter.next(this.CartProductsCounter.value+1)
    console.log(this.CartProductsCounter);  
       return this.http.post(this.url2,product).pipe(catchError ((err)=>{

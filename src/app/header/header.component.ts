@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartService } from '../services/cart.service';
+import { FavouriteService } from '../services/favourite.service';
 import { ProductsApiService } from '../services/products-api.service';
 import { UserAuthService } from '../services/user-auth.service';
 
@@ -13,10 +14,12 @@ export class HeaderComponent implements OnInit {
   isLoggedIn:any;
   username:any;
   isAdmin:any;
+  favouriteCounter:any;
   cartCounter:any;
+
   constructor(private userauth:UserAuthService,private router:Router,
     private userAuth:UserAuthService,private productApi:ProductsApiService,
-    private cartService:CartService) { 
+    private cartService:CartService,private favouriteService:FavouriteService) { 
     this.isLoggedIn=this.userAuth.getLoggedStatus();
     console.log(this.username)
    
@@ -32,6 +35,9 @@ export class HeaderComponent implements OnInit {
    this.userAuth.getIsAdminStatus().subscribe(status=>{ this.isAdmin=status});
    this.cartService.getCartProductsCounter().subscribe(res=>{
     this.cartCounter=res;
+   })
+   this.favouriteService.getfavouriteProductesCounter().subscribe(res=>{
+    this.favouriteCounter=res;
    })
 
    

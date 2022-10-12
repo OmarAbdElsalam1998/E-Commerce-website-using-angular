@@ -31,7 +31,7 @@
                     </ul>
                   </div> -->
                   <select class="form-select form-select-lg mb-3 w-auto" aria-label=".form-select-lg example" (change)="sort($event)">
-                    <option selected>Open this select menu</option>
+                    <option [selected]="true" disabled>__Sorting__</option>
                     <option value="LowPrice">Show Low to High Price</option>
                     <option value="HighPrice">Show High to Low Price</option>
                     <option value="LowRate">Show Low to High Rate</option>
@@ -42,37 +42,23 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="product-filteration p-3 bg-white">
-                        <div class="categories-filters  py-3 border-bottom">
+                        
+                        <div class="categories-filters py-3 border-bottom">
                             <div class="filteration-header d-flex align-items-center justify-content-between" data-toggle="categories">
-                                <h2 class="text-uppercase special-header">categories</h2>
-                                <span><i class="fa-light fa-chevron-down"></i></span>
+                                <h2 class="text-uppercase special-header">Categories</h2>
+                                <!-- <span><i class="fa-light fa-chevron-down"></i></span> -->
                             </div>
-
-                             <!-- <div class="category-filter d-flex align-items-center justify-content-between p-1 " *ngFor="let cat of categorieslist">
-                                <div class="select-filter">
-                                    <div class="form-check"  >
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label"  for="flexCheckDefault">
-                                         {{cat}}
+                            
+                             <div class="category-filter d-flex align-items-center justify-content-between p-1 "  *ngFor="let cat of categorieslist" id="categories" >
+                                <div class="select-filter" (change)="filterByCategory(cat)">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" [value]="cat" name="category" [id]="cat">
+                                        <label class="form-check-label" [for]="cat">
+                                            {{cat}}
                                         </label>
                                       </div>
                                 </div>
-
-                             </div> -->
-                             
-                             <div class="row " >
-                                <div class="my-2">
-                                    <!--  -->
-                                    <select class="form-control" (change)="filtercat($event)"  >
-                                        <option value="All" selected> All</option>
-                                        <option value="{{cat}}" *ngFor="let cat of categorieslist">
-                                            {{cat}}
-                                        </option>
-                                      </select>
-                                </div>
-
                              </div>
-
                         </div>
                         <div class="brand-filters py-3 border-bottom">
                             <div class="filteration-header d-flex align-items-center justify-content-between" data-toggle="categories">
@@ -131,7 +117,7 @@
                                             </div>
                                             <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
                                                 <span class="discount">{{product.discountPercentage/100  | percent }} OFF</span>
-                                                <span class="rate "><i class="fa-solid fa-star-sharp"></i>{{product.rating}} <span>(21)</span></span>
+                                                <span class="rate "><i class="fa-solid fa-star-sharp"></i>{{product.rating}} </span>
                                                 
                                             </div> 
                                         </div>
@@ -151,7 +137,7 @@
         </div>
     </section>
 </main>
-<div class="brand-select">
+<!-- <div class="brand-select">
     <div class="brand-name">Select Color</div>
     <form>
         
@@ -175,4 +161,4 @@
         <div *ngFor="let product of prod.product">
             <h5 class="product-inner-title">{{product.productName}}</h5>
         </div>
-    </div>
+    </div> -->
