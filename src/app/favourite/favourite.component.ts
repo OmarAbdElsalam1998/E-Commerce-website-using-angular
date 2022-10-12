@@ -16,6 +16,6 @@ export class FavouriteComponent implements OnInit {
   
   }
   seeDetails(id:any){
-     this.router.navigate(["product/",id]);
+     this.router.navigate(["products/",id]);
   }
 }
