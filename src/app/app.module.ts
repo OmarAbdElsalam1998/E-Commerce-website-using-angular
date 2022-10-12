@@ -17,7 +17,7 @@ import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common
 import { SpinnerComponent } from './spinner/spinner.component';
 import { loaderInterceptor } from './spinner/loader-interceptor';
 import { SearchComponent } from './search/search.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FavouriteComponent } from './favourite/favourite.component';
 
 
@@ -47,6 +47,7 @@ import { FavouriteComponent } from './favourite/favourite.component';
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     
     
   

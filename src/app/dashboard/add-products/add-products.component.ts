@@ -14,6 +14,7 @@ export class AddProductsComponent implements OnInit {
 categories:any;
 ckecked:boolean=false;
 newprd:newProduct=new newProduct("","","","",0,0,0,"");
+
   constructor(private fb:FormBuilder,private catsrviece:ProductsApiService,
     private http: HttpClient ,private ProductService: ProductsApiService,
      private router: Router) {

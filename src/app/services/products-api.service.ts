@@ -11,6 +11,7 @@ export class ProductsApiService {
  searchResult:BehaviorSubject<any>;
    url:string="https://dummyjson.com/products";
    url2:string="http://localhost:3000/addproducts";
+   url3:string="http://localhost:3000/orders";
    httpOption;
   constructor(private http:HttpClient) { 
     this.prloader=new BehaviorSubject<boolean>(false)
@@ -57,6 +58,9 @@ getcategories(){
 }
 saveproduct(product:any){
   return this.http.post(this.url2,product )
+}
+saveorder(order:any){
+  return this.http.post(this.url3,order )
 }
 }
 
