@@ -24,10 +24,10 @@ export class SpinnerComponent implements OnInit {
     //   this.loader=res;
     //   console.log(res)
     // })
-    this.cartService.cartLoader.subscribe(res=>{
-      this.loader=res;
-      console.log(res)
-    })
+    // this.cartService.cartLoader.subscribe(res=>{
+    //   this.loader=res;
+    //   console.log(res)
+    // })
     // this.loginService.Loginloader.subscribe(res=>{
     //   this.loader=res;
     //   console.log(res)

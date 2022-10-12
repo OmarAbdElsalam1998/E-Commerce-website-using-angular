@@ -11,6 +11,7 @@ import { Cart } from '../shares classes/cart';
 export class CartService {
   cartLoader:BehaviorSubject<boolean>;
   CartItemList:any;
+  CartProductsCounter:BehaviorSubject<number>;
   cartProducts:BehaviorSubject<any>;
   // CartTotal=0;
   url:string="https://dummyjson.com/products";
@@ -19,6 +20,12 @@ export class CartService {
     constructor(private http:HttpClient) { 
       this.cartLoader= new BehaviorSubject<boolean>(false);
       this.cartProducts=new BehaviorSubject<any>([]);
+      this.CartProductsCounter=new BehaviorSubject<number>(-1);
+      this.cartProducts.subscribe(res=>{
+        this.CartProductsCounter.next(res.length);
+        console.log(this.CartProductsCounter)
+       })
+     
 
     }
 
@@ -45,7 +52,14 @@ getProductFromCart(){
     this.cartProducts.next(res);
 
    });
-   return this.cartProducts;
+}
+getCartProducts(){
+  this.getProductFromCart();
+  return this.cartProducts;
+}
+getCartProductsCounter(){
+  
+   return  this.CartProductsCounter;
 }
 
 DeleteItemFromCart(id:number){
@@ -72,8 +86,9 @@ getProductById(prodId:any){
 }
   
 saveproduct(product:Cart){
-  console.log("save Product");
-     return this.http.post(this.url2,product).pipe(catchError ((err)=>{
+  this.CartProductsCounter.next(this.CartProductsCounter.value+1)
+   console.log(this.CartProductsCounter);  
+      return this.http.post(this.url2,product).pipe(catchError ((err)=>{
       return throwError (()=>console.log(err))}))
   
   

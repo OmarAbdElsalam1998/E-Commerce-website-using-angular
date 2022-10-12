@@ -16,8 +16,9 @@ const routes: Routes = [
   {path:"",component:HomeComponent},
   {path:"cart",component:CartComponent},
   {path:"products",component:ProductsComponent},
-  {path:"products/:id",component:ProductDetailsComponent},
   {path:"products/category/:category",component:ProductDetailsComponent},
+
+  {path:"products/:id",component:ProductDetailsComponent},
   {path:"cart/payment",component:PaymentComponent,canActivate:[AuthGuard]},
   {path:"auth",loadChildren:()=>import("../app/auth/auth.module").then(m=>m.AuthModule)},
   {path:"dashboard",loadChildren:()=>import("../app/dashboard/dashboard.module").then(m=>m.DashboardModule),canLoad:[AdminGuard]},

@@ -1,5 +1,24 @@
 {
-  "cart": [],
+  "cart": [
+    {
+      "productId": 2,
+      "title": "iPhone X",
+      "price": 899,
+      "thumbnail": "https://dummyjson.com/image/i/products/2/thumbnail.jpg",
+      "discount": 17.94,
+      "count": 1,
+      "id": 1
+    },
+    {
+      "productId": 2,
+      "title": "iPhone X",
+      "price": 899,
+      "thumbnail": "https://dummyjson.com/image/i/products/2/thumbnail.jpg",
+      "discount": 17.94,
+      "count": 1,
+      "id": 2
+    }
+  ],
   "addproducts": [
     {
       "brand": "iphone",
@@ -24,6 +43,66 @@
       "discound": "",
       "image": "C:\\fakepath\\freestocks-_3Q3tsJ01nc-unsplash.jpg",
       "id": 2
+    },
+    {
+      "brand": "apple",
+      "category": "smartphones",
+      "title": "iphone 14 pro max",
+      "description": "f",
+      "numofitems": 12,
+      "price": 12,
+      "subscribe": true,
+      "discound": 12.5,
+      "image": "C:\\fakepath\\20221012_000812.mp4",
+      "id": 3
+    },
+    {
+      "brand": "m",
+      "category": "smartphones",
+      "title": "m",
+      "description": "n5",
+      "numofitems": 5,
+      "price": 5,
+      "subscribe": false,
+      "discound": "",
+      "image": "C:\\fakepath\\20221012_000812.mp4",
+      "id": 4
+    },
+    {
+      "brand": "s",
+      "category": "fragrances",
+      "title": "f",
+      "description": "f",
+      "numofitems": 1,
+      "price": 1,
+      "subscribe": false,
+      "discound": "",
+      "image": "C:\\fakepath\\freestocks-_3Q3tsJ01nc-unsplash.jpg",
+      "id": 5
+    },
+    {
+      "brand": "f",
+      "category": "fragrances",
+      "title": "r",
+      "description": "r",
+      "numofitems": 1,
+      "price": 1,
+      "subscribe": false,
+      "discound": "",
+      "image": "C:\\fakepath\\20221012_000812.mp4",
+      "id": 6
+    },
+    {
+      "brand": "h",
+      "category": "home-decoration",
+      "title": "h",
+      "description": "h",
+      "numofitems": 3,
+      "price": 3,
+      "subscribe": false,
+      "discound": "",
+      "image": "C:\\fakepath\\freestocks-_3Q3tsJ01nc-unsplash.jpg",
+      "id": 7
     }
   ],
   "users": [
@@ -294,6 +373,22 @@
       "confirmpassword": "omar123",
       "role": "user",
       "id": 33
+    },
+    {
+      "username": "dddddd",
+      "email": "omar@gmail.com",
+      "password": "omar123",
+      "confirmpassword": "omar123",
+      "role": "user",
+      "id": 34
+    },
+    {
+      "username": "pppppppppppppp",
+      "email": "omar@gmail.com",
+      "password": "omar123",
+      "confirmpassword": "omar123",
+      "role": "user",
+      "id": 35
     }
   ]
 }

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { async } from '@angular/core/testing';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { IProudct } from 'Shared Classes and types/IProduct';
@@ -119,10 +120,8 @@ export class ProductsComponent implements OnInit {
     
 
   }
-  deleteItemGFromCart(id:number){
-    this.cart.DeleteItemFromCart(id);
-  }
-  
+ 
+
   addToFavorites(index:any){
     
     this.cart.getProductById(index);
@@ -155,6 +154,7 @@ Getallproductscategories()
     this.titleService.setTitle(this.title); 
     this.productService.Getallproductscategories().subscribe(res1=>{
      this.categorieslist=res1;  
+     console.log(this.categorieslist)
 
   },error=>{console.log(error)});
  
@@ -166,12 +166,14 @@ filtercat(event:any)
 {
 let value=event.target.value;
 this.getcats(value);
+console.log(value);
 this.selectedcategoty=value;
 
 }
 getcats(keyword:string)
 {
   this.productService.Getproductsbycategories(keyword).subscribe(res=>{
+    console.log(res)
   this.categorieslist2=res;
   this.productsList=res;
   console.log(this.categorieslist2);
@@ -197,23 +199,41 @@ getcats(keyword:string)
 sort(event: any) {
 
   switch (event.target.value) {
-    case "Low":
+    case "LowPrice":
       {
-        this.productsList= this.arrayes.sort((low:any, high:any) => low.price - high.price);
-        console.log(this.productsList);
+         console.log(this.productsList.products.sort((a:any, b:any) => parseFloat(a.price) - parseFloat(b.price)));
+
+         //this.productList.products= this.productList?.products.sort((a:any, b:any) => parseFloat(a.price) - parseFloat(b.price));
+         
         break;
       }
 
-    case "High":
+    case "HighPrice":
       {
-        this.productsList = this.arrayes.sort((low:any, high:any) => high.price - low.price);
+           console.log(this.productsList.products.sort((a:any, b:any) => parseFloat(b.price) - parseFloat(a.price)));
+          // this.productList?.products.sort((a:any, b:any) => parseFloat(b.price) - parseFloat(a.price));
+         
+         console.log(this.productsList.products);
         break;
       }
 
-    default: {
-      this.productsList = this.arrayes.sort((low:any, high:any) => low.price - high.price);
-      break;
-    }
+      case "LowRate":
+        {
+           console.log(this.productsList.products.sort((a:any, b:any) => parseFloat(a.rating) - parseFloat(b.rating)));
+  
+           //this.productList.products= this.productList?.products.sort((a:any, b:any) => parseFloat(a.price) - parseFloat(b.price));
+           
+          break;
+        }
+  
+      case "HighRate":
+        {
+             console.log(this.productsList.products.sort((a:any, b:any) => parseFloat(b.rating) - parseFloat(a.rating)));
+            // this.productList?.products.sort((a:any, b:any) => parseFloat(b.price) - parseFloat(a.price));
+           
+           console.log(this.productsList.products);
+          break;
+        }
 
   }
   

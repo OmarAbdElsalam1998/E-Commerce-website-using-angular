@@ -15,9 +15,9 @@ export class ProductsApiService {
  searchResult:BehaviorSubject<any>;
    url:string="https://dummyjson.com/products";
    url2:string="http://localhost:3000/addproducts";
-   url3:string="http://localhost:3000/orders";
+   url3:string="https://dummyjson.com/products/categories";
    url4:string="https://dummyjson.com/products/category";
-   url5:string="https://dummyjson.com/products/categories";
+   url5:string="http://localhost:3000/orders";
 
    httpOption;
   constructor(private http:HttpClient) { 

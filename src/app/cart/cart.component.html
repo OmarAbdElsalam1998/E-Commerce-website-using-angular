@@ -6,8 +6,8 @@
                 <nav aria-label="breadcrumb ">
                     <ol class="breadcrumb m-0">
                       <li class="breadcrumb-item"><a href="#">Home</a></li>
-                      <li class="breadcrumb-item"><a href="#">Library</a></li>
-                      <li class="breadcrumb-item active" aria-current="page">Data</li>
+                      <li class="breadcrumb-item"><a  [routerLink]="['/products']" routerLinkActive="router-link-active" >Products</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Cart</li>
                     </ol>
                   </nav>
             </div>
@@ -17,67 +17,82 @@
     <section class="cart">
         <div class="container">
             <div class="row">
-                <div class="col-md-8">
-                    <div class="row">
-                        <div class="col-12" >
-                            <div class="product d-flex bg-white p-3 mb-3" *ngFor="let product of Cartproducts;index as i">
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <div class="product-image" >
-                                            <img class="img-fluid" [src]="product.thumbnail">
-                                        </div>
+                <div *ngIf="Cartproducts.length>0;then CartContainItems;else CartHasNoItems"> 
+
+                </div>
+               
+                     
+            </div>
+        </div>
+                <ng-template #CartHasNoItems>
+                    
+                    <div style="height: 100%;"class="border rounded p-5 bg-white text-center w-50  m-auto">
+                        <i style="color:#ff8888"class="fa-regular fa-cart-circle-xmark fa-6x"></i>
+                        <h3 class=" fw-bold mt-3 ">Unfortunately, Your Cart Is Empty</h3>
+                        <p class="pb-2">please Add Something in You Cart</p>
+                        <a [routerLink]="['/products']" routerLinkActive="router-link-active"  class="custom-btn ">Go Shopping</a>
+                    </div>
+                </ng-template>
+                
+                <ng-template #CartContainItems>
+                    <span>Cart ({{Cartproducts.length}})</span>
+                    <div class="col-md-8" >
+                        <div class="product d-flex bg-white p-3 mb-3" *ngFor="let product of Cartproducts;index as i">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="product-image" >
+                                        <img class="img-fluid" [src]="product.thumbnail">
                                     </div>
-                                    <div class="col-lg-8" >
-                                        <div class="product-info px-2 pt-2">
-                                            <h2 class="d-block my-2 fw-bold "[title]="product.title">{{product.title}}</h2>
-                                            <div class="product-price-quantity ">
-                                                <div class="new-price mb-3 d-flex">
-                                                    <span class="price fw-bold d-block w-100 "><span> </span></span>
-                                                </div>
-                                                <div class="quantity d-flex me-4 mb-2">
-                                                    <div class="minus px-3 py-2 "><i class="fa-solid fa-minus"></i></div>
-                                                    <div class="num px-3 py-2 bg-light fw-bold">{{product.count}}</div>
-                                                    
-                                                    <div class="plus px-3 py-2 "><i class="fa-solid fa-plus"></i></div>
-        
-                                                </div>  
+                                </div>
+                                <div class="col-lg-8" >
+                                    <div class="product-info px-2 pt-2">
+                                        <h2 class="d-block my-2 fw-bold "[title]="product.title">{{product.title}}</h2>
+                                        <div class="product-price-quantity ">
+                                            <div class="new-price mb-3 d-flex">
+                                                <span class="price fw-bold d-block w-100 "><span> </span></span>
                                             </div>
-                                            <p>delivered by : <span class="fw-bold text-dark">13 oct 2022</span> </p>
-                                            <button class="btn btn-danger"(click)="deleteItemFromCart(product.id)" ><i class="fa-thin fa-trash-can fa-lg"></i> remove</button>
+                                            <div class="quantity d-flex me-4 mb-2">
+                                                <div class="minus px-3 py-2 " (click)=deceaseProductCounter(product.count)><i class="fa-solid fa-minus"></i></div>
+                                                <div class="num px-3 py-2 bg-light fw-bold">{{product.count}}</div>
+                                                
+                                                <div class="plus px-3 py-2 " (click)="increaseProductCounter(product.count)"><i class="fa-solid fa-plus"></i></div>
     
+                                            </div>  
                                         </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        
+                                        <p>delivered by : <span class="fw-bold text-dark">13 oct 2022</span> </p>
+                                        <button class="btn btn-danger"(click)="deleteItemFromCart(product.id)" ><i class="fa-thin fa-trash-can fa-lg"></i> remove</button>
+    
                                     </div>
                                 </div>
                                 
-                               
                             </div>
-                       </div>
-                     
-                        
-                   
-                    </div>
-                </div>
-                
-                <div class="col-md-4">
-                    <div class="payment bg-white p-4">
-                    <h2 class="special-heading fw-bold">Payment</h2>
-                    <div class="total-price d-flex justify-content-between py-3">
-                        <span  class="fw-bold fs-5">Total</span>
-                        <span >EGP 1000.33</span>
-                    </div>
-                    <div class="shipping d-flex justify-content-between py-3">
-                        <span  class="fw-bold fs-5" >Shipping</span>
-                        <span >EGP 25</span>
-                    </div>
-                    <button class="custom-btn w-100 p-3 mt-2" (click)="goToPaymentPage()"><i class="fa-solid fa-money-bill-1-wave fa-lg"></i> Check Out</button>
+                            
+                           
+                        </div>
+                     </div>
 
-                    </div>
-                </div>
                     
-            </div>
-        </div>
+                    <div class="col-md-4">
+                        <div class="payment bg-white p-4">
+                        <h2 class="special-heading fw-bold">Payment</h2>
+                        <div class="total-price d-flex justify-content-between py-3">
+                            <span  class="fw-bold fs-5">Total</span>
+                            <span >EGP 1000.33</span>
+                        </div>
+                        <div class="shipping d-flex justify-content-between py-3">
+                            <span  class="fw-bold fs-5" >Shipping</span>
+                            <span >EGP 25</span>
+                        </div>
+                        <button class="custom-btn w-100 p-3 mt-2" (click)="goToPaymentPage()"><i class="fa-solid fa-money-bill-1-wave fa-lg"></i> Check Out</button>
+    
+                        </div>
+                    </div>
+                    <a  [routerLink]="['/products']" routerLinkActive="router-link-active"  class="custom-btn w-auto mx-4">Continue Shopping</a>
+
+                </ng-template>
+                
+                
+                    
+           
     </section>
 </main>

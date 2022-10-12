@@ -30,11 +30,14 @@
                       <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                   </div> -->
-                  <select id="sort-by" (change)="sort($event)">
-                    <option value="" selected disabled hidden>Sort By</option>
-                    <option value="Low">Show Low to High Price</option>
-                    <option value="High">Show High to Low Price</option>
-                </select>
+                  <select class="form-select form-select-lg mb-3 w-auto" aria-label=".form-select-lg example" (change)="sort($event)">
+                    <option selected>Open this select menu</option>
+                    <option value="LowPrice">Show Low to High Price</option>
+                    <option value="HighPrice">Show High to Low Price</option>
+                    <option value="LowRate">Show Low to High Rate</option>
+                    <option value="HighRate">Show High to Low Rate</option>
+                  </select>
+                 
             </div>
             <div class="row">
                 <div class="col-lg-3">
@@ -59,8 +62,8 @@
                              
                              <div class="row " >
                                 <div class="my-2">
-                                    <!-- (change)="filtercat($event)" -->
-                                    <select class="form-control"  >
+                                    <!--  -->
+                                    <select class="form-control" (change)="filtercat($event)"  >
                                         <option value="All" selected> All</option>
                                         <option value="{{cat}}" *ngFor="let cat of categorieslist">
                                             {{cat}}
@@ -151,6 +154,7 @@
 <div class="brand-select">
     <div class="brand-name">Select Color</div>
     <form>
+        
         <div class="form-check brand-checkbox" *ngFor="let col of colors;let index = index">
             <input class="form-check-input" 
                  type="checkbox" 

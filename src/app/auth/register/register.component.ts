@@ -67,6 +67,9 @@ export class RegisterComponent implements OnInit {
     this.userService.postRegData(this.registerationForm.value).subscribe(data =>
       {
         console.log(data)
+        this.registerationForm.reset();
+        this.router.navigate([""]);
+          
         // this.usersArr=data;
       },
       error =>
@@ -74,24 +77,25 @@ export class RegisterComponent implements OnInit {
           console.log("Error")
         }
         )
+      }
 
         // let checkUser=this.usersArr?.filter((input:any)=>
         // input.email == this.userEmail?.value && input.password == this.Password?.value
         //   )
 
         // console.log(checkUser)
-        if(this.registerationForm.valid){
-          alert("Hello" + this.registerationForm.value.userName + "Registeration is Successfull");
-            this.registerationForm.reset();
-            this.router.navigate([""])
-          }
+        // if(this.registerationForm.valid){
+        //   alert("Hello" + this.registerationForm.value.userName + "Registeration is Successfull");
+        //     this.registerationForm.reset();
+        //     this.router.navigate([""])
+        //   }
 
-          else
-          { 
-            alert("Registertraion is failed , Plz try another account as not registered before")
-          }        
+        //   else
+        //   { 
+        //     alert("Registertraion is failed , Plz try another account as not registered before")
+        //   }        
       
-        }
+        // }
   
 
 }

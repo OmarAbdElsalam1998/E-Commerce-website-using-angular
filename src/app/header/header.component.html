@@ -53,7 +53,7 @@
 
                         <li class="nav-item px-3 position-relative">
                             <a class="nav-link"  routerLink="/cart" routerLinkActive="router-link-active"><i class="fa-light fa-cart-shopping fa-2x"></i></a>
-                            <span class="product-count position-absolute ">1</span>
+                            <span class="product-count position-absolute " *ngIf="cartCounter>0">{{cartCounter}}</span>
                          </li>
                     </ul>
                 </div>

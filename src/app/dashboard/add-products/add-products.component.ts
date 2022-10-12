@@ -95,9 +95,10 @@ return this.addproductForm.get('price')
     this.ProductService.saveproduct(this.addproductForm.value)
     .subscribe(data =>
       {
-      alert("Product added Successfully")
+      // alert("Product added Successfully")
           this.addproductForm.reset();
-          this.router.navigate(["products"])},
+          this.router.navigate(["products"])
+        },
      error =>{
         console.log("Error" , error)
       }

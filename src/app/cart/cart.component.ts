@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 import { CartService } from '../services/cart.service';
 
 @Component({
@@ -11,11 +12,13 @@ import { CartService } from '../services/cart.service';
 export class CartComponent implements OnInit {
   title="Market Cart";
   public Cartproducts:any;
+  totalPrice:any;
   
   constructor(private titleService:Title,private router:Router,private CartSER:CartService) { }
 
   ngOnInit(): void {
-    this.CartSER.getProductFromCart().subscribe(res=>{
+    this.titleService.setTitle(this.title);
+    this.CartSER.getCartProducts().subscribe(res=>{
        this.Cartproducts=res;
     });
   }
@@ -29,7 +32,7 @@ export class CartComponent implements OnInit {
   
   deleteItemFromCart(id:number){
     this.CartSER.DeleteItemFromCart(id);
-    this.CartSER.getProductFromCart().subscribe(res=>{
+    this.CartSER.getCartProducts().subscribe(res=>{
       this.Cartproducts=res;
    });
   }
@@ -43,5 +46,11 @@ emptyCart(){
 goToPaymentPage(){
   this.router.navigate(['/cart/payment']);
 }
-
+increaseProductCounter(count:BehaviorSubject<number>){
+count.value+1;
+console.log(count);
+}
+deceaseProductCounter(count:number){
+  
+}
 }
