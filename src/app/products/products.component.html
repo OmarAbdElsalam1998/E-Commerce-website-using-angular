@@ -6,9 +6,14 @@
                 <nav aria-label="breadcrumb ">
                     <ol class="breadcrumb m-0">
                       <li class="breadcrumb-item"><a href="#">Home</a></li>
+<<<<<<< HEAD
                       <!-- {{selectedcategoty}} -->
                       <li class="breadcrumb-item"><a href="#"></a></li>
                       <li class="breadcrumb-item active" aria-current="page">Data</li>
+=======
+                      <li class="breadcrumb-item active"><a href="#">{{selectedcategoty}}</a></li>
+                     
+>>>>>>> 2fa15d13f930925b26c29e85012f719005f2760f
                     </ol>
                   </nav>
             </div>
@@ -19,16 +24,21 @@
     <section class="products-area">
         <div class="container">
             <div class="sort-products d-flex justify-content-end mb-3">
-                <div class="dropdown">
+                <!-- <div class="dropdown">
                     <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                      Sorting
                     </button>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li><button class="dropdown-item" (click)= "sortbylowprice()" >sortbylowprice</button></li>
                       <li><a class="dropdown-item" href="#">Another action</a></li>
                       <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
-                  </div>
+                  </div> -->
+                  <select id="sort-by" (change)="sort($event)">
+                    <option value="" selected disabled hidden>Sort By</option>
+                    <option value="Low">Show Low to High Price</option>
+                    <option value="High">Show High to Low Price</option>
+                </select>
             </div>
             <div class="row">
                 <div class="col-lg-3">
@@ -142,3 +152,27 @@
         </div>
     </section>
 </main>
+<div class="brand-select">
+    <div class="brand-name">Select Color</div>
+    <form>
+        <div class="form-check brand-checkbox" *ngFor="let col of colors;let index = index">
+            <input class="form-check-input" 
+                 type="checkbox" 
+                 value="{{col.id}}" 
+                 id="{{col.id}}" 
+                 name="checkbox" 
+                 [(ngModel)]="col.selected"
+                 (ngModelChange)="filterProducts()">
+    
+              <label class="form-check-label" for="{{col.id}}">
+                {{col.productColor}}
+              </label>
+            </div>
+        </form>
+    </div>
+    
+    <div *ngFor="let prod of productListShow">
+        <div *ngFor="let product of prod.product">
+            <h5 class="product-inner-title">{{product.productName}}</h5>
+        </div>
+    </div>
