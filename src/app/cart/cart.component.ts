@@ -10,27 +10,29 @@ import { CartService } from '../services/cart.service';
 })
 export class CartComponent implements OnInit {
   title="Market Cart";
-  public products:any=[];
-  public grandTotal!:number;
-
+  public Cartproducts:any=[];
+  
   constructor(private titleService:Title,private router:Router,private CartSER:CartService) { }
 
   ngOnInit(): void {
-    this.titleService.setTitle(this.title);
-    this.CartSER.getProducts().subscribe(res=>{
-      this.products=res;
-      this.grandTotal=this.CartSER.getTotalPrice();
-    })
+   this.getCartProducts(); 
 
   }
-removeItem(item:any){
+  getCartProducts(){
+   if("cart" in localStorage)
+    {
+     this.Cartproducts=JSON.parse(localStorage.getItem("cart")!);
+    }
+    console.log(this.Cartproducts)
+  }
+  
+
+removeItem(item:any){ 
 this.CartSER.removeCartData(item);
 }
 emptyCart(){
   this.CartSER.removeAllCart();
 }
-
-
 
 goToPaymentPage(){
   this.router.navigate(['/cart/payment']);

@@ -64,7 +64,7 @@ getProductById(prodId:any){
 }
   
 saveproduct(product:any){
-   return this.http.post(this.url2,product )
+   return this.http.post(this.url2, product )
   
 }
 

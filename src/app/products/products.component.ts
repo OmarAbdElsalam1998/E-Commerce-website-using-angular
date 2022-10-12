@@ -62,16 +62,30 @@ export class ProductsComponent implements OnInit {
    addToCart(index:any){
     
     this.cart.getProductById(index);
-    this.productService.addToCartt(index);
+    this.productService.addToCart(index);
     window.alert('Your product has been added to the cart!');
    
     if (!this.productService.itemInCart(index)) {
       index.id= 1;
-      this.productService.addToCartt(index); //add items in cart
+      this.productService.addToCart(index); //add items in cart
       this.items = [...this.productService.getItems()];
     }
     
 
+  }
+
+  addToFavorites(index:any){
+    
+    this.cart.getProductById(index);
+    this.productService.addToCart(index);
+    window.alert('Your product has been added to the favorites!');
+   
+    if (!this.productService.itemInCart(index)) {
+      index.id= 1;
+      this.productService.addToCart(index); //add items in cart
+      this.items = [...this.productService.getItems()];
+    }
+    
   }
    
 seeDetails(id:any){

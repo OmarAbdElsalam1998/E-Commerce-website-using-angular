@@ -61,7 +61,7 @@ export class ProductsApiService {
 //  }
 
 // Add products to cart
- addToCartt(product: any) {
+ addToCart(product: any) {
   this.items.push(product);
   this.productList.next(this.items);
   console.log(this.items);
