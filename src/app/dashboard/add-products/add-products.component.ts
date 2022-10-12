@@ -96,7 +96,7 @@ return this.addproductForm.get('price')
       {
       alert("Product added Successfully")
           this.addproductForm.reset();
-          this.router.navigate(["product"])},
+          this.router.navigate(["products"])},
      error =>{
         console.log("Error" , error)
       }

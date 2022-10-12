@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http'
 import { userLogin } from '../auth/userLogin';
 import {userDataRegister} from '../auth/userRegister'
 import { map } from 'jquery';
+import { BehaviorSubject } from 'rxjs';
 // import * as data from '../Server/dB.json';
 
 
@@ -10,8 +11,11 @@ import { map } from 'jquery';
   providedIn: 'root'
 })
 export class LoginService {
+  Loginloader:BehaviorSubject<boolean>;
 
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient) {
+    this.Loginloader=new BehaviorSubject<boolean>(false);
+   }
   // _url:string="dB.json/save";
 
   _url:string="http://localhost:3000/users";

@@ -5,7 +5,9 @@
             <div class="d-flex align-items-center justify-content-start  rounded bg-white p-3 my-3">
                 <nav aria-label="breadcrumb ">
                     <ol class="breadcrumb m-0">
-                      <li class="breadcrumb-item"><a href="#">Home</a></li>
+                      <li class="breadcrumb-item"><a [routerLink]="['/']" routerLinkActive="router-link-active" >Home</a></li>
+                      <!-- {{selectedcategoty}} -->
+                      <li class="breadcrumb-item" aria-current="page"><a [routerLink]="['/products']" routerLinkActive="router-link-active" >Products</a></li>
                       <li class="breadcrumb-item active"><a href="#">{{selectedcategoty}}</a></li>
                      
                     </ol>
@@ -18,16 +20,21 @@
     <section class="products-area">
         <div class="container">
             <div class="sort-products d-flex justify-content-end mb-3">
-                <div class="dropdown">
+                <!-- <div class="dropdown">
                     <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                      Sorting
                     </button>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li><button class="dropdown-item" (click)= "sortbylowprice()" >sortbylowprice</button></li>
                       <li><a class="dropdown-item" href="#">Another action</a></li>
                       <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
-                  </div>
+                  </div> -->
+                  <select id="sort-by" (change)="sort($event)">
+                    <option value="" selected disabled hidden>Sort By</option>
+                    <option value="Low">Show Low to High Price</option>
+                    <option value="High">Show High to Low Price</option>
+                </select>
             </div>
             <div class="row">
                 <div class="col-lg-3">
@@ -52,7 +59,8 @@
                              
                              <div class="row " >
                                 <div class="my-2">
-                                    <select class="form-control" (change)="filtercat($event)" >
+                                    <!-- (change)="filtercat($event)" -->
+                                    <select class="form-control"  >
                                         <option value="All" selected> All</option>
                                         <option value="{{cat}}" *ngFor="let cat of categorieslist">
                                             {{cat}}
@@ -97,10 +105,10 @@
                                                 <img class="img-fluid" [src]="product.thumbnail" >
                                             </div>
                                             <div class="product-operations d-flex">
-                                                <div class="add-to-cart p-3"(click)="addToCart(i)" >
+                                                <div class="add-to-cart p-3"(click)="addToCart(product.id)" >
                                                     <i class="fa-light fa-cart-shopping fa-2x"></i>
                                                 </div>
-                                                <div class="save p-3 ">
+                                                <div class="save p-3 "(click)="addToFavorites(product.id)">
                                                     <i class="fa-light fa-heart fa-2x"></i>
                                                 </div>
                                                 <div class="details p-3 " (click)="seeDetails(product.id)" >

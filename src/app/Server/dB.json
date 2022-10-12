@@ -1,8 +1,5 @@
 {
-  "cart":[
-    
-  ]
-  ,
+  "cart": [],
   "addproducts": [
     {
       "brand": "iphone",
@@ -15,6 +12,18 @@
       "discound": 12.5,
       "image": "C:\\fakepath\\mary-brennan-bnHvVXENDSY-unsplash.jpg",
       "id": 1
+    },
+    {
+      "brand": "a",
+      "category": "laptops",
+      "title": "d",
+      "description": "d1",
+      "numofitems": 22,
+      "price": 2,
+      "subscribe": false,
+      "discound": "",
+      "image": "C:\\fakepath\\freestocks-_3Q3tsJ01nc-unsplash.jpg",
+      "id": 2
     }
   ],
   "users": [
@@ -269,6 +278,22 @@
       "confirmpassword": "omar123",
       "role": "admin",
       "id": 7
+    },
+    {
+      "username": "Ali Zakaria",
+      "email": "ali@gmail.com",
+      "password": "Ali12345",
+      "confirmpassword": "Ali12345",
+      "role": "user",
+      "id": 32
+    },
+    {
+      "username": "wsewe",
+      "email": "omar@gmail.com",
+      "password": "omar123",
+      "confirmpassword": "omar123",
+      "role": "user",
+      "id": 33
     }
   ]
 }

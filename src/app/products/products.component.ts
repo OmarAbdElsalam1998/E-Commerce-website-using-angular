@@ -1,8 +1,18 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { IProudct } from 'Shared Classes and types/IProduct';
+import { Product } from 'Shared Classes and types/model/product';
+import { CartService } from '../services/cart.service';
+
+// import { IProudct } from 'Shared Classes and types/IProduct';
+// import { AddToCartService } from '../services/add-to-cart.service';
+//import * as _ from 'lodash';
+// import * as _ from 'lodash'
 // import * as _ from 'lodash';
 import { ProductsApiService } from '../services/products-api.service';
+import { Cart } from '../shares classes/cart';
 
 @Component({
   selector: 'app-products',
@@ -13,14 +23,21 @@ export class ProductsComponent implements OnInit {
   title="Products Page";
   productsList:any;
   categories:any;
+  cartItem:any;
+  items:any[] = [];
+  products: any = [];
+  constructor(private titleService:Title,private productService:ProductsApiService,private router:Router,
+    private data1:HttpClient,private cart :CartService
+   ) { }
+
   categorieslist:any;
   categorieslist2:any;
   brandlist:any;
   arrayes:any;
-  uniquecat :any;
-  item: any;
   uniqueObjectArray: any;
-  constructor(private titleService:Title,private productService:ProductsApiService,private router:Router) { }
+  //constructor(private titleService:Title,private productService:ProductsApiService,private router:Router) { }
+
+ // constructor(private titleService:Title,private productService:ProductsApiService,private router:Router) { }
   productList:any;
   productListShow:any; 
   
@@ -30,6 +47,16 @@ export class ProductsComponent implements OnInit {
      this.productsList=data;
      this.categorieslist2=data;
      },error=>{console.log(error)});
+      
+
+     this.productService.getProductData().subscribe(res => {
+      this.products = res;
+     })
+    
+
+    
+    //  this.Getallproductscategories()
+    //  this.filtercatogry()
      this.productList = this.PRODUCTS;
       this.productListShow = this.productList; 
       
@@ -37,7 +64,6 @@ export class ProductsComponent implements OnInit {
 
     
      this.Getallproductscategories()
-     this.filtercatogry()
   
   }
   ngAfterViewInit(): void {
@@ -46,12 +72,83 @@ export class ProductsComponent implements OnInit {
     
     
   }
-addToCart(index:any){
+   addToCart(index:any){
+    
+    this.cart.getProductById(index).subscribe(res=>{
+      this.cartItem=res;
+      console.log(res);
+      console.log(this.cartItem)
+      var cart =new Cart(this.cartItem.id,this.cartItem.title,this.cartItem.price,this.cartItem.discountPercentage,this.cartItem.thumbnail,1);
+    this.cart.saveproduct(cart).subscribe(data =>
+      {
+        // this.usersArr=data;
+      },
+      error =>
+        {
+        }
+        );
+
+
+    });
+
+   
+    // data.subscribe((result=>{
+    //   this.pro=result;
+    //   console.log(this.pro)
+     
+    // }))
+    // var productt={
+    //   "title":this.pro.title,
+    //   "price":this.pro.price,
+    //   "discount":this.pro.discountPercentage,
+    //   "thumbnail":this .pro.thumbnail,
+    //   "count": 1
+    
+    //   }
+    
+    // console.log(this.pro   )
+    // var s=new Object(productt);
+    //this.productService.addToCart(index);
+    // window.alert('Your product has been added to the cart!');
+   
+    // if (!this.productService.itemInCart(index)) {
+    //   index.id= 1;
+    //   this.productService.addToCart(index); //add items in cart
+    //   this.items = [...this.productService.getItems()];
+    // }
+    
+
+  }
+  deleteItemGFromCart(id:number){
+    this.cart.DeleteItemFromCart(id);
+  }
   
-}
+  addToFavorites(index:any){
+    
+    this.cart.getProductById(index);
+    this.productService.addToCart(index);
+    window.alert('Your product has been added to the favorites!');
+   
+    if (!this.productService.itemInCart(index)) {
+      index.id= 1;
+      this.productService.addToCart(index); //add items in cart
+      this.items = [...this.productService.getItems()];
+    }
+    
+  }
+   
 seeDetails(id:any){
    this.router.navigate(["products/",id]);
 }
+  
+
+
+
+ 
+  
+
+
+
 
 Getallproductscategories()
 {
@@ -63,27 +160,6 @@ Getallproductscategories()
  
   
 }
-filtercatogry()
-{
-// let value=event.target.value;
-console.log(this.categorieslist);
-}
-temparray:any=[];
-newarray:any=[];
-onchange(event:any){
-  // let value=event.target.checked;
-  // console.log(value);
-  if(event.target.checked)
-  {
- this.temparray=this.arrayes.filter((e:any)=>e.i==event.target.value);
- console.log(this.temparray);
-  }
-  else{
-
-  }
-}
-result:any=[];
-
 selectedcategoty="All";
 
 filtercat(event:any)
@@ -91,17 +167,59 @@ filtercat(event:any)
 let value=event.target.value;
 this.getcats(value);
 this.selectedcategoty=value;
+
 }
 getcats(keyword:string)
 {
   this.productService.Getproductsbycategories(keyword).subscribe(res=>{
+  this.categorieslist2=res;
   this.productsList=res;
+  console.log(this.categorieslist2);
+  this.arrayes = Array.from(this.categorieslist2).sort();
+  console.log(this.arrayes);
   this.title=keyword;
   this.titleService.setTitle(this.title);
   
 
 
 })
+}
+
+// sortbylowprice(event:any)
+// {
+//   let value=event.target.value;
+//   this.arrayes =this.categorieslist2.sort((a1:any,b1:any)=>a1.price-b1.price);
+//   this.categorieslist2=this.arrayes;
+//   this.productsList=this.arrayes;
+//   console.log(this.arrayes);
+// }
+
+sort(event: any) {
+
+  switch (event.target.value) {
+    case "Low":
+      {
+        this.productsList= this.arrayes.sort((low:any, high:any) => low.price - high.price);
+        console.log(this.productsList);
+        break;
+      }
+
+    case "High":
+      {
+        this.productsList = this.arrayes.sort((low:any, high:any) => high.price - low.price);
+        break;
+      }
+
+    default: {
+      this.productsList = this.arrayes.sort((low:any, high:any) => low.price - high.price);
+      break;
+    }
+
+  }
+  
+  return this.productsList;
+
+  // this.productsList=this.categorieslist2;
 
 }
 
