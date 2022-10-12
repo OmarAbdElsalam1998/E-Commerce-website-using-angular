@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ProductsApiService } from '../services/products-api.service';
 import * as $ from 'jquery';
+import { CartService } from '../services/cart.service';
+import { Cart } from '../shares classes/cart';
 
 declare function slider():void;
 @Component({
@@ -12,10 +14,14 @@ declare function slider():void;
 })
 export class ProductDetailsComponent implements OnInit {
    title:any;
-  constructor(private titleService:Title,private productService:ProductsApiService,private activatedRoute:ActivatedRoute) { }
+  constructor(private titleService:Title,private productService:ProductsApiService,
+    private activatedRoute:ActivatedRoute,private router:Router,
+    private cartService:CartService) { }
   productId:any;
   product:any;
   mainImage:any;
+  selectedProduct:any;
+  counterValue=1;
   ngOnInit(): void {
     slider();
    //get product Id From url
@@ -34,8 +40,7 @@ export class ProductDetailsComponent implements OnInit {
    });
   }
    ngAfterViewInit(): void {
-    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
-    //Add 'implements AfterViewInit' to the class.
+   
     
   }
 
@@ -43,34 +48,38 @@ export class ProductDetailsComponent implements OnInit {
      this.mainImage=d;
   }
 
-  //   $(function (){
-  //     'use strict';
-  //    $(".product-images .image img").each(image => {
-  //     image.on("click",function(){
+  addToCart(productId:number){
+    this.cartService.getProductById(productId).subscribe(res=>{
+      this.selectedProduct=res;
+      console.log(res);
+      console.log(this.selectedProduct)
+      var cart =new Cart (this.selectedProduct.id,this.selectedProduct.title,this.selectedProduct.price,this.selectedProduct.discountPercentage,this.selectedProduct.thumbnail,this.counterValue);
+    this.cartService.saveproduct(cart).subscribe(data =>
+      {
+        // this.usersArr=data;
+      },
+      error =>
+        {
+        }
+        );
+        this.router.navigate(['/cart']);
 
-  //     });
-      
-  //    });      
-  // });
-    
-    
+
+
+    })
+  }
+  increaseNumberOfItems(counter:any){
+this.counterValue++;
+  }
+decreaseNumberOfItems(counter:any){
+  if(this.counterValue>1){
+    this.counterValue --;
+
+  }
+
+  }
   
 
-  // changeImage=()=>{
-  //   var images=document.querySelectorAll(".product-images .image img");
-  //   var mainImage=document.querySelector(".main-image img");
-  //   images.forEach(image=>{
-  //     image.addEventListener("click",function(){
-  //         let src=image.getAttribute("src");
-  //         mainImage.setAttribute('src',src);
-  //         var list=image.parentNode.parentNode.children;
-  //         for(let child of list){
-  //             child.classList.remove('active');
-  //         }
-  //         this.parentNode.classList.add('active');
-  //     });
-  // })
-  //   }
 }
 
 

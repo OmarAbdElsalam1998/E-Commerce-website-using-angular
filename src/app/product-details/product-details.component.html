@@ -70,12 +70,12 @@
                             
                             <div class="add-to-cart px-2 pt-4 d-flex justify-content-center ">
                                 <div class="quantity d-flex me-4">
-                                    <div class="minus px-4 py-3 "><i class="fa-solid fa-minus"></i></div>
-                                    <div class="num px-4 py-3 bg-light fw-bold">1</div>
-                                    <div class="plus px-4 py-3 "><i class="fa-solid fa-plus"></i></div>
+                                    <div class="minus px-4 py-3"(click)="decreaseNumberOfItems(counter)"><i class="fa-solid fa-minus"></i></div>
+                                    <div class="num  bg-light fw-bold"><input #counter class="fw-bold px-4 py-3" style="width:70px;text-align: center;border:none ;" disabled type="text" [value]="counterValue"></div>
+                                    <div class="plus px-4 py-3 " (click)="increaseNumberOfItems(counter)"><i class="fa-solid fa-plus"></i></div>
 
                                 </div>  
-                                <button  class="custom-btn w-100"><i class="fa-light fa-cart-shopping fa-lg"></i> Add To Cart</button>
+                                <button  class="custom-btn w-100" (click)="addToCart(product.id)"><i class="fa-light fa-cart-shopping fa-lg"></i> Add To Cart</button>
                             </div>
                             
                        

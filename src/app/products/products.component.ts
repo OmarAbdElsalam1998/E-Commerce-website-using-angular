@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { async } from '@angular/core/testing';
 import { Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { IProudct } from 'Shared Classes and types/IProduct';
 import { Product } from 'Shared Classes and types/model/product';
 import { CartService } from '../services/cart.service';
@@ -25,13 +25,14 @@ import { Favourite } from '../shares classes/favourite';
 export class ProductsComponent implements OnInit {
   title="Products Page";
   productsList:any;
+  categoryFromUrl:any;
   categories:any;
   cartItem:any;
   favouriteItem:any;
   items:any[] = [];
   products: any = [];
   constructor(private titleService:Title,private productService:ProductsApiService,private router:Router,
-    private data1:HttpClient,private cart :CartService,
+    private data1:HttpClient,private cart :CartService,private activatedRoute:ActivatedRoute,
     private favouriteService:FavouriteService
    ) { }
 
@@ -47,7 +48,10 @@ export class ProductsComponent implements OnInit {
   productListShow:any; 
   
   ngOnInit(): void {
+   
+    
      this.titleService.setTitle(this.title);
+    
      this.productService.getAllProducts().subscribe(data=>{
      this.productsList=data;
      this.categorieslist2=data;
@@ -57,6 +61,19 @@ export class ProductsComponent implements OnInit {
      this.productService.getProductData().subscribe(res => {
       this.products = res;
      })
+       //get category from url
+       this.activatedRoute.paramMap.subscribe((params:ParamMap)=>{
+        this.categoryFromUrl=params.get("category");
+        console.log(this.categoryFromUrl)
+  
+        if(this.categoryFromUrl){
+          this.productService.Getproductsbycategories(this.categoryFromUrl).subscribe(res=>{
+            console.log(res)
+          this.productsList=res;
+        })
+        this.selectedcategoty=this.categoryFromUrl;
+      }
+    });
     
 
     

@@ -4,12 +4,12 @@
             <div class="container">
                 <ul class="list-unstyled d-flex align-items-center justify-content-center m-0">
                     <li class="px-3 py-4 fw-bold fs-lg "><a routerLink="/products" routerLinkActive="router-link-active" >All Categories</a></li>
-                    <li class="px-3 py-4 fw-bold fs-lg"><a href="">Mens Fashion</a></li>
-                    <li class="px-3 py-4 fw-bold fs-lg"><a href="">Women Fashion</a></li>
-                    <li class="px-3 py-4 fw-bold fs-lg"><a href="">Home Decore</a></li>
-                    <li class="px-3 py-4 fw-bold fs-lg"><a href="">furniture</a></li>
-                    <li class="px-3 py-4 fw-bold fs-lg"><a href="">skincare</a></li>
-                    <li class="px-3 py-4 fw-bold fs-lg"><a href="">jewellery</a></li>
+                    <li class="px-3 py-4 fw-bold fs-lg"><a [routerLink]="['/category/mens-shirts']" routerLinkActive="router-link-active" >Mens Fashion</a></li>
+                    <li class="px-3 py-4 fw-bold fs-lg"><a  [routerLink]="['/category/womens-dresses']" routerLinkActive="router-link-active">Women Fashion</a></li>
+                    <li class="px-3 py-4 fw-bold fs-lg"><a [routerLink]="['/category/home-decoration']" routerLinkActive="router-link-active">Home Decore</a></li>
+                    <li class="px-3 py-4 fw-bold fs-lg"><a [routerLink]="['/category/furniture']" routerLinkActive="router-link-active">furniture</a></li>
+                    <li class="px-3 py-4 fw-bold fs-lg"><a [routerLink]="['/category/skincare']" routerLinkActive="router-link-active">skincare</a></li>
+                    <li class="px-3 py-4 fw-bold fs-lg"><a [routerLink]="['/category/womens-jewellery']" routerLinkActive="router-link-active">jewellery</a></li>
 
                 </ul>
 
@@ -78,7 +78,7 @@
                             </div>
                             <div class="category-name">
                                 <h3>Men's Fashion</h3>  
-                                 <a [routerLink]="['/category/men-shirts']" routerLinkActive="router-link-active" >Shop Now!</a>
+                                 <a [routerLink]="['/category/mens-shirts']" routerLinkActive="router-link-active" >Shop Now!</a>
                             </div>
                         </div>
                     </div>
@@ -92,7 +92,7 @@
                             </div>
                             <div class="category-name">
                                 <h3>Women's Fashion</h3>  
-                                <a [routerLink]="['/category/women-dresses']" routerLinkActive="router-link-active" >Shop Now!</a>
+                                <a [routerLink]="['/category/womens-dresses']" routerLinkActive="router-link-active" >Shop Now!</a>
                             </div>
                         </div>
                     </div>
@@ -149,7 +149,7 @@
                         <div class="category">
                             <div class="overlay"></div>
                             <div class="category-image">
-                                <img src="../../assets/images/catrgories/men.jpg">
+                                <img src="../../assets/images/catrgories/sunglasses.jpg">
                             </div>
                             <div class="category-name">
                                 <h3>Sunglasses</h3>  
@@ -168,7 +168,7 @@
                                 <img src="../../assets/images/catrgories/automotive.jpg">
                             </div>
                             <div class="category-name">
-                                <h3>cars</h3>  
+                                <h3>Automotive</h3>  
                                 <a [routerLink]="['/category/automotive']" routerLinkActive="router-link-active" >Shop Now!</a>
                               
                                   

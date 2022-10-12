@@ -94,19 +94,19 @@
                             <h2 class="special-heading fw-bold">Payment Method</h2>
                             <div class="p-3 border rounded">
                                 <div class="form-check py-2">
-                                    <input formControlName="subscribewhenreciving"  name="chkOffers" class="form-check-input" type="checkbox" value="" id="flexCheckDefault"  checked>
-                                    <label class="form-check-label" for="flexCheckDefault">
+                                    <input formControlName="subscribewhenreciving" (click)="resetvisaValidation()" name="chkOffers" class="form-check-input" type="radio" value="" id="receive" >
+                                    <label class="form-check-label" for="receive">
                                         Paiement when recieving
                                     </label>
                                   </div>
                                   <div class="form-check py-2">
-                                    <input (click)="clicked()" (click)="setvisaValidation()"  name="chkOffers" formControlName="subscribe" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <input  (click)="setvisaValidation()"  name="chkOffers" formControlName="subscribe" class="form-check-input" type="radio" value="" >
                                     <label class="form-check-label" for="flexCheckDefault">
                                         Pay with Visa
                                     </label>
                                   </div>
                             </div> 
-                            <div class="border rounded my-4 p-3" *ngIf="ckecked" >
+                            <div class="border rounded my-4 p-3" *ngIf="ckecked">
                                 <h5 class="special-heading fw-bold">Payment Information</h5>
 
                                 <div class="d-flex">
@@ -156,22 +156,15 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
+                          <tr *ngFor="let item of newCartItems;index as i">
+                            <td><img style="width: 100px;height: 100px;" [src]="item.image"></td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.count}}</td>
+                            <td>{{item.totalPrice}}</td>
+
                           </tr>
                           <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                            <td>@twitter</td>
+                            <td colspan="4"> Total :{{totalPriceOfAllItems}}</td>
                           </tr>
                         </tbody>
                       </table>

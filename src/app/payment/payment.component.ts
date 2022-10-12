@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProductsApiService } from '../services/products-api.service';
 import { Title } from '@angular/platform-browser';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-payment',
@@ -11,10 +12,28 @@ import { Title } from '@angular/platform-browser';
 })
 export class PaymentComponent implements OnInit {
   ckecked: boolean = false;
+  cartItems:any;
+  newCartItems:any=[];
+  totalPriceOfAllItems=0.0;
   title="payment";
 
-  constructor(private fb: FormBuilder, private router: Router, private ProductService: ProductsApiService,private titleService:Title) { 
+  constructor(private fb: FormBuilder, private router: Router, 
+    private ProductService: ProductsApiService,private titleService:Title,
+    private cartService:CartService
+    
+    ) { 
     this.titleService.setTitle(this.title);
+
+    this.cartService.getCartProducts().subscribe(res=>{
+      this.cartItems=res;
+      console.log(this.cartItems)
+      
+     
+      })
+      
+
+    //calculate 
+    
 
   }
 
@@ -31,25 +50,12 @@ export class PaymentComponent implements OnInit {
       street: ['', Validators.required],
       subscribewhenreciving: [true],
       subscribe: [false],
+      itemsList:["",this.fb.array([])],
+      totalPrice:[""]
 
 
     });
-    // noteForm:FormGroup=this.fb.group({
 
-    //   name:['',[Validators.required,forbiddenNameValidator(/admin/)]],
-  
-    //   product:[''],
-  
-    //   discount:[false],
-  
-    //   comment:[''],
-  
-    //   alternativeComments:this.fb.array([])
-  
-  
-  
-  
-    // });
   ngOnInit(): void {
   }
   get firstname() {
@@ -91,33 +97,44 @@ export class PaymentComponent implements OnInit {
   get cvv() {
     return this.paymentForm.get('cvv')
   }
-  
-  clicked() {
-    this.ckecked = !this.ckecked;
+  get subscribewhenreciving(){
+    return this.paymentForm.get("subscribewhenreciving")
   }
+  
+ ngAfterViewInit(): void {
+  //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+  //Add 'implements AfterViewInit' to the class.
+  for(let data of this.cartItems){
+    console.log(data)
+    var totalpriceOfoneItem=parseFloat(data.price)-(parseFloat(data.price)*(parseFloat(data.discount)/100))*parseFloat(data.count);
+       console.log(totalpriceOfoneItem)
+       var obj={image:data.thumbnail,name:data.title,count:data.count,totalPrice:totalpriceOfoneItem}
+      this.newCartItems.push(obj);
+      this.totalPriceOfAllItems+=totalpriceOfoneItem;
+    }
+ }
   setvisaValidation() {
-    this.paymentForm.get('subscribe')?.valueChanges.subscribe(
-      checkedValue => {
-        if (checkedValue) {
+    this.ckecked=true;
+    
           this.paymentForm.setControl('cardholder', this.fb.control('',[Validators.required])); 
           this.paymentForm.setControl('cardnum', this.fb.control('',[Validators.required])); 
           this.paymentForm.setControl('expirationdate', this.fb.control('',[Validators.required])); 
           this.paymentForm.setControl('cvv', this.fb.control('',[Validators.required])); 
-        }
-        else {
-          this.paymentForm.removeControl('cardholder');
-          this.paymentForm.removeControl('cardnum');
-          this.paymentForm.removeControl('expirationdate');
-          this.paymentForm.removeControl('cvv');
+       
 
-        }
-
-      }
-    )
+      
   }
- 
+  resetvisaValidation()
+{           this.ckecked=false;
 
+        this.paymentForm.removeControl('cardholder');
+        this.paymentForm.removeControl('cardnum');
+        this.paymentForm.removeControl('expirationdate');
+        this.paymentForm.removeControl('cvv');
+}
 addorder(){
+  this.paymentForm.value.itemsList=this.newCartItems;
+  this.paymentForm.value.total=this.totalPriceOfAllItems;
   console.log(this.paymentForm.value);
   this.ProductService.saveorder(this.paymentForm.value)
     .subscribe(data => {
@@ -132,5 +149,6 @@ addorder(){
     )
 }
 
+ 
   }
 

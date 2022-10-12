@@ -1,6 +1,25 @@
 {
   "favourite": [],
-  "cart": [],
+  "cart": [
+    {
+      "productId": 4,
+      "title": "OPPOF19",
+      "price": 280,
+      "thumbnail": "https://dummyjson.com/image/i/products/4/thumbnail.jpg",
+      "discount": 17.91,
+      "count": 1,
+      "id": 1
+    },
+    {
+      "productId": 1,
+      "title": "iPhone 9",
+      "price": 549,
+      "thumbnail": "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
+      "discount": 12.96,
+      "count": 3,
+      "id": 2
+    }
+  ],
   "addproducts": [
     {
       "brand": "iphone",

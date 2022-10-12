@@ -8,7 +8,7 @@
                       <li class="breadcrumb-item"><a [routerLink]="['/']" routerLinkActive="router-link-active" >Home</a></li>
                       <!-- {{selectedcategoty}} -->
                       <li class="breadcrumb-item" aria-current="page"><a [routerLink]="['/products']" routerLinkActive="router-link-active" >Products</a></li>
-                      <li class="breadcrumb-item active"><a href="#">{{selectedcategoty}}</a></li>
+                      <li class="breadcrumb-item active">{{selectedcategoty}}</li>
                      
                     </ol>
                   </nav>
@@ -30,8 +30,8 @@
                       <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                   </div> -->
-                  <select class="form-select form-select-lg mb-3 w-auto" aria-label=".form-select-lg example" (change)="sort($event)">
-                    <option [selected]="true" disabled>__Sorting__</option>
+                  <select class="form-select form-sel ect-lg mb-3 w-auto" aria-label=".form-select-lg example" (change)="sort($event)">
+                    <option [selected]="true" disabled slected="true">__Sorting__</option>
                     <option value="LowPrice">Show Low to High Price</option>
                     <option value="HighPrice">Show High to Low Price</option>
                     <option value="LowRate">Show Low to High Rate</option>
@@ -52,7 +52,7 @@
                              <div class="category-filter d-flex align-items-center justify-content-between p-1 "  *ngFor="let cat of categorieslist" id="categories" >
                                 <div class="select-filter" (change)="filterByCategory(cat)">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" [value]="cat" name="category" [id]="cat">
+                                        <input class="form-check-input" type="radio" [value]="cat" name="category" [id]="cat" [checked]="cat==categoryFromUrl">
                                         <label class="form-check-label" [for]="cat">
                                             {{cat}}
                                         </label>
