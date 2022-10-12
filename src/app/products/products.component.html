@@ -6,8 +6,8 @@
                 <nav aria-label="breadcrumb ">
                     <ol class="breadcrumb m-0">
                       <li class="breadcrumb-item"><a href="#">Home</a></li>
-                      <li class="breadcrumb-item"><a href="#">{{selectedcategoty}}</a></li>
-                      <li class="breadcrumb-item active" aria-current="page">Data</li>
+                      <li class="breadcrumb-item active"><a href="#">{{selectedcategoty}}</a></li>
+                     
                     </ol>
                   </nav>
             </div>
@@ -145,3 +145,27 @@
         </div>
     </section>
 </main>
+<div class="brand-select">
+    <div class="brand-name">Select Color</div>
+    <form>
+        <div class="form-check brand-checkbox" *ngFor="let col of colors;let index = index">
+            <input class="form-check-input" 
+                 type="checkbox" 
+                 value="{{col.id}}" 
+                 id="{{col.id}}" 
+                 name="checkbox" 
+                 [(ngModel)]="col.selected"
+                 (ngModelChange)="filterProducts()">
+    
+              <label class="form-check-label" for="{{col.id}}">
+                {{col.productColor}}
+              </label>
+            </div>
+        </form>
+    </div>
+    
+    <div *ngFor="let prod of productListShow">
+        <div *ngFor="let product of prod.product">
+            <h5 class="product-inner-title">{{product.productName}}</h5>
+        </div>
+    </div>
