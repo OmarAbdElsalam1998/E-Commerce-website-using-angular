@@ -1,0 +1,88 @@
+*{
+    box-sizing: border-box;
+}
+.active-display-mode{
+    color: #FFF;
+    background-color: rgb(53, 32, 211);
+}
+#main{
+    font-family: 'Nunito', sans-serif;
+    .modal{
+        .user-role{
+            .tag{
+                display: inline-block;
+                background: #0e9b0a;
+                color: #FFF;
+                border-radius: 8px;
+                padding: 5px 10px;
+                font-weight: bold;
+                margin: 0 2px 4px 2px;
+            }
+        }
+    }
+
+    .users{
+        .users-header{
+           
+        .search-box{
+            width:300px;
+            input{
+                border: none;
+                outline: none;
+                background: none;
+            }
+        }
+        }
+        .users-list{
+            .user{
+                .header{
+                    background-color: #5872ff;
+
+                }
+                .user-image{
+                    margin-top: -40px;
+                    img{
+                        width: 120px;
+                        height: 120px;
+                        border: 10px solid #fff;
+                        border-radius: 50%;
+                        background: #FFF
+                    }
+                }
+                .actions{
+                    button{
+
+                        &:active{
+                            border: transparent;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (max-width:768px){
+    #main{
+        .users{
+            .user-header{
+               
+            .search-box{
+                width:auto;
+               
+            }
+            }
+    }
+}
+    
+
+
+}
+
+// breadCrumb
+.breadcrumb  {
+    background:none !important;
+}
+.breadcrumb .breadcrumb-item a{
+    text-decoration: none;
+    background:none;
+}
