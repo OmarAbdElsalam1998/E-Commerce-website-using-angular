@@ -1,0 +1,54 @@
+<aside class="sidebar" id="sidebar">
+    <ul class="sidebar-nav  list-unstyled p-3">
+        <li class="nav-item">
+            <a class="nav-link d-flex align-items-center "[routerLink]="['/dashboard']" routerLinkActive="active-super-link" [routerLinkActiveOptions]="{ exact: true }">
+                <i class="fa-regular fa-grid"></i><span class="ps-2">dashboard</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link d-flex align-items-center "[routerLink]="['/dashboard/productslist']" routerLinkActive="active-super-link" [routerLinkActiveOptions]="{ exact: true }">
+                <i class="fa-regular fa-grid"></i><span class="ps-2">Products list</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link d-flex align-items-center "[routerLink]="['/dashboard/brands']" routerLinkActive="active-super-link" [routerLinkActiveOptions]="{ exact: true }">
+                <i class="fa-regular fa-grid"></i><span class="ps-2">brands</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link d-flex align-items-center "[routerLink]="['/dashboard/categories']" routerLinkActive="active-super-link" [routerLinkActiveOptions]="{ exact: true }">
+                <i class="fa-regular fa-grid"></i><span class="ps-2">Categoreis</span></a>
+        </li>   
+        <li class="nav-item">
+            <a class="nav-link d-flex align-items-center "[routerLink]="['/dashboard']" routerLinkActive="active-super-link" [routerLinkActiveOptions]="{ exact: true }">
+                <i class="fa-regular fa-grid"></i><span class="ps-2">dashboard</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link d-flex align-items-center "[routerLink]="['/dashboard']" routerLinkActive="active-super-link" [routerLinkActiveOptions]="{ exact: true }">
+                <i class="fa-regular fa-grid"></i><span class="ps-2">dashboard</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link d-flex align-items-center "[routerLink]="['/dashboard']" routerLinkActive="active-super-link" [routerLinkActiveOptions]="{ exact: true }">
+                <i class="fa-regular fa-grid"></i><span class="ps-2">dashboard</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link d-flex align-items-center "[routerLink]="['/dashboard']" routerLinkActive="active-super-link" [routerLinkActiveOptions]="{ exact: true }">
+                <i class="fa-regular fa-grid"></i><span class="ps-2">dashboard</span></a>
+        </li>
+        <li class="nav-item">
+            <span class="dropdown">
+                <i class="fa-solid fa-bag-shopping"></i> <span>Products</span>
+            </span>
+           
+            <ul id="produt-navbar" class="nav-content ">
+                <li>
+                    <a [routerLink]="['/dashboard/addProduct']" routerLinkActive="active-super-link"><i class="fa-solid fa-bag-shopping"></i> <span>Products</span></a> 
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item d-flex align-items-center">
+            <a [routerLink]="['/dashboard/orders']" routerLinkActive="active-super-link"><i class="fa-solid fa-cart-shopping"></i><span>orders</span></a> 
+        </li>
+        <li class="nav-item">
+            <a [routerLink]="['/dashboard/ordersdetails']" routerLinkActive="active-super-link">orders</a> 
+        </li>
+        
+    </ul>
+</aside>

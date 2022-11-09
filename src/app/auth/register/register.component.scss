@@ -1,21 +1,27 @@
 $button_background:#feee00;
 $button_background_hover:#d1c51b;
+$brand_color:#1363DF;
+
 @mixin writting_Style($color,$font_Size,$font_Weight:normal){
     color:$color;
     font-size:$font_Size ;
     font-weight: $font_Weight;
 }//global style
 .my-button{
-    background-color: $button_background;
-    padding:10px 40px;
-    border-radius: 5px;;
+    color: #333;
+    font-size: 17px;
+    font-weight: 400;
     outline: none;
     border: none;
-    font-size: 18px;
+    padding: 15px 35px;
+    background-color: $brand_color;
+    color: #FFF;
+    text-decoration: none;
     font-weight: bold;
-    transition: all .2s ease-in-out;
+    transition: all 0.3s ease-in-out;
     &:hover{
-        background-color: $button_background_hover;
+        color:#FFF;
+        background-color: #548be1;
     }
 }
 a{

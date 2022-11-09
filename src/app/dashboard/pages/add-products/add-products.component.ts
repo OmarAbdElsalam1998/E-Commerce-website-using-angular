@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProductsApiService } from 'src/app/services/products-api.service';
-import { newProduct } from '../newproduct';
+import { newProduct } from '../../newproduct';
 
 @Component({
   selector: 'app-add-products',
@@ -11,6 +11,7 @@ import { newProduct } from '../newproduct';
   styleUrls: ['./add-products.component.scss']
 })
 export class AddProductsComponent implements OnInit {
+productImages:any=[];  
 categories:any;
 ckecked:boolean=false;
 newprd:newProduct=new newProduct("","","","",0,0,0,"");
@@ -105,4 +106,21 @@ return this.addproductForm.get('price')
       
       )
  }
+
+ onSelectImageFromFile(event:any) {
+  let fileType = event.target.files[0].type;
+  if (fileType.match(/image\/*/)) {
+    let reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = (event: any) => {
+      this.productImages.push(event.target.result);
+    };
+  } else {
+    window.alert('Please select correct image format');
+  }
+}
+removeProductImage(index:number){
+  this.productImages.splice(index,1);
+
+}
 }

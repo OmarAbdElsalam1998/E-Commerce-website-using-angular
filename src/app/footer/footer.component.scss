@@ -1,0 +1,38 @@
+
+.footer{
+    background-color: #060a34;
+    .dept-name{
+        color:rgb(239 228 228);
+        font-size:15px;
+        font-weight:bold;
+    }
+    li{
+        display: block;
+        padding: 5px 0;
+        a{
+            color:rgb(152 146 146);
+            text-decoration: none;
+            font-size:14px;
+            position: relative;
+            &::after{
+                content:"";
+                top:25px;
+                right:0;
+                width:0;
+                height:1px;
+                background-color: dodgerblue;
+                position:absolute;
+                transition: all .3s ease-in-out;
+            
+
+            }
+            &:hover{ 
+                &::after{
+                    width:100%;
+                    left:0;
+                }
+            }
+        }
+
+    }
+}

@@ -1,12 +1,29 @@
 import {  NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminGuard } from '../Guards/admin.guard';
-import { AddProductsComponent } from './add-products/add-products.component';
 import { MainComponent } from './main/main.component';
+import { AddProductsComponent } from './pages/add-products/add-products.component';
+import { BrandsComponent } from './pages/brands/brands.component';
+import { CategoriesComponent } from './pages/categories/categories.component';
+import { DashboardMainComponent } from './pages/dashboard-main/dashboard-main.component';
+import { OrderdetailsComponent } from './pages/orderdetails/orderdetails.component';
+import { OrdersComponent } from './pages/orders/orders.component';
+import { ProductslistComponent } from './pages/productslist/productslist.component';
+
 
 const routes: Routes = [
-  {path:"",component:MainComponent,canLoad:[AdminGuard]},
-  {path:"addProduct",component:AddProductsComponent,canLoad:[AdminGuard]}
+  {path:"",component:MainComponent,canLoad:[AdminGuard],children:[
+    {path:"",component:DashboardMainComponent,canLoad:[AdminGuard]},
+    {path:"ordersdetails",component:OrderdetailsComponent,canLoad:[AdminGuard]},
+    {path:"productslist",component:ProductslistComponent,canLoad:[AdminGuard]},
+    {path:"addProduct",component:AddProductsComponent,canLoad:[AdminGuard]},
+    {path:"editProduct/:id",component:AddProductsComponent,canLoad:[AdminGuard]},
+    {path:"categories",component:CategoriesComponent,canLoad:[AdminGuard]},
+    {path:"brands",component:BrandsComponent,canLoad:[AdminGuard]},
+    {path:"orders",component:OrdersComponent,canLoad:[AdminGuard]},
+
+  ]},
+  
 ];
 
 @NgModule({

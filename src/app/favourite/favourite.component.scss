@@ -128,33 +128,7 @@ a{
                 }
 
             }
-            .product-price{
-                .new-price{
-                    font-size: 17px;
-                    font-weight: bold;
-                    margin-right: 10px;
-                }
-                .old-price{
-                    color: rgb(142, 141, 141);
-                    font-size: 12px;
-                    font-weight: bold;
-                    text-decoration: line-through;
-                }
-            }
-            .product-discount-rate{
-                .discount{
-                    background: $brand_color;
-                    padding: 1px 10px;
-                    border-radius: 10px 41px 10px 42px;
-                    color: #FFF;
-                }
-                .rate{
-                    color:$brand_color;
-                    span{
-                           color:rgb(163, 161, 161);
-                        }
-                    }
-                
-            }
+            
+        
         }
     }

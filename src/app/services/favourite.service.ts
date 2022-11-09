@@ -31,24 +31,6 @@ export class FavouriteService {
 
     }
 
-  getProducts(){
-    return this.productList.asObservable();
-  }
- 
-// setProduct(prod:any){
-// this.CartItemList.push(...prod);
-// this.productList.next(prod)
-
-// }
-
-// AddtoCartt(product:any){
-// this.CartItemList.push(product);
-// this.productList.next(this.CartItemList)
-// this.getTotalPrice();
-// console.log(this.CartItemList)
-
-// }
-
 getProductFromFavourite(){
    this.http.get(this.url2).subscribe(res=>{
     this.favouriteProductes.next(res);
@@ -69,16 +51,7 @@ DeleteItemFromFavourite(id:number){
     console.log(res);
   })
 }
-// getTotalPrice():number{
 
-//  let grandTotal=0;
-//  this.CartItemList.map((a:any)=>{
-//   grandTotal+=a.total;
-//  });
-// return grandTotal;
-
-// }
-pro:any;
 
 getProductById(prodId:any){
    return this.http.get<any>(this.url+"/"+prodId).pipe(catchError((err)=>{
@@ -94,37 +67,7 @@ saveproduct(product:Favourite){
    console.log(this.favouriteProductesCounter);  
       return this.http.post(this.url2,product).pipe(catchError ((err)=>{
       return throwError (()=>console.log(err))}))
-  
+ 
   
 }
-
-//   AddProductToCart(product:any){
-//     let productExists=false;
-//     for(let i in this.CartItemList)
-//       {
-//     if(this.CartItemList[i].id === product.id){
-//       this.CartItemList.qty++;
-//        productExists=true;
-//        break;
-// }
-// }
-//}
-
-
 }
-//Remove product one by one
-// removeCartData(product: any) {
-//   this.CartItemList.map((a: any, index: any) => {
-//     if (product.id === a.id) {
-//       this.CartItemList.splice(index, 1);
-//     }
-//   })
-// }
-
-// // Empties the whole cart
-// removeAllCart() {
-//   this.CartItemList = [];
-//   this.productList.next(this.CartItemList);
-// }
-
-// }

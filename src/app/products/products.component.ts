@@ -31,6 +31,7 @@ export class ProductsComponent implements OnInit {
   favouriteItem:any;
   items:any[] = [];
   products: any = [];
+  displayGrid:boolean=true;
   constructor(private titleService:Title,private productService:ProductsApiService,private router:Router,
     private data1:HttpClient,private cart :CartService,private activatedRoute:ActivatedRoute,
     private favouriteService:FavouriteService
@@ -94,6 +95,13 @@ export class ProductsComponent implements OnInit {
     
     
   }
+  changeDisplay(str:string){
+    if(str=='grid'){
+      this.displayGrid=true;
+    }else{
+      this.displayGrid=false;
+    }
+  }
    addToCart(index:any){
     
     this.cart.getProductById(index).subscribe(res=>{
@@ -114,33 +122,11 @@ export class ProductsComponent implements OnInit {
     });
 
    
-    // data.subscribe((result=>{
-    //   this.pro=result;
-    //   console.log(this.pro)
-     
-    // }))
-    // var productt={
-    //   "title":this.pro.title,
-    //   "price":this.pro.price,
-    //   "discount":this.pro.discountPercentage,
-    //   "thumbnail":this .pro.thumbnail,
-    //   "count": 1
-    
-    //   }
-    
-    // console.log(this.pro   )
-    // var s=new Object(productt);
-    //this.productService.addToCart(index);
-    // window.alert('Your product has been added to the cart!');
-   
-    // if (!this.productService.itemInCart(index)) {
-    //   index.id= 1;
-    //   this.productService.addToCart(index); //add items in cart
-    //   this.items = [...this.productService.getItems()];
-    // }
     
 
   }
+
+  //add item to favourite
   addToFavorites(index:any){
     this.favouriteService.getProductById(index).subscribe(res=>{
       this.favouriteItem=res;
@@ -160,34 +146,13 @@ export class ProductsComponent implements OnInit {
     });
   }
  
-
-  // addToFavorites(index:any){
-    
-  //   this.cart.getProductById(index);
-  //   this.productService.addToCart(index);
-  //   window.alert('Your product has been added to the favorites!');
-   
-  //   if (!this.productService.itemInCart(index)) {
-  //     index.id= 1;
-  //     this.productService.addToCart(index); //add items in cart
-  //     this.items = [...this.productService.getItems()];
-  //   }
-    
-  // }
-   
+  
+  //go to the selected product to see getails
 seeDetails(id:any){
    this.router.navigate(["products/",id]);
 }
   
-
-
-
- 
-  
-
-
-
-
+//get all items categories from api
 Getallproductscategories()
 {
     this.titleService.setTitle(this.title); 

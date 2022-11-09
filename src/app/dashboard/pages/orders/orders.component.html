@@ -1,0 +1,239 @@
+<main id="main" class="p-md-5 py-5">
+    
+    <div class="container">
+         <!-- Start breadcrumb -->
+     <section class="breadcrumb bg-dark">
+            <div class="d-flex align-items-center justify-content-start  rounded my-3">
+                <nav aria-label="breadcrumb ">
+                    <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item d-flex align-items-center justify-content-between"><a [routerLink]="['/dashboard']" routerLinkActive="router-link-active" >
+                        <i class="fa-solid fa-gauge-min fa-lg pe-2"></i> <span class="fw-bold">dashboard</span></a> 
+                    </li>
+                    <!-- {{selectedcategoty}} -->
+                    <li class="breadcrumb-item active fw-bold">Orders</li>
+                    
+                    </ol>
+                </nav>
+             </div>
+        </section>
+        
+        <!-- end breadcrumb -->
+
+        <owl-carousel-o [options]="customOptions" class="order-status-carousel d-flex justify-content-center">
+            <ng-template carouselSlide>
+                <div class="order-status p-3  rounded " (click)="changeStatus('WaitingForReview')">
+                   <div class="status-icon-count d-flex justify-content-between align-items-center">
+                    <span class="icon"><i class="fa-regular fa-clock"></i></span>
+                    <span class="count">100</span>
+                   </div>
+                   <div class="status-type">
+                    Waiting For Review
+                   </div>
+                </div>
+            </ng-template>
+            <ng-template carouselSlide>
+                <div class="order-status p-3  rounded "  (click)="changeStatus('beingProcessed')">
+                    <div class="status-icon-count d-flex justify-content-between align-items-center">
+                     <span class="icon"><i class="fa-regular fa-gift"></i></span>
+                     <span class="count">100</span>
+                    </div>
+                    <div class="status-type">
+                     Being processed
+                    </div>
+                 </div>
+            </ng-template>
+            <ng-template carouselSlide>
+                <div class="order-status p-3  rounded " (click)="changeStatus('prepared')">
+                    <div class="status-icon-count d-flex justify-content-between align-items-center">
+                     <span class="icon"><i class="fa-solid fa-check-double"></i></span>
+                     <span class="count">100</span>
+                    </div>
+                    <div class="status-type">
+                     Prepared
+                    </div>
+                 </div>
+            </ng-template>
+            <ng-template carouselSlide>
+                <div class="order-status p-3  rounded "(click)="changeStatus('deliveryInProgress')">
+                    <div class="status-icon-count d-flex justify-content-between align-items-center">
+                     <span class="icon"><i class="fa-regular fa-truck-bolt"></i></span>
+                     <span class="count">100</span>
+                    </div>
+                    <div class="status-type">
+                    Delivery In Progress
+                    </div>
+                 </div>
+            </ng-template>
+            <ng-template carouselSlide>
+                <div class="order-status p-3  rounded " (click)="changeStatus('delivered')">
+                    <div class="status-icon-count d-flex justify-content-between align-items-center">
+                     <span class="icon"><i class="fa-solid fa-person-carry-box"></i></span>
+                     <span class="count">100</span>
+                    </div>
+                    <div class="status-type">
+                     Delivered
+                    </div>
+                 </div>
+            </ng-template>
+            <ng-template carouselSlide>
+                <div class="order-status p-3  rounded " (click)="changeStatus('cancelled')">
+                    <div class="status-icon-count d-flex justify-content-between align-items-center">
+                        <span class="icon"><i class="fa-regular fa-xmark-large"></i></span>
+                        <span class="count">100</span>
+                    </div>
+                    <div class="status-type">
+                        Cancelled
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template carouselSlide>
+                <div class="order-status p-3  rounded " (click)="changeStatus('beingRetrived')">
+                    <div class="status-icon-count d-flex justify-content-between align-items-center">
+                        <span class="icon"><i class="fa-solid fa-arrows-rotate"></i></span>
+                        <span class="count">100</span>
+                    </div>
+                    <div class="status-type">
+                        Being Retrived
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template carouselSlide>
+                <div class="order-status p-3  rounded " (click)="changeStatus('retrived')">
+                    <div class="status-icon-count d-flex justify-content-between align-items-center">
+                        <span class="icon"><i class=" fa-solid fa-clock-rotate-left"></i></span>
+                        <span class="count">100</span>
+                    </div>
+                    <div class="status-type">
+                        Retrived
+                    </div>
+                </div>
+            </ng-template>
+        </owl-carousel-o>  
+
+        <div class="order  my-4 rounded bg-white border">
+            <div class="order-header p-3 border-bottom">
+                <div class="row">
+                    <div class="col-6">
+                        <h2 class="fw-bold">orders <small class="fw-normal" style="font-size:1rem;">({{copyOrders.length}} order)</small></h2>
+    
+                    </div>
+                    <div class="col-6 d-md-flex align-items-center justify-content-between">
+                        <div class="search-box d-flex align-items-center p-2 border rounded">
+                            <i class="fa-regular fa-search fa-1x pe-2"></i>
+                            <input id="search" placeholder="search" type="text" name="search" (keyup)="search($event)">
+                
+                        </div>
+                        <div class="btn-group px-2">
+                            <span type="button" class="btn btn-primary  outline-none p-2"><i class="fa-solid fa-edit pe-3"></i> Edit</span>
+                            <button type="button" class="btn btn-primary  outline-none dropdown-toggle dropdown-toggle-split p-2" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" ><i class="fa-regular fa-bag-shopping"></i><span class="ps-2">Change Order Status</span></a></li>
+                            <li (click)="showConfirmAlert()"><a class="dropdown-item" ><i class="fa-light fa-trash-can"></i><span class="ps-2">Delete Order</span></a></li>
+                           
+                            </ul>
+                        </div>
+    
+                    </div>
+                </div>
+
+            </div>
+            <div class="order-list">
+                <div class="d-flex align-items-center border-bottom" *ngFor="let order of copyOrders | orderBy: key: reverse | paginate : {
+                    itemsPerPage: 5,
+                    currentPage: page,
+                    totalItems: copyOrders.length
+                  };">
+                  <div class="order-customer  ">
+                        <div class="customer d-flex align-items-center p-3">
+                            <div class="checkbox px-2">
+                                <input  class=" form-check-input"type="checkbox">
+                            </div>
+                            <div class="customer-img px-2">
+                                    <img src="../../../../assets/images/person.jpg" style="width:50px;height:50px;">
+                            </div>
+                            <div class="order-info px-2">
+                                <div class="customer-name">
+                                    {{order.firstname+" "+order.lastname}}
+
+                                </div>
+                                <div class="shipping-data">
+                                    d
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-total px-2">{{order.totalPrice}} </div>
+
+                    <div class="order-time px-2"> since 3 minutes ago</div>
+            
+           
+                 
+                </div>
+                <div class="text-center  p-5" *ngIf="copyOrders.length==0">
+                    NO Orders Found
+                    
+                </div>
+                
+                       
+               <pagination-controls  *ngIf="copyOrders.length>0" (pageChange)="page=($event)" class="text-end py-2"></pagination-controls>
+            </div>
+
+            <!-- <div class="table-responsive">
+                <table class="react_table table  table-hover scroll text">
+                     <thead>
+                       <tr>
+                        <th (click)="sort('id')">ID &nbsp;<i class="fa-solid fa-sort"></i></th>
+                        <th (click)="sort('id')">Date &nbsp;<i class="fa-solid fa-sort"></i></th>
+                        <th (click)="sort('firstname')">Customer Name &nbsp;<i class="fa-solid fa-sort"></i></th>
+                        <th (click)="sort('totalPrice')">Total &nbsp;<i class="fa-solid fa-sort"></i></th>
+                        <th (click)="sort('id')">Payment Status &nbsp;<i class="fa-solid fa-sort"></i></th>
+                        <th (click)="sort('id')">Action &nbsp;<i class="fa-solid fa-sort"></i></th>
+                        
+                       </tr>
+                    </thead> 
+                    <tbody>
+                        <tr *ngFor="let order of copyOrders | orderBy: key: reverse | paginate : {
+                            itemsPerPage: 5,
+                            currentPage: page,
+                            totalItems: copyOrders.length
+                          };">
+                          
+                            <td class="order-customer ">
+                                <div class="customer d-flex align-items-center p-3">
+                                    <div class="checkbox">
+                                        <input  class=" form-control-checkbox"type="checkbox">
+                                    </div>
+                                    <div class="customer-img">
+                                            ee
+                                    </div>
+                                    <div class="order-info">
+                                        <div class="customer-name">
+                                            ddd
+
+                                        </div>
+                                        <div class="shipping-data">
+                                            d
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="order-total">{{order.totalPrice}} </td>
+
+                            <td class="order-time"> since 3 minutes ago</td>
+                        </tr>
+                        <tr *ngIf="copyOrders.length==0">
+                            <td class="text-center" colspan="6">NO Orders Found</td>
+                            
+                        </tr>
+                    </tbody>
+                      
+                </table>
+                <pagination-controls  (pageChange)="page=($event)" class="text-end py-2"></pagination-controls>
+            </div> -->
+
+
+        </div>
+    </div>
+</main>

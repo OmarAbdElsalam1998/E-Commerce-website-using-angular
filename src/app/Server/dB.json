@@ -2,22 +2,271 @@
   "favourite": [],
   "cart": [
     {
-      "productId": 4,
-      "title": "OPPOF19",
-      "price": 280,
-      "thumbnail": "https://dummyjson.com/image/i/products/4/thumbnail.jpg",
-      "discount": 17.91,
+      "productId": 2,
+      "title": "iPhone X",
+      "price": 899,
+      "thumbnail": "https://dummyjson.com/image/i/products/2/thumbnail.jpg",
+      "discount": 17.94,
       "count": 1,
+      "id": 1
+    }
+  ],
+  "orders": [
+    {
+      "firstname": "d",
+      "lastname": "h",
+      "email": "h@gmail.com",
+      "Phone": "h",
+      "country": "h",
+      "region": "h",
+      "city": "h",
+      "zipcode": "h",
+      "street": "h",
+      "subscribewhenreciving": true,
+      "subscribe": false,
+      "itemsList": [
+        {
+          "image": "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
+          "name": "iPhone 9",
+          "count": 1,
+          "totalPrice": 477.8496
+        }
+      ],
+      "totalPrice": "",
+      "total": 477.8496,
       "id": 1
     },
     {
-      "productId": 1,
-      "title": "iPhone 9",
-      "price": 549,
-      "thumbnail": "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
-      "discount": 12.96,
-      "count": 3,
+      "firstname": "ee",
+      "lastname": "e",
+      "email": "omar@gmail.com",
+      "Phone": "24242343243",
+      "country": "t",
+      "region": "t",
+      "city": "t",
+      "zipcode": "t",
+      "street": "t",
+      "subscribewhenreciving": "",
+      "subscribe": false,
+      "itemsList": [
+        {
+          "image": "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
+          "name": "iPhone 9",
+          "count": 1,
+          "totalPrice": 477.8496
+        },
+        {
+          "image": "https://dummyjson.com/image/i/products/2/thumbnail.jpg",
+          "name": "iPhone X",
+          "count": 1,
+          "totalPrice": 737.7194
+        }
+      ],
+      "totalPrice": 1215.569,
       "id": 2
+    },
+    {
+      "firstname": "sdw",
+      "lastname": "wew",
+      "email": "omar@gmail.com",
+      "Phone": "wew",
+      "country": "we",
+      "region": "k",
+      "city": "k",
+      "zipcode": "k",
+      "street": "k",
+      "subscribewhenreciving": true,
+      "subscribe": false,
+      "itemsList": [
+        {
+          "image": "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
+          "name": "iPhone 9",
+          "count": 1,
+          "totalPrice": 477.8496
+        },
+        {
+          "image": "https://dummyjson.com/image/i/products/2/thumbnail.jpg",
+          "name": "iPhone X",
+          "count": 1,
+          "totalPrice": 737.7194
+        }
+      ],
+      "totalPrice": 1215.569,
+      "id": 3
+    },
+    {
+      "firstname": "sdw",
+      "lastname": "wew",
+      "email": "omar@gmail.com",
+      "Phone": "wew",
+      "country": "we",
+      "region": "k",
+      "city": "k",
+      "zipcode": "k",
+      "street": "k",
+      "subscribewhenreciving": true,
+      "subscribe": false,
+      "itemsList": [
+        {
+          "image": "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
+          "name": "iPhone 9",
+          "count": 1,
+          "totalPrice": 477.8496
+        },
+        {
+          "image": "https://dummyjson.com/image/i/products/2/thumbnail.jpg",
+          "name": "iPhone X",
+          "count": 1,
+          "totalPrice": 737.7194
+        }
+      ],
+      "totalPrice": 1215.569,
+      "id": 3
+    },
+    {
+      "firstname": "sdw",
+      "lastname": "wew",
+      "email": "omar@gmail.com",
+      "Phone": "wew",
+      "country": "we",
+      "region": "k",
+      "city": "k",
+      "zipcode": "k",
+      "street": "k",
+      "subscribewhenreciving": true,
+      "subscribe": false,
+      "itemsList": [
+        {
+          "image": "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
+          "name": "iPhone 9",
+          "count": 1,
+          "totalPrice": 477.8496
+        },
+        {
+          "image": "https://dummyjson.com/image/i/products/2/thumbnail.jpg",
+          "name": "iPhone X",
+          "count": 1,
+          "totalPrice": 737.7194
+        }
+      ],
+      "totalPrice": 1215.569,
+      "id": 3
+    },
+    {
+      "firstname": "sdw",
+      "lastname": "wew",
+      "email": "omar@gmail.com",
+      "Phone": "wew",
+      "country": "we",
+      "region": "k",
+      "city": "k",
+      "zipcode": "k",
+      "street": "k",
+      "subscribewhenreciving": true,
+      "subscribe": false,
+      "itemsList": [
+        {
+          "image": "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
+          "name": "iPhone 9",
+          "count": 1,
+          "totalPrice": 477.8496
+        },
+        {
+          "image": "https://dummyjson.com/image/i/products/2/thumbnail.jpg",
+          "name": "iPhone X",
+          "count": 1,
+          "totalPrice": 737.7194
+        }
+      ],
+      "totalPrice": 1215.569,
+      "id": 3
+    },
+    {
+      "firstname": "sdw",
+      "lastname": "wew",
+      "email": "omar@gmail.com",
+      "Phone": "wew",
+      "country": "we",
+      "region": "k",
+      "city": "k",
+      "zipcode": "k",
+      "street": "k",
+      "subscribewhenreciving": true,
+      "subscribe": false,
+      "itemsList": [
+        {
+          "image": "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
+          "name": "iPhone 9",
+          "count": 1,
+          "totalPrice": 477.8496
+        },
+        {
+          "image": "https://dummyjson.com/image/i/products/2/thumbnail.jpg",
+          "name": "iPhone X",
+          "count": 1,
+          "totalPrice": 737.7194
+        }
+      ],
+      "totalPrice": 1215.569,
+      "id": 3
+    },
+    {
+      "firstname": "sdw",
+      "lastname": "wew",
+      "email": "omar@gmail.com",
+      "Phone": "wew",
+      "country": "we",
+      "region": "k",
+      "city": "k",
+      "zipcode": "k",
+      "street": "k",
+      "subscribewhenreciving": true,
+      "subscribe": false,
+      "itemsList": [
+        {
+          "image": "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
+          "name": "iPhone 9",
+          "count": 1,
+          "totalPrice": 477.8496
+        },
+        {
+          "image": "https://dummyjson.com/image/i/products/2/thumbnail.jpg",
+          "name": "iPhone X",
+          "count": 1,
+          "totalPrice": 737.7194
+        }
+      ],
+      "totalPrice": 1215.569,
+      "id": 3
+    },
+    {
+      "firstname": "sdw",
+      "lastname": "wew",
+      "email": "omar@gmail.com",
+      "Phone": "wew",
+      "country": "we",
+      "region": "k",
+      "city": "k",
+      "zipcode": "k",
+      "street": "k",
+      "subscribewhenreciving": true,
+      "subscribe": false,
+      "itemsList": [
+        {
+          "image": "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
+          "name": "iPhone 9",
+          "count": 1,
+          "totalPrice": 477.8496
+        },
+        {
+          "image": "https://dummyjson.com/image/i/products/2/thumbnail.jpg",
+          "name": "iPhone X",
+          "count": 1,
+          "totalPrice": 737.7194
+        }
+      ],
+      "totalPrice": 1215.569,
+      "id": 3
     }
   ],
   "addproducts": [
@@ -398,6 +647,14 @@
       "confirmpassword": "omar123",
       "role": "user",
       "id": 36
+    },
+    {
+      "username": "kkkkk",
+      "email": "omar@gmail.com",
+      "password": "omar123",
+      "confirmpassword": "omar123",
+      "role": "user",
+      "id": 37
     }
   ]
 }

@@ -1,0 +1,62 @@
+$background_color:#f7f7f7;
+$brand_color:#1363DF;
+#main{
+    background-color: $background_color;
+    font-family: 'Nunito', sans-serif;
+    .add-product{
+        .form{
+            .icon{
+                margin-right: 10px;
+                width: 50px;
+                height: 50px;
+                line-height: 50px;
+                background: #34a957;
+                border-radius: 50%;
+                color: #FFF;
+                text-align: center;
+            }
+            .product-images{
+                .upload-images{
+                    border: 2px dashed #444;
+                }
+                .remove-image{
+                    position: absolute;
+                    right: 10px;
+                    top: 10px;
+                    width: 25px;
+                    height: 25px;
+                    line-height: 25px;
+                    background: #ea2236;
+                    border-radius: 50%;
+                    color: #FFF;
+                    text-align: center;
+                }   
+            }
+        }
+    }
+   
+
+}
+//special heading
+.special-heading{
+    &:after{
+        content:"";
+        width: 75px;
+        height: 3px;
+        background-color: $brand_color;
+        display: block;
+        margin-top: 10px;
+        
+   
+  
+
+    }
+}
+// breadCrumb
+.breadcrumb  {
+    background:none !important;
+}
+.breadcrumb .breadcrumb-item a{
+    text-decoration: none;
+    background:none;
+}

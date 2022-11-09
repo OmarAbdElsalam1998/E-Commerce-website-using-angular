@@ -1,4 +1,4 @@
-<main class="show-products">
+<main class="show-products pb-5">
     <!-- Start breadcrumb -->
     <section class="breadcrumb">
         <div class="container">
@@ -33,14 +33,14 @@
                                                 <img class="img-fluid" [src]="product.thumbnail" >
                                             </div>
                                             <div class="product-operations d-flex">
-                                                <div class="add-to-cart p-3" (click)="addToCart(product.id)" >
+                                                <div class="add-to-cart p-3" (click)="addToCart(product.id,product.productId)" >
                                                     <i class="fa-light fa-cart-shopping fa-2x"></i>
                                                 </div>
                                                 <div class="delete p-3" (click)="removeFromFavourite(product.id)" >
                                                     <i class="fa-regular fa-trash-can fa-2x"></i>
                                                 </div>                                               
                                             
-                                                <div class="details p-3 " (click)="seeDetails(product.id)" >
+                                                <div class="details p-3 " (click)="seeDetails(product.productId)" >
                                                     <i class="fa-light fa-arrow-right fa-2x"></i>  
                                                 </div>
                                             </div>

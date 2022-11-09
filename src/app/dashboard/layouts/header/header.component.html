@@ -1,0 +1,52 @@
+
+<header id="header" class="fixed-top d-flex align-items-center bg-white p-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3">
+                <div class="brand d-flex align-items-center justify-content-between">
+                    <a [routerLink]="['/dashboard']" routerLinkActive="router-link-active" class="d-flex align-items-center ustify-content-between">
+                        <img src="../../../../assets/images/logo.png" class="img-fluid" style="width:40px;height:40px">
+                        <span class="brand-name d-none d-md-block">Market</span>
+                    </a> 
+                    <i class="fa-regular fa-bars-sort fa-2x" (click)="toggleSidebar()"></i>
+                </div>
+            </div>
+            <div class="col-4">
+                
+            </div>
+            <div class="col-5">
+                <div class="d-flex algn-items-center justify-content-end">
+                    <ul class="list-unstyled d-flex align-items-center  m-0">
+                        <li class="nav-item dropdown px-3 position-relative">
+                            <span class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-regular fa-bell fa-lg"></i>
+                            </span>
+                            <ul class="dropdown-menu">
+                              <li class=" dropdown-item PS-3"><i class="fa-regular fa-user"></i> Guest</li>
+                              <li class=" dropdown-item PS-3"><i class="fa-regular fa-user"></i> Guest</li>
+                              <li class=" dropdown-item PS-3"><i class="fa-regular fa-user"></i> Guest</li>
+                              <li class=" dropdown-item PS-3"><i class="fa-regular fa-user"></i> Guest</li>
+
+                              
+                            </ul>
+                          </li>
+                          <li class="nav-item dropdown px-3 position-relative">
+                            <img src="../../../../assets/images/person.jpg" class="img-fluid dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false" style="width:40px;height:40px">
+                            <ul class="dropdown-menu">
+                              <li class=" dropdown-item PS-3"><i class="fa-regular fa-user"></i> Guest</li>
+                              <li class=" dropdown-item PS-3"><i class="fa-regular fa-user"></i> Guest</li>
+                              <li class=" dropdown-item PS-3"><i class="fa-regular fa-user"></i> Guest</li>
+                              <li class=" dropdown-item PS-3"><i class="fa-regular fa-user"></i> Guest</li>
+                              
+                              
+                            </ul>
+                          </li>
+                        </ul>
+
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+</header>

@@ -1,4 +1,4 @@
-<main>
+<main class="pb-5">
     <!-- Start breadcrumb -->
     <section class="breadcrumb">
         <div class="container">
@@ -96,7 +96,7 @@
                                 <div class="form-check py-2">
                                     <input formControlName="subscribewhenreciving" (click)="resetvisaValidation()" name="chkOffers" class="form-check-input" type="radio" value="" id="receive" >
                                     <label class="form-check-label" for="receive">
-                                        Paiement when recieving
+                                        Pay when recieving
                                     </label>
                                   </div>
                                   <div class="form-check py-2">
@@ -111,7 +111,7 @@
 
                                 <div class="d-flex">
                                     <div class="form-group w-50 m-2">
-                                        <label for="lastName" class="form-label fs-5 fw-bold"  >Card Nolder </label>
+                                        <label for="lastName" class="form-label fs-5 fw-bold"  >Card Holder </label>
                                         <input formControlName="cardholder"  [class.is-invalid]="cardholder?.invalid && cardholder?.touched"  type="text" class="form-control " id="lastName" placeholder="">
                                         <small class="text-danger" *ngIf="cardholder?.invalid && cardholder?.touched"> Card Holder is required</small> 
                                     </div>
@@ -156,15 +156,15 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let item of newCartItems;index as i">
+                          <tr *ngFor="let item of newCartItems;index as i" >
                             <td><img style="width: 100px;height: 100px;" [src]="item.image"></td>
                             <td>{{item.name}}</td>
                             <td>{{item.count}}</td>
-                            <td>{{item.totalPrice}}</td>
+                            <td>{{item.totalPrice |number:'1.1-2'}}</td>
 
                           </tr>
                           <tr>
-                            <td colspan="4"> Total :{{totalPriceOfAllItems}}</td>
+                            <td colspan="4"> Total :{{totalPriceOfAllItems |number:'1.1-2'}}</td>
                           </tr>
                         </tbody>
                       </table>

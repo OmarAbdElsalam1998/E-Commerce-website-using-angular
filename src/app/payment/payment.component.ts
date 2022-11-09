@@ -14,7 +14,7 @@ export class PaymentComponent implements OnInit {
   ckecked: boolean = false;
   cartItems:any;
   newCartItems:any=[];
-  totalPriceOfAllItems=0.0;
+  totalPriceOfAllItems=0;
   title="payment";
 
   constructor(private fb: FormBuilder, private router: Router, 
@@ -106,11 +106,12 @@ export class PaymentComponent implements OnInit {
   //Add 'implements AfterViewInit' to the class.
   for(let data of this.cartItems){
     console.log(data)
-    var totalpriceOfoneItem=parseFloat(data.price)-(parseFloat(data.price)*(parseFloat(data.discount)/100))*parseFloat(data.count);
+    var totalpriceOfoneItem=(parseFloat(data.price)-(parseFloat(data.price)*(parseFloat(data.discount)/100)))*parseFloat(data.count);
        console.log(totalpriceOfoneItem)
        var obj={image:data.thumbnail,name:data.title,count:data.count,totalPrice:totalpriceOfoneItem}
       this.newCartItems.push(obj);
       this.totalPriceOfAllItems+=totalpriceOfoneItem;
+      
     }
  }
   setvisaValidation() {
@@ -134,7 +135,7 @@ export class PaymentComponent implements OnInit {
 }
 addorder(){
   this.paymentForm.value.itemsList=this.newCartItems;
-  this.paymentForm.value.total=this.totalPriceOfAllItems;
+  this.paymentForm.value.totalPrice=this.totalPriceOfAllItems;
   console.log(this.paymentForm.value);
   this.ProductService.saveorder(this.paymentForm.value)
     .subscribe(data => {

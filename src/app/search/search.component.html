@@ -36,7 +36,7 @@
 
 
 
-<main class="show-products">
+<main class="show-products pb-5">
     <!-- Start breadcrumb -->
     <section class="breadcrumb">
         <div class="container">
@@ -249,7 +249,7 @@
                             <div class="row">
                                <span>Results ({{productsList?.total}})</span>
                                 <!--Start Product  -->
-                                <div  class="col-md-6 col-lg-4" *ngFor="let product of productsList?.products;index as i">
+                                <div  class="col-md-6 col-lg-4" *ngFor="let product of productsList?.products;index as i" >
                                     <div class="product-box p-2 mb-3">
                                         <div class="product">
                                             <div class="overlay"></div>
@@ -260,7 +260,7 @@
                                                 <div class="add-to-cart p-3"(click)="addToCart(product.id)" >
                                                     <i class="fa-light fa-cart-shopping fa-2x"></i>
                                                 </div>
-                                                <div class="save p-3 ">
+                                                <div class="save p-3 " (click)="addToFavorites(product.id)">
                                                     <i class="fa-light fa-heart fa-2x"></i>
                                                 </div>
                                                 <div class="details p-3 " (click)="seeDetails(product.id)" >
@@ -280,7 +280,7 @@
                                             </div>
                                             <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
                                                 <span class="discount">{{product.discountPercentage/100  | percent }} OFF</span>
-                                                <span class="rate "><i class="fa-solid fa-star-sharp"></i>{{product.rating}} <span>(21)</span></span>
+                                                <span class="rate "><i class="fa-solid fa-star-sharp"></i>{{product.rating}} </span>
                                                 
                                             </div> 
                                         </div>

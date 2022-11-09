@@ -1,0 +1,29 @@
+.active-super-link{
+    background-color: #efefef;
+   }
+.active-sub-link{
+    color:red;
+}
+.sidebar{
+    z-index: 1;
+    .sidebar-nav{
+        
+        .nav-item{
+           .nav-link,
+           .dropdown{
+            padding: 10px;
+            margin-bottom: 11px;
+            display: flex;
+            align-items: center;
+            font-size: 1.4rem;
+             &:active{
+                background-color: #EEE;
+             }
+           }
+            a{
+                text-decoration: none;
+                color: rgb(32, 29, 29);
+            }
+        }
+    }
+}

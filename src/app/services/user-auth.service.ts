@@ -18,7 +18,7 @@ export class UserAuthService {
    }
 
 
-  logIn(username:any,password:string,role:string){
+  logIn(username:any,password:string,role:string="user"){
     let token="12345";
     localStorage.setItem("token",token);
     this.isLoogedSubject.next(true);

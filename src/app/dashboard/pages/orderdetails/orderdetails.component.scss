@@ -1,0 +1,40 @@
+#main{
+    font-family: 'Nunito', sans-serif;
+
+    .order-details{
+        box-shadow: 0 0 15px #c2bdbdd9;
+
+        h2{
+            font-weight: 600;
+            color:red;
+        }
+
+        .order-shipping-info{
+            .box{
+                overflow: hidden;
+                .heading{
+                    background-color: #eee;
+                    .icon i{
+                        padding: 10px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background: #1d51c1;
+                        border-radius: 50%;
+                        color: #FFF;
+                    }
+                }
+            }
+           
+        }
+    }
+
+}
+// breadCrumb
+.breadcrumb  {
+    background:none !important;
+}
+.breadcrumb .breadcrumb-item a{
+    text-decoration: none;
+    background:none;
+}

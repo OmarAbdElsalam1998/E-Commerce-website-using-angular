@@ -42,6 +42,9 @@
                                                 <small class="text-danger" *ngIf="userPassword?.errors?.['required']">Password is Required</small>
                                                 <small class="text-danger" *ngIf="userPassword?.errors?.['pattern']">Password should be in form like (capital & small letters ,at least 6 characters and maximum 32 characters)</small>
                                             </div>
+                                            <div *ngIf="errorLogin" class="text-center">
+                                                <small class="text-danger">Invalid Name Or Password</small>
+                                            </div>
     
                                             <span class="show-password"><i class="fa-light fa-eye-slash fa-fw"></i></span>
                                             <!-- <span (click)="passwordShowHide()" class="show-password"><i class="fa-light fa-eye-slash fa-fw"></i></span> -->

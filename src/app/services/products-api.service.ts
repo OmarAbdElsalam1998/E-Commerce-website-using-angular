@@ -55,12 +55,6 @@ export class ProductsApiService {
   }
 
 
-//  addToCart(product: any) {
-//    this.items.push(product);
-//     localStorage.setItem('session',JSON.stringify(product));
-//     console.log(localStorage.getItem('session'));
-//     this.saveCart();
-//  }
 
 // Add products to cart
  addToCart(product: any) {

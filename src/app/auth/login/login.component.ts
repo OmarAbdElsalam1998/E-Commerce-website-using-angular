@@ -13,6 +13,7 @@ import { userLogin } from '../userLogin';
 })
 export class LoginComponent implements OnInit {
   title="Sign IN";
+  errorLogin=false;
 
   constructor(
     private titleService:Title ,
@@ -73,7 +74,7 @@ export class LoginComponent implements OnInit {
     }
     )
     
-    let checkUser=this.usersArr?.filter((user:any)=>
+    var checkUser=this.usersArr?.filter((user:any)=>
     user.email== this.userEmail?.value && user.password ==this.userPassword?.value
     )
     console.log(checkUser)
@@ -86,6 +87,11 @@ export class LoginComponent implements OnInit {
       this.router.navigate([""])
 
     }
+    else{
+          this.errorLogin=true;
+    }
+
+    
 
 
 

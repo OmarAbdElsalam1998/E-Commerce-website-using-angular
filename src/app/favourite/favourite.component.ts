@@ -34,9 +34,9 @@ favouriteList:any;
      this.router.navigate(["products/",id]);
   }
 
-  addToCart(index:any){
+  addToCart(index:any,productId:any){
     
-    this.cartService.getProductById(index).subscribe(res=>{
+    this.cartService.getProductById(productId).subscribe(res=>{
       this.item=res;
       console.log(res);
       console.log(this.item)

@@ -1,0 +1,28 @@
+*{
+    box-sizing: border-box;
+}
+.active-display-mode{
+    color: #FFF;
+    background-color: rgb(53, 32, 211);
+}
+#main{
+    .products{
+        .products-header{
+        .search-box{
+            width:300px;
+            input{
+                border: none;
+                outline: none;
+            }
+        }
+        }
+    }
+}
+// breadCrumb
+.breadcrumb  {
+    background:none !important;
+}
+.breadcrumb .breadcrumb-item a{
+    text-decoration: none;
+    background:none;
+}

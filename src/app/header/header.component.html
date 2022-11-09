@@ -22,7 +22,7 @@
                       </ul>
                         <button class="btn btn-primary input-group-text" (click)="search(this)">Go</button> -->
 
-                        <button class="btn btn-primary input-group-text" (click)="search(searchKeyword)">Go</button>
+                        <button class="btn btn-primary input-group-text" (click)="search(searchKeyword)"><i class="fa fa-search"></i></button>
 
                     </div>
                 </div>
@@ -36,12 +36,12 @@
                                 <i class="fa-light fa-user fa-2x"></i>
                             </a>
                             <ul class="dropdown-menu">
-                              <li [hidden]="isLoggedIn" class="PS-3">Guest</li>
-                              <li [hidden]="!isLoggedIn" >{{username}}</li>
-                              <li ><a class="dropdown-item "  routerLink="/dashboard/addProduct" routerLinkActive="router-link-active">Dashboard</a></li>
+                              <li [hidden]="isLoggedIn" class=" dropdown-item PS-3"><i class="fa-regular fa-user"></i> Guest</li>
+                              <li [hidden]="!isLoggedIn"  class=" dropdown-item PS-3" ><i class="fa-regular fa-user pe-1"></i>{{ username}}</li>
+                              <li ><a class="dropdown-item "  routerLink="/dashboard" routerLinkActive="router-link-active"><i class="fa-solid fa-chart-line fa-1x"></i> Dashboard</a></li>
 
-                              <li [hidden]="isLoggedIn"><a class="dropdown-item "  routerLink="/auth/login" routerLinkActive="router-link-active">Sign In</a></li>
-                              <li [hidden]="!isLoggedIn" style="cursor:pointer" (click)="logOut()">LogOut</li>
+                              <li [hidden]="isLoggedIn"><a class="dropdown-item"  routerLink="/auth/login" routerLinkActive="router-link-active"><i class="fa-light fa-right-to-bracket"></i> Sign In</a></li>
+                              <li [hidden]="!isLoggedIn" class="dropdown-item "  style="cursor:pointer" id="liveToastBtn" (click)="logOut()"><i class="fa-light fa-arrow-right-from-bracket"></i> LogOut</li>
                               
                             </ul>
                           </li>
@@ -58,6 +58,19 @@
                     </ul>
                 </div>
             </div>
+            <!-- <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div class="toast-header">
+                    <img src="..." class="rounded me-2" alt="...">
+                    <strong class="me-auto">Bootstrap</strong>
+                    <small>11 mins ago</small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                  </div>
+                  <div class="toast-body">
+                    Hello, world! This is a toast message.
+                  </div>
+                </div>
+            </div> -->
         </div>
     </div>
 </div>

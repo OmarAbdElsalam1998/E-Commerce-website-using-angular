@@ -1,0 +1,89 @@
+<main id="main" class="p-md-5 py-5">
+    <div class="container">
+           <!-- Start breadcrumb -->
+     <section class="breadcrumb ">
+        <div class="d-flex align-items-center justify-content-start  rounded my-3">
+            <nav aria-label="breadcrumb ">
+                <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item d-flex align-items-center justify-content-between"><a [routerLink]="['/dashboard']" routerLinkActive="router-link-active" >
+                    <i class="fa-solid fa-gauge-min fa-lg pe-2"></i> <span class="fw-bold">dashboard</span></a> 
+                </li>
+                <li class="breadcrumb-item d-flex align-items-center justify-content-between"><a [routerLink]="['/dashboard/orders']" routerLinkActive="router-link-active" >
+                     <span class="fw-bold">Orders</span></a> 
+                </li>
+                <li class="breadcrumb-item active fw-bold">Orders</li>
+                
+                </ol>
+            </nav>
+         </div>
+    </section>
+    
+    <!-- end breadcrumb -->
+        <h2 class="">Order Details</h2>
+
+        <div class="order-details p-4  ">
+            <div class="order-action bg-white my-2">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="order-date-id">
+                            <div class="d-flex align-items-center">
+                                <i class="fa-regular fa-calendar pe-2"></i>
+                                <span>wed,Agu 12,2022,4:44 pm</span>
+                            </div>
+                            <div class="order-id">
+                                <span>8349495</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        dddd
+                    </div>
+                </div>
+            </div>
+            <div class="order-shipping-info  my-4">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="box customer rounded bg-white h-100">
+                            <div class="heading d-flex align-items-center p-2">
+                                <span class="icon me-3"><i class="fa-regular fa-user"></i></span>
+                                <span>Customer</span>
+                                
+                            </div>
+                            <p>ddddddddddd</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="box address rounded bg-white h-100">
+                            <div class="heading d-flex align-items-center p-2">
+                                <span class="icon me-3"><i class="fa-solid fa-truck-fast"></i></span>
+                                <span>Shipping</span>
+                                
+                            </div>
+                            <p>ddddddddddd</p>  
+
+                            <p>ddddddddddd</p>  
+
+                            <p>ddddddddddd</p>  
+
+                            <p>ddddddddddd</p>  
+
+v                        </div>
+                    </div>
+                    <div class="col-md-4">
+                       <div class="box paymentMethod rounded bg-white h-100">
+                        <div class="heading d-flex align-items-center p-2">
+                            <span class="icon me-3"><i class="fa-solid fa-money-bill-1-wave"></i></span>
+                            <span>Payment</span>
+                            
+                        </div>
+                        <div class="body p-2">
+                            <i class="fa-duotone fa-money-bill"></i>
+                        </div>     
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>

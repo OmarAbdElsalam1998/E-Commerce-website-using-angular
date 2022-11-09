@@ -97,17 +97,7 @@ saveproduct(product:Cart){
   
 }
 
-//   AddProductToCart(product:any){
-//     let productExists=false;
-//     for(let i in this.CartItemList)
-//       {
-//     if(this.CartItemList[i].id === product.id){
-//       this.CartItemList.qty++;
-//        productExists=true;
-//        break;
-// }
-// }
-//}
+
 
 
 

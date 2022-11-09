@@ -1,0 +1,53 @@
+*{
+    box-sizing: border-box;
+}
+.active-display-mode{
+    color: #FFF;
+    background-color: rgb(53, 32, 211);
+}
+#main{
+    .brands{
+        .brands-header{
+        .search-box{
+            width:300px;
+            input{
+                border: none;
+                outline: none;
+            }
+        }
+        }
+       
+        
+    }
+}
+@media (max-width:768px){
+    #main{
+        .brands{
+            .brands-header{
+            .search-box{
+                width:auto;
+                input{
+                    border: none;
+                    outline: none;
+                }
+            }
+            }
+           
+            
+        }
+    }
+    
+
+
+}
+.search-box{
+    width: 100px;
+}
+// breadCrumb
+.breadcrumb  {
+    background:none !important;
+}
+.breadcrumb .breadcrumb-item a{
+    text-decoration: none;
+    background:none;
+}

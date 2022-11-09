@@ -20,6 +20,10 @@ import { SearchComponent } from './search/search.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FavouriteComponent } from './favourite/favourite.component';
 import { SortPipe } from './pipes/sort.pipe';
+import { FooterComponent } from './footer/footer.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { Ng2OrderModule } from 'ng2-order-pipe';
 
 
 
@@ -37,7 +41,8 @@ import { SortPipe } from './pipes/sort.pipe';
    SpinnerComponent,
    SearchComponent,
    FavouriteComponent,
-   SortPipe
+   SortPipe,
+   FooterComponent
 
     
   ],
@@ -48,9 +53,11 @@ import { SortPipe } from './pipes/sort.pipe';
     CarouselModule,
     BrowserAnimationsModule,
     HttpClientModule,
-
+    NgxPaginationModule, 
     FormsModule,
     ReactiveFormsModule,
+    Ng2OrderModule,
+    Ng2SearchPipeModule
     
   ],
   providers: [Title,{provide:HTTP_INTERCEPTORS,useClass:loaderInterceptor,multi:true}],

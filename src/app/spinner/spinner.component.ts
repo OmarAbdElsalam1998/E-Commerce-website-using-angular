@@ -17,13 +17,13 @@ export class SpinnerComponent implements OnInit {
     private cartService:CartService ,
     private loginService:LoginService) { 
 
-    // this.userService.loader.subscribe(res=>{
-    //   this.loader=res;
-    // })
-    // this.productService.prloader.subscribe(res=>{
-    //   this.loader=res;
-    //   console.log(res)
-    // })
+    this.userService.loader.subscribe(res=>{
+      this.loader=res;
+    })
+    this.productService.prloader.subscribe(res=>{
+      this.loader=res;
+      console.log(res)
+    })
     this.cartService.cartLoader.subscribe(res=>{
       this.loader=res;
       console.log(res)

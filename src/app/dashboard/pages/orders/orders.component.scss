@@ -1,0 +1,130 @@
+$background_color:#f7f7f7;
+$brand_color:#1363DF;
+*{
+    box-sizing: border-box;
+}
+.status-selected{
+    border-color:  #0052ff !important;
+    background: #0d6efd0a !important;
+    position: relative;
+    transition: all .3s ease-in-out;
+    &::before{
+        content: ('\f00c');
+        font: var(--fa-font-solid);
+        color: #0052ff;
+
+        position: absolute;
+        right:5px;
+        top: 5px;
+    }
+}
+#main{
+    background-color: $background_color;
+    font-family: 'Roboto', sans-serif;
+    margin-top: 72px;
+    min-height: calc(100vh - 72px);
+    transition: all .4s ease-in-out;
+    .search-box{
+        width:300px;
+        background-color: #FFF;
+        #search{
+            border:none;
+            outline: none;
+        }
+       }
+    .order-status-carousel{
+        .order-status
+        {
+            width: 95%;
+            background-color: #FFF;
+            border: 2px solid transparent;
+            .status-icon-count {
+                .icon{
+                    padding: 10px;
+                    background: #1dc11d;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border: 10px solid #eaeaea;
+                    border-radius: 50%;
+                    color: #FFF;
+                }
+                .count{
+                    font-weight: bold;
+                    font-size: 1.5rem;
+                    color: #80d59c;
+
+                }
+            }
+            .status-type{
+                padding: 10px 0;
+                font-weight: bold;
+                color: #000000;
+                font-size: 20px;
+            }
+        }
+       
+    }
+    h2{
+        font-weight:500;
+
+    }
+
+    .order{
+        // box-shadow: 0 0 15px #c2bdbdd9;
+
+        .order-list{
+            .order-customer{
+                width: 70%;
+            }
+        }
+
+       
+    }
+    .table-responsive{
+        .react_table{
+            white-space: nowrap;;
+
+        }
+        &::-webkit-scrollbar{
+            width:5px;
+            height:9px;
+            
+        }
+        &::-webkit-scrollbar-thumb{
+            background-color: #1363DF;
+            border-radius:50px
+
+            
+        }
+    }
+}
+@media (max-width:576px){
+    .search-box{
+        width:100% !important;
+    }
+}
+//special heading
+.special-heading{
+    &:after{
+        content:"";
+        width: 75px;
+        height: 3px;
+        background-color: $brand_color;
+        display: block;
+        margin-top: 10px;
+        
+   
+  
+
+    }
+}
+
+// breadCrumb
+.breadcrumb  {
+    background:none !important;
+}
+.breadcrumb .breadcrumb-item a{
+    text-decoration: none;
+    background:none;
+}

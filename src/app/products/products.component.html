@@ -1,4 +1,4 @@
-<main class="show-products">
+<main class="show-products pb-5">
     <!-- Start breadcrumb -->
     <section class="breadcrumb">
         <div class="container">
@@ -19,7 +19,7 @@
 
     <section class="products-area">
         <div class="container">
-            <div class="sort-products d-flex justify-content-end mb-3">
+            <div class="sort-products d-flex justify-content-end align-items-center mb-3">
                 <!-- <div class="dropdown">
                     <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                      Sorting
@@ -30,13 +30,15 @@
                       <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                   </div> -->
-                  <select class="form-select form-sel ect-lg mb-3 w-auto" aria-label=".form-select-lg example" (change)="sort($event)">
+                  <select class="form-select form-sel ect-lg  w-auto" aria-label=".form-select-lg example" (change)="sort($event)">
                     <option [selected]="true" disabled slected="true">__Sorting__</option>
                     <option value="LowPrice">Show Low to High Price</option>
                     <option value="HighPrice">Show High to Low Price</option>
                     <option value="LowRate">Show Low to High Rate</option>
                     <option value="HighRate">Show High to Low Rate</option>
                   </select>
+                  <i class="fa-regular fa-grid fa-2x" (click)="changeDisplay('grid')"></i>
+                  <i class="fa-regular fa-list fa-2x"(click)="changeDisplay('list')"></i>
                  
             </div>
             <div class="row">
@@ -71,7 +73,7 @@
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
-                                            {{product.brand}}
+                                            {{product.brand }}
                                         </label>
                                       </div>
                                 </div>
@@ -83,10 +85,14 @@
                 <div class="col-lg-9">
                     <div class="products ">
                         <div class="products-list">
-                            <div class="row">
-                           
-                                <!--Start Product  -->
-                                <div  class="col-md-6 col-lg-4" *ngFor="let product of productsList?.products;index as i">
+                            <div  *ngIf="displayGrid;then gridView;else listView">
+                              
+                                
+                            </div>
+                            <ng-template #gridView>
+                                <div class="row">
+                                    <!--Start Product  -->                                    
+                                <div class="col-md-6 col-lg-4" *ngFor="let product of productsList?.products;index as i">
                                     <div class="product-box p-2 mb-3">
                                         <div class="product">
                                             <div class="overlay"></div>
@@ -111,8 +117,8 @@
                                   
                                             </div>
                                             <div class="product-price px-2 pt-3 d-flex align-items-center">
-                                               <span class="new-price">EGP <span >{{product.price}}</span></span>
-                                               <span class="old-price ">EGP {{product.price}}</span>
+                                                <span class="new-price">EGP <span >{{product.price-product.price*product.discountPercentage/100 |number :'1.1-2'}}</span></span>
+                                                <span class="old-price ">EGP {{product.price | number}}</span>
                                                
                                             </div>
                                             <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
@@ -124,11 +130,50 @@
                                     </div>
                                 </div>
                                 <!-- End Product -->
+                                </div>
                                 
+                              </ng-template>  
+                              <ng-template #listView>
+                               <!--Start Product  -->                                    
+                               <div  *ngFor="let product of productsList?.products;index as i">
+                                  <div class="product-box p-2 mb-3">
+                                      <div class="product">
+                                          <div class="overlay"></div>
+                                          <div class="product-image">
+                                              <img class="img-fluid" [src]="product.thumbnail" >
+                                          </div>
+                                          <div class="product-operations d-flex">
+                                              <div class="add-to-cart p-3"(click)="addToCart(product.id)" >
+                                                  <i class="fa-light fa-cart-shopping fa-2x"></i>
+                                              </div>
+                                              <div class="save p-3 "(click)="addToFavorites(product.id)">
+                                                  <i class="fa-light fa-heart fa-2x"></i>
+                                              </div>
+                                              <div class="details p-3 " (click)="seeDetails(product.id)" >
+                                                  <i class="fa-light fa-arrow-right fa-2x"></i>  
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="product-info py-3">
+                                          <div class="product-name px-2 pt-2">
+                                              <h4 class=" m-0" [title]="product.title">{{product.title}}</h4>
                                 
-                                
-                                
-                            </div>
+                                          </div>
+                                          <div class="product-price px-2 pt-3 d-flex align-items-center">
+                                              <span class="new-price">EGP <span >{{product.price-product.price*product.discountPercentage/100 |number :'1.1-2'}}</span></span>
+                                              <span class="old-price ">EGP {{product.price | number}}</span>
+                                             
+                                          </div>
+                                          <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
+                                              <span class="discount">{{product.discountPercentage/100  | percent }} OFF</span>
+                                              <span class="rate "><i class="fa-solid fa-star-sharp"></i>{{product.rating}} </span>
+                                              
+                                          </div> 
+                                      </div>
+                                  </div>
+                              </div>
+                              <!-- End Product -->
+                             </ng-template>  
                         </div>
                     
                     </div>

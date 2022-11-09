@@ -23,7 +23,6 @@ export class ProductDetailsComponent implements OnInit {
   selectedProduct:any;
   counterValue=1;
   ngOnInit(): void {
-    slider();
    //get product Id From url
    this.activatedRoute.paramMap.subscribe((params:ParamMap)=>{
     this.productId=params.get("id");
@@ -62,7 +61,7 @@ export class ProductDetailsComponent implements OnInit {
         {
         }
         );
-        this.router.navigate(['/cart']);
+        this.router.navigate(['/products']);
 
 
 
