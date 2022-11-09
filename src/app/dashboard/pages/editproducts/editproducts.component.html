@@ -1,0 +1,197 @@
+<main id="main">
+    <div class="add-product  ">
+        <div class="container  p-5">
+            <section class="breadcrumb ">
+                <div class="d-flex align-items-center justify-content-start  rounded my-3">
+                    <nav aria-label="breadcrumb ">
+                        <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item d-flex align-items-center justify-content-between"><a [routerLink]="['/dashboard']" routerLinkActive="router-link-active" >
+                            <i class="fa-solid fa-gauge-min fa-lg pe-2"></i> <span class="fw-bold">dashboard</span></a> 
+                        </li>
+                        <li class="breadcrumb-item active fw-bold">Add Product</li>
+                        
+                        </ol>
+                    </nav>
+                 </div>
+            </section>
+
+            <h2 class="fw-bold" >Add Product</h2>
+            <div class="form">
+                
+                <form [formGroup]="addproductForm"  (ngSubmit)="addproduct()">
+                    <div class="general-info rounded bg-white mb-3">
+                        <div class="custom-accordion p-4 collapsed d-flex justify-content-between align-items-center border-bottom"  data-bs-target="#general-info" data-bs-toggle="collapse">
+                            <div class="heading d-flex align-items-center">
+                                <div class="icon">
+                                    <i class="fa-light fa-calendar-lines-pen"></i>
+                                </div>
+                                <div class="">
+                                    <h4 class="fw-bold m-0">Billing Info</h4>
+                                    <span>Fil all information below</span>
+                                </div>
+                                
+                            </div>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div id="general-info" class="collapse p-4 " >
+                            <div class="d-flex">
+                                <div class="form-group w-50 m-2">
+                                    <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold"  >brand</label>
+                                    <input formControlName="brand" [class.is-invalid]=" brand?.invalid &&  brand?.touched"  type="text" class="form-control ">
+                                    <div *ngIf="(brand?.invalid &&  brand?.touched)">
+                                        <small class="text-danger" *ngIf=" brand?.errors?.['required']">Brand Name is required</small>
+                                    </div>
+                                </div>
+                                <div class="form-group w-50 m-2">
+                                    <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold">Category</label>
+                                    <select formControlName="category" [class.is-invalid]=" category?.invalid &&  category?.touched" class="form-select" aria-label="Default select example">
+                                        <div *ngIf="(category?.invalid &&  category?.touched)">
+                                            <small class="text-danger" *ngIf=" category?.errors?.['required']">Category Name is required</small>
+                                        </div>
+                                        <option selected>Open this select menu</option>
+                                        <option value="{{cat}}" *ngFor="let cat of categories">{{cat}}</option>
+                                      </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group  m-2">
+                                <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold" >Title</label>
+                                <input formControlName="title" [class.is-invalid]=" title?.invalid &&  title?.touched" type="text" class="form-control ">
+                                <div *ngIf="(title?.invalid &&  title?.touched)">
+                                    <small class="text-danger" *ngIf=" title?.errors?.['required']">Title Name is required</small>
+                                </div>
+                            </div>
+                             
+                            <div class="form-group m-2">
+                                <label  for="floatingTextarea" class="form-label fs-5 fw-bold" >description</label>
+                                <textarea formControlName="description" [class.is-invalid]=" description?.invalid &&  description?.touched" class="form-control" placeholder="description" id="floatingTextarea" ></textarea>
+                                <div *ngIf="(description?.invalid &&  description?.touched)">
+                                    <small class="text-danger" *ngIf=" description?.errors?.['required']">Description is required</small>
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="form-group w-50 m-2">
+                                    <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold" >number of items</label>
+                                    <input formControlName="numofitems"  [class.is-invalid]=" numofitems?.invalid &&  numofitems?.touched" type="number" class="form-control " >
+                                    <div *ngIf="(numofitems?.invalid &&  numofitems?.touched)">
+                                        <small class="text-danger" *ngIf=" numofitems?.errors?.['required']">numofitems is required</small>
+                                    </div>
+                                </div>
+                                <div class="form-group w-50 m-2">
+                                    <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold">Price</label>
+                                    <input formControlName="price" [class.is-invalid]=" price?.invalid &&  price?.touched" type="number"  class="form-control ">
+                                    <div *ngIf="(price?.invalid &&  price?.touched)">
+                                        <small class="text-danger" *ngIf=" price?.errors?.['required']">Price Name is required</small>
+                                        <small class="text-danger" *ngIf="price?.errors?.['min']">Price must be positive number </small>
+        
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="form-group m-2 py-3">
+                                <div class="form-check" >
+                                    <input (click)="clicked()" (click)="setDiscountValidation()" name="chkOffers" formControlName="subscribe" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label  class="form-check-label" for="flexCheckDefault">
+                                      add discount
+                                    </label>
+                                  </div>
+                            </div>
+                           
+                            <div class="form-group  m-2" *ngIf="ckecked">
+                                <label  for="exampleFormControlInput1" class="form-label fs-5 fw-bold">discount</label>
+                                <input formControlName="discound"[class.is-invalid]="discound?.invalid && discound?.touched" type="number"  class="form-control ">
+                                <small class="text-danger" *ngIf="discound?.invalid && discound?.touched"> Discount must be in percent</small> 
+                            </div>
+                            
+    
+                        </div>
+                    </div> 
+                    <div class="product-images rounded bg-white mb-3">
+                        <div class="custom-accordion p-4 collapsed d-flex justify-content-between align-items-center border-bottom"  data-bs-target="#product-images" data-bs-toggle="collapse">
+                            <div class="heading d-flex align-items-center">
+                                <div class="icon">
+                                    <i class="fa-regular fa-image"></i>
+                                </div>
+                                <div class="">
+                                    <h4 class="fw-bold m-0">Product Images</h4>
+                                    <span>Fil all information below</span>
+                                </div>
+                                
+                            </div>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div id="product-images" class="collapse p-4" >
+                            <div class="mb-3">
+                                
+                                <div class="upload-images p-5 rounded  text-center" (click)="selectImage.click()">
+                                    <i class="fa-regular fa-cloud-arrow-up fa-3x"></i>
+                                    <p> upload Image</p>
+                                </div>
+                                <div class="selected-image p-2 d-flex algn-items-center " *ngIf="productImages">
+                                    <div class="image position-relative" *ngFor="let img of productImages;index as i">
+                                        <span class="remove-image d-block position-absolute" (click)="removeProductImage(i)"><i class="fa-solid fa-close"></i></span>
+                                        <img   [src]="img" title="Category Picture" height="150px" width="150px" />
+                                    </div>
+        
+                                </div>
+                                
+                                <input
+                                  type="file"
+                                  id="img"
+                                  multiple
+                                  style="display:none"
+                                  accept="image/*"
+                                  #selectImage
+                                  (change)="onSelectImageFromFile($event)"
+                                  formControlName="image" 
+                                   [class.is-invalid]=" image?.invalid &&  image?.touched" 
+                                />
+                                <div *ngIf="(image?.invalid &&  image?.touched)">
+                                    <small class="text-danger" *ngIf=" image?.errors?.['required']">Image is required</small>
+                                </div>
+                            </div>
+    
+                        </div>
+                    </div> 
+                    <div class="overview rounded bg-white">
+                        <div class="custom-accordion p-4 collapsed d-flex justify-content-between align-items-center border-bottom"  data-bs-target="#overview" data-bs-toggle="collapse">
+                            <div class="heading d-flex align-items-center">
+                                <div class="icon">
+                                    <i class="fa-light fa-layer-group"></i>
+                                </div>
+                                <div class="">
+                                    <h4 class="fw-bold m-0">Overview</h4>
+                                    <span>Fil all information below</span>
+                                </div>
+                                
+                            </div>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div id="overview" class=" collapse p-4" >
+                            
+                             
+                            <div class="form-group m-2">
+                                <label  for="floatingTextarea" class="form-label fs-5 fw-bold" >Overview</label>
+                                <textarea style="height: 150px" formControlName="description" [class.is-invalid]=" description?.invalid &&  description?.touched" class="form-control" placeholder="overView" id="floatingTextarea" ></textarea>
+                                <!-- <div *ngIf="(description?.invalid &&  description?.touched)">
+                                    <small class="text-danger" *ngIf=" description?.errors?.['required']">Description is required</small>
+                                </div> -->
+                            </div>
+                            
+                            
+    
+                        </div>
+                    </div> 
+                    
+                    
+                    
+                    <div class="form-group m-2 py-3 ">
+                        <button [disabled]="addproductForm.invalid" class="btn btn-success ">Add Product</button>
+
+                    </div>
+                    <!-- {{newPrd | json}} -->
+                </form>
+            </div>
+        </div>
+    </div>
+</main>

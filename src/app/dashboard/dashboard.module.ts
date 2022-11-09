@@ -18,6 +18,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { ProductslistComponent } from './pages/productslist/productslist.component';
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { BrandsComponent } from './pages/brands/brands.component';
+import { EditproductsComponent } from './pages/editproducts/editproducts.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { BrandsComponent } from './pages/brands/brands.component';
     OrderdetailsComponent,
     ProductslistComponent,
     CategoriesComponent,
-    BrandsComponent
+    BrandsComponent,
+    EditproductsComponent
   ],
   imports: [
     CommonModule,

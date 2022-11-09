@@ -19,7 +19,9 @@ export class ProductslistComponent implements OnInit {
   addProduct(){
     this.router.navigate(['/dashboard/addProduct']);
   }
-  
+  editProduct(){
+    this.router.navigate(['dashboard/editProduct/',11])
+  }
   displayMode(value:string){
     if(value=="grid"){
       this.displayGrid=true;

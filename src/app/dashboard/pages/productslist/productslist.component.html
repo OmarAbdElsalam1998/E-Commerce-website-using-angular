@@ -90,7 +90,7 @@
                                 <span>$120</span>
                             </div>
                             <div class="actions d-flex align-items-center justify-content-between w-100">
-                                <button class="btn btn-default border rounded  me-1 w-50" ><i class="fa fa-edit pe-2"></i>Edit</button>
+                                <button (click)="editProduct() "class="btn btn-default border rounded  me-1 w-50" ><i class="fa fa-edit pe-2"></i>Edit</button>
                                 <button (click)="showConfirmAlert()"  class="btn btn-default border rounded ms-1 w-50" style="color: rgb(220, 31, 31);"><i class="fa fa-trash pe-2 "></i>Delete</button>
                             </div>
 
@@ -99,41 +99,7 @@
                     <!-- End Product -->
 
                 </div>
-            <!-- <div class="table-responsive">
-                    <table class="react_table table  table-hover scroll text">
-                        <thead>
-                        <tr>
-                            <th (click)="sort('id')">ID &nbsp;<i class="fa-solid fa-sort"></i></th>
-                            <th (click)="sort('id')">Date &nbsp;<i class="fa-solid fa-sort"></i></th>
-                            <th (click)="sort('firstname')">Customer Name &nbsp;<i class="fa-solid fa-sort"></i></th>
-                            <th (click)="sort('totalPrice')">Total &nbsp;<i class="fa-solid fa-sort"></i></th>
-                            <th (click)="sort('id')">Payment Status &nbsp;<i class="fa-solid fa-sort"></i></th>
-                            <th (click)="sort('id')">Action &nbsp;<i class="fa-solid fa-sort"></i></th>
-                            
-                        </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let order of copyOrders | orderBy: key: reverse | paginate : {
-                                itemsPerPage: 5,
-                                currentPage: page,
-                                totalItems: copyOrders.length
-                            };">
-                                <td>{{order.id}}</td>
-                                <td>09jul,2022,4:44  pm</td>
-                                <td>{{order.firstname+ " "+order.lastname}}</td>
-                                <td>{{order.totalPrice}}</td>
-                                <td><span class="badge badge-pill bg-pill font-size-12 bg-soft-success badge bg-success">paid</span></td>
-                                <td class="text-center"><a class="btn btn-primary py-1" [routerLink]="['/dashboard/ordersdetails']" routerLinkActive="router-link-active" >view</a></td>
-                            </tr>
-                            <tr *ngIf="copyOrders.length==0">
-                                <td class="text-center" colspan="6">NO Orders Found</td>
-                                
-                            </tr>
-                        </tbody>
-                        
-                    </table>
-                    <pagination-controls  (pageChange)="page=($event)" class="text-end py-2"></pagination-controls>
-                </div> -->
+           
 
             </div>
         </div>
