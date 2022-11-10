@@ -11,34 +11,34 @@ import { newProduct } from '../../newproduct';
   styleUrls: ['./productslist.component.scss']
 })
 export class ProductslistComponent implements OnInit {
- displayGrid:boolean=true;
+  displayGrid: boolean = true;
 
-  constructor(private router:Router,private productapi:ProductsApiService) { }
-   productdata:any=[];
+  constructor(private router: Router, private productapi: ProductsApiService) { }
+  productdata: any = [];
   ngOnInit(): void {
-    this.productapi.getProduct().subscribe((allData)=>{
-           console.log(allData);
-           this.productdata=allData;
+    this.productapi.getProduct().subscribe((allData) => {
+      console.log(allData);
+      this.productdata = allData;
     });
   }
-  search(event:any){
+  search(event: any) {
 
   }
-  addProduct(){
+  addProduct() {
     this.router.navigate(['/dashboard/addProduct']);
   }
- 
-  displayMode(value:string){
-    if(value=="grid"){
-      this.displayGrid=true;
+
+  displayMode(value: string) {
+    if (value == "grid") {
+      this.displayGrid = true;
     }
-    else{
-      this.displayGrid=false;
+    else {
+      this.displayGrid = false;
     }
 
   }
-  
-  showConfirmAlert(id:number){
+
+  showConfirmAlert(id: number) {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
@@ -46,7 +46,7 @@ export class ProductslistComponent implements OnInit {
       },
       buttonsStyling: true
     })
-    
+
     swalWithBootstrapButtons.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -58,24 +58,23 @@ export class ProductslistComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.productapi.deleteProduct(id)
-    .subscribe({
-      next:(res)=>{
-        this.ngOnInit();
-      },
-      error:()=>{
-        console.log("Error" , error)
-      }
-    })
-        
+          .subscribe({
+            next: (res) => {
+              this.ngOnInit();
+            },
+            error: () => {
+              console.log("Error", error)
+            }
+          })
         swalWithBootstrapButtons.fire({
-        
-          title:  'Deleted!',
+
+          title: 'Deleted!',
           text: "You won't be able to revert this!",
-          icon:'success' ,
-          showConfirmButton:false,
-          timer:1000
-          
-         })
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 1000
+
+        })
       } else if (
         /* Read more about handling dismissals below */
         result.dismiss === Swal.DismissReason.cancel

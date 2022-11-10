@@ -10,6 +10,7 @@ import { EditproductsComponent } from './pages/editproducts/editproducts.compone
 import { OrderdetailsComponent } from './pages/orderdetails/orderdetails.component';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { ProductslistComponent } from './pages/productslist/productslist.component';
+import { UsersComponent } from './pages/users/users.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
     {path:"editProduct/:id",component:EditproductsComponent,canLoad:[AdminGuard]},
     {path:"categories",component:CategoriesComponent,canLoad:[AdminGuard]},
     {path:"brands",component:BrandsComponent,canLoad:[AdminGuard]},
+    {path:"users",component:UsersComponent,canLoad:[AdminGuard]},
     {path:"orders",component:OrdersComponent,canLoad:[AdminGuard]},
 
   ]},

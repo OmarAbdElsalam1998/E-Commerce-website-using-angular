@@ -1,16 +1,13 @@
 {
-  "favourite": [],
-  "cart": [
+  "favourite": [
     {
-      "productId": 2,
-      "title": "iPhone X",
-      "price": 899,
-      "thumbnail": "https://dummyjson.com/image/i/products/2/thumbnail.jpg",
-      "discount": 17.94,
-      "count": 1,
+      "productId": 97,
+      "title": "Metal Ceramic Flower",
+      "thumbnail": "https://dummyjson.com/image/i/products/97/thumbnail.jpg",
       "id": 1
     }
   ],
+  "cart": [],
   "orders": [
     {
       "firstname": "d",
@@ -349,6 +346,45 @@
       "sizes": [],
       "colors": [],
       "id": 5
+<<<<<<< HEAD
+=======
+    },
+    {
+      "brand": "f",
+      "category": "fragrances",
+      "title": "r",
+      "description": "r",
+      "numofitems": 1,
+      "price": 1,
+      "subscribe": false,
+      "discound": "",
+      "image": "C:\\fakepath\\20221012_000812.mp4",
+      "id": 6
+    },
+    {
+      "brand": "h",
+      "category": "home-decoration",
+      "title": "h",
+      "description": "h",
+      "numofitems": 3,
+      "price": 3,
+      "subscribe": false,
+      "discound": "",
+      "image": "C:\\fakepath\\freestocks-_3Q3tsJ01nc-unsplash.jpg",
+      "id": 7
+    },
+    {
+      "brand": "sdsd",
+      "category": "womens-bags",
+      "title": "sds",
+      "description": "sd",
+      "numofitems": 3,
+      "price": 44,
+      "subscribe": false,
+      "discound": "",
+      "image": "C:\\fakepath\\laura-chouette-JoM9rbc_Rxg-unsplash.jpg",
+      "id": 8
+>>>>>>> 6b88b9dffee689764dd2b0dc25da40fa39b16303
     }
   ],
   "users": [

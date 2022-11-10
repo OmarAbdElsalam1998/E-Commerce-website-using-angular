@@ -15,7 +15,6 @@ export class EditproductsComponent implements OnInit {
   productImages:any=[];  
   categories:any;
   ckecked:boolean=false;
-  // newprd:newProduct=new newProduct(0,"","","","",0,0,0,'');
   message:boolean=false;
   
     constructor(private fb:FormBuilder,private catsrviece:ProductsApiService,

@@ -1,0 +1,209 @@
+<main id="main" class="p-md-5 py-5">
+    
+    <div class="container">
+         <!-- Start breadcrumb -->
+
+        <div class="heading d-flex align-items-center justify-content-between">
+            <section class="breadcrumb ">
+                <div class="d-flex align-items-center justify-content-start  rounded my-3">
+                    <nav aria-label="breadcrumb ">
+                        <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item d-flex align-items-center justify-content-between"><a [routerLink]="['/dashboard']" routerLinkActive="router-link-active" >
+                            <i class="fa-solid fa-gauge-min fa-lg pe-2"></i> <span class="fw-bold">dashboard</span></a> 
+                        </li>
+                        <!-- {{selectedcategoty}} -->
+                        <li class="breadcrumb-item active fw-bold">Users</li>
+                        
+                        </ol>
+                    </nav>
+                 </div>
+            </section>
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="fa-solid fa-plus pe-2"></i>New User
+            </button>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered ">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="exampleModalLabel">User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Form To Add Categories -->
+                        <form>
+                            <div class="mb-3">
+                              <label for="firstname" class="form-label fw-bold">First Name</label>
+                              <input type="text" class="form-control" id="firstname"  placeholder="First Name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="lastname" class="form-label fw-bold">Last Name</label>
+                                <input type="text" class="form-control" id="lastname"  placeholder="Last Name">
+                             </div>
+                         
+                            
+                            <div class="mb-3">
+                                <label for="email" class="form-label fw-bold">Email</label>
+                                <input type="text" class="form-control" id="email"  placeholder="Email">
+                              </div>
+                              <div class="mb-3">
+                                <label for="phone" class="form-label fw-bold">phone</label>
+                                <input type="text" class="form-control" id="phone"  placeholder="phone">
+                              </div>
+                           
+
+                            <div class="mb-3">
+                                <label  class="form-label fw-bold">user picture</label>
+                                <div class="upload-image p-2  rounded text-center"style="border:3px dashed #555" (click)="selectImage.click()">
+                                    <i class="fa-regular fa-cloud-arrow-up fa-3x"></i>
+                                    <p> upload Image</p>
+                                </div>
+                                <div class="selected-image py-2" *ngIf="userImageUrl">
+                                    <img [src]="userImageUrl" title="Category Picture" height="150px" width="150px" />
+
+                                </div>
+
+                                <input
+                                  type="file"
+                                  id="img"
+                                  multiple
+                                  style="display:none"
+                                  accept="image/*"
+                                  #selectImage
+                                  (change)="onSelect($event)"
+                                />
+                                
+                            </div>
+                            <div class="mb-3">
+                                <label for="userResponsibilities" class="form-label fw-bold">Responsibilities</label>
+                                <select class="form-control" id="userResponsibilities"(change)="addUserResponsibilities($event)">
+                                    <option disabled selected>Select</option>
+                                    <option>Add Products</option>
+                                    <option>Edit Products</option>
+                                    <option>Remove Products</option>
+                                    <option>Manage Orders</option>
+                                </select>
+
+                            </div>
+                            <div class="user-role p-3" *ngIf="userResponsipilities.length>0">
+                                <ul class="list-unstyled" >
+                                    <li class="tag  align-items-center" *ngFor="let res of userResponsipilities;index as i">
+                                      <span class="pe-3">{{res}}</span>
+                                      <Span style="cursor:pointer;" (click)="removeUserResponsibilities(i)"> <i class="fa-solid fa-close" ></i></Span>
+                                    </li>
+                                </ul> 
+                              </div>
+                              <div class="mb-3">
+                                <label for="password" class="form-label fw-bold">Password</label>
+                                <input type="password" class="form-control" id="password"  placeholder="Password">
+                              </div>
+                              <div class="mb-3">
+                                <label for="confirmPassword" class="form-label fw-bold">Confirm Password</label>
+                                <input type="password" class="form-control" id="confirmPassword"  placeholder="confirm Password">
+                              </div>
+                            
+                            <button type="submit" class="btn btn-primary px-4 w-100">Submit</button>
+                          </form>
+                    </div>
+                    
+                </div>
+                </div>
+            </div>
+
+        </div>
+        
+        <!-- end breadcrumb -->
+
+        
+
+        <div class="users  my-4 ">
+            <div class="users-header p-3 d-lg-flex align-items-center justify-content-between bg-white rounded">
+                
+                <h2 class="fw-bold text-md-center">Users <small class="fw-normal" style="font-size:1rem;">(100)</small></h2>
+                <div class="search-box d-flex align-items-center p-2 border rounded text-md-center" >
+                    <i class="fa-regular fa-search fa-1x pe-2"></i>
+                    <input id="search" placeholder="search" type="text" name="search" (keyup)="search($event)" >
+        
+                </div>
+                
+                
+               
+            </div>
+            <div class="users-list p-3">
+                <div class="row">
+                    <div class="col-md-4 col-lg-3">
+                        <div class="user rounded bg-white rounded overflow-hidden">
+                            <div class="header p-5 ">
+                            </div>
+                            <div class="user-image text-center  ">
+                                <img src="../../../../assets/images/person.jpg" style="width:100px;height:100px">
+                            </div>
+                            <div class="user-info text-center py-2">
+                                <span class="fw-bold fs-5">Omar Abd Elsalam</span>
+                            </div>
+                            <div class="actions d-flex align-items-center justify-content-between w-100 py-2">
+                                <button  data-bs-toggle="modal" data-bs-target="#exampleModal"(click)="userEdit() "class="btn btn-default  rounded  me-1 w-50"><i class="fa fa-edit pe-2"></i>Edit</button>
+                                <button (click)="showConfirmAlert()"  class="btn btn-default  rounded ms-1 w-50" style="color: rgb(220, 31, 31);"><i class="fa fa-trash pe-2 "></i>Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- <div class="col-md-6  col-lg-4 col-xl-3" *ngFor="let category of copyCategories |  paginate : {
+                        itemsPerPage: 30,
+                        currentPage: page,
+                        totalItems: copyCategories.length
+                    };">
+                         
+                        <div class="category rounded bg-light p-3 mb-3">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="category-image h-100">
+                                        <img style="height:100%;width: 100%;" src="../../../../assets/images/catrgories/laptops.jpg">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="category-info">
+                                        <div class="d-flex align-items-center justify-content-between border-bottom">
+                                            <div class="category-name p-3  ">
+                                        
+                                                <h2><i class="fa-solid fa-tag pe-2"></i>Electronics</h2>
+                                            </div>
+                                            <div class="category-action d-flex align-items-center justify-content-between ">
+                                                <span (click)="edit()" style="cursor:pointer"> 
+                                                    <i class="fa-light fa-solid fa-pen fa-lg px-3 "></i>
+                                                </span>
+                                                <span style="cursor:pointer">
+                                                    <i class="fa-solid fa-trash-can fa-lg px-3"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="sub-categories py-2">
+                                            <h4 class="fw-bold py-2 ">Sub Categories</h4>
+                                            <ul class="list-unstyled">
+                                                <li *ngFor="let subcategory of category.subCategories " class="act-tag">
+                                                    <span>{{subcategory}}</span>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div> -->
+
+                
+                
+               
+            
+
+            </div>
+        </div>
+    
+    </div>
+</main>
