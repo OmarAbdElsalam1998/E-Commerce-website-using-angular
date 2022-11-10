@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, TitleStrategy } from '@angular/router';
+import { error } from 'jquery';
+import { ProductsApiService } from 'src/app/services/products-api.service';
 import Swal from 'sweetalert2';
+import { newProduct } from '../../newproduct';
 
 @Component({
   selector: 'app-productslist',
@@ -9,9 +12,14 @@ import Swal from 'sweetalert2';
 })
 export class ProductslistComponent implements OnInit {
  displayGrid:boolean=true;
-  constructor(private router:Router) { }
 
+  constructor(private router:Router,private productapi:ProductsApiService) { }
+   productdata:any=[];
   ngOnInit(): void {
+    this.productapi.getProduct().subscribe((allData)=>{
+           console.log(allData);
+           this.productdata=allData;
+    });
   }
   search(event:any){
 
@@ -19,9 +27,7 @@ export class ProductslistComponent implements OnInit {
   addProduct(){
     this.router.navigate(['/dashboard/addProduct']);
   }
-  editProduct(){
-    this.router.navigate(['dashboard/editProduct/',11])
-  }
+ 
   displayMode(value:string){
     if(value=="grid"){
       this.displayGrid=true;
@@ -31,7 +37,8 @@ export class ProductslistComponent implements OnInit {
     }
 
   }
-  showConfirmAlert(){
+  
+  showConfirmAlert(id:number){
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
@@ -50,6 +57,16 @@ export class ProductslistComponent implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
+        this.productapi.deleteProduct(id)
+    .subscribe({
+      next:(res)=>{
+        this.ngOnInit();
+      },
+      error:()=>{
+        console.log("Error" , error)
+      }
+    })
+        
         swalWithBootstrapButtons.fire({
         
           title:  'Deleted!',
@@ -71,4 +88,19 @@ export class ProductslistComponent implements OnInit {
       }
     })
   }
+  // deleteProduct(id:number){
+  //  
+  //   this.productapi.deleteProduct(id)
+  //   .subscribe({
+  //     next:(res)=>{
+  //       // alert("product deleted succesfully")
+  //       this.ngOnInit();
+  //     },
+  //     error:()=>{
+  //       alert("Error while deleting thhe record")
+  //     }
+  //   })
+  // 
+  // }
 }
+

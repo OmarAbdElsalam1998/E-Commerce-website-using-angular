@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import { ProductsApiService } from 'src/app/services/products-api.service';
 import { newProduct } from '../../newproduct';
 
@@ -15,11 +15,12 @@ export class EditproductsComponent implements OnInit {
   productImages:any=[];  
   categories:any;
   ckecked:boolean=false;
-  newprd:newProduct=new newProduct("","","","",0,0,0,"");
+  // newprd:newProduct=new newProduct(0,"","","","",0,0,0,'');
+  message:boolean=false;
   
     constructor(private fb:FormBuilder,private catsrviece:ProductsApiService,
       private http: HttpClient ,private ProductService: ProductsApiService,
-       private router: Router) {
+       private router2: ActivatedRoute ,private router:Router) {
       
   
     }
@@ -34,13 +35,26 @@ export class EditproductsComponent implements OnInit {
     price:['',[Validators.required,Validators.min(0)]],
     subscribe:[false],
     discound:[''],
-    image:[this.productImages,Validators.required]
+    image:[this.productImages,Validators.required],
+    overview:['',Validators.required]
   });
   
     ngOnInit(): void {
       this.catsrviece.getcategories().subscribe(data=>{
         this.categories=data;
       },error=>{console.log(error)});
+      this.ProductService.getaddProductById(this.router2.snapshot.params['id']).subscribe((result:any)=>{
+        console.log(result);
+     this.addproductForm.controls['brand'].setValue(result['brand']);
+     this.addproductForm.controls['category'].setValue(result['category']);
+     this.addproductForm.controls['title'].setValue(result['title']);
+     this.addproductForm.controls['description'].setValue(result['description']);
+     this.addproductForm.controls['price'].setValue(result['price']);
+     this.addproductForm.controls['numofitems'].setValue(result['numofitems']);
+     this.addproductForm.controls['discound'].setValue(result['discound']);
+     this.productImages=result['images']
+     this.addproductForm.controls['overview'].setValue(result['overview']);
+      })
     }
     get brand()
     {
@@ -73,6 +87,10 @@ export class EditproductsComponent implements OnInit {
     {
       return this.addproductForm.get('image')
     }
+    get overview()
+  {
+    return this.addproductForm.get('overview')
+  }
     clicked(){
       this.ckecked =! this.ckecked;
     }
@@ -92,20 +110,25 @@ export class EditproductsComponent implements OnInit {
         }
       )
     }
-   addproduct(){
-    console.log(this.addproductForm.value);
-      this.ProductService.saveproduct(this.addproductForm.value)
+    Updateproduct(){
+      var newprd=new newProduct(this.brand?.value , this.category?.value ,this.title?.value,this.description?.value,this.numofitems?.value,this.price?.value,this.discound?.value,this.productImages,this.overview?.value,[],[]);
+      this.ProductService.putProduct(newprd,this.router2.snapshot.params['id'])
       .subscribe(data =>
         {
         // alert("Product added Successfully")
+        this.message=true;
             this.addproductForm.reset();
-            this.router.navigate(["products"])
+            // this.router.navigate(["products"])
           },
        error =>{
-          console.log("Error" , error)
+          alert("Error")
         }
         
         )
+   }
+   removemessage(){
+    this.message=false;
+    this.router.navigate(["dashboard/productslist"])
    }
   
    onSelectImageFromFile(event:any) {

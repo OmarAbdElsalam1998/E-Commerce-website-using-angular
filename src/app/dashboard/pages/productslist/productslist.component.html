@@ -19,7 +19,7 @@
                  </div>
             </section>
 
-            <button class="btn btn-success" (click)="addProduct()"> <i class="fa-solid fa-plus pe-2"></i>Add Product</button>
+            <button class="btn btn-success" (click)="addProduct()" > <i class="fa-solid fa-plus pe-2"></i>Add Product</button>
 
         </div>
         
@@ -76,22 +76,22 @@
                 
                
             </div>
-            <div class="products-list p-3">
-                <div class="row">
+            <div class="products-list p-3"   >
+                <div class="row" >
 
                     <!-- Start Product -->
-                    <div class="col-md-6  col-lg-4 col-xl-3">
-                        <div class="products-box border rounded p-2 text-center mb-2">
-                            <div class="product-img">
-                                <img src="../../../../assets/images/product.png" class="img-fluid">
+                    <div class=" col-md-6  col-lg-4 col-xl-3" *ngFor="let item of productdata"   >
+                        <div class="products-box border rounded p-2 text-center mb-2 " >
+                            <div class="product-img" >
+                                <img src={{item.images[0]}} class="img-fluid">
                             </div>
                             <div class="product-info py-2 text-md-start text-center">
-                                <h4 class="product-name fw-bold">Product name</h4>
-                                <span>$120</span>
+                                <h4 class="product-name fw-bold">{{item.title }}</h4>
+                                <span>{{item.price|currency}}</span>
                             </div>
                             <div class="actions d-flex align-items-center justify-content-between w-100">
-                                <button (click)="editProduct() "class="btn btn-default border rounded  me-1 w-50" ><i class="fa fa-edit pe-2"></i>Edit</button>
-                                <button (click)="showConfirmAlert()"  class="btn btn-default border rounded ms-1 w-50" style="color: rgb(220, 31, 31);"><i class="fa fa-trash pe-2 "></i>Delete</button>
+                                <button routerLink="/dashboard/editProduct/{{item.id}}" class="btn btn-default border rounded  me-1 w-50" ><i class="fa fa-edit pe-2"></i>Edit</button>
+                                <button (click)="showConfirmAlert(item.id)"  class="btn btn-default border rounded ms-1 w-50" style="color: rgb(220, 31, 31);"><i class="fa fa-trash pe-2 "></i>Delete</button>
                             </div>
 
                         </div>
