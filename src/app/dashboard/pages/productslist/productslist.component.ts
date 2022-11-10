@@ -57,15 +57,9 @@ export class ProductslistComponent implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-        this.productapi.deleteProduct(id)
-          .subscribe({
-            next: (res) => {
-              this.ngOnInit();
-            },
-            error: () => {
-              console.log("Error", error)
-            }
-          })
+       
+        this.deleteProduct(id);
+        
         swalWithBootstrapButtons.fire({
 
           title: 'Deleted!',
@@ -87,19 +81,18 @@ export class ProductslistComponent implements OnInit {
       }
     })
   }
-  // deleteProduct(id:number){
-  //  
-  //   this.productapi.deleteProduct(id)
-  //   .subscribe({
-  //     next:(res)=>{
-  //       // alert("product deleted succesfully")
-  //       this.ngOnInit();
-  //     },
-  //     error:()=>{
-  //       alert("Error while deleting thhe record")
-  //     }
-  //   })
-  // 
-  // }
+  deleteProduct(id:number){
+   
+    this.productapi.deleteProduct(id)
+    .subscribe({
+      next:(res)=>{
+        this.ngOnInit();
+      },
+      error:()=>{
+        console.log("Error",error)
+      }
+    })
+  
+  }
 }
 

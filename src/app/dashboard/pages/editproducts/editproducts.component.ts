@@ -42,7 +42,8 @@ export class EditproductsComponent implements OnInit {
       this.catsrviece.getcategories().subscribe(data=>{
         this.categories=data;
       },error=>{console.log(error)});
-      this.ProductService.getaddProductById(this.router2.snapshot.params['id']).subscribe((result:any)=>{
+
+     this.ProductService.getaddProductById(this.router2.snapshot.params['id']).subscribe((result:any)=>{
         console.log(result);
      this.addproductForm.controls['brand'].setValue(result['brand']);
      this.addproductForm.controls['category'].setValue(result['category']);
@@ -114,10 +115,10 @@ export class EditproductsComponent implements OnInit {
       this.ProductService.putProduct(newprd,this.router2.snapshot.params['id'])
       .subscribe(data =>
         {
-        // alert("Product added Successfully")
         this.message=true;
             this.addproductForm.reset();
             // this.router.navigate(["products"])
+            this.productImages='';
           },
        error =>{
           alert("Error")

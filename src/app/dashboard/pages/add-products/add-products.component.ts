@@ -102,6 +102,7 @@ return this.addproductForm.get('price')
       {
       this.message=true;
           this.addproductForm.reset();
+          this.productImages='';
           
         },
      error =>{

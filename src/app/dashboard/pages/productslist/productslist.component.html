@@ -30,7 +30,7 @@
         <div class="products  my-4 rounded bg-white border">
             <div class="products-header p-3 d-lg-flex align-items-center justify-content-between">
                 
-                <h2 class="fw-bold text-md-center">Products <small class="fw-normal" style="font-size:1rem;">(1244 Items)</small></h2>
+                <h2 class="fw-bold text-md-center">Products <small class="fw-normal" style="font-size:1rem;">{{productdata.length}} items</small></h2>
                 <div class="search-box d-flex align-items-center p-2 border rounded text-md-center" >
                     <i class="fa-regular fa-search fa-1x pe-2"></i>
                     <input id="search" placeholder="search" type="text" name="search" (keyup)="search($event)">
@@ -83,7 +83,7 @@
                     <div class=" col-md-6  col-lg-4 col-xl-3" *ngFor="let item of productdata"   >
                         <div class="products-box border rounded p-2 text-center mb-2 " >
                             <div class="product-img" >
-                                <img src={{item.images[0]}} class="img-fluid">
+                                <img src={{item.images[0]}} class="img-fluid width"  >
                             </div>
                             <div class="product-info py-2 text-md-start text-center">
                                 <h4 class="product-name fw-bold">{{item.title }}</h4>

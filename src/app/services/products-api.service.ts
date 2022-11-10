@@ -93,9 +93,6 @@ getcategories(){
 
 }
 ///server/////////////
-// saveproduct(product:any){
-//   return this.http.post(this.url2,product )
-// }
 saveorder(order:any){
   return this.http.post(this.url5,order )
 }
