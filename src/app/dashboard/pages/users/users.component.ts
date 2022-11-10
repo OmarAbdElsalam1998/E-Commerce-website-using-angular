@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+import { AdminRoleService } from 'src/app/services/admin-role.service';
+import { UserRole } from 'src/app/shares classes/userRole';
 import Swal from 'sweetalert2';
+import { ConfirmPasswordValidator } from './confirmPassword';
 
 @Component({
   selector: 'app-users',
@@ -7,11 +14,92 @@ import Swal from 'sweetalert2';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
+  title="User DashBoard"
   userResponsipilities:string[]=[];
-  constructor() { }
+  constructor(private adminService: AdminRoleService , private activateRoute:ActivatedRoute, private fb:FormBuilder , private route:Router , private titleService : Title) { }
+
+  userRole :UserRole = new UserRole("","","","","","",[],"","");
+  userList:any;
+  userId:any;
+  count:any;
 
   ngOnInit(): void {
+    this.titleService.setTitle(this.title);
+    this.loadData();
+    // this.loadSpecificDataById();
   }
+
+  loadData()
+  {
+    this.adminService.getAllUsers().subscribe(
+      data=>
+      {
+        this.userList=data;
+        // this.count=this.userList.length;
+        console.log(this.count);
+        console.log(this.userList);
+      }
+    )
+  }
+
+  loadSpecificDataById(id:any)
+  {
+    var user =new UserRole(this.addUserForm.value.userName,this.addUserForm.value.lastName,this.addUserForm.value.userEmail,this.addUserForm.value.phone,this.addUserForm.value.Password,this.addUserForm.value.confirmPassword,this.userResponsipilities,this.userImageUrl,"")
+  //   // get userDetails by id
+    this.adminService.putUser(user,id)
+    .subscribe(
+        (data) =>{
+          user=data;
+          console.log(data);
+          this.loadData();
+          this.addUserForm.reset();
+        }
+      )
+    }
+    openEdit(id:any){
+      // this.loadSpecificDataById(id);
+    }
+  
+    saveChanges()
+    {
+      this.adminService.putUser(this.userRole,this.userId)
+      .subscribe(
+        data =>{
+          this.userRole=data;
+          this.loadData();
+  
+        })
+    }
+  
+  addUserForm=this.fb.group(
+    {
+    userName:['',[Validators.required,Validators.maxLength(32),Validators.minLength(5)]],           //call simple validators
+    lastName:['',[Validators.required,Validators.maxLength(32),Validators.minLength(5)]],           //call simple validators
+    userEmail:['',[Validators.required,Validators.pattern("^([a-zA-Z0-9_-]+)@([a-zA-Z]+)\.(com|eg)$")]],
+    phone:[,[Validators.required,Validators.maxLength(11),Validators.minLength(11)]],           //call simple validators
+    Password:['',[Validators.required,Validators.pattern("^[a-zA-Z0-9_-]{6,32}$")]],        //call simple validators
+    confirmPassword:[''],           //call simple validators
+    role:['',[Validators.required]], 
+    image:['',[Validators.required]],
+    
+  },
+  {validator:[ConfirmPasswordValidator,Validators.required]}                    //call Cross field validators (on all form Group not only control)
+  );
+
+  addUser()
+  {
+     var user =new UserRole(this.addUserForm.value.userName,this.addUserForm.value.lastName,this.addUserForm.value.userEmail,this.addUserForm.value.phone,this.addUserForm.value.Password,this.addUserForm.value.confirmPassword,this.userResponsipilities,this.userImageUrl,"")
+    this.adminService.postUser(user).subscribe(
+      data =>{
+        this.userRole=data;
+        this.addUserForm.reset();
+        // this.route.navigate(['/dashboard/users']);
+        this.loadData();
+        console.log(data);
+      }
+    )
+  }
+
   search(event:any){
 
   }
@@ -43,10 +131,8 @@ export class UsersComponent implements OnInit {
 
   }
 
-  userEdit(){
-    
-  }
-  showConfirmAlert(){
+
+  showConfirmAlert(id:any){
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
@@ -65,6 +151,7 @@ export class UsersComponent implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
+        this.DeleteUser(id)
         swalWithBootstrapButtons.fire({
         
           title:  'Deleted!',
@@ -86,4 +173,50 @@ export class UsersComponent implements OnInit {
       }
     })
   }
+
+  DeleteUser(id:any){
+    this.adminService.deleteUser(id)
+    .subscribe(
+      data =>{
+        console.log(id);
+        this.loadData();
+      }
+    )
+  }
+
+    get userName()
+    {
+      return this.addUserForm.get('userName');
+    }
+    get lastName()
+    {
+      return this.addUserForm.get('lastName');
+    }
+    get userEmail()
+    {
+      return this.addUserForm.get('userEmail');
+    }
+    get phone()
+    {
+      return this.addUserForm.get('phone');
+    }
+    get Password()
+    {
+      return this.addUserForm.get('Password');
+    }
+    get confirmPassword()
+    {
+      return this.addUserForm.get('confirmPassword');
+    }
+    get role()
+    {
+      return this.addUserForm.get('role');
+    }
+    get image()
+    {
+      return this.addUserForm.get('image');
+    }
+
+
+  
 }
