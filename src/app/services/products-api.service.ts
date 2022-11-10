@@ -78,17 +78,9 @@ getProductData() {
 
  }
 
-
  saveCart(): void {
    localStorage.setItem('session', JSON.stringify(this.items)); 
  }
-
-
-
-
-
- 
-
 
   getsearchResultData(){
      return this.searchResult;
@@ -101,9 +93,6 @@ getcategories(){
 
 }
 ///server/////////////
-saveproduct(product:any){
-  return this.http.post(this.url2,product )
-}
 saveorder(order:any){
   return this.http.post(this.url5,order )
 }
@@ -128,7 +117,20 @@ return throwError (()=>err.message ||"internal server error")
 //     return throwError (()=>err.message ||"internal server error")
 //   }));
 // }
-
-
+postProduct(data:any){
+  return this.http.post<any>("http://localhost:3000/addproducts/",data)
+}
+getProduct(){
+  return this.http.get<any>("http://localhost:3000/addproducts/")
+}
+putProduct(data:any,id:number){
+  return this.http.put<any>("http://localhost:3000/addproducts/"+id,data);
+}
+deleteProduct(id:number){
+  return this.http.delete<any>("http://localhost:3000/addproducts/"+id);
+}
+getaddProductById(id:number){
+  return this.http.get<any>("http://localhost:3000/addproducts/"+id)
+}
 }
 

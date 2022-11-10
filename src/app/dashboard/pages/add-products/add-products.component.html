@@ -14,7 +14,12 @@
                     </nav>
                  </div>
             </section>
-
+            <div *ngIf="message" class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Success!</strong> Product Added
+                <button (click)="removemessage()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
             <h2 class="fw-bold" >Add Product</h2>
             <div class="form">
                 
@@ -172,10 +177,10 @@
                              
                             <div class="form-group m-2">
                                 <label  for="floatingTextarea" class="form-label fs-5 fw-bold" >Overview</label>
-                                <textarea style="height: 150px" formControlName="description" [class.is-invalid]=" description?.invalid &&  description?.touched" class="form-control" placeholder="overView" id="floatingTextarea" ></textarea>
-                                <!-- <div *ngIf="(description?.invalid &&  description?.touched)">
-                                    <small class="text-danger" *ngIf=" description?.errors?.['required']">Description is required</small>
-                                </div> -->
+                                <textarea style="height: 150px" formControlName="overview" [class.is-invalid]=" overview?.invalid &&  overview?.touched" class="form-control" placeholder="overView" id="floatingTextarea" ></textarea>
+                                <div *ngIf="(overview?.invalid &&  overview?.touched)">
+                                    <small class="text-danger" *ngIf=" overview?.errors?.['required']">Overview is required</small>
+                                </div>
                             </div>
                             
                             

@@ -14,14 +14,10 @@ export class AddProductsComponent implements OnInit {
 productImages:any=[];  
 categories:any;
 ckecked:boolean=false;
-newprd:newProduct=new newProduct("","","","",0,0,0,"");
-
+message:boolean=false;
   constructor(private fb:FormBuilder,private catsrviece:ProductsApiService,
     private http: HttpClient ,private ProductService: ProductsApiService,
-     private router: Router) {
-    
-
-  }
+     private router: Router) {}
 
 addproductForm=this.fb.group(
   {
@@ -33,7 +29,8 @@ addproductForm=this.fb.group(
   price:['',[Validators.required,Validators.min(0)]],
   subscribe:[false],
   discound:[''],
-  image:['',Validators.required]
+  image:[this.productImages,Validators.required],
+  overview:['',Validators.required]
 });
 
   ngOnInit(): void {
@@ -72,6 +69,10 @@ return this.addproductForm.get('price')
   {
     return this.addproductForm.get('image')
   }
+  get overview()
+  {
+    return this.addproductForm.get('overview')
+  }
   clicked(){
     this.ckecked =! this.ckecked;
   }
@@ -92,21 +93,28 @@ return this.addproductForm.get('price')
     )
   }
  addproduct(){
-  console.log(this.addproductForm.value);
-    this.ProductService.saveproduct(this.addproductForm.value)
+  //console.log(this.addproductForm.value)public brand:string,
+       
+  var newprd=new newProduct(this.brand?.value , this.category?.value ,this.title?.value,this.description?.value,this.numofitems?.value,this.price?.value,this.discound?.value,this.productImages,this.overview?.value,[],[]);
+  
+    this.ProductService.postProduct(newprd)
     .subscribe(data =>
       {
-      // alert("Product added Successfully")
+      this.message=true;
           this.addproductForm.reset();
-          this.router.navigate(["products"])
+          this.productImages='';
+          
         },
      error =>{
         console.log("Error" , error)
       }
       
-      )
+    )
  }
-
+ removemessage(){
+  this.message=false;
+  this.router.navigate(["dashboard/productslist"])
+ }
  onSelectImageFromFile(event:any) {
   let fileType = event.target.files[0].type;
   if (fileType.match(/image\/*/)) {
