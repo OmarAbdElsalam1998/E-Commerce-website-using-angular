@@ -101,48 +101,7 @@ export class ProductslistComponent implements OnInit {
   }
   sort(event: any) {
 
-    switch (event.target.value) {
-      case "LowPrice":
-        {
-           console.log(this.productsList.products.sort((a:any, b:any) => parseFloat(a.price) - parseFloat(b.price)));
-  
-           //this.productList.products= this.productList?.products.sort((a:any, b:any) => parseFloat(a.price) - parseFloat(b.price));
-           
-          break;
-        }
-  
-      case "HighPrice":
-        {
-             console.log(this.productsList.products.sort((a:any, b:any) => parseFloat(b.price) - parseFloat(a.price)));
-            // this.productList?.products.sort((a:any, b:any) => parseFloat(b.price) - parseFloat(a.price));
-           
-           console.log(this.productsList.products);
-          break;
-        }
-  
-        case "LowRate":
-          {
-             console.log(this.productsList.products.sort((a:any, b:any) => parseFloat(a.rating) - parseFloat(b.rating)));
-    
-             //this.productList.products= this.productList?.products.sort((a:any, b:any) => parseFloat(a.price) - parseFloat(b.price));
-             
-            break;
-          }
-    
-        case "HighRate":
-          {
-               console.log(this.productsList.products.sort((a:any, b:any) => parseFloat(b.rating) - parseFloat(a.rating)));
-              // this.productList?.products.sort((a:any, b:any) => parseFloat(b.price) - parseFloat(a.price));
-             
-             console.log(this.productsList.products);
-            break;
-          }
-  
-    }
-    
-    return this.productsList;
-  
-    // this.productsList=this.categorieslist2;
+   
   
   }
 

@@ -33,7 +33,7 @@
                 <div class="modal-dialog modal-dialog-centered ">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title fw-bold" id="productsModalLabel">Add Brand</h5>
+                            <h5 class="modal-title fw-bold" id="productsModalLabel">{{actiontext}}</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"(click)="reset();"></button>
                         </div>
                         <div class="modal-body">
@@ -68,7 +68,7 @@
                                 <button [disabled]="productsForm.invalid" type="submit"
                                     class="btn btn-primary px-4 w-100" *ngIf="showAddBtn">Submit</button>
                                 <button type="button"
-                                class="btn btn-primary" (click)="updatebrandDetails(currentbrand.id)" *ngIf="showUpdateBtn">UpdateBrand</button>
+                                class="btn btn-primary" (click)="updatebrandDetails(currentbrand.id)" *ngIf="showUpdateBtn">Update Brand</button>
 
                                 <!---////////--->
                             </form>
@@ -88,7 +88,7 @@
             <div class="brands-header p-3 d-md-flex align-items-center justify-content-between ">
 
                 <h2 class="fw-bold text-md-center bp-2">Brands <small class="fw-normal"
-                        style="font-size:1rem;">(12)</small></h2>
+                        style="font-size:1rem;">{{productsDetails.length}}</small></h2>
                 <div class="search-box d-flex align-items-center p-2 border rounded text-md-center">
                     <i class="fa-regular fa-search fa-1x pe-2"></i>
                     <input id="search" placeholder="search" type="text" name="search" (keyup)="search($event)">

@@ -25,6 +25,7 @@ export class BrandsComponent implements OnInit {
   image: any;
   id: any;
   currentbrand:any;
+  actiontext:string="Add Brand"
  
 
 
@@ -152,7 +153,7 @@ export class BrandsComponent implements OnInit {
   ///////////////////Edit///////////////////
 
   Edit(Brandid:number) {
-
+    this.actiontext="Edit Brand";
     this.showAddBtn = false;
     this.showUpdateBtn = true;
     this.brand.getCurrent(Brandid).subscribe((result:any) => {
@@ -167,7 +168,6 @@ export class BrandsComponent implements OnInit {
 
   updatebrandDetails(id:any) {
     // this.productsModel = Object.assign({}, this.productsForm.value);
-
     var bran = new brand(this.productsForm.value.name, this.brandImageUrl);
     this.brand.Updatebrand(id,bran).subscribe(res => {
 
