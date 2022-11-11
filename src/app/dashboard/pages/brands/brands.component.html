@@ -41,8 +41,10 @@
                             <form [formGroup]="productsForm" (ngSubmit)="addbrandDetails()">
                                 <div class="mb-3">
                                     <label for="Brand Name" class="form-label fw-bold">Brand Name</label>
-                                    <input type="text" class="form-control" id="brandName" placeholder="Brand Name"
-                                        formControlName="name" required>
+                                    <input formControlName="name" [class.is-invalid]=" name?.invalid &&  name?.touched"  type="text" class="form-control ">
+                                    <div *ngIf="(name?.invalid &&  name?.touched)">
+                                        <small class="text-danger" *ngIf=" name?.errors?.['required']">Brand Name is required</small>
+                                    </div>
                                     <!-- <input type="text" class="form-control" id="subCategories" value=""(keyup)="addSubCategory($event)" placeholder="Category Name" formControlName="subCategoriesme" required> -->
                                 </div>
                                 <div class="mb-3">
@@ -66,7 +68,7 @@
                                 <button [disabled]="productsForm.invalid" type="submit"
                                     class="btn btn-primary px-4 w-100" *ngIf="showAddBtn">Submit</button>
                                 <button type="button"
-                                class="btn btn-primary" (click)="updatebrandDetails(id)" *ngIf="showUpdateBtn">UpdateBrand</button>
+                                class="btn btn-primary" (click)="updatebrandDetails(currentbrand.id)" *ngIf="showUpdateBtn">UpdateBrand</button>
 
                                 <!---////////--->
                             </form>
@@ -115,7 +117,7 @@
                             </div>
                             <div class="actions d-flex align-items-center justify-content-between w-100">
                                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#productsModal"
-                               (click)="Edit(brand.id)" class="btn btn-default border rounded  me-1 w-50"><i class="fa fa-edit pe-2"></i>Edit</button>
+                               (click)=" Edit(brand.id)" class="btn btn-default border rounded  me-1 w-50"><i class="fa fa-edit pe-2"></i>Edit</button>
                                 <button (click)="showConfirmAlert(brand.id)"class="btn btn-default border rounded ms-1 w-50" style="color: rgb(220, 31, 31);"><i class="fa fa-trash pe-2 "></i>Delete</button>
                             </div>
 

@@ -6,9 +6,11 @@ import { AddProductsComponent } from './pages/add-products/add-products.componen
 import { BrandsComponent } from './pages/brands/brands.component';
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { DashboardMainComponent } from './pages/dashboard-main/dashboard-main.component';
+import { EditproductsComponent } from './pages/editproducts/editproducts.component';
 import { OrderdetailsComponent } from './pages/orderdetails/orderdetails.component';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { ProductslistComponent } from './pages/productslist/productslist.component';
+import { UsersComponent } from './pages/users/users.component';
 
 
 const routes: Routes = [
@@ -17,9 +19,11 @@ const routes: Routes = [
     {path:"ordersdetails",component:OrderdetailsComponent,canLoad:[AdminGuard]},
     {path:"productslist",component:ProductslistComponent,canLoad:[AdminGuard]},
     {path:"addProduct",component:AddProductsComponent,canLoad:[AdminGuard]},
-    {path:"editProduct/:id",component:AddProductsComponent,canLoad:[AdminGuard]},
+    {path:"editProduct/:id",component:EditproductsComponent,canLoad:[AdminGuard]},
     {path:"categories",component:CategoriesComponent,canLoad:[AdminGuard]},
+    {path:"",component:CategoriesComponent,canLoad:[AdminGuard]},
     {path:"brands",component:BrandsComponent,canLoad:[AdminGuard]},
+    {path:"users",component:UsersComponent,canLoad:[AdminGuard]},
     {path:"orders",component:OrdersComponent,canLoad:[AdminGuard]},
 
   ]},

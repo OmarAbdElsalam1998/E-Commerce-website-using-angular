@@ -140,15 +140,15 @@
 
             </div>
             <div class="order-list">
-                <div class="d-flex align-items-center border-bottom" *ngFor="let order of copyOrders | orderBy: key: reverse | paginate : {
+                <div class="d-flex align-items-center border-bottom " *ngFor="let order of copyOrders | orderBy: key: reverse | paginate : {
                     itemsPerPage: 5,
                     currentPage: page,
                     totalItems: copyOrders.length
-                  };">
-                  <div class="order-customer  ">
+                  };" [id]="order.id">
+                  <div class="order-customer" >
                         <div class="customer d-flex align-items-center p-3">
                             <div class="checkbox px-2">
-                                <input  class=" form-check-input"type="checkbox">
+                                <input  class=" form-check-input"type="checkbox" [value]="order.id" (change)="selectOrder($event)">
                             </div>
                             <div class="customer-img px-2">
                                     <img src="../../../../assets/images/person.jpg" style="width:50px;height:50px;">

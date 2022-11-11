@@ -3,9 +3,9 @@ export class brand{
  name:string;
  Img:string;
 
- constructor(namee:string, Imgg:string){
-   this.Img=Imgg;
-   this.name= namee;
+ constructor(name:string, Img:string){
+   this.Img= Img;
+   this.name= name;
  }
 
 

@@ -1,0 +1,412 @@
+<main id="main" class="p-md-5 py-5">
+    
+    <div class="container">
+         <!-- Start breadcrumb -->
+
+        <div class="heading d-flex align-items-center justify-content-between">
+            <section class="breadcrumb ">
+                <div class="d-flex align-items-center justify-content-start  rounded my-3">
+                    <nav aria-label="breadcrumb ">
+                        <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item d-flex align-items-center justify-content-between"><a [routerLink]="['/dashboard']" routerLinkActive="router-link-active" >
+                            <i class="fa-solid fa-gauge-min fa-lg pe-2"></i> <span class="fw-bold">dashboard</span></a> 
+                        </li>
+                        <!-- {{selectedcategoty}} -->
+                        <li class="breadcrumb-item active fw-bold">Users</li>
+                        
+                        </ol>
+                    </nav>
+                 </div>
+            </section>
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="fa-solid fa-plus pe-2"></i>New User
+            </button>
+            
+            <!-- Modal 1 for add new user-->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered ">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="exampleModalLabel">Add New User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Form To Add Users -->
+                        <!-- <form [formGroup]="addUserForm"  (ngSubmit)="addUser()"> -->
+                        <form [formGroup]="addUserForm">
+
+                            <div class="mb-3">
+                              <label for="firstname" class="form-label fw-bold">First Name</label>
+                              <input [class.is-invalid]="userName?.invalid && userName?.touched" formControlName="userName" type="text" class="form-control" id="firstname"  placeholder="First Name">
+                              <div *ngIf="userName?.invalid && userName?.touched">
+                                <small *ngIf="userName?.errors?.['required']"  class="text-danger">Name is Required</small>
+                                <small *ngIf="userName?.errors?.['minlength']"  class="text-danger">Name Length must be minimum 3 characters </small>
+                                <small *ngIf="userName?.errors?.['maxlength']"  class="text-danger">Name Length must be maximum 32 characters</small>
+                              </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="lastname" class="form-label fw-bold">Last Name</label>
+                                <input [class.is-invalid]="lastName?.invalid && lastName?.touched" formControlName="lastName" type="text" class="form-control" id="lastname"  placeholder="Last Name">
+                                <div *ngIf="lastName?.invalid && lastName?.touched">
+                                    <small *ngIf="lastName?.errors?.['required']"  class="text-danger">Name is Required</small>
+                                    <small *ngIf="lastName?.errors?.['minlength']"  class="text-danger">Name Length must be minimum 3 characters </small>
+                                    <small *ngIf="lastName?.errors?.['maxlength']"  class="text-danger">Name Length must be maximum 32 characters</small>
+                                  </div>
+                             </div>
+                         
+                            
+                            <div class="mb-3">
+                                <label for="email" class="form-label fw-bold">Email</label>
+                                <input [class.is-invalid]="userEmail?.invalid && userEmail?.touched"  formControlName="userEmail" type="text" class="form-control" id="email"  placeholder="Email">
+                                <div *ngIf="userEmail?.invalid && userEmail?.touched">
+                                    <small class="text-danger" *ngIf="userEmail?.errors?.['required']"> Email is Required</small>
+                                    <small class="text-danger" *ngIf="userEmail?.errors?.['pattern']"  > Email should be in form xxx@gmail.com </small>
+                                </div>
+                            </div>
+                              <div class="mb-3">
+                                <label for="phone" class="form-label fw-bold">phone</label>
+                                <input [class.is.invalid]="phone?.invalid && phone?.touched" formControlName="phone" type="text" class="form-control" id="phone"  placeholder="phone">
+                                <div *ngIf="phone?.invalid && phone?.touched">
+                                    <small class="text-danger" *ngIf="phone?.errors?.['minlength']"> Phone should be 11 numbers</small>
+                                    <small class="text-danger" *ngIf="phone?.errors?.['maxlength']"> Phone should be 11 numbers </small>
+                                    <small class="text-danger" *ngIf="phone?.errors?.['required']"> Phone should be 11 numbers </small>
+
+                                </div>
+                              </div>
+                           
+
+                            <div class="mb-3">
+                                <label  class="form-label fw-bold">user picture</label>
+                                <div class="upload-image p-2  rounded text-center"style="border:3px dashed #555" (click)="selectImage.click()">
+                                    <i class="fa-regular fa-cloud-arrow-up fa-3x"></i>
+                                    <p> upload Image</p>
+                                </div>
+                                <div class="selected-image py-2" *ngIf="userImageUrl">
+                                    <img [src]="userImageUrl"  title="Category Picture" height="150px" width="150px" />
+
+                                </div>
+
+                                <input
+                                  type="file"
+                                  id="img"
+                                  multiple
+                                  style="display:none"
+                                  accept="image/*"
+                                  #selectImage
+                                  (change)="onSelect($event)"
+                                  formControlName="image"
+                                  [class.is-invalid]="image?.invalid && image?.touched"
+                                />
+                                <div *ngIf="image?.invalid && image?.touched">
+                                    <small class="text-danger" *ngIf="image?.errors?.['required']">Image is Required</small>
+                                </div>
+                                
+                            </div>
+                            <div class="mb-3">
+                                <label for="userResponsibilities" class="form-label fw-bold">Responsibilities</label>
+                                <select [class.is-invalid]="role?.invalid && role?.touched" formControlName="role" class="form-control" id="userResponsibilities"(change)="addUserResponsibilities($event)">
+                                
+                                    <option disabled selected>Select</option>
+                                    <option>Add Products</option>
+                                    <option>Edit Products</option>
+                                    <option>Remove Products</option>
+                                    <option>Manage Orders</option>
+                                </select>
+                                <div *ngIf="role?.invalid && role?.touched">
+                                    <small class="text-danger" *ngIf="role?.errors?.['required']"> Admin Role is Required</small>
+                                </div>
+
+                            </div>
+                            <div class="user-role p-3" *ngIf="userResponsipilities.length>0">
+                                <ul class="list-unstyled" >
+                                    <li class="tag  align-items-center" *ngFor="let res of userResponsipilities;index as i">
+                                      <span class="pe-3">{{res}}</span>
+                                      <Span style="cursor:pointer;" (click)="removeUserResponsibilities(i)"> <i class="fa-solid fa-close" ></i></Span>
+                                    </li>
+                                </ul> 
+                              </div>
+                              <div class="mb-3">
+                                <label for="password" class="form-label fw-bold">Password</label>
+                                <input [class.is-invalid]="Password?.invalid && Password?.touched" formControlName="Password" type="password" class="form-control" id="password"  placeholder="Password">
+                                <div *ngIf="Password?.invalid && Password?.touched">
+                                    <small class="text-danger" *ngIf="Password?.errors?.['required']"> Password is Required</small>
+                                    <small class="text-danger" *ngIf="Password?.errors?.['pattern']"> Password should be in form like (capital & small letters ,at least 6 characters and maximum 32 characters)</small>
+                                    </div>
+                                   <span class="show-password"><i class="fa-light fa-eye-slash fa-fw"></i></span>
+                              </div>
+                              <div class="mb-3">
+                                <label for="confirmPassword" class="form-label fw-bold">Confirm Password</label>
+                                <input required [class.is-invalid]="addUserForm.errors?.['misMatch']" formControlName="confirmPassword" type="password" class="form-control" id="confirmPassword"  placeholder="confirm Password">
+                                   <!-- <small class="text-danger" *ngIf="registerationForm.errors?.['required'] "> Confirm Password is a required Flied</small> -->
+                                   <small class="text-danger" *ngIf="addUserForm.errors?.['misMatch']"> Confirm Password not match with Password</small>
+                         
+
+                                   <span class="show-password"><i class="fa-light fa-eye-slash fa-fw"></i></span>
+                              </div>
+                            
+                            <button  (click)="addUser()" type="submit" class="btn btn-primary px-4 w-100">Add User</button>
+                          </form>
+                    </div>
+                    
+                </div>
+                </div>
+            </div>
+
+                <!-- Modal 2 for Edit User -->
+            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered ">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="exampleModalLabel">Edit User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Form To Edit User -->
+                        <!-- <form [formGroup]="addUserForm"  (ngSubmit)="addUser()"> -->
+                            <form [formGroup]="addUserForm">
+
+                                <div class="mb-3">
+                                  <label for="firstname" class="form-label fw-bold">First Name</label>
+                                  <input [class.is-invalid]="userName?.invalid && userName?.touched" formControlName="userName" type="text" class="form-control" id="firstname"  placeholder="First Name">
+                                  <div *ngIf="userName?.invalid && userName?.touched">
+                                    <small *ngIf="userName?.errors?.['required']"  class="text-danger">Name is Required</small>
+                                    <small *ngIf="userName?.errors?.['minlength']"  class="text-danger">Name Length must be minimum 3 characters </small>
+                                    <small *ngIf="userName?.errors?.['maxlength']"  class="text-danger">Name Length must be maximum 32 characters</small>
+                                  </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="lastname" class="form-label fw-bold">Last Name</label>
+                                    <input [class.is-invalid]="lastName?.invalid && lastName?.touched" formControlName="lastName" type="text" class="form-control" id="lastname"  placeholder="Last Name">
+                                    <div *ngIf="lastName?.invalid && lastName?.touched">
+                                        <small *ngIf="lastName?.errors?.['required']"  class="text-danger">Name is Required</small>
+                                        <small *ngIf="lastName?.errors?.['minlength']"  class="text-danger">Name Length must be minimum 3 characters </small>
+                                        <small *ngIf="lastName?.errors?.['maxlength']"  class="text-danger">Name Length must be maximum 32 characters</small>
+                                      </div>
+                                 </div>
+                             
+                                
+                                <div class="mb-3">
+                                    <label for="email" class="form-label fw-bold">Email</label>
+                                    <input [class.is-invalid]="userEmail?.invalid && userEmail?.touched"  formControlName="userEmail" type="text" class="form-control" id="email"  placeholder="Email">
+                                    <div *ngIf="userEmail?.invalid && userEmail?.touched">
+                                        <small class="text-danger" *ngIf="userEmail?.errors?.['required']"> Email is Required</small>
+                                        <small class="text-danger" *ngIf="userEmail?.errors?.['pattern']"  > Email should be in form xxx@gmail.com </small>
+                                    </div>
+                                </div>
+                                  <div class="mb-3">
+                                    <label for="phone" class="form-label fw-bold">phone</label>
+                                    <input [class.is.invalid]="phone?.invalid && phone?.touched" formControlName="phone" type="text" class="form-control" id="phone"  placeholder="phone">
+                                    <div *ngIf="phone?.invalid && phone?.touched">
+                                        <small class="text-danger" *ngIf="phone?.errors?.['minlength']"> Phone should be 11 numbers</small>
+                                        <small class="text-danger" *ngIf="phone?.errors?.['maxlength']"> Phone should be 11 numbers </small>
+                                        <small class="text-danger" *ngIf="phone?.errors?.['required']"> Phone should be 11 numbers </small>
+    
+                                    </div>
+                                  </div>
+                               
+    
+                                <div class="mb-3">
+                                    <label  class="form-label fw-bold">user picture</label>
+                                    <div class="upload-image p-2  rounded text-center"style="border:3px dashed #555" (click)="selectImage.click()">
+                                        <i class="fa-regular fa-cloud-arrow-up fa-3x"></i>
+                                        <p> upload Image</p>
+                                    </div>
+                                    <div class="selected-image py-2" *ngIf="userImageUrl">
+                                        <img [src]="userImageUrl"  title="Category Picture" height="150px" width="150px" />
+    
+                                    </div>
+    
+                                    <input
+                                      type="file"
+                                      id="img"
+                                      multiple
+                                      style="display:none"
+                                      accept="image/*"
+                                      #selectImage
+                                      (change)="onSelect($event)"
+                                      formControlName="image"
+                                      [class.is-invalid]="image?.invalid && image?.touched"
+                                    />
+                                    <div *ngIf="image?.invalid && image?.touched">
+                                        <small class="text-danger" *ngIf="image?.errors?.['required']">Image is Required</small>
+                                    </div>
+                                    
+                                </div>
+                                <div class="mb-3">
+                                    <label for="userResponsibilities" class="form-label fw-bold">Responsibilities</label>
+                                    <select [class.is-invalid]="role?.invalid && role?.touched" formControlName="role" class="form-control" id="userResponsibilities"(change)="addUserResponsibilities($event)">
+                                    
+                                        <option disabled selected>Select</option>
+                                        <option>Add Products</option>
+                                        <option>Edit Products</option>
+                                        <option>Remove Products</option>
+                                        <option>Manage Orders</option>
+                                    </select>
+                                    <div *ngIf="role?.invalid && role?.touched">
+                                        <small class="text-danger" *ngIf="role?.errors?.['required']"> Admin Role is Required</small>
+                                    </div>
+    
+                                </div>
+                                <div class="user-role p-3" *ngIf="userResponsipilities.length>0">
+                                    <ul class="list-unstyled" >
+                                        <li class="tag  align-items-center" *ngFor="let res of userResponsipilities;index as i">
+                                          <span class="pe-3">{{res}}</span>
+                                          <Span style="cursor:pointer;" (click)="removeUserResponsibilities(i)"> <i class="fa-solid fa-close" ></i></Span>
+                                        </li>
+                                    </ul> 
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="password" class="form-label fw-bold">Password</label>
+                                    <input [class.is-invalid]="Password?.invalid && Password?.touched" formControlName="Password" type="password" class="form-control" id="password"  placeholder="Password">
+                                    <div *ngIf="Password?.invalid && Password?.touched">
+                                        <small class="text-danger" *ngIf="Password?.errors?.['required']"> Password is Required</small>
+                                        <small class="text-danger" *ngIf="Password?.errors?.['pattern']"> Password should be in form like (capital & small letters ,at least 6 characters and maximum 32 characters)</small>
+                                        </div>
+                                       <span class="show-password"><i class="fa-light fa-eye-slash fa-fw"></i></span>
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="confirmPassword" class="form-label fw-bold">Confirm Password</label>
+                                    <input required [class.is-invalid]="addUserForm.errors?.['misMatch']" formControlName="confirmPassword" type="password" class="form-control" id="confirmPassword"  placeholder="confirm Password">
+                                       <!-- <small class="text-danger" *ngIf="addUserForm.errors?.['required'] "> Confirm Password is a required Flied</small> -->
+                                       <small class="text-danger" *ngIf="addUserForm.errors?.['misMatch']"> Confirm Password not match with Password</small>
+                             
+    
+                                       <span class="show-password"><i class="fa-light fa-eye-slash fa-fw"></i></span>
+                                  </div>
+                                  <button (click)="saveChanges()" type="submit" class="btn btn-primary px-4 w-100">save Changes</button>
+
+                                <!-- <button [disabled]="addUserForm.invalid" (click)="saveChanges()" type="submit" class="btn btn-primary px-4 w-100">save Changes</button> -->
+                              </form>
+                    </div>
+                    
+                </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- end breadcrumb -->
+
+        <section class="user">
+            <div class="container">
+                <div class="row">
+                    <!-- <div *ngIf="userList.length>0;then ListContainUsers;else ListHasNoUsers"> 
+                    </div> -->
+                   
+                         
+                </div>
+            </div>
+        <!-- <ng-template #ListHasNoUsers>
+                <div style="height: 100%;"class="border rounded p-5 bg-white text-center w-50  m-auto">
+                    <i style="color:#ff8888"class="fa-regular fa-cart-circle-xmark fa-6x"></i>
+                    <h3 class=" fw-bold mt-3 ">Unfortunately, Your List Is Empty</h3>
+                    <p class="pb-2">please Add User Roles in You List</p>
+                    <a [routerLink]="['/users']" routerLinkActive="router-link-active"  class="custom-btn ">Add Users</a>
+                </div>
+        </ng-template> -->
+
+        <!-- <ng-template #ListContainUsers > -->
+        <div class="users  my-4 ">
+            <div class="users-header p-3 d-lg-flex align-items-center justify-content-between bg-white rounded">
+               
+
+                <h2 class="fw-bold text-md-center">Users <small class="fw-normal" style="font-size:1rem;"> <span>({{userList?.length}})</span></small></h2>
+                <!-- <h2 class="fw-bold text-md-center">Users <small class="fw-normal" style="font-size:1rem;"></small></h2> -->
+
+                <div class="search-box d-flex align-items-center p-2 border rounded text-md-center" >
+                    <i class="fa-regular fa-search fa-1x pe-2"></i>
+                    <input id="search" placeholder="search" type="text" name="search" (keyup)="search($event)" >
+        
+                </div>
+                
+                
+               
+            </div>
+            
+            <div class="users-list p-3" >
+                <!-- <div class="users-list p-3" > -->
+
+                <div class="row" >
+                    <div class="col-md-4 col-lg-3" *ngFor="let user of userList ; index as i">
+                        <div class="user rounded bg-white rounded overflow-hidden">
+                            <div class="header p-5 ">
+                            </div>
+                            <div class="user-image text-center  ">
+                                <img [src]="user.image" style="width:100px;height:100px"> 
+                                <!-- {{user.image}} -->
+                                <!-- <img src="../../../../assets/images/person.jpg" style="width:100px;height:100px">{{user.image}} -->
+
+                            </div>
+                            <div class="user-info text-center py-2">
+                                <!-- <h4 class="fw-bold fs-5" [userName]="user.userName">{{user.userName}}</h4> -->
+                                <h4 class="fw-bold fs-5" >{{user.userName}}</h4>
+
+                            </div>
+                            <div class="actions d-flex align-items-center justify-content-between w-100 py-2">
+                                <button  data-bs-toggle="modal" data-bs-target="#exampleModal2" (click)="openEdit(user.id) "class="btn btn-default  rounded  me-1 w-50"><i class="fa fa-edit pe-2"></i>Edit</button>
+                                <button (click)="showConfirmAlert(user.id)" class="btn btn-default  rounded ms-1 w-50" style="color: rgb(220, 31, 31);"><i class="fa fa-trash pe-2 "></i>Delete</button>
+
+                                <!-- <button userDelete (click)="showConfirmAlert()"  class="btn btn-default  rounded ms-1 w-50" style="color: rgb(220, 31, 31);"><i class="fa fa-trash pe-2 "></i>Delete</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- <div class="col-md-6  col-lg-4 col-xl-3" *ngFor="let category of copyCategories |  paginate : {
+                        itemsPerPage: 30,
+                        currentPage: page,
+                        totalItems: copyCategories.length
+                    };">
+                         
+                        <div class="category rounded bg-light p-3 mb-3">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="category-image h-100">
+                                        <img style="height:100%;width: 100%;" src="../../../../assets/images/catrgories/laptops.jpg">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="category-info">
+                                        <div class="d-flex align-items-center justify-content-between border-bottom">
+                                            <div class="category-name p-3  ">
+                                        
+                                                <h2><i class="fa-solid fa-tag pe-2"></i>Electronics</h2>
+                                            </div>
+                                            <div class="category-action d-flex align-items-center justify-content-between ">
+                                                <span (click)="edit()" style="cursor:pointer"> 
+                                                    <i class="fa-light fa-solid fa-pen fa-lg px-3 "></i>
+                                                </span>
+                                                <span style="cursor:pointer">
+                                                    <i class="fa-solid fa-trash-can fa-lg px-3"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="sub-categories py-2">
+                                            <h4 class="fw-bold py-2 ">Sub Categories</h4>
+                                            <ul class="list-unstyled">
+                                                <li *ngFor="let subcategory of category.subCategories " class="act-tag">
+                                                    <span>{{subcategory}}</span>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div> -->
+
+                
+                
+               
+            
+
+            </div>
+        </div>
+    <!-- </ng-template> -->
+    </section>
+    
+    </div>
+</main>

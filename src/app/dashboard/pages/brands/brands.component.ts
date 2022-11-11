@@ -24,7 +24,7 @@ export class BrandsComponent implements OnInit {
   copyBrands: any = [];
   image: any;
   id: any;
-
+  currentbrand:any;
  
 
 
@@ -34,13 +34,7 @@ export class BrandsComponent implements OnInit {
 
 
   ngOnInit(): void {
-      console.log(this.router.snapshot.params['id'])
-      this.brand.getCurrent(this.router.snapshot.params['id']).subscribe((result:any) => {
-        this.addbrandForm.controls['Img'].setValue(result['Img']);
-        this.addbrandForm.controls['name'].setValue(result['name']);
-        this.brandImageUrl=result['Img'];
-   
-    })
+      
 
 
     this.brand.getAllbrands().subscribe((res) => {
@@ -50,9 +44,17 @@ export class BrandsComponent implements OnInit {
 
     this.getAllbrandDetails();
     this.createbrandForm();
-  }
+    this.brand.getCurrent(this.router.snapshot.params['id']).subscribe((result:any) => {
+      
+      (
+        this.productsForm.controls['name'].setValue(result['name']),
+        this. brandImageUrl=result['Img']
+        
+      )
+  
+  })
 
-
+}
   search(e: any) {
     console.log(e.keyCode);
     this.copyBrands = [...this.brands];
@@ -121,8 +123,8 @@ export class BrandsComponent implements OnInit {
   }
   //////////////////Add/////////////////
   addbrandDetails() {
-    this.productsModel = Object.assign({}, this.productsForm.value);
-    console.log(this.productsForm.value);
+    // this.productsModel = Object.assign({}, this.productsForm.value);
+    // console.log(this.productsForm.value);
 
     var bran = new brand(this.productsForm.value.name, this.brandImageUrl);
     this.brand.Postbrand(bran).subscribe(res => {
@@ -149,26 +151,26 @@ export class BrandsComponent implements OnInit {
   }
   ///////////////////Edit///////////////////
 
-  Edit(Brandid:any) {
+  Edit(Brandid:number) {
 
     this.showAddBtn = false;
     this.showUpdateBtn = true;
     this.brand.getCurrent(Brandid).subscribe((result:any) => {
       
-    this.addbrandForm.controls['Img'].setValue(result['Img']);
-    this.addbrandForm.controls['name'].setValue(result['name']);
+      this.productsForm.controls['name'].setValue(result['name']),
+      this. brandImageUrl=result['Img'],
+      this.currentbrand=result;
 
     })
   }
   ////////////update/////////////////////////
 
   updatebrandDetails(id:any) {
-    this.productsModel = Object.assign({}, this.productsForm.value);
+    // this.productsModel = Object.assign({}, this.productsForm.value);
 
     var bran = new brand(this.productsForm.value.name, this.brandImageUrl);
-    this.brand.Postbrand(bran).subscribe(res => {
-    this.brand.Updatebrand(bran,id).subscribe(res => {
-      
+    this.brand.Updatebrand(id,bran).subscribe(res => {
+
       alert("brand information updated successfully");
       let close = document.getElementById('close');
       close?.click();
@@ -179,7 +181,7 @@ export class BrandsComponent implements OnInit {
     }, err => {
       alert("Error in updating brand information");
     })
-  })
+ 
 }
 
 

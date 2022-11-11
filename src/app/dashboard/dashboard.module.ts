@@ -19,6 +19,7 @@ import { ProductslistComponent } from './pages/productslist/productslist.compone
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { BrandsComponent } from './pages/brands/brands.component';
 import { EditproductsComponent } from './pages/editproducts/editproducts.component';
+import { UsersComponent } from './pages/users/users.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { EditproductsComponent } from './pages/editproducts/editproducts.compone
     ProductslistComponent,
     CategoriesComponent,
     BrandsComponent,
-    EditproductsComponent
+    EditproductsComponent,
+    UsersComponent
   ],
   imports: [
     CommonModule,

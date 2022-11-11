@@ -1,6 +1,7 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CartComponent } from './cart/cart.component';
+import { UsersComponent } from './dashboard/pages/users/users.component';
 import { FavouriteComponent } from './favourite/favourite.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { AdminGuard } from './Guards/admin.guard';
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path:"search/:keyword",component:SearchComponent},
   {path:"favourite",component:FavouriteComponent},
   {path:"error",component:ForbiddenComponent},
+  // {path:"users",component:UsersComponent},
   {path:"**",component:NotFoundPageComponent}, 
 ];
 
