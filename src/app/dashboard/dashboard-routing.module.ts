@@ -19,6 +19,7 @@ const routes: Routes = [
     {path:"addProduct",component:AddProductsComponent,canLoad:[AdminGuard]},
     {path:"editProduct/:id",component:AddProductsComponent,canLoad:[AdminGuard]},
     {path:"categories",component:CategoriesComponent,canLoad:[AdminGuard]},
+    {path:"",component:CategoriesComponent,canLoad:[AdminGuard]},
     {path:"brands",component:BrandsComponent,canLoad:[AdminGuard]},
     {path:"orders",component:OrdersComponent,canLoad:[AdminGuard]},
 
