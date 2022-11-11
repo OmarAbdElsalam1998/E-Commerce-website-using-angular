@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, TitleStrategy } from '@angular/router';
+import { error } from 'jquery';
+import { ProductsApiService } from 'src/app/services/products-api.service';
 import Swal from 'sweetalert2';
+import { newProduct } from '../../newproduct';
 
 @Component({
   selector: 'app-productslist',
@@ -8,30 +11,34 @@ import Swal from 'sweetalert2';
   styleUrls: ['./productslist.component.scss']
 })
 export class ProductslistComponent implements OnInit {
- displayGrid:boolean=true;
-  constructor(private router:Router) { }
+  displayGrid: boolean = true;
 
+  constructor(private router: Router, private productapi: ProductsApiService) { }
+  productdata: any = [];
   ngOnInit(): void {
+    this.productapi.getProduct().subscribe((allData) => {
+      console.log(allData);
+      this.productdata = allData;
+    });
   }
-  search(event:any){
+  search(event: any) {
 
   }
-  addProduct(){
+  addProduct() {
     this.router.navigate(['/dashboard/addProduct']);
   }
-  editProduct(){
-    this.router.navigate(['dashboard/editProduct/',11])
-  }
-  displayMode(value:string){
-    if(value=="grid"){
-      this.displayGrid=true;
+
+  displayMode(value: string) {
+    if (value == "grid") {
+      this.displayGrid = true;
     }
-    else{
-      this.displayGrid=false;
+    else {
+      this.displayGrid = false;
     }
 
   }
-  showConfirmAlert(){
+
+  showConfirmAlert(id: number) {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
@@ -39,7 +46,7 @@ export class ProductslistComponent implements OnInit {
       },
       buttonsStyling: true
     })
-    
+
     swalWithBootstrapButtons.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -50,15 +57,18 @@ export class ProductslistComponent implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-        swalWithBootstrapButtons.fire({
+       
+        this.deleteProduct(id);
         
-          title:  'Deleted!',
+        swalWithBootstrapButtons.fire({
+
+          title: 'Deleted!',
           text: "You won't be able to revert this!",
-          icon:'success' ,
-          showConfirmButton:false,
-          timer:1000
-          
-         })
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 1000
+
+        })
       } else if (
         /* Read more about handling dismissals below */
         result.dismiss === Swal.DismissReason.cancel
@@ -71,4 +81,18 @@ export class ProductslistComponent implements OnInit {
       }
     })
   }
+  deleteProduct(id:number){
+   
+    this.productapi.deleteProduct(id)
+    .subscribe({
+      next:(res)=>{
+        this.ngOnInit();
+      },
+      error:()=>{
+        console.log("Error",error)
+      }
+    })
+  
+  }
 }
+
