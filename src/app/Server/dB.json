@@ -7,7 +7,17 @@
       "id": 1
     }
   ],
-  "cart": [],
+  "cart": [
+    {
+      "productId": 1,
+      "title": "iPhone 9",
+      "price": 549,
+      "thumbnail": "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
+      "discount": 12.96,
+      "count": 3,
+      "id": 1
+    }
+  ],
   "orders": [
     {
       "firstname": "d",
