@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProductsApiService } from 'src/app/services/products-api.service';
+import { ProductsService } from 'src/app/services/products.service';
 import { newProduct } from '../../newproduct';
 
 @Component({
@@ -16,7 +17,7 @@ categories:any;
 ckecked:boolean=false;
 message:boolean=false;
   constructor(private fb:FormBuilder,private catsrviece:ProductsApiService,
-    private http: HttpClient ,private ProductService: ProductsApiService,
+    private http: HttpClient ,private ProductService: ProductsService,
      private router: Router) {}
 
 addproductForm=this.fb.group(
@@ -93,7 +94,7 @@ return this.addproductForm.get('price')
     )
   }
  addproduct(){
-  //console.log(this.addproductForm.value)public brand:string,
+  //console.log(this.addproductForm.value)
        
   var newprd=new newProduct(this.brand?.value , this.category?.value ,this.title?.value,this.description?.value,this.numofitems?.value,this.price?.value,this.discound?.value,this.productImages,this.overview?.value,[],[]);
   

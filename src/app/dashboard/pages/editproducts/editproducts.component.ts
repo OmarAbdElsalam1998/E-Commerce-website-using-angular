@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router,ActivatedRoute } from '@angular/router';
 import { ProductsApiService } from 'src/app/services/products-api.service';
 import { newProduct } from '../../newproduct';
+import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-editproducts',
@@ -18,7 +19,7 @@ export class EditproductsComponent implements OnInit {
   message:boolean=false;
   
     constructor(private fb:FormBuilder,private catsrviece:ProductsApiService,
-      private http: HttpClient ,private ProductService: ProductsApiService,
+      private http: HttpClient ,private ProductService: ProductsService,
        private router2: ActivatedRoute ,private router:Router) {
       
   
