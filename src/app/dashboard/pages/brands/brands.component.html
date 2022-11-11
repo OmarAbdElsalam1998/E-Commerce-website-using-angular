@@ -1,155 +1,171 @@
 <main id="main" class="p-md-5 py-5">
-    
+
     <div class="container">
-         <!-- Start breadcrumb -->
+        <!-- Start breadcrumb -->
 
         <div class="heading d-flex align-items-center justify-content-between">
             <section class="breadcrumb ">
                 <div class="d-flex align-items-center justify-content-start  rounded my-3">
                     <nav aria-label="breadcrumb ">
                         <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item d-flex align-items-center justify-content-between"><a [routerLink]="['/dashboard']" routerLinkActive="router-link-active" >
-                            <i class="fa-solid fa-gauge-min fa-lg pe-2"></i> <span class="fw-bold">dashboard</span></a> 
-                        </li>
-                        <!-- {{selectedcategoty}} -->
-                        <li class="breadcrumb-item active fw-bold">Brands</li>
-                        
+                            <li class="breadcrumb-item d-flex align-items-center justify-content-between"><a
+                                    [routerLink]="['/dashboard']" routerLinkActive="router-link-active">
+                                    <i class="fa-solid fa-gauge-min fa-lg pe-2"></i> <span
+                                        class="fw-bold">dashboard</span></a>
+                            </li>
+                            <!-- {{selectedcategoty}} -->
+                            <li class="breadcrumb-item active fw-bold">Brands</li>
+
                         </ol>
                     </nav>
-                 </div>
+                </div>
             </section>
 
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#productsModal"
+                (click)="onAddClick();">
                 <i class="fa-solid fa-plus pe-2"></i>Add Brand
             </button>
-            
+
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="productsModal" tabindex="-1" aria-labelledby="productsModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered ">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title fw-bold" id="exampleModalLabel">Add Brand</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- Form for add Brand -->
-                        <form>
-                            <div class="mb-3">
-                              <label for="categoryName" class="form-label fw-bold">Brand Name</label>
-                              <input type="text" class="form-control" id="categoryName"  placeholder="Category Name">
-                            </div>
-                            <div class="mb-3">
-                                <label  class="form-label fw-bold">Brand Logo</label>
-
-                                <div class="upload-image p-3 border text-center" (click)="selectImage.click()">
-                                    <i class="fa-regular fa-cloud-arrow-up fa-3x"></i>
-                                    <p> upload Image</p>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title fw-bold" id="productsModalLabel">Add Brand</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"(click)="reset();"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Form for add Brand -->
+                            <form [formGroup]="productsForm" (ngSubmit)="addbrandDetails()">
+                                <div class="mb-3">
+                                    <label for="Brand Name" class="form-label fw-bold">Brand Name</label>
+                                    <input type="text" class="form-control" id="brandName" placeholder="Brand Name"
+                                        formControlName="name" required>
+                                    <!-- <input type="text" class="form-control" id="subCategories" value=""(keyup)="addSubCategory($event)" placeholder="Category Name" formControlName="subCategoriesme" required> -->
                                 </div>
-                                <div class="selected-image py-2" *ngIf="brandImageUrl">
-                                    <img [src]="brandImageUrl" title="Category Picture" height="150px" width="150px" />
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Brand Logo</label>
 
+                                    <div class="upload-image p-3 border text-center" (click)="selectImage.click()">
+                                        <i class="fa-regular fa-cloud-arrow-up fa-3x"></i>
+                                        <p> upload Image</p>
+                                    </div>
+                                    <div class="selected-image py-2" *ngIf="brandImageUrl">
+                                        <input type="text" class="form-control" id="brandName" placeholder="Brand Img"
+                                        formControlName="Img" required>
+                                        <img [src]="brandImageUrl" title="Category Picture" height="150px"
+                                            width="150px" />
+
+                                    </div>
+
+                                    <input input type="file" id="img" multiple style="display:none" accept="image/*"
+                                        #selectImage (change)="onSelect($event)" formControlName="Img" required />
                                 </div>
+                                <button [disabled]="productsForm.invalid" type="submit"
+                                    class="btn btn-primary px-4 w-100" *ngIf="showAddBtn">Submit</button>
+                                <button type="button"
+                                class="btn btn-primary" (click)="updatebrandDetails(id)" *ngIf="showUpdateBtn">UpdateBrand</button>
 
-                                <input
-                                  type="file"
-                                  id="img"
-                                  multiple
-                                  style="display:none"
-                                  accept="image/*"
-                                  #selectImage
-                                  (change)="onSelect($event)"
-                                />
-                            </div>
-                            
-                            <button type="submit" class="btn btn-primary px-4 w-100">Submit</button>
-                          </form>
+                                <!---////////--->
+                            </form>
+                        </div>
+
                     </div>
-                    
-                </div>
                 </div>
             </div>
 
         </div>
-        
+
         <!-- end breadcrumb -->
 
-        
+
 
         <div class="brands  my-4 rounded bg-white border">
             <div class="brands-header p-3 d-md-flex align-items-center justify-content-between ">
-                
-                <h2 class="fw-bold text-md-center bp-2">Brands <small class="fw-normal" style="font-size:1rem;">(12)</small></h2>
-                <div class="search-box d-flex align-items-center p-2 border rounded text-md-center" >
+
+                <h2 class="fw-bold text-md-center bp-2">Brands <small class="fw-normal"
+                        style="font-size:1rem;">(12)</small></h2>
+                <div class="search-box d-flex align-items-center p-2 border rounded text-md-center">
                     <i class="fa-regular fa-search fa-1x pe-2"></i>
                     <input id="search" placeholder="search" type="text" name="search" (keyup)="search($event)">
-        
+
                 </div>
-               
-                
-               
+
+
+
             </div>
 
             <!-- Brands List -->
             <div class="brands-list p-3">
                 <div class="row">
- 
+
+                    <div class="col-md-6  col-lg-4 col-xl-3" *ngFor="let brand of productsDetails |  paginate : {
+                        itemsPerPage: 30,
+                        currentPage: page,
+                        totalItems: productsDetails.length
+                    };">
+                        <div class="brand-box border rounded p-2 text-center mb-2" >
+                            <div class="product-img" >
+                                <img [src]="brand.Img" class="img-fluid">
+                            </div>
+                            <div class="brand-info py-2 text-center">
+                                <h4 class="brand-name fw-bold">{{brand.name}}</h4>
+                            </div>
+                            <div class="actions d-flex align-items-center justify-content-between w-100">
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#productsModal"
+                               (click)="Edit(brand.id)" class="btn btn-default border rounded  me-1 w-50"><i class="fa fa-edit pe-2"></i>Edit</button>
+                                <button (click)="showConfirmAlert(brand.id)"class="btn btn-default border rounded ms-1 w-50" style="color: rgb(220, 31, 31);"><i class="fa fa-trash pe-2 "></i>Delete</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <!-- Delete This -->
                     <!-- <div class="col-md-6  col-lg-4 col-xl-3" *ngFor="let brand of copyBrands |  paginate : {
                         itemsPerPage: 30,
                         currentPage: page,
                         totalItems: copyBrands.length
                     };">
-                    <div class="brand-box border rounded p-2 text-center mb-2">
-                        <div class="product-img">
-                            <img src="../../../../assets/images/adidas_logo.jpg" class="img-fluid">
-                        </div>
-                        <div class="brand-info py-2 text-center">
-                            <h4 class="brand-name fw-bold">{{brand.name}}</h4>
-                        </div>
-                        <div class="actions d-flex align-items-center justify-content-between w-100">
-                            <button class="btn btn-default border rounded  me-1 w-50" ><i class="fa fa-edit pe-2" (click)=""></i>Edit</button>
-                            <button (click)="showConfirmAlert()"  class="btn btn-default border rounded ms-1 w-50" style="color: rgb(220, 31, 31);"><i class="fa fa-trash pe-2 "></i>Delete</button>
-                        </div>
-
-                    </div>
-                    </div> -->
-
-
-                    <!-- Delete This -->
-                    <div class="col-md-6  col-lg-4 col-xl-3">
-                        <div class="brand-box border rounded p-2 text-center mb-2">
-                            <div class="product-img">
-                                <img src="../../../../assets/images/adidas_logo.jpg" class="img-fluid">
+                        <div class="brand-box border rounded p-2 text-center mb-2" *ngIf="brand.Img">
+                            <div class="product-img" *ngIf="brand.Img">
+                                <img [src]="brandImageUrl" class="img-fluid">
                             </div>
                             <div class="brand-info py-2  text-center">
-                                <h4 class="brand-name fw-bold">Brand name</h4>
+                                <h4 class="brand-name fw-bold">{{brand.name}}</h4>
                             </div>
                             <div class="actions d-flex align-items-center justify-content-between w-100">
-                                <button class="btn btn-default border rounded  me-1 w-50" ><i class="fa fa-edit pe-2"></i>Edit</button>
-                                <button (click)="showConfirmAlert()"  class="btn btn-default border rounded ms-1 w-50" style="color: rgb(220, 31, 31);"><i class="fa fa-trash pe-2 "></i>Delete</button>
+                                <button (click)="updatebrandDetails()" class="btn btn-default border rounded  me-1 w-50"><i
+                                        class="fa fa-edit pe-2"></i>Edit</button>
+                                <button (click)="showConfirmAlert(brand.id)"
+                                    class="btn btn-default border rounded ms-1 w-50" style="color: rgb(220, 31, 31);"><i
+                                        class="fa fa-trash pe-2 "></i>Delete</button>
                             </div>
 
                         </div>
-                    </div>
-                     <!--  -->
+                    </div> -->
+                    <!--  -->
 
 
-                     
+
 
                     <div class="text-center  p-5" *ngIf="copyBrands.length==0">
                         NO Brands Found
-                        
-                    </div>
-                    
-                </div>
-                <pagination-controls  *ngIf="copyBrands.length>0" (pageChange)="page=($event)" class="text-end py-2"></pagination-controls>
 
+                    </div>
+
+                </div>
+                <pagination-controls *ngIf="copyBrands.length>0" (pageChange)="page=($event)" class="text-end py-2">
+                    
+                </pagination-controls>
 
             </div>
-               
-               
-           
+
+
+
         </div>
-    
+
     </div>
 </main>

@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { data, error } from 'jquery';
+import { BrandsService } from 'src/app/services/brands.service';
+import { brand } from 'src/app/shares classes/brands';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -7,34 +12,63 @@ import Swal from 'sweetalert2';
   styleUrls: ['./brands.component.scss']
 })
 export class BrandsComponent implements OnInit {
-  page:number=1;
-  brands:any;
-  copyBrands:any=[];
-  constructor() { }
+
+
+  productsForm!: FormGroup;
+  productsModel: any;
+  productsDetails: any;
+  showAddBtn: boolean = true;
+  showUpdateBtn: boolean = false;
+  page: number = 1;
+  brands: any;
+  copyBrands: any = [];
+  image: any;
+  id: any;
+
+ 
+
+
+  constructor(private brand: BrandsService, private fb: FormBuilder, private router: ActivatedRoute
+  ) { }
+
+
 
   ngOnInit(): void {
-    
-  //  this.brandService.getOrders().subscribe((response)=>{
-  //   this.brands=response;
-  //   this.brands=response;
-  //  })
+      console.log(this.router.snapshot.params['id'])
+      this.brand.getCurrent(this.router.snapshot.params['id']).subscribe((result:any) => {
+        this.addbrandForm.controls['Img'].setValue(result['Img']);
+        this.addbrandForm.controls['name'].setValue(result['name']);
+        this.brandImageUrl=result['Img'];
+   
+    })
+
+
+    this.brand.getAllbrands().subscribe((res) => {
+      this.brands = res;
+      this.brands = res;
+    })
+
+    this.getAllbrandDetails();
+    this.createbrandForm();
   }
-  search(e:any){
+
+
+  search(e: any) {
     console.log(e.keyCode);
-    this.copyBrands=[...this.brands];
-    if(e.target.value==""){
+    this.copyBrands = [...this.brands];
+    if (e.target.value == "") {
       // this.ngOnInit();
     }
-    else{
+    else {
 
-      this.copyBrands=this.brands.filter((res:any)=>{
+      this.copyBrands = this.brands.filter((res: any) => {
         return res.name.toLocaleLowerCase().match(e.target.value.toLocaleLowerCase());
       });
     }
   }
- 
+
   brandImageUrl = '';
-  onSelect(event:any) {
+  onSelect(event: any) {
     let fileType = event.target.files[0].type;
     if (fileType.match(/image\/*/)) {
       let reader = new FileReader();
@@ -47,7 +81,113 @@ export class BrandsComponent implements OnInit {
       window.alert('Please select correct image format');
     }
   }
-  showConfirmAlert(){
+  /////////////////////////////
+  createbrandForm() {
+    this.productsForm = this.fb.group({
+      Img: [this.brandImageUrl],
+      name: [''],
+
+    });
+  }
+  /////////////////////////
+  onAddClick() {
+    this.showAddBtn = true;
+    this.showUpdateBtn = false;
+  }
+  ////////////////////////////////
+
+  getAllbrandDetails() {
+    this.brand.getAllbrands().subscribe(res => {
+      this.productsDetails = res;
+    }, err => {
+      console.log(err);
+
+    })
+  }
+  ////////////////////////////////
+  addbrandForm = this.fb.group(
+    {
+      name: ['', Validators.required],
+
+      Img: [this.brandImageUrl, Validators.required]
+    });
+
+
+  get name() {
+    return this.productsForm.get('name');
+  }
+  get img() {
+    return this.productsForm.get('Img');
+  }
+  //////////////////Add/////////////////
+  addbrandDetails() {
+    this.productsModel = Object.assign({}, this.productsForm.value);
+    console.log(this.productsForm.value);
+
+    var bran = new brand(this.productsForm.value.name, this.brandImageUrl);
+    this.brand.Postbrand(bran).subscribe(res => {
+      alert("brand Information added successfully");
+      let close = document.getElementById('close');
+      close?.click();
+      this.productsForm.reset();
+      this.brandImageUrl='';
+      this.getAllbrandDetails();
+    }, err => {
+      alert("Error");
+    })
+  }
+  ////////////////////FOOORM/////////////////
+
+  //////////////////////////////Delete/////////////////
+  deletebrandDetails(id: any) {
+    this.brand.Deletebrand(id).subscribe(res => {
+      alert("product information deleted successfully");
+      this.getAllbrandDetails();
+    }, err => {
+      alert("Failed to delete product information");
+    })
+  }
+  ///////////////////Edit///////////////////
+
+  Edit(Brandid:any) {
+
+    this.showAddBtn = false;
+    this.showUpdateBtn = true;
+    this.brand.getCurrent(Brandid).subscribe((result:any) => {
+      
+    this.addbrandForm.controls['Img'].setValue(result['Img']);
+    this.addbrandForm.controls['name'].setValue(result['name']);
+
+    })
+  }
+  ////////////update/////////////////////////
+
+  updatebrandDetails(id:any) {
+    this.productsModel = Object.assign({}, this.productsForm.value);
+
+    var bran = new brand(this.productsForm.value.name, this.brandImageUrl);
+    this.brand.Postbrand(bran).subscribe(res => {
+    this.brand.Updatebrand(bran,id).subscribe(res => {
+      
+      alert("brand information updated successfully");
+      let close = document.getElementById('close');
+      close?.click();
+      this.getAllbrandDetails();
+      this.productsForm.reset();
+      this.brandImageUrl='';
+      this.productsModel = {};
+    }, err => {
+      alert("Error in updating brand information");
+    })
+  })
+}
+
+
+  reset() {
+    this.productsForm.reset();
+    this.productsModel = {};
+  }
+  showConfirmAlert(id: number) {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
@@ -55,7 +195,7 @@ export class BrandsComponent implements OnInit {
       },
       buttonsStyling: true
     })
-    
+
     swalWithBootstrapButtons.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -66,15 +206,25 @@ export class BrandsComponent implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
+        this.brand.Deletebrand(id)
+          .subscribe({
+            next: (res) => {
+              this.ngOnInit();
+            },
+            error: () => {
+              console.log("Error", error)
+            }
+          })
+
         swalWithBootstrapButtons.fire({
-        
-          title:  'Deleted!',
+
+          title: 'Deleted!',
           text: "You won't be able to revert this!",
-          icon:'success' ,
-          showConfirmButton:false,
-          timer:1000
-          
-         })
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 1000
+
+        })
       } else if (
         /* Read more about handling dismissals below */
         result.dismiss === Swal.DismissReason.cancel
