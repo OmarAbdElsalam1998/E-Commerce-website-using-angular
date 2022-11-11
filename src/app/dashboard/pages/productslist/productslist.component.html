@@ -19,7 +19,7 @@
                  </div>
             </section>
 
-            <button class="btn btn-success" (click)="addProduct()"> <i class="fa-solid fa-plus pe-2"></i>Add Product</button>
+            <button class="btn btn-success" (click)="addProduct()" > <i class="fa-solid fa-plus pe-2"></i>Add Product</button>
 
         </div>
         
@@ -30,7 +30,7 @@
         <div class="products  my-4 rounded bg-white border">
             <div class="products-header p-3 d-lg-flex align-items-center justify-content-between">
                 
-                <h2 class="fw-bold text-md-center">Products <small class="fw-normal" style="font-size:1rem;">(1244 Items)</small></h2>
+                <h2 class="fw-bold text-md-center">Products <small class="fw-normal" style="font-size:1rem;">{{productdata.length}} items</small></h2>
                 <div class="search-box d-flex align-items-center p-2 border rounded text-md-center" >
                     <i class="fa-regular fa-search fa-1x pe-2"></i>
                     <input id="search" placeholder="search" type="text" name="search" (keyup)="search($event)">
@@ -76,22 +76,22 @@
                 
                
             </div>
-            <div class="products-list p-3">
-                <div class="row">
+            <div class="products-list p-3"   >
+                <div class="row" >
 
                     <!-- Start Product -->
-                    <div class="col-md-6  col-lg-4 col-xl-3">
-                        <div class="products-box border rounded p-2 text-center mb-2">
-                            <div class="product-img">
-                                <img src="../../../../assets/images/product.png" class="img-fluid">
+                    <div class=" col-md-6  col-lg-4 col-xl-3" *ngFor="let item of productdata"   >
+                        <div class="products-box border rounded p-2 text-center mb-2 " >
+                            <div class="product-img" >
+                                <img src={{item.images[0]}} class="img-fluid width"  >
                             </div>
                             <div class="product-info py-2 text-md-start text-center">
-                                <h4 class="product-name fw-bold">Product name</h4>
-                                <span>$120</span>
+                                <h4 class="product-name fw-bold">{{item.title }}</h4>
+                                <span>{{item.price|currency}}</span>
                             </div>
                             <div class="actions d-flex align-items-center justify-content-between w-100">
-                                <button (click)="editProduct() "class="btn btn-default border rounded  me-1 w-50" ><i class="fa fa-edit pe-2"></i>Edit</button>
-                                <button (click)="showConfirmAlert()"  class="btn btn-default border rounded ms-1 w-50" style="color: rgb(220, 31, 31);"><i class="fa fa-trash pe-2 "></i>Delete</button>
+                                <button routerLink="/dashboard/editProduct/{{item.id}}" class="btn btn-default border rounded  me-1 w-50" ><i class="fa fa-edit pe-2"></i>Edit</button>
+                                <button (click)="showConfirmAlert(item.id)"  class="btn btn-default border rounded ms-1 w-50" style="color: rgb(220, 31, 31);"><i class="fa fa-trash pe-2 "></i>Delete</button>
                             </div>
 
                         </div>

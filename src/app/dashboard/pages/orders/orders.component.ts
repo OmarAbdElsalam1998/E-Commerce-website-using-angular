@@ -46,6 +46,8 @@ export class OrdersComponent implements OnInit {
     this.copyOrders=response;
    })
   }
+
+  //Search for order
   search(e:any){
     console.log(e.keyCode);
     this.copyOrders=[...this.orders];
@@ -59,6 +61,8 @@ export class OrdersComponent implements OnInit {
       });
     }
   }
+
+  //Change status of order 
   changeStatus(status:string){
     if(this.orderStatus=="" ||this.orderStatus!=status){
       this.orderStatus=status;
@@ -71,6 +75,27 @@ export class OrdersComponent implements OnInit {
     
 
   }
+
+
+//select order when checkbox is checked
+  selectOrder(event:any){
+    if(event.target.checked){
+      console.log(event.target.value);
+      var order=document.getElementById(event.target.value);
+      console.log(order);
+      
+      order!.style.backgroundColor="#EEE";
+    }
+    else{
+      var order=document.getElementById(event.target.value);
+      console.log(order);
+      
+      order!.style.background="none";
+    }
+  }
+
+
+
   showConfirmAlert(){
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
