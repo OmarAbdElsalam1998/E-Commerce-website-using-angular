@@ -5,6 +5,7 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { CategoreisService } from 'src/app/services/categoreis.service';
 import { ProductsApiService } from 'src/app/services/products-api.service';
+import { ProductsService } from 'src/app/services/products.service';
 import { newProduct } from '../../newproduct';
 
 @Component({
@@ -20,8 +21,9 @@ taptitle:string="Add Product";
 ckecked:boolean=false;
 message:boolean=false;
   constructor(private fb:FormBuilder,private catsrviece:CategoreisService,
-    private http: HttpClient ,private ProductService: ProductsApiService,
+    private http: HttpClient ,private ProductService: ProductsService,
      private router: Router,private titleService:Title) {}
+  
 
 addproductForm=this.fb.group(
   {
@@ -99,7 +101,7 @@ return this.addproductForm.get('price')
     )
   }
  addproduct(){
-  //console.log(this.addproductForm.value)public brand:string,
+  //console.log(this.addproductForm.value)
        
   var newprd=new newProduct(this.addproductForm.value.brand!,this.category?.value! ,this.title?.value!,this.description?.value!,parseInt(this.numofitems?.value!),parseInt(this.price?.value!),parseInt(this.discound?.value!),this.productImages,this.overview?.value!,[],[]);
   

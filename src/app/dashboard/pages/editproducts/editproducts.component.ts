@@ -6,6 +6,7 @@ import { Router,ActivatedRoute } from '@angular/router';
 import { CategoreisService } from 'src/app/services/categoreis.service';
 import { ProductsApiService } from 'src/app/services/products-api.service';
 import { newProduct } from '../../newproduct';
+import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-editproducts',
@@ -21,9 +22,9 @@ export class EditproductsComponent implements OnInit {
   currentProduct:any;
   
     constructor(private fb:FormBuilder,private catsrviece:CategoreisService,
-      private http: HttpClient ,private ProductService: ProductsApiService,
+      private http: HttpClient ,private ProductService: ProductsService,
        private router2: ActivatedRoute ,private router:Router,private titleService:Title) {
-      
+   
   
     }
   

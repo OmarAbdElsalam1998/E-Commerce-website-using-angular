@@ -56,12 +56,12 @@
                     <!-- Example split danger button -->
                     <div class="btn-group px-2">
                         <span type="button" class="btn btn-default border outline-none p-2"><i class="fa-solid fa-sort pe-3"></i> Sorting</span>
-                        <button type="button" class="btn btn-default border outline-none dropdown-toggle dropdown-toggle-split p-2" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button type="button" (change)="sort($event)" class="btn btn-default border outline-none dropdown-toggle dropdown-toggle-split p-2" data-bs-toggle="dropdown" aria-expanded="false">
                         <span class="visually-hidden">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Show Low to High Price</a></li>
+                        <li><a class="dropdown-item" href="#">Show High to Low Price</a></li>
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#">Separated link</a></li>

@@ -4,6 +4,7 @@ import { Router, TitleStrategy } from '@angular/router';
 import { error } from 'jquery';
 import { ProductsApiService } from 'src/app/services/products-api.service';
 import Swal from 'sweetalert2';
+import { ProductsService } from 'src/app/services/products.service';
 import { newProduct } from '../../newproduct';
 
 @Component({
@@ -13,19 +14,22 @@ import { newProduct } from '../../newproduct';
 })
 export class ProductslistComponent implements OnInit {
   displayGrid: boolean = true;
+  productsList: any;
 
-  constructor(private router: Router, private productapi: ProductsApiService,private titleService:Title) { }
+  constructor(private router: Router, private ProductService: ProductsService,private titleService:Title) { }
   productdata: any = [];
+  title="AddProduct Dashboard";
   ngOnInit(): void {
     this.titleService.setTitle("Products");
-    this.productapi.getProduct().subscribe((allData) => {
+    this.ProductService.getProduct().subscribe((allData) => {
+    this.titleService.setTitle(this.title);
+    this.ProductService.getProduct().subscribe((allData) => {
       console.log(allData);
       this.productdata = allData;
     });
-  }
-  search(event: any) {
-
-  }
+  });
+}
+ 
   addProduct() {
     this.router.navigate(['/dashboard/productslist/addProduct']);
   }
@@ -61,7 +65,7 @@ export class ProductslistComponent implements OnInit {
       if (result.isConfirmed) {
        
         this.deleteProduct(id);
-        
+
         swalWithBootstrapButtons.fire({
 
           title: 'Deleted!',
@@ -85,7 +89,7 @@ export class ProductslistComponent implements OnInit {
   }
   deleteProduct(id:number){
    
-    this.productapi.deleteProduct(id)
+    this.ProductService.deleteProduct(id)
     .subscribe({
       next:(res)=>{
         this.ngOnInit();
@@ -95,6 +99,14 @@ export class ProductslistComponent implements OnInit {
       }
     })
   
+  }
+  sort(event: any) {
+
+   
+  
+  }
+  search(event:any){
+    
   }
 }
 
