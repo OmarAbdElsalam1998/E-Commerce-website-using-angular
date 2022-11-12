@@ -16,3 +16,9 @@
         margin-left: 20px;
     }
 }
+@media print {
+    header{
+        display: none !important;
+        color: red;
+    }
+}

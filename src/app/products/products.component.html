@@ -37,8 +37,10 @@
                     <option value="LowRate">Show Low to High Rate</option>
                     <option value="HighRate">Show High to Low Rate</option>
                   </select>
-                  <i class="fa-regular fa-grid fa-2x" (click)="changeDisplay('grid')"></i>
-                  <i class="fa-regular fa-list fa-2x"(click)="changeDisplay('list')"></i>
+                  
+                  <span class="mx-2 p-2 border border rounded "  (click)="changeDisplay('grid')"><i class="fa-solid fa-grid fa-lg"></i></span> 
+               
+                  <span class="mx-2 p-2 border rounded"  (click)="changeDisplay('list')"><i class="fa-solid fa-list fa-lg"></i></span> 
                  
             </div>
             <div class="row">

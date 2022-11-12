@@ -2,19 +2,19 @@ export class newProduct
 {
 
         
-        brand:any;
-        category:any;
-        title:any;
-        description:any;
-        numofitems:any;
-        price:any;
-        discound:any;
-        images:any;
-        overview:any;
-        sizes:[];
-        colors:[];
+        brand:string;
+        category:string;
+        title:string;
+        description:string;
+        numofitems:number;
+        price:number;
+        discound:number;
+        images:string[];
+        overview:string;
+        sizes:string[];
+        colors:string[];
 
-        constructor(brand:any,category:any,title:any,description:any,numofitems:any,price:any,discound:any,images:any,overview:any,sizes:[],colors:[]){
+        constructor(brand:string,category:string,title:string,description:string,numofitems:number,price:number,discound:number,images:any,overview:string,sizes:[],colors:[]){
             this.brand=brand;
             this.category=category;
             this.title=title;

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router, TitleStrategy } from '@angular/router';
 import { error } from 'jquery';
 import { ProductsApiService } from 'src/app/services/products-api.service';
@@ -13,9 +14,10 @@ import { newProduct } from '../../newproduct';
 export class ProductslistComponent implements OnInit {
   displayGrid: boolean = true;
 
-  constructor(private router: Router, private productapi: ProductsApiService) { }
+  constructor(private router: Router, private productapi: ProductsApiService,private titleService:Title) { }
   productdata: any = [];
   ngOnInit(): void {
+    this.titleService.setTitle("Products");
     this.productapi.getProduct().subscribe((allData) => {
       console.log(allData);
       this.productdata = allData;
@@ -25,7 +27,7 @@ export class ProductslistComponent implements OnInit {
 
   }
   addProduct() {
-    this.router.navigate(['/dashboard/addProduct']);
+    this.router.navigate(['/dashboard/productslist/addProduct']);
   }
 
   displayMode(value: string) {

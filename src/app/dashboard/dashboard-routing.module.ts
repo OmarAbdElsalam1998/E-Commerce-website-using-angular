@@ -16,10 +16,10 @@ import { UsersComponent } from './pages/users/users.component';
 const routes: Routes = [
   {path:"",component:MainComponent,canLoad:[AdminGuard],children:[
     {path:"",component:DashboardMainComponent,canLoad:[AdminGuard]},
-    {path:"ordersdetails",component:OrderdetailsComponent,canLoad:[AdminGuard]},
+    {path:"orders/order/:id",component:OrderdetailsComponent,canLoad:[AdminGuard]},
     {path:"productslist",component:ProductslistComponent,canLoad:[AdminGuard]},
-    {path:"addProduct",component:AddProductsComponent,canLoad:[AdminGuard]},
-    {path:"editProduct/:id",component:EditproductsComponent,canLoad:[AdminGuard]},
+    {path:"productslist/addProduct",component:AddProductsComponent,canLoad:[AdminGuard]},
+    {path:"productslist/editProduct/:id",component:EditproductsComponent,canLoad:[AdminGuard]},
     {path:"categories",component:CategoriesComponent,canLoad:[AdminGuard]},
     {path:"",component:CategoriesComponent,canLoad:[AdminGuard]},
     {path:"brands",component:BrandsComponent,canLoad:[AdminGuard]},

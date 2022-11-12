@@ -14,7 +14,7 @@ import { ConfirmPasswordValidator } from './confirmPassword';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-  title="User DashBoard"
+  title="Users"
   userResponsipilities:string[]=[];
   constructor(private adminService: AdminRoleService , private activateRoute:ActivatedRoute, private fb:FormBuilder , private route:Router , private titleService : Title) { }
 
@@ -22,12 +22,29 @@ export class UsersComponent implements OnInit {
   userList:any;
   userId:any;
   count:any;
+  currentUser:any;
 
   ngOnInit(): void {
     this.titleService.setTitle(this.title);
     this.loadData();
     // this.loadSpecificDataById();
   }
+
+  addUserForm=this.fb.group(
+    {
+    userName:['',[Validators.required,Validators.maxLength(32),Validators.minLength(3)]],           //call simple validators
+    lastName:['',[Validators.required,Validators.maxLength(32),Validators.minLength(3)]],           //call simple validators
+    userEmail:['',[Validators.required,Validators.pattern("^([a-zA-Z0-9_-]+)@([a-zA-Z]+)\.(com|eg)$")]],
+    phone:[,[Validators.required,Validators.maxLength(11),Validators.minLength(11)]],           //call simple validators
+    Password:['',[Validators.required,Validators.pattern("^[a-zA-Z0-9_-]{6,32}$")]],        //call simple validators
+    confirmPassword:[''],           //call simple validators
+    role:['',[Validators.required]], 
+    image:['',[Validators.required]],
+    
+  },
+  {validator:[ConfirmPasswordValidator,Validators.required]}                    //call Cross field validators (on all form Group not only control)
+  );
+
 
   loadData()
   {
@@ -42,7 +59,7 @@ export class UsersComponent implements OnInit {
     )
   }
 
-  loadSpecificDataById(id:any)
+  UpdateUser(id:any)
   {
     var user =new UserRole(this.addUserForm.value.userName,this.addUserForm.value.lastName,this.addUserForm.value.userEmail,this.addUserForm.value.phone,this.addUserForm.value.Password,this.addUserForm.value.confirmPassword,this.userResponsipilities,this.userImageUrl,"")
   //   // get userDetails by id
@@ -53,46 +70,64 @@ export class UsersComponent implements OnInit {
           console.log(data);
           this.loadData();
           this.addUserForm.reset();
+          let close = document.getElementById('close');
+        close?.click();
+          Swal.fire({
+        
+            title:"Updated Successfully",
+            icon:'success' ,
+            showConfirmButton:false,
+            timer:1000
+            
+           })
         }
       )
     }
     openEdit(id:any){
-      // this.loadSpecificDataById(id);
+      this.currentUser=id;
+      this.adminService.getUserById(id).subscribe(result => {
+        console.log(result);
+        this.addUserForm.controls['userName']?.setValue(result['userName']),
+        this.addUserForm.controls['lastName']?.setValue(result['lastName']),
+        this.addUserForm.controls['userEmail']?.setValue(result['userEmail']),
+        this.addUserForm.controls['phone']?.setValue(result['phone']),
+        this.addUserForm.controls['Password']?.setValue(result['Password']),
+        this.addUserForm.controls['confirmPassword']?.setValue(result['confirmPassword']),
+        this.userImageUrl=result['image'],
+        this.userResponsipilities=result['role'];
+    });
     }
   
-    saveChanges()
+    saveChanges(id:number)
     {
-      this.adminService.putUser(this.userRole,this.userId)
-      .subscribe(
-        data =>{
-          this.userRole=data;
-          this.loadData();
-  
-        })
+     this.UpdateUser(id);
     }
   
-  addUserForm=this.fb.group(
+ 
+    resetForm()
     {
-    userName:['',[Validators.required,Validators.maxLength(32),Validators.minLength(5)]],           //call simple validators
-    lastName:['',[Validators.required,Validators.maxLength(32),Validators.minLength(5)]],           //call simple validators
-    userEmail:['',[Validators.required,Validators.pattern("^([a-zA-Z0-9_-]+)@([a-zA-Z]+)\.(com|eg)$")]],
-    phone:[,[Validators.required,Validators.maxLength(11),Validators.minLength(11)]],           //call simple validators
-    Password:['',[Validators.required,Validators.pattern("^[a-zA-Z0-9_-]{6,32}$")]],        //call simple validators
-    confirmPassword:[''],           //call simple validators
-    role:['',[Validators.required]], 
-    image:['',[Validators.required]],
+      this.addUserForm.reset();
+      this.userImageUrl="";
+      this.userResponsipilities=[];
+    }  
     
-  },
-  {validator:[ConfirmPasswordValidator,Validators.required]}                    //call Cross field validators (on all form Group not only control)
-  );
-
   addUser()
   {
      var user =new UserRole(this.addUserForm.value.userName,this.addUserForm.value.lastName,this.addUserForm.value.userEmail,this.addUserForm.value.phone,this.addUserForm.value.Password,this.addUserForm.value.confirmPassword,this.userResponsipilities,this.userImageUrl,"")
     this.adminService.postUser(user).subscribe(
       data =>{
-        this.userRole=data;
+        // this.userRole=data;
         this.addUserForm.reset();
+        let close = document.getElementById('close');
+        close?.click();
+        Swal.fire({
+        
+          title:"User Added Successfully",
+          icon:'success' ,
+          showConfirmButton:false,
+          timer:1000
+          
+         })
         // this.route.navigate(['/dashboard/users']);
         this.loadData();
         console.log(data);
@@ -165,11 +200,7 @@ export class UsersComponent implements OnInit {
         /* Read more about handling dismissals below */
         result.dismiss === Swal.DismissReason.cancel
       ) {
-        swalWithBootstrapButtons.fire(
-          'Cancelled',
-          'Your imaginary file is safe :)',
-          'error'
-        )
+       
       }
     })
   }

@@ -24,7 +24,8 @@
                 <div class="order-status p-3  rounded " (click)="changeStatus('WaitingForReview')">
                    <div class="status-icon-count d-flex justify-content-between align-items-center">
                     <span class="icon"><i class="fa-regular fa-clock"></i></span>
-                    <span class="count">100</span>
+                   
+                    <span class="count">{{waitingForReview}}</span>
                    </div>
                    <div class="status-type">
                     Waiting For Review
@@ -35,7 +36,7 @@
                 <div class="order-status p-3  rounded "  (click)="changeStatus('beingProcessed')">
                     <div class="status-icon-count d-flex justify-content-between align-items-center">
                      <span class="icon"><i class="fa-regular fa-gift"></i></span>
-                     <span class="count">100</span>
+                     <span class="count">{{beingProcessed}}</span>
                     </div>
                     <div class="status-type">
                      Being processed
@@ -46,7 +47,8 @@
                 <div class="order-status p-3  rounded " (click)="changeStatus('prepared')">
                     <div class="status-icon-count d-flex justify-content-between align-items-center">
                      <span class="icon"><i class="fa-solid fa-check-double"></i></span>
-                     <span class="count">100</span>
+                    
+                     <span class="count">{{prepared}}</span>
                     </div>
                     <div class="status-type">
                      Prepared
@@ -54,13 +56,13 @@
                  </div>
             </ng-template>
             <ng-template carouselSlide>
-                <div class="order-status p-3  rounded "(click)="changeStatus('deliveryInProgress')">
+                <div class="order-status p-3  rounded "(click)="changeStatus('outForDelivery')">
                     <div class="status-icon-count d-flex justify-content-between align-items-center">
                      <span class="icon"><i class="fa-regular fa-truck-bolt"></i></span>
-                     <span class="count">100</span>
+                     <span class="count">{{outForDelivery}}</span>
                     </div>
                     <div class="status-type">
-                    Delivery In Progress
+                        Out For Delivery
                     </div>
                  </div>
             </ng-template>
@@ -68,8 +70,10 @@
                 <div class="order-status p-3  rounded " (click)="changeStatus('delivered')">
                     <div class="status-icon-count d-flex justify-content-between align-items-center">
                      <span class="icon"><i class="fa-solid fa-person-carry-box"></i></span>
-                     <span class="count">100</span>
+                     <span class="count">{{delivered}}</span>
                     </div>
+                   
+                   
                     <div class="status-type">
                      Delivered
                     </div>
@@ -79,7 +83,7 @@
                 <div class="order-status p-3  rounded " (click)="changeStatus('cancelled')">
                     <div class="status-icon-count d-flex justify-content-between align-items-center">
                         <span class="icon"><i class="fa-regular fa-xmark-large"></i></span>
-                        <span class="count">100</span>
+                        <span class="count">{{cancelled}}</span>
                     </div>
                     <div class="status-type">
                         Cancelled
@@ -90,18 +94,19 @@
                 <div class="order-status p-3  rounded " (click)="changeStatus('beingRetrived')">
                     <div class="status-icon-count d-flex justify-content-between align-items-center">
                         <span class="icon"><i class="fa-solid fa-arrows-rotate"></i></span>
-                        <span class="count">100</span>
+                        <span class="count">{{beingRetrived}}</span>
                     </div>
                     <div class="status-type">
                         Being Retrived
                     </div>
+                  
                 </div>
             </ng-template>
             <ng-template carouselSlide>
                 <div class="order-status p-3  rounded " (click)="changeStatus('retrived')">
                     <div class="status-icon-count d-flex justify-content-between align-items-center">
                         <span class="icon"><i class=" fa-solid fa-clock-rotate-left"></i></span>
-                        <span class="count">100</span>
+                        <span class="count">{{retrived}}</span>
                     </div>
                     <div class="status-type">
                         Retrived
@@ -129,7 +134,9 @@
                             <span class="visually-hidden">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" ><i class="fa-regular fa-bag-shopping"></i><span class="ps-2">Change Order Status</span></a></li>
+                            <li (click)="showFormToSelectStatus()" data-bs-toggle="modal" data-bs-target="#changeStatus"><a class="dropdown-item" ><i class="fa-regular fa-bag-shopping"></i><span class="ps-2">Change Order Status</span></a>
+                                
+                            </li>
                             <li (click)="showConfirmAlert()"><a class="dropdown-item" ><i class="fa-light fa-trash-can"></i><span class="ps-2">Delete Order</span></a></li>
                            
                             </ul>
@@ -140,12 +147,12 @@
 
             </div>
             <div class="order-list">
-                <div class="d-flex align-items-center border-bottom " *ngFor="let order of copyOrders | orderBy: key: reverse | paginate : {
-                    itemsPerPage: 5,
+                <div class="d-flex align-items-center border-bottom fw-bold" *ngFor="let order of copyOrders | orderBy: key: reverse | paginate : {
+                    itemsPerPage: 20,
                     currentPage: page,
                     totalItems: copyOrders.length
-                  };" [id]="order.id">
-                  <div class="order-customer" >
+                  };" [id]="order.id" >
+                  <div class="order-customer"  >
                         <div class="customer d-flex align-items-center p-3">
                             <div class="checkbox px-2">
                                 <input  class=" form-check-input"type="checkbox" [value]="order.id" (change)="selectOrder($event)">
@@ -153,20 +160,47 @@
                             <div class="customer-img px-2">
                                     <img src="../../../../assets/images/person.jpg" style="width:50px;height:50px;">
                             </div>
-                            <div class="order-info px-2">
-                                <div class="customer-name">
+                            <div class="order-info px-2" (click)="OrderDetails(order.id)">
+                                <div class="customer-name fw-bold">
                                     {{order.firstname+" "+order.lastname}}
 
                                 </div>
-                                <div class="shipping-data">
-                                    d
-                                </div>
+                                <div class="shipping-data ">
+                                    <span class="pe-2"><i class="fa-solid fa-hashtag "></i>{{order.id}}</span>
+                                    <span class="pe-2"><i class="fa-regular fa-location-dot pe-1"></i>{{ order.country }},{{order.city}}</span>
+                                    <span [ngSwitch]="order.orderStatus">
+                                        <span style="padding: 3px 10px;background: #ffc8467d;border-radius: 11px; color: #cda215;" *ngSwitchCase="'WaitingForReview'">
+                                            {{order.orderStatus}}
+                                        </span>
+                                        <span style="padding: 3px 10px;border-radius: 11px; background: #a7beff7d;color: #050142;" *ngSwitchCase="'beingProcessed'">
+                                            {{order.orderStatus}}
+                                        </span>
+                                        <span style="padding: 3px 10px;border-radius: 11px; background: #a7beff7d;color: #050142;" *ngSwitchCase="'prepared'">
+                                            {{order.orderStatus}}
+                                        </span>
+                                        <span style="padding: 3px 10px;background: #96ec987d; border-radius: 11px;color: #4a9706;" *ngSwitchCase="'outForDelivery'">
+                                            {{order.orderStatus}}
+                                        </span>
+                                        <span style="padding: 3px 10px;background: #96ec987d; border-radius: 11px;color: #4a9706;" *ngSwitchCase="'delivered'">
+                                            {{order.orderStatus}}
+                                        </span>
+                                        <span style="padding: 3px 10px;background: #ff746c7d;border-radius: 11px;color: #c91d1d;" *ngSwitchCase="'cancelled'">
+                                            {{order.orderStatus}}
+                                        </span>
+                                        <span style="padding: 3px 10px;background: #74fff47d;border-radius: 11px; color: #12acb3;" *ngSwitchCase="'beingRetrived'">
+                                            {{order.orderStatus}}
+                                        </span>
+                                        <span style="padding: 3px 10px;background: #74fff47d;border-radius: 11px; color: #12acb3;" *ngSwitchCase="'retrived'">
+                                            {{order.orderStatus}}
+                                        </span>
+                                    </span>                               
+                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="order-total px-2">{{order.totalPrice}} </div>
+                    <div class="order-total px-3">{{order.totalPrice |number : '1.1-1'}} E.P</div>
 
-                    <div class="order-time px-2"> since 3 minutes ago</div>
+                    <div class="order-time px-3"> since 3 minutes ago</div>
             
            
                  
@@ -179,6 +213,49 @@
                        
                <pagination-controls  *ngIf="copyOrders.length>0" (pageChange)="page=($event)" class="text-end py-2"></pagination-controls>
             </div>
+              <!-- Modal -->
+          <div *ngIf="selectedOrder.length>0" class="modal fade" id="changeStatus" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    
+                
+                <h5 class="modal-title fw-bold" id="categoryModalLabel"  >Change Status</h5>
+                <!-- <button type="button" class="btn-close"id="close" data-bs-dismiss="modal" aria-label="Close" (click)="reset(); "></button> -->
+                <button type="button" class="btn-close"id="close" data-bs-dismiss="modal" aria-label="Close" id="close"></button>
+                </div>
+
+                <div class="modal-body border-none">
+                    <form [formGroup]="changeStatusForm">
+                        <div class="mb-3">
+                            <select class="form-select" aria-label="Default select example" formControlName="status">
+                                <option selected disabled>Select Status</option>
+                                <option value="WaitingForReview">WaitingForReview</option>
+                                <option value="beingProcessed">beingProcessed</option>
+                                <option value="prepared">prepared</option>
+                                <option value="outForDelivery">outForDelivery</option>
+                                <option value="delivered">delivered</option>
+                                <option value="cancelled">cancelled</option>
+                                <option value="beingRetrived">beingRetrived</option>
+                                <option value="retrived">retrived</option>
+                              </select> 
+                        </div>
+                        
+                        <button (click)="changeOrderStatus()" type="button" class="btn btn-primary" >Confirm</button>
+                        
+                      </form>
+                </div>
+                
+                <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close"
+                        (click)="reset();">Close</button>
+                    <button type="button" class="btn btn-primary" (click)="updateafterEditetaked()"
+                        *ngIf="showUpdateBtn">Update Product</button>
+    
+                </div> -->
+            </div>
+            </div>
+        </div>
 
             <!-- <div class="table-responsive">
                 <table class="react_table table  table-hover scroll text">

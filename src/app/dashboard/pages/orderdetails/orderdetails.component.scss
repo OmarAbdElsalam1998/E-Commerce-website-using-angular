@@ -2,11 +2,15 @@
     font-family: 'Nunito', sans-serif;
 
     .order-details{
-        box-shadow: 0 0 15px #c2bdbdd9;
 
         h2{
             font-weight: 600;
             color:red;
+        }
+        .order-action{
+            .order-status{
+
+            }
         }
 
         .order-shipping-info{
@@ -15,10 +19,10 @@
                 .heading{
                     background-color: #eee;
                     .icon i{
-                        padding: 10px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
+                        width:40px;
+                        height: 40px;
+                        text-align: center;
+                        line-height: 40px;
                         background: #1d51c1;
                         border-radius: 50%;
                         color: #FFF;
@@ -37,4 +41,35 @@
 .breadcrumb .breadcrumb-item a{
     text-decoration: none;
     background:none;
+}
+
+.icon-heading i{
+    width:40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    background: #9a9a9a;
+    border-radius: 50%;
+    color: #FFF;
+}
+
+@media print {
+    .order-status{
+        display: none;
+    }
+    .breadcrumb{
+        display: none;
+    }
+    header{
+        display: none;
+    }
+    .btn{
+        display: none;
+    }
+
+
+}
+
+.table tr{
+    vertical-align: middle;
 }

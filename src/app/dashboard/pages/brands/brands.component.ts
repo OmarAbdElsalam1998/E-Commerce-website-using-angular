@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BrandsService } from 'src/app/services/brands.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -10,13 +11,13 @@ export class BrandsComponent implements OnInit {
   page:number=1;
   brands:any;
   copyBrands:any=[];
-  constructor() { }
+  constructor(private brandService:BrandsService) { }
 
   ngOnInit(): void {
     
-  //  this.brandService.getOrders().subscribe((response)=>{
+  //  this.brandService.getBrand().subscribe((response)=>{
   //   this.brands=response;
-  //   this.brands=response;
+  //   this.copyBrands=response;
   //  })
   }
   search(e:any){

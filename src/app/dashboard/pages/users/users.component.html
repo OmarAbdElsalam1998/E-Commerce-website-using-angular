@@ -20,7 +20,7 @@
             </section>
 
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button (click)="resetForm()" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <i class="fa-solid fa-plus pe-2"></i>New User
             </button>
             
@@ -30,7 +30,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                     <h5 class="modal-title fw-bold" id="exampleModalLabel">Add New User</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close"></button>
                     </div>
                     <div class="modal-body">
                         <!-- Form To Add Users -->
@@ -106,10 +106,10 @@
                             </div>
                             <div class="mb-3">
                                 <label for="userResponsibilities" class="form-label fw-bold">Responsibilities</label>
-                                <select [class.is-invalid]="role?.invalid && role?.touched" formControlName="role" class="form-control" id="userResponsibilities"(change)="addUserResponsibilities($event)">
+                                <select  placeholder="dd" [class.is-invalid]="role?.invalid && role?.touched" formControlName="role" class="form-control" id="userResponsibilities"(change)="addUserResponsibilities($event)">
                                 
                                     <option disabled selected>Select</option>
-                                    <option>Add Products</option>
+                                    <option selected="selected">Add Products</option>
                                     <option>Edit Products</option>
                                     <option>Remove Products</option>
                                     <option>Manage Orders</option>
@@ -134,7 +134,7 @@
                                     <small class="text-danger" *ngIf="Password?.errors?.['required']"> Password is Required</small>
                                     <small class="text-danger" *ngIf="Password?.errors?.['pattern']"> Password should be in form like (capital & small letters ,at least 6 characters and maximum 32 characters)</small>
                                     </div>
-                                   <span class="show-password"><i class="fa-light fa-eye-slash fa-fw"></i></span>
+                                   <!-- <span class="show-password"><i class="fa-light fa-eye-slash fa-fw"></i></span> -->
                               </div>
                               <div class="mb-3">
                                 <label for="confirmPassword" class="form-label fw-bold">Confirm Password</label>
@@ -143,10 +143,10 @@
                                    <small class="text-danger" *ngIf="addUserForm.errors?.['misMatch']"> Confirm Password not match with Password</small>
                          
 
-                                   <span class="show-password"><i class="fa-light fa-eye-slash fa-fw"></i></span>
+                                   <!-- <span class="show-password"><i class="fa-light fa-eye-slash fa-fw"></i></span> -->
                               </div>
                             
-                            <button  (click)="addUser()" type="submit" class="btn btn-primary px-4 w-100">Add User</button>
+                            <button [disabled]="addUserForm.invalid" (click)="addUser()" type="submit" class="btn btn-primary px-4 w-100">Add User</button>
                           </form>
                     </div>
                     
@@ -156,11 +156,11 @@
 
                 <!-- Modal 2 for Edit User -->
             <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered ">
+                <div class="modal-dialog modal-dialog-centered  modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
                     <h5 class="modal-title fw-bold" id="exampleModalLabel">Edit User</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close"></button>
                     </div>
                     <div class="modal-body">
                         <!-- Form To Edit User -->
@@ -238,8 +238,8 @@
                                     <label for="userResponsibilities" class="form-label fw-bold">Responsibilities</label>
                                     <select [class.is-invalid]="role?.invalid && role?.touched" formControlName="role" class="form-control" id="userResponsibilities"(change)="addUserResponsibilities($event)">
                                     
-                                        <option disabled selected>Select</option>
-                                        <option>Add Products</option>
+                                        <option selected>Select</option>
+                                        <option >Add Products</option>
                                         <option>Edit Products</option>
                                         <option>Remove Products</option>
                                         <option>Manage Orders</option>
@@ -264,7 +264,7 @@
                                         <small class="text-danger" *ngIf="Password?.errors?.['required']"> Password is Required</small>
                                         <small class="text-danger" *ngIf="Password?.errors?.['pattern']"> Password should be in form like (capital & small letters ,at least 6 characters and maximum 32 characters)</small>
                                         </div>
-                                       <span class="show-password"><i class="fa-light fa-eye-slash fa-fw"></i></span>
+                                       <!-- <span class="show-password"><i class="fa-light fa-eye-slash fa-fw"></i></span> -->
                                   </div>
                                   <div class="mb-3">
                                     <label for="confirmPassword" class="form-label fw-bold">Confirm Password</label>
@@ -273,9 +273,9 @@
                                        <small class="text-danger" *ngIf="addUserForm.errors?.['misMatch']"> Confirm Password not match with Password</small>
                              
     
-                                       <span class="show-password"><i class="fa-light fa-eye-slash fa-fw"></i></span>
+                                       <!-- <span class="show-password"><i class="fa-light fa-eye-slash fa-fw"></i></span> -->
                                   </div>
-                                  <button (click)="saveChanges()" type="submit" class="btn btn-primary px-4 w-100">save Changes</button>
+                                  <button  (click)="saveChanges(currentUser)" type="submit" class="btn btn-primary px-4 w-100">save Changes</button>
 
                                 <!-- <button [disabled]="addUserForm.invalid" (click)="saveChanges()" type="submit" class="btn btn-primary px-4 w-100">save Changes</button> -->
                               </form>
@@ -340,7 +340,7 @@
                             </div>
                             <div class="user-info text-center py-2">
                                 <!-- <h4 class="fw-bold fs-5" [userName]="user.userName">{{user.userName}}</h4> -->
-                                <h4 class="fw-bold fs-5" >{{user.userName}}</h4>
+                                <h4 class="fw-bold fs-5" >{{user.userName +" "+user.lastName}}</h4>
 
                             </div>
                             <div class="actions d-flex align-items-center justify-content-between w-100 py-2">

@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 export class UserAuthService {
    isLoogedSubject:BehaviorSubject<boolean>;
    isAdminSubject:BehaviorSubject<boolean>;
+   userId:BehaviorSubject<number>;
    loader:BehaviorSubject<boolean>;
    userName:BehaviorSubject<string>;
 
@@ -15,14 +16,16 @@ export class UserAuthService {
     this.isAdminSubject=new BehaviorSubject<boolean> (false);
     this.loader=new BehaviorSubject<boolean>(false);
     this.userName=new BehaviorSubject<string>("");
+    this.userId=new BehaviorSubject<number>(-1);
    }
 
 
-  logIn(username:any,password:string,role:string="user"){
+  logIn(id:number,username:any,password:string,role:string="user"){
     let token="12345";
-    localStorage.setItem("token",token);
+//    localStorage.setItem("token",token);
     this.isLoogedSubject.next(true);
     this.isAdminSubject.next(false);
+    this.userId.next(id);
     console.log(username);
     this.userName.next(username)
     if(role=="admin"){
@@ -33,7 +36,7 @@ export class UserAuthService {
   }
   
   logOut(){
-    localStorage.removeItem("token");
+    //localStorage.removeItem("token");
     this.isLoogedSubject.next(false);
     this.isAdminSubject.next(false);
     this.userName.next("");
@@ -56,6 +59,10 @@ export class UserAuthService {
   }
   getUsername(){
     return this.userName;
+  }
+
+  getUserId(){
+    return this.userId;
   }
 
 }

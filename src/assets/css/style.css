@@ -92,3 +92,43 @@
   }
  /* end dashboard sidebar */
 
+
+
+ /* Pagination */
+ .ngx-pagination{
+  padding: 10px 0;
+ }
+ .ngx-pagination .ng-star-inserted,
+ .ngx-pagination .pagination-previous.ng-star-inserted,
+ .ngx-pagination .pagination-previous.disabled {
+  margin: 0;
+
+ }
+ .ngx-pagination .current{
+  background-color: #5757ff !important;
+  padding:10px;
+ }
+ .ngx-pagination ul li{
+padding: 20px !important; 
+margin:0;
+}
+ .ngx-pagination a{
+  text-decoration: none;
+  padding:10px;
+
+ }
+ 
+
+ @media print {
+  .order-status{
+      display: none;
+  }
+  .breadcrumb{
+      display: none;
+  }
+  header{
+      display: none;
+  }
+
+}
+ 

@@ -8,18 +8,17 @@
                         <li class="breadcrumb-item d-flex align-items-center justify-content-between"><a [routerLink]="['/dashboard']" routerLinkActive="router-link-active" >
                             <i class="fa-solid fa-gauge-min fa-lg pe-2"></i> <span class="fw-bold">dashboard</span></a> 
                         </li>
+                        <li class="breadcrumb-item d-flex align-items-center justify-content-between"><a [routerLink]="['/dashboard/productslist']" routerLinkActive="router-link-active" >
+                            <span class="fw-bold">Products</span>
+                        </a> 
+                        </li>
                         <li class="breadcrumb-item active fw-bold">Edit Product</li>
                         
                         </ol>
                     </nav>
                  </div>
             </section>
-            <div *ngIf="message" class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Success!</strong> Product Updated
-                <button (click)="removemessage()" type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
+
             <h2 class="fw-bold" >Edit Product</h2>
             <div class="form">
                 
@@ -49,12 +48,12 @@
                                 </div>
                                 <div class="form-group w-50 m-2">
                                     <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold">Category</label>
-                                    <select formControlName="category" [class.is-invalid]=" category?.invalid &&  category?.touched" class="form-select" aria-label="Default select example">
+                                    <select value="k" formControlName="category" [class.is-invalid]=" category?.invalid &&  category?.touched" class="form-select" aria-label="Default select example">
                                         <div *ngIf="(category?.invalid &&  category?.touched)">
                                             <small class="text-danger" *ngIf=" category?.errors?.['required']">Category Name is required</small>
                                         </div>
-                                        <option selected>Open this select menu</option>
-                                        <option value="{{cat}}" *ngFor="let cat of categories">{{cat}}</option>
+                                        <option selected="selected">Open this select menu</option>
+                                        <option value="{{cat}}" *ngFor="let cat of categories" >{{cat.Name}}</option>
                                       </select>
                                 </div>
                             </div>
@@ -177,10 +176,10 @@
                              
                             <div class="form-group m-2">
                                 <label  for="floatingTextarea" class="form-label fs-5 fw-bold" >Overview</label>
-                                <textarea style="height: 150px" formControlName="overview" [class.is-invalid]=" overview?.invalid &&  overview?.touched" class="form-control" placeholder="overView" id="floatingTextarea" ></textarea>
-                                <div *ngIf="(overview?.invalid &&  overview?.touched)">
-                                    <small class="text-danger" *ngIf=" overview?.errors?.['required']">Overview is required</small>
-                                </div>
+                                <textarea style="height: 150px" formControlName="description" [class.is-invalid]=" description?.invalid &&  description?.touched" class="form-control" placeholder="overView" id="floatingTextarea" ></textarea>
+                                <!-- <div *ngIf="(description?.invalid &&  description?.touched)">
+                                    <small class="text-danger" *ngIf=" description?.errors?.['required']">Description is required</small>
+                                </div> -->
                             </div>
                             
                             
@@ -191,7 +190,7 @@
                     
                     
                     <div class="form-group m-2 py-3 ">
-                        <button  class="btn btn-success ">Update Product</button>
+                        <button [disabled]="addproductForm.invalid" class="btn btn-success ">Add Product</button>
 
                     </div>
                     <!-- {{newPrd | json}} -->

@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { CategoreisService } from 'src/app/services/categoreis.service';
 import { ProductsApiService } from 'src/app/services/products-api.service';
 import { newProduct } from '../../newproduct';
 
@@ -13,15 +15,17 @@ import { newProduct } from '../../newproduct';
 export class AddProductsComponent implements OnInit {
 productImages:any=[];  
 categories:any;
+addproductFor!:FormBuilder;
+taptitle:string="Add Product";
 ckecked:boolean=false;
 message:boolean=false;
-  constructor(private fb:FormBuilder,private catsrviece:ProductsApiService,
+  constructor(private fb:FormBuilder,private catsrviece:CategoreisService,
     private http: HttpClient ,private ProductService: ProductsApiService,
-     private router: Router) {}
+     private router: Router,private titleService:Title) {}
 
 addproductForm=this.fb.group(
   {
-  brand:['',Validators.required],
+  brand:["",Validators.required],
   category:['',Validators.required],
   title:['',Validators.required], 
   description:['',Validators.required],
@@ -34,8 +38,10 @@ addproductForm=this.fb.group(
 });
 
   ngOnInit(): void {
-    this.catsrviece.getcategories().subscribe(data=>{
+    this.titleService.setTitle(this.taptitle);
+    this.catsrviece.getAllcategroies().subscribe(data=>{
       this.categories=data;
+      console.log(this.categories)
     },error=>{console.log(error)});
   }
   get brand()
@@ -95,12 +101,13 @@ return this.addproductForm.get('price')
  addproduct(){
   //console.log(this.addproductForm.value)public brand:string,
        
-  var newprd=new newProduct(this.brand?.value , this.category?.value ,this.title?.value,this.description?.value,this.numofitems?.value,this.price?.value,this.discound?.value,this.productImages,this.overview?.value,[],[]);
+  var newprd=new newProduct(this.addproductForm.value.brand!,this.category?.value! ,this.title?.value!,this.description?.value!,parseInt(this.numofitems?.value!),parseInt(this.price?.value!),parseInt(this.discound?.value!),this.productImages,this.overview?.value!,[],[]);
   
     this.ProductService.postProduct(newprd)
     .subscribe(data =>
       {
-      this.message=true;
+          this.router.navigate(["dashboard/productslist"])
+          this.message=true;
           this.addproductForm.reset();
           this.productImages='';
           
@@ -113,7 +120,7 @@ return this.addproductForm.get('price')
  }
  removemessage(){
   this.message=false;
-  this.router.navigate(["dashboard/productslist"])
+ 
  }
  onSelectImageFromFile(event:any) {
   let fileType = event.target.files[0].type;
