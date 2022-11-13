@@ -30,7 +30,9 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         
-                    <h5 class="modal-title fw-bold" id="categoryModalLabel">{{actiontext}}</h5>
+                    
+                    <h5 class="modal-title fw-bold" id="categoryModalLabel"  *ngIf="showAddBtn">Add Category</h5>
+                    <h5 class="modal-title fw-bold" id="categoryModalLabel"  *ngIf="showUpdateBtn">Edit Category</h5>
                     <button type="button" class="btn-close"id="close" data-bs-dismiss="modal" aria-label="Close" (click)="reset(); "></button>
                     </div>
                     <div class="modal-body">
@@ -42,7 +44,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="subCategories" class="form-label fw-bold">Sub Category (optional)</label>
-                                <input type="text" class="form-control" id="subCategories" value=""(keyup)="addSubCategory($event)" placeholder="Category Name" formControlName="subCategoriesme" required>
+                                <input type="text" class="form-control" id="subCategories" value=""(keyup)="addSubCategory($event)" placeholder="Sub Category" formControlName="subCategoriesme" required>
                             </div>
                             <div class="subcategories-tags p-3" *ngIf="subCategories.length>0">
                               <ul class="list-unstyled" >
@@ -119,8 +121,8 @@
                         };">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <div class="category-image h-100">
-                                        <img style="height:100%;width: 100%;"[src]="category.Img">
+                                    <div class="category-image ">
+                                        <img class="img-fluid" style="height:220px;width: 100%;"[src]="category.Img">
                                     </div>
                                 </div>
                                 <div class="col-md-9">

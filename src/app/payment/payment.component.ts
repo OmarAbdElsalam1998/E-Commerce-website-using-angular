@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ProductsApiService } from '../services/products-api.service';
 import { Title } from '@angular/platform-browser';
 import { CartService } from '../services/cart.service';
+import { UserAuthService } from '../services/user-auth.service';
 
 @Component({
   selector: 'app-payment',
@@ -14,12 +15,14 @@ export class PaymentComponent implements OnInit {
   ckecked: boolean = false;
   cartItems:any;
   newCartItems:any=[];
-  totalPriceOfAllItems=0;
+  subTotalPrice=0;
+  ShippingCharge:number=25;
+  totalPriceOfAllItems=this.subTotalPrice+this.ShippingCharge;
   title="payment";
 
   constructor(private fb: FormBuilder, private router: Router, 
     private ProductService: ProductsApiService,private titleService:Title,
-    private cartService:CartService
+    private cartService:CartService,private userAuth:UserAuthService
     
     ) { 
     this.titleService.setTitle(this.title);
@@ -39,6 +42,7 @@ export class PaymentComponent implements OnInit {
 
   paymentForm:FormGroup = this.fb.group(
     {
+      userId:[''],
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern("^([a-zA-Z0-9_-]+)@([a-zA-Z]+)\.(com|eg)$")]],
@@ -50,8 +54,15 @@ export class PaymentComponent implements OnInit {
       street: ['', Validators.required],
       subscribewhenreciving: [true],
       subscribe: [false],
+      paymentMethod:[''],
+      orderStatus:["WaitingForReview"],
       itemsList:["",this.fb.array([])],
-      totalPrice:[""]
+      createdAt:[''],
+      subTotalPrice:[""],
+      shippingCharge:[25],
+      totalPrice:[''],
+      
+
 
 
     });
@@ -110,6 +121,7 @@ export class PaymentComponent implements OnInit {
        console.log(totalpriceOfoneItem)
        var obj={image:data.thumbnail,name:data.title,count:data.count,totalPrice:totalpriceOfoneItem}
       this.newCartItems.push(obj);
+      this.subTotalPrice+=totalpriceOfoneItem;
       this.totalPriceOfAllItems+=totalpriceOfoneItem;
       
     }
@@ -135,13 +147,18 @@ export class PaymentComponent implements OnInit {
 }
 addorder(){
   this.paymentForm.value.itemsList=this.newCartItems;
-  this.paymentForm.value.totalPrice=this.totalPriceOfAllItems;
+  this.paymentForm.value.subTotalPrice=this.subTotalPrice;
+  this.paymentForm.value.totalPrice=this.subTotalPrice+this.ShippingCharge;
+  this.paymentForm.value.userId=this.userAuth.getUserId().value;
+  this.paymentForm.value.createdAt= new Date();
   console.log(this.paymentForm.value);
   this.ProductService.saveorder(this.paymentForm.value)
     .subscribe(data => {
       alert("your Order done Successfully")
       this.paymentForm.reset();
       this.router.navigate([""])
+      console.log(this.cartItems.id);
+      // this.cartService.DeleteItemFromCart(this.cartItems.id);
     },
       error => {
         console.log("Error", error)

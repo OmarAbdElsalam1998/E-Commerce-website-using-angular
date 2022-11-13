@@ -23,6 +23,7 @@ const routes: Routes = [
   {path:"cart/payment",component:PaymentComponent,canActivate:[AuthGuard]},
   {path:"auth",loadChildren:()=>import("../app/auth/auth.module").then(m=>m.AuthModule)},
   {path:"dashboard",loadChildren:()=>import("../app/dashboard/dashboard.module").then(m=>m.DashboardModule),canLoad:[AdminGuard]},
+  {path:"profile",loadChildren:()=>import("../app/customer-profile/customer-profile.module").then(m=>m.CustomerProfileModule)},
   {path:"search/:keyword",component:SearchComponent},
   {path:"favourite",component:FavouriteComponent},
   {path:"error",component:ForbiddenComponent},

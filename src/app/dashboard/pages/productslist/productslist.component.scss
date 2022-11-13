@@ -15,6 +15,18 @@
                 outline: none;
             }
         }
+     
+    
+        }
+        .products-list{
+            .product-box {
+                .product-img{
+                    img{
+                        width: auto;
+                        height: 200px;
+                    }
+                }
+            }
         }
     }
 }
@@ -26,10 +38,4 @@
     text-decoration: none;
     background:none;
 }
-// .roow {
-//     display: flex;
-//     width: 40%; /*Optional*/
-//     table-layout: fixed; /*Optional*/
-//     border-spacing: 10px; /*Optional*/
-//     text-align: center;
-// }
+

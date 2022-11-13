@@ -5,7 +5,7 @@ import { error } from 'jquery';
 import { ProductsApiService } from 'src/app/services/products-api.service';
 import Swal from 'sweetalert2';
 import { ProductsService } from 'src/app/services/products.service';
-import { newProduct } from '../../newproduct';
+import { AnimateTimings } from '@angular/animations';
 
 @Component({
   selector: 'app-productslist',
@@ -18,19 +18,19 @@ export class ProductslistComponent implements OnInit {
 
   constructor(private router: Router, private ProductService: ProductsService,private titleService:Title) { }
   productdata: any = [];
-  title="AddProduct Dashboard";
+  searchText:any;
   ngOnInit(): void {
-    this.titleService.setTitle(this.title);
+    this.titleService.setTitle("Products");
+    this.ProductService.getProduct().subscribe((allData) => {
     this.ProductService.getProduct().subscribe((allData) => {
       console.log(allData);
       this.productdata = allData;
     });
-  }
-  search(event: any) {
-
-  }
+  });
+}
+ 
   addProduct() {
-    this.router.navigate(['/dashboard/addProduct']);
+    this.router.navigate(['/dashboard/productslist/addProduct']);
   }
 
   displayMode(value: string) {
@@ -104,6 +104,8 @@ export class ProductslistComponent implements OnInit {
    
   
   }
-
+  search(event:any){
+    
+  }
 }
 

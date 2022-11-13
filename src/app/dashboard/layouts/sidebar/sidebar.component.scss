@@ -42,3 +42,8 @@
             font-size: 1.4rem;        }
     }    
 }
+@media print {
+    .sidebar{
+        display: none;
+    }
+}

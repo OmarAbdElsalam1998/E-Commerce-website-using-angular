@@ -11,7 +11,7 @@
                 <li class="breadcrumb-item d-flex align-items-center justify-content-between"><a [routerLink]="['/dashboard/orders']" routerLinkActive="router-link-active" >
                      <span class="fw-bold">Orders</span></a> 
                 </li>
-                <li class="breadcrumb-item active fw-bold">Orders</li>
+                <li class="breadcrumb-item active fw-bold">Order #{{orderDetails.id }}</li>
                 
                 </ol>
             </nav>
@@ -22,68 +22,212 @@
         <h2 class="">Order Details</h2>
 
         <div class="order-details p-4  ">
-            <div class="order-action bg-white my-2">
+            <div class="order-action bg-white my-2 py-5 px-2 rounded">
                 <div class="row">
-                    <div class="col-sm-6">
-                        <div class="order-date-id">
-                            <div class="d-flex align-items-center">
-                                <i class="fa-regular fa-calendar pe-2"></i>
-                                <span>wed,Agu 12,2022,4:44 pm</span>
+                    <div class="col-md-4">
+                        <div class=" d-flex align-items-center">
+                            <div class="order-Num d-flex align-items-center">
+                                <div class="">
+                                    <span class="icon-heading me-3"><i class="fa-regular fa-hashtag"></i></span>
+                                </div>
+                                <div class="">
+                                    <span class=" fs-5 fw-bold p-0 m-0 d-block">Order Number </span>
+
+                                    <span class="p-0 m-0">{{orderDetails.id}}</span>
+                                </div>
                             </div>
-                            <div class="order-id">
-                                <span>8349495</span>
-                            </div>
+                           
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        dddd
+                    <div class="col-md-4">
+                        <div class=" d-flex align-items-center">
+                            <div class="order-date d-flex align-items-center">
+                                <div class="">
+                                    <span class="icon-heading me-3"><i class="fa-regular fa-calendar"></i></span>
+                                </div>
+                                <div class="">
+                                    <span class=" fs-5 fw-bold p-0 m-0 d-block">Order Date </span>
+
+                                    <span class="p-0 m-0">wed Nov 10 2022 11:21:08 pm</span>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class=" d-flex align-items-center">
+                            <div class="order-status d-flex align-items-center ">
+                                <div class="">
+                                    <span class="icon-heading me-3"><i class="fa-regular fa-flag"></i></span>
+                                </div>
+                                <div class="">
+                                    <span class=" fs-5 fw-bold p-0 m-0 d-block">Order Status </span>
+                                      
+                                    <span [ngSwitch]="orderDetails.orderStatus">
+                                        <span style="padding: 3px 10px;background: #ffc8467d;border-radius: 11px; color: #cda215;" *ngSwitchCase="'WaitingForReview'">
+                                            {{orderDetails.orderStatus}}
+                                        </span>
+                                        <span style="padding: 3px 10px;border-radius: 11px; background: #a7beff7d;color: #050142;" *ngSwitchCase="'beingProcessed'">
+                                            {{orderDetails.orderStatus}}
+                                        </span>
+                                        <span style="padding: 3px 10px;border-radius: 11px; background: #a7beff7d;color: #050142;" *ngSwitchCase="'prepared'">
+                                            {{orderDetails.orderStatus}}
+                                        </span>
+                                        <span style="padding: 3px 10px;background: #96ec987d; border-radius: 11px;color: #4a9706;" *ngSwitchCase="'deliveryInProgress'">
+                                            {{orderDetails.orderStatus}}
+                                        </span>
+                                        <span style="padding: 3px 10px;background: #96ec987d; border-radius: 11px;color: #4a9706;" *ngSwitchCase="'delivered'">
+                                            {{orderDetails.orderStatus}}
+                                        </span>
+                                        <span style="padding: 3px 10px;background: #ff746c7d;border-radius: 11px;color: #c91d1d;" *ngSwitchCase="'cancelled'">
+                                            {{orderDetails.orderStatus}}
+                                        </span>
+                                        <span style="padding: 3px 10px;background: #74fff47d;border-radius: 11px; color: #12acb3;" *ngSwitchCase="'beingRetrived'">
+                                            {{orderDetails.orderStatus}}
+                                        </span>
+                                        <span style="padding: 3px 10px;background: #74fff47d;border-radius: 11px; color: #12acb3;" *ngSwitchCase="'retrived'">
+                                            {{orderDetails.orderStatus}}
+                                        </span>
+                                      </span>  
+                                      <!-- Example single danger button -->
+                                    <div class="btn-group text-end ms-4">
+                                        <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Action
+                                        </button>
+                                        <ul class="dropdown-menu" style="cursor: pointer">
+                                        <li class="dropdown-item" (click)="changeStatus('')">ًWiating For Review</li>
+                                        <li class="dropdown-item">Being Processed</li>
+                                        <li class="dropdown-item">Processed</li>
+                                        <li class="dropdown-item">Delivery In Progress</li>
+                                        <li class="dropdown-item">Delivered</li>
+                                        <li class="dropdown-item">Cancelled</li>
+                                        <li class="dropdown-item">Being Retrived</li>
+                                        <li class="dropdown-item">Retrived</li>
+                                        </ul>
+                                    </div>
+                                      <!-- <button class="btn btn-primary ms-3" data-bs-toggle="modal" data-bs-target="#changeStatus">Change </button> -->
+                                </div>
+                            </div>
+                           
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="order-shipping-info  my-4">
+            <div class="order-shipping-info  my-4  ">
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="box customer rounded bg-white h-100">
+                        <div class="box customer rounded bg-white h-100 p-2">
                             <div class="heading d-flex align-items-center p-2">
                                 <span class="icon me-3"><i class="fa-regular fa-user"></i></span>
-                                <span>Customer</span>
+                                <span class="fw-bold">Customer</span>
                                 
                             </div>
-                            <p>ddddddddddd</p>
+                            <div class="customer-info p-2">
+                                <p>Name : {{orderDetails.firstname +" "+orderDetails.lastname}}</p>
+                                <p>Email : {{orderDetails.email}}</p>
+                                <p>Phone : {{orderDetails.Phone}}</p>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="box address rounded bg-white h-100">
+                        <div class="box address rounded bg-white h-100 p-2">
                             <div class="heading d-flex align-items-center p-2">
                                 <span class="icon me-3"><i class="fa-solid fa-truck-fast"></i></span>
-                                <span>Shipping</span>
+                                <span class="fw-bold">Shipping</span>
                                 
                             </div>
-                            <p>ddddddddddd</p>  
+                            <div class="p-2">
+                                <span class="d-block fw-bold fs-5">{{orderDetails.country + ","+ orderDetails.city}} </span>  
 
-                            <p>ddddddddddd</p>  
+                                <p>{{orderDetails.street}} </p>  
+    
+                             
+                            </div>
 
-                            <p>ddddddddddd</p>  
-
-                            <p>ddddddddddd</p>  
-
-v                        </div>
+                        </div>
                     </div>
                     <div class="col-md-4">
-                       <div class="box paymentMethod rounded bg-white h-100">
+                       <div class="box paymentMethod rounded bg-white h-100 p-2">
                         <div class="heading d-flex align-items-center p-2">
                             <span class="icon me-3"><i class="fa-solid fa-money-bill-1-wave"></i></span>
-                            <span>Payment</span>
+                            <span class="fw-bold">Payment</span> 
+                                
                             
                         </div>
-                        <div class="body p-2">
-                            <i class="fa-duotone fa-money-bill"></i>
+                        <div class="body p-2 d-flex align-items-center ">
+                            <span class="ps-2" [ngSwitch]="orderDetails.paymentMethod">
+                                <span  *ngSwitchCase="'visa'">
+                                    <i class="fa-brands fa-cc-visa fa-lg"></i>
+                                   Paid With {{orderDetails.paymentMethod}}
+                                </span>
+                                <span  *ngSwitchCase="'payPal'">
+                                    <i class="fa-brands fa-paypal fa-lg"></i>
+                                   Paid With  {{orderDetails.paymentMethod}}
+                                </span>
+                                <span style="padding: 3px 10px;border-radius: 11px; background: #a7beff7d;color: #050142;" *ngSwitchCase="'payWhenRecive'">
+                                    <i class="fa-duotone fa-money-bill fa-lg pe-3"></i>
+                                    {{orderDetails.paymentMethod}}
+                                </span>
+                                
+                              </span>
                         </div>     
                         </div>
                     </div>
                 </div>
             </div>
 
+
+            <div class="orderproducts">
+                <div class="box paymentMethod rounded bg-white h-100 p-2">
+                    <div class="heading d-flex align-items-center p-4 rounded " style="background-color:#5b43ff;color:#FFF">
+                        <span class="icon me-3 "><i class="fa-regular fa-bag-shopping fa-2x"></i></span>
+                        <h3 class="fw-bold">Products</h3> 
+                            
+                        
+                    </div>
+                    <div class="body p-2 d-flex align-items-center ">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                <th colspan="2">product</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Total Price</th>
+                                </tr>
+                                
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of orderDetails.itemsList">
+                                   <td >
+                                    <div class="d-flex align-items-between">
+                                        <img [src]="item.image" style="width:80px;height:80px">
+                                    </div>
+                                   </td>
+                                   <td><span class="fw-bold">{{item.name}}</span> </td>
+                                   <td>{{item.count  }}</td>
+                                   <td>{{(item.totalPrice / item.count) |number:'1.0-0'}} E.P</td>
+                                   <td>{{item.totalPrice |number:'1.0-0'}} E.P</td>
+                                   
+
+                                </tr>
+                                
+                                <tr> <th colspan="4"  class="p-4">SubTotal</th>
+                                    <th>{{orderDetails.subTotalPrice |number:'1.0-0'}} E.P</th>
+                                </tr>
+                                <tr > <th colspan="4"  class="p-4">Shipping Charge</th>
+                                    <th>{{orderDetails.shippingCharge |number:'1.0-0'}} E.P</th>
+                                </tr>
+                                <tr style="background-color:#e0e0e0;"> <th colspan="4"  class="p-4">Total</th>
+                                    <th>{{orderDetails.totalPrice |number:'1.0-0'}} E.P</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>     
+                    </div>
+            </div>
+            <button class="btn btn-success my-4" (click)="printBill()"><i class="fa-solid fa-print pe-2 "></i>Print Bill</button>
+
         </div>
+        
     </div>
 </main>

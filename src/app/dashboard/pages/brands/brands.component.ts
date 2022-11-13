@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { data, error } from 'jquery';
 import { BrandsService } from 'src/app/services/brands.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Route, Router } from '@angular/router';
+import { data, error } from 'jquery';
 import { brand } from 'src/app/shares classes/brands';
 import Swal from 'sweetalert2';
 
@@ -12,55 +12,36 @@ import Swal from 'sweetalert2';
   styleUrls: ['./brands.component.scss']
 })
 export class BrandsComponent implements OnInit {
-
-
+  page:number=1;
+  brands:any;
+  copyBrands:any=[];
   productsForm!: FormGroup;
   productsModel: any;
   productsDetails: any;
   showAddBtn: boolean = true;
   showUpdateBtn: boolean = false;
-  page: number = 1;
-  brands: any;
-  copyBrands: any = [];
   image: any;
   id: any;
   currentbrand:any;
   actiontext:string="Add Brand"
- 
-
-
-  constructor(private brand: BrandsService, private fb: FormBuilder, private router: ActivatedRoute
-  ) { }
-
-
-
+  constructor(private brandService:BrandsService,private router:ActivatedRoute,private fb:FormBuilder) { }
+  
   ngOnInit(): void {
-      
-
-
-    this.brand.getAllbrands().subscribe((res) => {
+    this.brandService.getAllbrands().subscribe((res) => {
       this.brands = res;
-      this.brands = res;
+      this.copyBrands = res;
     })
 
     this.getAllbrandDetails();
     this.createbrandForm();
-    this.brand.getCurrent(this.router.snapshot.params['id']).subscribe((result:any) => {
-      
-      (
-        this.productsForm.controls['name'].setValue(result['name']),
-        this. brandImageUrl=result['Img']
-        
-      )
-  
-  })
+ 
 
 }
   search(e: any) {
     console.log(e.keyCode);
     this.copyBrands = [...this.brands];
     if (e.target.value == "") {
-      // this.ngOnInit();
+       this.ngOnInit();
     }
     else {
 
@@ -100,12 +81,12 @@ export class BrandsComponent implements OnInit {
   ////////////////////////////////
 
   getAllbrandDetails() {
-    this.brand.getAllbrands().subscribe(res => {
-      this.productsDetails = res;
-    }, err => {
-      console.log(err);
+    // this.brandService.getAllbrands().subscribe(res => {
+    //   this.productsDetails = res;
+    // }, err => {
+    //   console.log(err);
 
-    })
+    // })
   }
   ////////////////////////////////
   addbrandForm = this.fb.group(
@@ -128,7 +109,7 @@ export class BrandsComponent implements OnInit {
     // console.log(this.productsForm.value);
 
     var bran = new brand(this.productsForm.value.name, this.brandImageUrl);
-    this.brand.Postbrand(bran).subscribe(res => {
+    this.brandService.Postbrand(bran).subscribe(res => {
       alert("brand Information added successfully");
       let close = document.getElementById('close');
       close?.click();
@@ -143,7 +124,7 @@ export class BrandsComponent implements OnInit {
 
   //////////////////////////////Delete/////////////////
   deletebrandDetails(id: any) {
-    this.brand.Deletebrand(id).subscribe(res => {
+    this.brandService.Deletebrand(id).subscribe(res => {
       alert("product information deleted successfully");
       this.getAllbrandDetails();
     }, err => {
@@ -156,7 +137,7 @@ export class BrandsComponent implements OnInit {
     this.actiontext="Edit Brand";
     this.showAddBtn = false;
     this.showUpdateBtn = true;
-    this.brand.getCurrent(Brandid).subscribe((result:any) => {
+    this.brandService.getCurrent(Brandid).subscribe((result:any) => {
       
       this.productsForm.controls['name'].setValue(result['name']),
       this. brandImageUrl=result['Img'],
@@ -169,7 +150,7 @@ export class BrandsComponent implements OnInit {
   updatebrandDetails(id:any) {
     // this.productsModel = Object.assign({}, this.productsForm.value);
     var bran = new brand(this.productsForm.value.name, this.brandImageUrl);
-    this.brand.Updatebrand(id,bran).subscribe(res => {
+    this.brandService.Updatebrand(id,bran).subscribe(res => {
 
       alert("brand information updated successfully");
       let close = document.getElementById('close');
@@ -208,7 +189,7 @@ export class BrandsComponent implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-        this.brand.Deletebrand(id)
+        this.brandService.Deletebrand(id)
           .subscribe({
             next: (res) => {
               this.ngOnInit();

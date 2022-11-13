@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Router,ActivatedRoute } from '@angular/router';
+import { CategoreisService } from 'src/app/services/categoreis.service';
 import { ProductsApiService } from 'src/app/services/products-api.service';
-import { newProduct } from '../../newproduct';
+import { newProduct } from '../../../shares classes/newproduct';
 import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
@@ -17,11 +19,12 @@ export class EditproductsComponent implements OnInit {
   categories:any;
   ckecked:boolean=false;
   message:boolean=false;
+  currentProduct:any;
   
-    constructor(private fb:FormBuilder,private catsrviece:ProductsApiService,
+    constructor(private fb:FormBuilder,private catsrviece:CategoreisService,
       private http: HttpClient ,private ProductService: ProductsService,
-       private router2: ActivatedRoute ,private router:Router) {
-      
+       private router2: ActivatedRoute ,private router:Router,private titleService:Title) {
+   
   
     }
   
@@ -35,17 +38,18 @@ export class EditproductsComponent implements OnInit {
     price:['',[Validators.required,Validators.min(0)]],
     subscribe:[false],
     discound:[''],
-    image:[this.productImages,Validators.required],
+    image:[''],
     overview:['',Validators.required]
   });
   
     ngOnInit(): void {
-      this.catsrviece.getcategories().subscribe(data=>{
+     
+      this.catsrviece.getAllcategroies().subscribe(data=>{
         this.categories=data;
       },error=>{console.log(error)});
 
      this.ProductService.getaddProductById(this.router2.snapshot.params['id']).subscribe((result:any)=>{
-        console.log(result);
+       this.currentProduct=result;
      this.addproductForm.controls['brand'].setValue(result['brand']);
      this.addproductForm.controls['category'].setValue(result['category']);
      this.addproductForm.controls['title'].setValue(result['title']);
@@ -55,7 +59,9 @@ export class EditproductsComponent implements OnInit {
      this.addproductForm.controls['discound'].setValue(result['discound']);
      this.productImages=result['images']
      this.addproductForm.controls['overview'].setValue(result['overview']);
+     this.titleService.setTitle("Edit Product | "+result['title']);
       })
+     
     }
     get brand()
     {
@@ -112,7 +118,7 @@ export class EditproductsComponent implements OnInit {
       )
     }
     Updateproduct(){
-      var newprd=new newProduct(this.brand?.value , this.category?.value ,this.title?.value,this.description?.value,this.numofitems?.value,this.price?.value,this.discound?.value,this.productImages,this.overview?.value,[],[]);
+      var newprd=new newProduct(this.addproductForm.value.brand!,this.category?.value! ,this.title?.value!,this.description?.value!,parseInt(this.numofitems?.value!),parseInt(this.price?.value!),parseInt(this.discound?.value!),this.productImages,this.overview?.value!,[],[]);
       this.ProductService.putProduct(newprd,this.router2.snapshot.params['id'])
       .subscribe(data =>
         {
@@ -146,6 +152,15 @@ export class EditproductsComponent implements OnInit {
   }
   removeProductImage(index:number){
     this.productImages.splice(index,1);
+    this.image?.setValidators(Validators.required);
+
+    if(this.productImages.length==0){
+      this.image?.setValidators(Validators.required);
+    }
+    else{
+      this.image?.removeValidators(Validators.required);
+
+    }
   
   }
   }

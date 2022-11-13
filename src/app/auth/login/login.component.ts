@@ -75,14 +75,15 @@ export class LoginComponent implements OnInit {
     )
     
     var checkUser=this.usersArr?.filter((user:any)=>
-    user.email== this.userEmail?.value && user.password ==this.userPassword?.value
+    user.userEmail== this.userEmail?.value && user.Password ==this.userPassword?.value
     )
     console.log(checkUser)
     console.log(this.userAuth.getLoggedStatus());
 
     if(checkUser.length>0){
+
       console.log(checkUser[0])
-      this.userAuth.logIn(checkUser[0].username ,checkUser[0].password,checkUser[0].role);
+      this.userAuth.logIn(checkUser[0].id, checkUser[0].userName ,checkUser[0].Password,checkUser[0].role);
       console.log(this.userAuth.getLoggedStatus());
       this.router.navigate([""])
 
