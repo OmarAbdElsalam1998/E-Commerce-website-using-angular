@@ -17,6 +17,7 @@ export class BrandsComponent implements OnInit {
   copyBrands:any=[];
   productsForm!: FormGroup;
   productsModel: any;
+  brandImageUrl = '';
   productsDetails: any;
   showAddBtn: boolean = true;
   showUpdateBtn: boolean = false;
@@ -33,9 +34,22 @@ export class BrandsComponent implements OnInit {
     })
 
     this.getAllbrandDetails();
-    this.createbrandForm();
  
 
+}
+addbrandForm = this.fb.group(
+  {
+    name: ['', Validators.required],
+
+    Img: [this.brandImageUrl, Validators.required]
+  });
+
+
+get name() {
+  return this.addbrandForm.get('name');
+}
+get img() {
+  return this.addbrandForm.get('Img');
 }
   search(e: any) {
     console.log(e.keyCode);
@@ -51,7 +65,7 @@ export class BrandsComponent implements OnInit {
     }
   }
 
-  brandImageUrl = '';
+ 
   onSelect(event: any) {
     let fileType = event.target.files[0].type;
     if (fileType.match(/image\/*/)) {
@@ -66,17 +80,15 @@ export class BrandsComponent implements OnInit {
     }
   }
   /////////////////////////////
-  createbrandForm() {
-    this.productsForm = this.fb.group({
-      Img: [this.brandImageUrl],
-      name: [''],
-
-    });
-  }
+ 
   /////////////////////////
   onAddClick() {
     this.showAddBtn = true;
     this.showUpdateBtn = false;
+    this.brandImageUrl='';
+    this.addbrandForm.reset();
+
+
   }
   ////////////////////////////////
 
@@ -89,33 +101,30 @@ export class BrandsComponent implements OnInit {
     // })
   }
   ////////////////////////////////
-  addbrandForm = this.fb.group(
-    {
-      name: ['', Validators.required],
 
-      Img: [this.brandImageUrl, Validators.required]
-    });
-
-
-  get name() {
-    return this.productsForm.get('name');
-  }
-  get img() {
-    return this.productsForm.get('Img');
-  }
   //////////////////Add/////////////////
   addbrandDetails() {
     // this.productsModel = Object.assign({}, this.productsForm.value);
     // console.log(this.productsForm.value);
 
-    var bran = new brand(this.productsForm.value.name, this.brandImageUrl);
+    var bran = new brand(this.addbrandForm.value.name!, this.brandImageUrl);
     this.brandService.Postbrand(bran).subscribe(res => {
-      alert("brand Information added successfully");
+      Swal.fire({
+
+        title: "Added Successfully",
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 1000
+
+      })
+      this.ngOnInit();
+
       let close = document.getElementById('close');
       close?.click();
       this.productsForm.reset();
       this.brandImageUrl='';
-      this.getAllbrandDetails();
+    
+
     }, err => {
       alert("Error");
     })
@@ -125,8 +134,18 @@ export class BrandsComponent implements OnInit {
   //////////////////////////////Delete/////////////////
   deletebrandDetails(id: any) {
     this.brandService.Deletebrand(id).subscribe(res => {
-      alert("product information deleted successfully");
-      this.getAllbrandDetails();
+      this.ngOnInit();
+      let close = document.getElementById('close');
+      close?.click();
+      Swal.fire({
+
+        title:"Updated Successfully",
+        text: "You won't be able to revert this!",
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 1000
+
+      })
     }, err => {
       alert("Failed to delete product information");
     })
@@ -139,7 +158,7 @@ export class BrandsComponent implements OnInit {
     this.showUpdateBtn = true;
     this.brandService.getCurrent(Brandid).subscribe((result:any) => {
       
-      this.productsForm.controls['name'].setValue(result['name']),
+      this.addbrandForm.controls['name'].setValue(result['name']),
       this. brandImageUrl=result['Img'],
       this.currentbrand=result;
 
@@ -149,16 +168,23 @@ export class BrandsComponent implements OnInit {
 
   updatebrandDetails(id:any) {
     // this.productsModel = Object.assign({}, this.productsForm.value);
-    var bran = new brand(this.productsForm.value.name, this.brandImageUrl);
+    var bran = new brand(this.addbrandForm.value.name!, this.brandImageUrl);
     this.brandService.Updatebrand(id,bran).subscribe(res => {
+      Swal.fire({
 
-      alert("brand information updated successfully");
+        title:"Updated Successfully",
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 1000
+
+      })
       let close = document.getElementById('close');
       close?.click();
-      this.getAllbrandDetails();
+      this.ngOnInit();
       this.productsForm.reset();
       this.brandImageUrl='';
       this.productsModel = {};
+     
     }, err => {
       alert("Error in updating brand information");
     })

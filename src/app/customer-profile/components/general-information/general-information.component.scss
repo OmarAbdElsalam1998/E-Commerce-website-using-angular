@@ -1,0 +1,29 @@
+.general-info{
+    .icon{
+        margin-right: 10px;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        background: #4674e5;
+        border-radius: 50%;
+        color: #FFF;
+        text-align: center;
+    }
+     
+    //start customer addresses style
+    .customer-addresses{
+        .addresses{
+            .address-box{
+                border:2px solid #4674e5 ;
+                .editaddress{
+                    right: 10px;
+                    top:10px;
+                    color: #4674e5;
+                }
+            }
+        }
+
+    }
+    //End customer addresses style
+
+}

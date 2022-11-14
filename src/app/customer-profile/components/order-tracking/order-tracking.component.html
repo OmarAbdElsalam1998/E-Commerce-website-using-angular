@@ -1,0 +1,109 @@
+<div class="orders ">
+    <h3 class="fw-bold"> You Orders <small>({{customerOrders.length}})</small></h3> 
+
+    <div class="order-details mb-4 bg-white overflow-hidden rounded" *ngFor="let order of customerOrders">
+    
+        <div class="heading d-flex align-items-center justify-content-between p-4 border-bottom">
+            <div class="">
+                <span class="d-block fw-bold">
+                    <i class="fa-solid fa-hashtag pe-1"></i>                   
+                    OrderNo. {{order.id}}
+                </span>
+                <span >
+                    <i class="fa-regular fa-clock pe-2"></i>
+                    {{order.createdAt |date:'medium'}}
+                </span>
+                
+
+            </div>
+            <div>
+                <button class="btn btn-danger fw-bold">
+                    <i class="fa-solid fa-xmark pe-2"></i>
+                    Cancel Order
+                </button>
+               
+            </div>    
+        </div>
+        <div class="order-status p-4  bg-white rounded border-bottom" >
+           <span class="fw-bold fs-5">Order Status : <span style="color:#0db30d">{{order.orderStatus}}</span></span>
+           <div class="status-stepper d-flex  justify-content-center pt-2">
+            <div class="status-box">
+                <span class="status-icon" 
+                [style.backgroundColor]="(order.orderStatus=='WaitingForReview' ||
+                 order.orderStatus=='prepared'||order.orderStatus=='outForDelivery'||
+                 order.orderStatus=='delivered'
+                 )?'#0db30d':'#c3c7ff59'">
+                    <i [style.color]="true?'#FFF':'#333'" class="fa-regular fa-solid fa-badge-check"></i>
+                   
+                </span>
+                <p class="d-none d-md-block pt-2 fw-bold">ordered</p>
+            </div>
+            <span class="status-line"
+             [style.backgroundColor]="
+             (order.orderStatus=='prepared'||order.orderStatus=='outForDelivery'||order.orderStatus=='delivered')?'#0db30d':'#c3c7ff59'"
+             >
+            </span>
+            <div class="status-box">
+                <span class="status-icon" 
+                [style.backgroundColor]="(order.orderStatus=='prepared'||order.orderStatus=='outForDelivery'||order.orderStatus=='delivered')?'#0db30d':'#c3c7ff59'"
+                >
+                    <i [style.color]="(order.orderStatus=='prepared'||order.orderStatus=='outForDelivery'||order.orderStatus=='delivered')?'#FFF':'#333'"  class="fa-solid fa-gift"></i>
+                   
+                </span>
+                <p class="d-none d-md-block pt-2 fw-bold">Prepared</p>
+            </div>
+            <span class="status-line"
+            [style.backgroundColor]="(order.orderStatus=='outForDelivery'||order.orderStatus=='delivered')?'#0db30d':'#c3c7ff59'"
+
+            ></span>
+            <div class="status-box">
+                <span class="status-icon"          
+                   [style.backgroundColor]="(order.orderStatus=='outForDelivery'||order.orderStatus=='delivered')?'#0db30d':'#c3c7ff59'"
+                >
+                    <i [style.color]="(order.orderStatus=='outForDelivery'||order.orderStatus=='delivered')?'#FFF':'#333'"  class="fa-solid fa-truck-fast"></i>
+                   
+                </span>
+                <p class="d-none d-md-block pt-2 fw-bold">Out For Delivery</p>
+            </div>
+            <span class="status-line"
+            [style.backgroundColor]="(order.orderStatus=='delivered')?'#0db30d':'#c3c7ff59'"
+
+            ></span>
+            <div class="status-box">
+                <span class="status-icon" 
+                [style.backgroundColor]="(order.orderStatus=='delivered')?'#0db30d':'#c3c7ff59'"
+
+                >
+                    <i [style.color]="(order.orderStatus=='delivered')?'#FFF':'#333'" class="fa-solid fa-person-carry-box"></i>
+                   
+                </span>
+                <p class="d-none d-md-block pt-2 fw-bold">Delivered</p>
+            </div>
+    
+           </div>
+        </div>
+        <div class="products p-4">
+          <div class="product-box d-flex align-items-center justify-content-between  pb-2" *ngFor="let item of order.itemsList">
+            <div class="product-info d-flex align-items-center">
+                <div class="product-image pe-4">
+                    <img [src]="item.image">
+                </div>
+                <div class="product-name">
+                    <span class="fw-bold d-block">{{item.name}}</span>
+                    <span class="">{{item.count}}X {{item.totalPrice/item.count|number:'1.0-0'}} EGP</span>
+    
+    
+    
+                </div>
+            </div>
+            <div class="product-action " *ngIf="order.orderStatus=='delivered'">
+                <button (click)="addReview(item.productId)" class="custom-btn"><i class="fa-regular fa-comment"></i> write review</button>
+            </div>
+           
+          </div>
+          <div class="total-price p-3 rounded">
+            <h4 class="fw-bold">Total Price : {{order.totalPrice|number:'1.1-1'}} EGP</h4>
+          </div>
+        </div>
+    </div>
+</div>

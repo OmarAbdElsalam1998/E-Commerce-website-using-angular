@@ -15,18 +15,15 @@ import { newProduct } from '../../newproduct';
 export class ProductslistComponent implements OnInit {
   displayGrid: boolean = true;
   productsList: any;
+  copyProductList:any;
 
   constructor(private router: Router, private ProductService: ProductsService,private titleService:Title) { }
   productdata: any = [];
-  title="AddProduct Dashboard";
   ngOnInit(): void {
     this.titleService.setTitle("Products");
     this.ProductService.getProduct().subscribe((allData) => {
-    this.titleService.setTitle(this.title);
-    this.ProductService.getProduct().subscribe((allData) => {
-      console.log(allData);
-      this.productdata = allData;
-    });
+    this.productdata = allData;
+      this.copyProductList=allData;
   });
 }
  
@@ -106,7 +103,17 @@ export class ProductslistComponent implements OnInit {
   
   }
   search(event:any){
-    
+    console.log(event.keyCode);
+    this.productsList = [...this.copyProductList];
+    if (event.target.value == "") {
+       this.ngOnInit();
+    }
+    else {
+
+      this.productdata = this.copyProductList.filter((res: any) => {
+        return res.title.toLocaleLowerCase().match(event.target.value.toLocaleLowerCase());
+      });
+    }
   }
 }
 

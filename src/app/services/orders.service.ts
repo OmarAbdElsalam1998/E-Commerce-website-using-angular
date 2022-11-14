@@ -30,6 +30,13 @@ export class OrdersService {
  }
 
 
+ //getOrders  for sepecific Customer
+ getOrdersForSpecificCustomer(customerId:number){
+  return this.http.get<any>(this.url+"?userId="+customerId).pipe(catchError((err)=>{
+    return throwError (()=>err.message ||"internal server error")
+  }));
+ } 
+
  //get Order by Specific Status
 
  getOrderByStatus(status:string){

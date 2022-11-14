@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
      private fB: FormBuilder ,
       private userService : LoginService ,
       private router: Router,
-      private userAuth:UserAuthService)   { }
+      private userAuth:UserAuthService,
+      private location:Location)   { }
 
   ngOnInit(): void {
     this.titleService.setTitle(this.title);
@@ -85,7 +87,8 @@ export class LoginComponent implements OnInit {
       console.log(checkUser[0])
       this.userAuth.logIn(checkUser[0].id, checkUser[0].userName ,checkUser[0].Password,checkUser[0].role);
       console.log(this.userAuth.getLoggedStatus());
-      this.router.navigate([""])
+      this.location.back();
+
 
     }
     else{

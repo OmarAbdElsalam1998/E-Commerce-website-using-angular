@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { CategoreisService } from 'src/app/services/categoreis.service';
 import { ProductsApiService } from 'src/app/services/products-api.service';
 import { ProductsService } from 'src/app/services/products.service';
+import Swal from 'sweetalert2';
 import { newProduct } from '../../newproduct';
 
 @Component({
@@ -108,10 +109,19 @@ return this.addproductForm.get('price')
     this.ProductService.postProduct(newprd)
     .subscribe(data =>
       {
+        Swal.fire({
+          
+          title:  'Added Successfully',
+          icon:'success' ,
+          showConfirmButton:false,
+          timer:1000
+          
+         });
           this.router.navigate(["dashboard/productslist"])
           this.message=true;
           this.addproductForm.reset();
           this.productImages='';
+         
           
         },
      error =>{

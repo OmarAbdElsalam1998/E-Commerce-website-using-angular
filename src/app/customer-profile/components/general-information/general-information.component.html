@@ -1,8 +1,141 @@
-<div class="personal-info" >
-    <div class="general-info">
-      ,a,slsdlsdl  
-    </div>
-    <div class="addresses">
-        fff
-    </div>
-</div>
+<div class="general-info">
+    <div class="personal-info bg-white rounded my-2" >
+        <div class="custom-accordion p-4 collapsed d-flex justify-content-between align-items-center border-bottom"  data-bs-target="#general-info" data-bs-toggle="collapse">
+            <div class="heading d-flex align-items-center">
+                <div class="icon">
+                    <i class="fa-light fa-calendar-lines-pen"></i>
+                </div>
+                <div class="">
+                    <h4 class="fw-bold m-0">General Infomation</h4>
+                    <span>Fil all information below</span>
+                </div>
+                
+            </div>
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div id="general-info" class="collapse p-4 " >
+                <form>
+                    <div class="d-flex">
+                        <div class="form-group  m-2 w-50">
+                            <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold"  >firstname</label>
+                            <input type="text" class="form-control">
+                            
+                        </div>  
+                        <div class="form-group  m-2 w-50">
+                            <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold"  >lastname</label>
+                            <input type="text" class="form-control">
+                            
+                        </div>
+                    </div>
+                    <div class="form-group  m-2 ">
+                        <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold"  >Email</label>
+                        <input type="text" class="form-control">
+                        
+                    </div>
+                    <div class="d-flex">
+                        <div class="form-group  m-2 w-50">
+                            <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold"  >phone</label>
+                            <input type="text" class="form-control">
+                            
+                        </div>  
+                        <div class="form-group  m-2 w-50">
+                            <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold"  >Date OF Birth</label>
+                            <input type="date" class="form-control">
+                            
+                        </div> 
+                    </div> 
+                    <div class="form-group  m-2 w-50">
+                        <button class="btn btn-primary">Save</button>
+                        
+                    </div>  
+                </form>
+        </div>
+    </div> 
+    <div class="customer-addresses bg-white rounded my-2" >
+        <div class="custom-accordion p-4 collapsed d-flex justify-content-between align-items-center border-bottom"  data-bs-target="#customer-addresses" data-bs-toggle="collapse">
+            <div class="heading d-flex align-items-center">
+                <div class="icon">
+                    <i class="fa-regular fa-location-dot"></i>
+                </div>
+                <div class="">
+                    <h4 class="fw-bold m-0">Address</h4>
+                    <span>Fil all information below</span>
+                </div>
+                
+            </div>
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div id="customer-addresses" class="collapse p-4 " >
+                <div class="addaddress-btn text-end">
+
+                    <!-- ADD ADDRESS  -->
+                    <button class="btn btn-success">
+                        <i class="fa-solid fa-plus pe-2"></i>
+                        add Address
+                    </button>
+                    
+                </div>
+                <div class="addresses py-4">
+                    <div class="row">
+
+                        <!-- ng for to display addresses -->
+                        <div class="col-md-6">
+                                <div class="address-box  rounded p-3 mb-3 position-relative">
+                                    <h4 class="fw-bold">Egypt,Cairo</h4>
+                                    <p>12 mohamedali stmohamedalimohamedalimohamedal
+                                        imohamedalimohamedalimohamedali,</p>
+                                        <div class="editaddress position-absolute ">
+                                            <i class="fa-solid fa-pen pe-2"></i>
+                                            <i class="fa-solid fa-trash-can text-danger"></i>
+                                        </div>
+                                </div> 
+                        </div>
+                        <!-- ng for to display addresses -->
+
+
+                        <div class="col-md-6">
+                            <div class="address-box  rounded p-3 mb-3 position-relative">
+                                <h4 class="fw-bold">Egypt,Cairo</h4>
+                                <p>12 mohamedali stmohamedalimohamedalimohamedal
+                                    imohamedalimohamedalimohamedali,</p>
+                                    <div class="editaddress position-absolute ">
+                                        <i class="fa-solid fa-pen pe-2"></i>
+                                        <i class="fa-solid fa-trash-can text-danger"></i>
+                                    </div>
+                            </div> 
+                         </div>
+                        
+                    </div>
+                </div>
+                
+                <div *ngIf="true"  class="address-form border-top py-3">
+                    <form>
+                        <h3 class="fw-bold">Add Address</h3>
+                        <div class="d-flex">
+                            <div class="form-group  m-2 w-50">
+                                <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold"  >country</label>
+                                <input type="text" class="form-control">
+                                
+                            </div>  
+                            <div class="form-group  m-2 w-50">
+                                <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold"  >city</label>
+                                <input type="text" class="form-control">
+                                
+                            </div>
+                        </div>
+                        <div class="form-group  m-2 ">
+                            <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold"  >Address</label>
+                            <textarea type="text" class="form-control" rows="4"></textarea>
+                            
+                        </div>
+                        
+                        <div class="form-group  m-2 w-50">
+                            <button class="btn btn-primary">Save</button>
+                            
+                        </div>  
+                    </form>
+                </div>
+        </div>
+    </div> 
+</div>  
+    

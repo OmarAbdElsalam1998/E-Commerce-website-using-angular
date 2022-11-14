@@ -1,0 +1,32 @@
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { OrdersComponent } from 'src/app/dashboard/pages/orders/orders.component';
+import { OrdersService } from 'src/app/services/orders.service';
+import { UserAuthService } from 'src/app/services/user-auth.service';
+
+@Component({
+  selector: 'app-order-tracking',
+  templateUrl: './order-tracking.component.html',
+  styleUrls: ['./order-tracking.component.scss']
+})
+export class OrderTrackingComponent implements OnInit {
+  customerId:any;
+  customerOrders:any;
+  constructor(private orderService:OrdersService,private userAuth:UserAuthService,private router:Router) { }
+
+  ngOnInit(): void {
+    this.userAuth.getUserId().subscribe(id=>{
+      this.customerId=id;
+    });
+    this.orderService.getOrdersForSpecificCustomer(this.customerId).subscribe(res=>{
+      this.customerOrders=res;
+    })
+  
+  }
+
+  //Got to Add Review for Agiven product 
+  addReview(productID:number){
+      this.router.navigate(["profile/review-order-purchase/product/",productID]);
+  }
+
+}

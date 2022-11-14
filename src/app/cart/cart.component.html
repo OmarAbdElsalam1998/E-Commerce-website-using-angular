@@ -36,42 +36,56 @@
                 
                 <ng-template #CartContainItems>
                     <span>Cart ({{Cartproducts.length}})</span>
-                    <div class="col-md-8" >
-                        <div class="product d-flex bg-white p-3 mb-3" *ngFor="let product of Cartproducts;index as i">
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="product-image" >
-                                        <img class="img-fluid" [src]="product.thumbnail">
-                                    </div>
-                                </div>
-                                <div class="col-lg-8" >
-                                    <div class="product-info px-2 pt-2">
-                                        <h2 class="d-block my-2 fw-bold "[title]="product.title">{{product.title}}</h2>
-                                        <div class="product-price-quantity ">
-                                            <div class="new-price mb-3 d-flex">
-                                                <span class="price fw-bold d-block w-100 "><span> </span></span>
-                                            </div>
-                                            <div class="quantity d-flex me-4 mb-2">
-                                                <div class="minus px-3 py-2 " (click)=deceaseProductCounter(product.count)><i class="fa-solid fa-minus"></i></div>
-                                                <div class="num px-3 py-2 bg-light fw-bold">{{product.count}}</div>
-                                                
-                                                <div class="plus px-3 py-2 " (click)="increaseProductCounter(product.count)"><i class="fa-solid fa-plus"></i></div>
-    
-                                            </div>  
+                    <div class="col-md-8 " >
+                        <div class="product  rounded bg-white p-3 mb-3 " *ngFor="let product of Cartproducts;index as i " >
+                            <div class="product d-flex p-3 mb-3 border-bottom" >
+                                <div class="d-flex justify-content-between w-100">
+                                    <div class="product d-flex align-items-center">
+                                        <div class="product-image pe-3">
+                                            <img class="img-fluid" [src]="product.thumbnail">
                                         </div>
-                                        <p>delivered by : <span class="fw-bold text-dark">13 oct 2022</span> </p>
-                                        <button class="btn btn-danger"(click)="deleteItemFromCart(product.id)" ><i class="fa-thin fa-trash-can fa-lg"></i> remove</button>
+                                        <div class="product-info">
+                                            <h2 class="d-block my-2 fw-bold "[title]="product.title">{{product.title}}</h2>
+                                            <span class=" d-block fw-bold">Size: <span class="fw-normal">xl</span></span>
+                                            <span class="d-block fw-bold">color: <span class="fw-normal">red</span></span>
+                                         </div>   
+                                    </div>
+                                    <div class="action text-end">
+                                        <i (click)="deleteItemFromCart(product.id)" class="fa-regular fa-trash-can fa-lg text-danger"></i>
     
                                     </div>
                                 </div>
-                                
                             </div>
-                            
-                           
-                        </div>
-                     </div>
+                            <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="new-price mb-3 text-center">
+                                            <span class="d-block mb-2" style="color: #ada6a6;font-weight: 500;">TotalPrice</span>
+                                            <span class="price fw-bold d-block w-100 "><span>{{product.price}} EGP</span></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4" >
+                                                <div class="text-center">
+                                                    <span class="d-block mb-2" style="color: #ada6a6;font-weight: 500;">Quantity</span>
 
-                    
+                                                <div class="quantity d-flex align-items-center justify-content-center">
+                                                    <div class="minus px-3 py-2 rounded border" (click)=deceaseProductCounter(product.id,product.count)><i class="fa-solid fa-minus"></i></div>
+                                                    <div class="num px-3 py-2 bg-light fw-bold  ">{{product.count}}</div>
+                                                    
+                                                    <div class="plus px-3 py-2 rounded border" (click)="increaseProductCounter(product.id,product.count)"><i class="fa-solid fa-plus"></i></div>
+        
+                                                </div>  
+                                                </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="new-price mb-3 text-center">
+                                            <span class="d-block mb-2 " style="color: #ada6a6;font-weight: 500;">TotalPrice</span>
+                                            <span class="price fw-bold d-block w-100 "><span>{{product.price * product.count}} EGP</span></span>
+                                        </div>
+                                    </div>
+                                           
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-md-4">
                         <div class="payment bg-white p-4">
                         <h2 class="special-heading fw-bold">Payment</h2>

@@ -17,6 +17,7 @@ export class order{
         public paymentMethod: string,
         public orderStatus: string,
         public itemsList: any[ ],
+        public createdAt:Date,
         public subTotalPrice: number,
         public shippingCharge: number,
         public totalPrice: number,

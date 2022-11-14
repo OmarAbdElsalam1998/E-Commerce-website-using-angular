@@ -83,6 +83,6 @@ export class HomeComponent implements OnInit {
 
   }
   seeDetails(productId:any){
-    this.router.navigate(["products/"+productId])
+    this.router.navigate(["product/"+productId])
   }
 }
