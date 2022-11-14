@@ -6,6 +6,7 @@ import { ProductsApiService } from 'src/app/services/products-api.service';
 import Swal from 'sweetalert2';
 import { ProductsService } from 'src/app/services/products.service';
 import { AnimateTimings } from '@angular/animations';
+import { SortPipe } from 'src/app/pipes/sort.pipe';
 
 @Component({
   selector: 'app-productslist',
@@ -14,21 +15,28 @@ import { AnimateTimings } from '@angular/animations';
 })
 export class ProductslistComponent implements OnInit {
   displayGrid: boolean = true;
-  productsList: any;
-
-  constructor(private router: Router, private ProductService: ProductsService,private titleService:Title) { }
+  // productsList: any;
+  // products: any = [];
+  SortbyParams = '';
+  SortDirection = 'asc'
+  constructor(private router: Router, private ProductService: ProductsService, private titleService: Title) { }
   productdata: any = [];
-  searchText:any;
+  searchText: any;
+
   ngOnInit(): void {
     this.titleService.setTitle("Products");
-    this.ProductService.getProduct().subscribe((allData) => {
+    // this.ProductService.getProduct().subscribe((allData) => { 
     this.ProductService.getProduct().subscribe((allData) => {
       console.log(allData);
       this.productdata = allData;
     });
-  });
-}
- 
+    // });
+    // this.ProductService.getProductData().subscribe((res) => {
+    //   // console.log(allData);
+    //   this.products = res;
+    // });
+  }
+
   addProduct() {
     this.router.navigate(['/dashboard/productslist/addProduct']);
   }
@@ -62,7 +70,7 @@ export class ProductslistComponent implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-       
+
         this.deleteProduct(id);
 
         swalWithBootstrapButtons.fire({
@@ -86,26 +94,42 @@ export class ProductslistComponent implements OnInit {
       }
     })
   }
-  deleteProduct(id:number){
-   
+  deleteProduct(id: number) {
+
     this.ProductService.deleteProduct(id)
-    .subscribe({
-      next:(res)=>{
-        this.ngOnInit();
-      },
-      error:()=>{
-        console.log("Error",error)
-      }
-    })
-  
+      .subscribe({
+        next: (res) => {
+          this.ngOnInit();
+        },
+        error: () => {
+          console.log("Error", error)
+        }
+      })
+
   }
   sort(event: any) {
-
-   
+    switch (event.target.value) {
+      case "LowPrice":
+        {
+          this.SortDirection = 'asc';
+          break;
+        }
   
+      case "HighPrice":
+        {
+          this.SortDirection = 'desc';
+          break;
+        }
+    // if (this.SortDirection === 'desc') {
+    //   this.SortDirection = 'asc';
+    // } else {
+    //   this.SortDirection = 'desc';
+    // }
+      }
+      return this.productdata;
   }
-  search(event:any){
-    
+  search(event: any) {
+
   }
 }
 
