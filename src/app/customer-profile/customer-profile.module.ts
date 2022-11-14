@@ -4,16 +4,26 @@ import { CommonModule } from '@angular/common';
 import { CustomerProfileRoutingModule } from './customer-profile-routing.module';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { GeneralInformationComponent } from './components/general-information/general-information.component';
+import { OrderTrackingComponent } from './components/order-tracking/order-tracking.component';
+import { ReviewProductsComponent } from './components/review-products/review-products.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import {  NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
   declarations: [
     MainPageComponent,
-    GeneralInformationComponent
+    GeneralInformationComponent,
+    OrderTrackingComponent,
+    ReviewProductsComponent,
+
+
   ],
   imports: [
     CommonModule,
-    CustomerProfileRoutingModule
+    CustomerProfileRoutingModule,
+    ReactiveFormsModule,
+    NgbModule
   ]
 })
 export class CustomerProfileModule { }

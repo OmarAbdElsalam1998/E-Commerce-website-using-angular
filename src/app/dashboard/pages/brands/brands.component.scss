@@ -13,29 +13,43 @@
             input{
                 border: none;
                 outline: none;
+             }
             }
         }
-        }
-       
         
-    }
-}
-@media (max-width:768px){
-    #main{
-        .brands{
-            .brands-header{
-            .search-box{
-                width:auto;
-                input{
-                    border: none;
-                    outline: none;
+        .brands-list{
+            .brand-box {
+                .brand-img{
+                    img{
+                        width: auto;
+                        height: 200px;
+                    }
                 }
             }
-            }
-           
-            
         }
     }
+}
+
+
+
+
+@media (max-width:768px){
+#main{
+.brands{
+    .brands-header{
+    .search-box{
+        width:auto;
+        input{
+            border: none;
+            outline: none;
+        }
+    }
+    }
+   
+    
+}
+}
+    
     
 
 

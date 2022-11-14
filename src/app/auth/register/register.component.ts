@@ -1,9 +1,11 @@
+import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { UserAuthService } from 'src/app/services/user-auth.service';
 import { LoginComponent } from '../login/login.component';
 import { userDataRegister } from '../userRegister';
 import { ConfirmPasswordValidator } from '../validators/confirmpassword';
@@ -15,9 +17,9 @@ import { ConfirmPasswordValidator } from '../validators/confirmpassword';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private titleService:Title ,private formB : FormBuilder ,private http : HttpClient, private userService : LoginService , private router:Router) { }
+  constructor(private titleService:Title ,private formB : FormBuilder ,private userAuth:UserAuthService,
+    private http : HttpClient, private userService : LoginService , private router:Router,private location:Location) { }
   title="Sign UP";
-  userRegister : userDataRegister = new userDataRegister("","","","","User");             //initiat obj from class user.ts
   
 
   ngOnInit(): void {
@@ -60,7 +62,7 @@ export class RegisterComponent implements OnInit {
         
 
   usersArr:any;
-
+  userRegister : userDataRegister = new userDataRegister("","","","","User");             //initiat obj from class user.ts
   userRegistering()
   {
     console.log(this.registerationForm.value)
@@ -68,7 +70,8 @@ export class RegisterComponent implements OnInit {
       {
         console.log(data)
         this.registerationForm.reset();
-        this.router.navigate([""]);
+        this.location.back();
+
           
         // this.usersArr=data;
       },

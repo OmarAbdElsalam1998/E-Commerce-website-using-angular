@@ -54,7 +54,7 @@
                                             <small class="text-danger" *ngIf=" category?.errors?.['required']">Category Name is required</small>
                                         </div>
                                         <option selected>Open this select menu</option>
-                                        <option value="{{cat.Name}}" *ngFor="let cat of categories">{{cat.Name}}</option>
+                                        <option [value]="cat.Name" *ngFor="let cat of categories">{{cat.Name}}</option>
                                       </select>
                                 </div>
                             </div>
