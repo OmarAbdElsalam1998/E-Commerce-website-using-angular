@@ -28,6 +28,9 @@ export class ProductDetailsComponent implements OnInit {
    //get product Id From url
    this.activatedRoute.paramMap.subscribe((params:ParamMap)=>{
     this.productId=params.get("id");
+
+    console.log("hi PRODUCT id "+this.productId);
+    
     this.commentsRouter="/product/"+this.productId+"/comments";
     this.overViewRouter="/product/"+this.productId;
 
