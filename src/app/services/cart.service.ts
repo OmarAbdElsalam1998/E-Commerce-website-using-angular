@@ -79,13 +79,22 @@ return grandTotal;
 }
 pro:any;
 
+getProductformCartbyId(proId:any){
+  return this.http.get<any>(this.url2+"/"+proId).pipe(catchError((err)=>{
+    return throwError (()=>err.message ||"internal server error")
+  }));
+}
 getProductById(prodId:any){
    return this.http.get<any>(this.url+"/"+prodId).pipe(catchError((err)=>{
     return throwError (()=>err.message ||"internal server error")
   }));
   
 }
-  
+UpdateCart(productID:any,product:any){
+  return this.http.put(this.url2+"/"+productID,product).pipe(catchError((err)=>{
+    return throwError (()=>err.message ||"internal server error")
+  }));
+}
 saveproduct(product:Cart){
   var headers= new HttpHeaders().set("Content-Type", "procademy");
 

@@ -73,17 +73,17 @@
       "price": 549,
       "thumbnail": "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
       "discount": 12.96,
-      "count": 1,
+      "count": 3,
       "id": 1
     },
     {
-      "productId": 28,
-      "title": "3D Embellishment Art Lamp",
-      "price": 20,
-      "thumbnail": "https://dummyjson.com/image/i/products/28/thumbnail.jpg",
-      "discount": 16.49,
-      "count": 1,
-      "id": 2
+      "productId": 53,
+      "title": "printed high quality T shirts",
+      "price": 35,
+      "thumbnail": "https://dummyjson.com/image/i/products/53/thumbnail.jpg",
+      "discount": 7.54,
+      "count": 5,
+      "id": 4
     }
   ],
   "orders": [
