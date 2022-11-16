@@ -99,9 +99,9 @@
                                   formControlName="image"
                                   [class.is-invalid]="image?.invalid && image?.touched"
                                 />
-                                <div *ngIf="image?.invalid && image?.touched">
+                                <!-- <div *ngIf="image?.invalid && image?.touched">
                                     <small class="text-danger" *ngIf="image?.errors?.['required']">Image is Required</small>
-                                </div>
+                                </div> -->
                                 
                             </div>
                             <div class="mb-3">
@@ -146,7 +146,7 @@
                                    <!-- <span class="show-password"><i class="fa-light fa-eye-slash fa-fw"></i></span> -->
                               </div>
                             
-                            <button [disabled]="addUserForm.invalid" (click)="addUser()" type="submit" class="btn btn-primary px-4 w-100">Add User</button>
+                            <button [disabled]="addUserForm.invalid" (click)="addUser()" type="submit" class="btn btn-primary px-4 w-100">Add New User</button>
                           </form>
                     </div>
                     
@@ -272,12 +272,10 @@
                                        <!-- <small class="text-danger" *ngIf="addUserForm.errors?.['required'] "> Confirm Password is a required Flied</small> -->
                                        <small class="text-danger" *ngIf="addUserForm.errors?.['misMatch']"> Confirm Password not match with Password</small>
                              
-    
-                                       <!-- <span class="show-password"><i class="fa-light fa-eye-slash fa-fw"></i></span> -->
                                   </div>
-                                  <button  (click)="saveChanges(currentUser)" type="submit" class="btn btn-primary px-4 w-100">save Changes</button>
+                                  <button [disabled]="addUserForm.invalid" (click)="UpdateUser(currentUser)" type="submit" class="btn btn-primary px-4 w-100">save Changes</button>
 
-                                <!-- <button [disabled]="addUserForm.invalid" (click)="saveChanges()" type="submit" class="btn btn-primary px-4 w-100">save Changes</button> -->
+                                <!-- <button [disabled]="addUserForm.invalid" (click)="saveChanges(currentUser)" type="submit" class="btn btn-primary px-4 w-100">save Changes</button> -->
                               </form>
                     </div>
                     

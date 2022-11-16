@@ -1,3 +1,6 @@
+import { Address } from "./address";
+import { GeneralInfo } from "./generalInfo";
+
 export class UserRole
 {
     public userName:string;
@@ -5,24 +8,28 @@ export class UserRole
     public userEmail:string;
     public phone:any;
     public Password:string;
-    public confirmPassword:string;
-    public role:string[];
-    public image:string
-    public id:any;
+    public role:string;
+    public addresses:Address[];
+    public generalInfo:GeneralInfo;
+    public image:string; 
+    public responsability:string[]; 
 
-    constructor(userName:string,lastName:string,userEmail:string,phone:any,Password:string,confirmPassword:string,role:string[],image:string,id:any)
+
+    constructor(userName:string,lastName:string,userEmail:string,phone:any,Password:string,role:string,addresses:Address[],generalInfo:GeneralInfo,image:string,responsability:string[])
     {
         this.userName=userName;
         this.lastName=lastName;
         this.userEmail=userEmail;
         this.phone=phone;
         this.Password=Password;
-        this.confirmPassword=confirmPassword;
         this.role=role;
+        this.addresses=addresses;
+        this.generalInfo=generalInfo;
         this.image=image;
-        this.id=id;
+        this.responsability=responsability;
 
   
       }
+
 
 }

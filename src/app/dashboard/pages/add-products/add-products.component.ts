@@ -6,8 +6,9 @@ import { Router } from '@angular/router';
 import { CategoreisService } from 'src/app/services/categoreis.service';
 import { ProductsApiService } from 'src/app/services/products-api.service';
 import { ProductsService } from 'src/app/services/products.service';
+import { newProduct } from '../../../shares classes/newproduct';
 import Swal from 'sweetalert2';
-import { newProduct } from '../../newproduct';
+// import { newProduct } from '../../newproduct';
 
 @Component({
   selector: 'app-add-products',
@@ -18,7 +19,6 @@ export class AddProductsComponent implements OnInit {
 productImages:any=[];  
 categories:any;
 addproductFor!:FormBuilder;
-taptitle:string="Add Product";
 ckecked:boolean=false;
 message:boolean=false;
   constructor(private fb:FormBuilder,private catsrviece:CategoreisService,
@@ -41,7 +41,7 @@ addproductForm=this.fb.group(
 });
 
   ngOnInit(): void {
-    this.titleService.setTitle(this.taptitle);
+    // this.titleService.setTitle(this.taptitle);
     this.catsrviece.getAllcategroies().subscribe(data=>{
       this.categories=data;
       console.log(this.categories)
