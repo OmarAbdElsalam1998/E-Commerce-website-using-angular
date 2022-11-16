@@ -19,6 +19,7 @@ export class OrdersComponent implements OnInit {
   orderStatus:string="";
   selectedOrder:any=[];
   page:number=1;
+  currentDateTime=Date.now();
   waitingForReview:number=0;
   beingProcessed:number=0
   prepared:number=0

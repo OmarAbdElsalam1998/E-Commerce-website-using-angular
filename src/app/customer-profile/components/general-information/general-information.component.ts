@@ -117,30 +117,7 @@ export class GeneralInformationComponent implements OnInit {
          })
   }
 
-   //update address
-  // saveAddressChanges(id:any)
-  // {
-  //   var address= new Address (this.addAddressForm.value.country!, this.addAddressForm.value.city!,this.addAddressForm.value.address!)
 
-  //   this.customer.putAddress(address,id).subscribe(
-  //     data =>{
-  //       address=data;
-  //       console.log(data);
-  //       this.addProfileForm.reset();
-  //     }
-  //   )
-
-  //   let save = document.getElementById('updateAdd');
-  //     save?.click();
-  //     Swal.fire({
-      
-  //       title:"Profile Info changed Successfully",
-  //       icon:'success' ,
-  //       showConfirmButton:false,
-  //       timer:1000
-        
-  //      })
-  // }
 
   //add new address
   arr: Address[]=[];
@@ -160,6 +137,7 @@ export class GeneralInformationComponent implements OnInit {
       let add = document.getElementById('addAddress');
       add?.click();
       this.closeForm=true;
+      this.ngOnInit();
       Swal.fire({
         title:"Profile Info changed Successfully",
         icon:'success' ,

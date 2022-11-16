@@ -37,6 +37,12 @@ getcurrunetcategory(catid:Number){
     return throwError(()=>err.message || "Internal Server error");  
    }));
 }
+getCategoryByName(name:Number){
+  return this.http.get<any>(this.url+"?Name="+ name).pipe(catchError((err)=>{
+    return throwError(()=>err.message || "Internal Server error");  
+   }));
+}
+
 
 updatecategroy(catid:number,updatePrd:any)
 {

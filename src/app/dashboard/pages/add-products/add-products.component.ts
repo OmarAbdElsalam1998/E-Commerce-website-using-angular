@@ -8,6 +8,7 @@ import { ProductsApiService } from 'src/app/services/products-api.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { newProduct } from '../../../shares classes/newproduct';
 import Swal from 'sweetalert2';
+import { BrandsService } from 'src/app/services/brands.service';
 // import { newProduct } from '../../newproduct';
 
 @Component({
@@ -18,18 +19,25 @@ import Swal from 'sweetalert2';
 export class AddProductsComponent implements OnInit {
 productImages:any=[];  
 categories:any;
+subCategories:any;
+brands:any;
+colors:string[]=['red','green','blue','black','white','orange'];
+selectedColors:any=[];
+productSizes:any=[];
+theirIsSubCategories:boolean=false;
 addproductFor!:FormBuilder;
 ckecked:boolean=false;
 message:boolean=false;
   constructor(private fb:FormBuilder,private catsrviece:CategoreisService,
     private http: HttpClient ,private ProductService: ProductsService,
-     private router: Router,private titleService:Title) {}
+     private router: Router,private titleService:Title,private brandService:BrandsService) {}
   
 
 addproductForm=this.fb.group(
   {
   brand:["",Validators.required],
   category:['',Validators.required],
+  subCategory:[''],
   title:['',Validators.required], 
   description:['',Validators.required],
   numofitems:['',Validators.required],
@@ -46,6 +54,10 @@ addproductForm=this.fb.group(
       this.categories=data;
       console.log(this.categories)
     },error=>{console.log(error)});
+    
+    this.brandService.getAllbrands().subscribe(res=>{
+      this.brands=res;
+    });
   }
   get brand()
   {
@@ -54,6 +66,10 @@ addproductForm=this.fb.group(
   get category()
   {
     return this.addproductForm.get('category')
+  }
+  get subCategory()
+  {
+    return this.addproductForm.get('subCategory')
   }
   get title()
   {
@@ -104,7 +120,7 @@ return this.addproductForm.get('price')
  addproduct(){
   //console.log(this.addproductForm.value)
        
-  var newprd=new newProduct(this.addproductForm.value.brand!,this.category?.value! ,this.title?.value!,this.description?.value!,parseInt(this.numofitems?.value!),parseInt(this.price?.value!),parseInt(this.discound?.value!),this.productImages,this.overview?.value!,[],[]);
+  var newprd=new newProduct(this.addproductForm.value.brand!,this.category?.value! ,this.title?.value!,this.description?.value!,parseInt(this.numofitems?.value!),parseInt(this.price?.value!),parseInt(this.discound?.value!),this.productImages,this.overview?.value!,this.productSizes,this.selectedColors);
   
     this.ProductService.postProduct(newprd)
     .subscribe(data =>
@@ -130,6 +146,19 @@ return this.addproductForm.get('price')
       
     )
  }
+//get sub categoires of selected Category
+ getSubCategories(event:any)
+{
+  this.catsrviece.getCategoryByName(event.target.value).subscribe(res=>{
+    this.subCategories=res[0].subCategories;
+    if(this.subCategories.length>0){
+      this.subCategory?.setValidators(Validators.required);
+      this.theirIsSubCategories=true;
+
+    }
+    console.log(this.subCategories);;
+  })
+}
  removemessage(){
   this.message=false;
  
@@ -148,6 +177,37 @@ return this.addproductForm.get('price')
 }
 removeProductImage(index:number){
   this.productImages.splice(index,1);
+
+}
+
+//add list of Product colors
+addColors(event:any){
+  if(event.target.value){
+    this.selectedColors.push(event.target.value);
+  }
+  console.log(event.target.value +" "+event.which);
+
+   
+}
+//remove role from Array Of User Responsability
+removeColor(index:number){
+ this.selectedColors.splice(index,1);
+
+}
+
+//add list of products Sizes
+addSize(event:any){
+  if(event.which==13 && event.target.value.length>0){
+    this.productSizes.push(event.target.value);
+    event.target.value="";
+  }
+  console.log(event.target.value +" "+event.which);
+
+   
+}
+//
+removeSize(index:number){
+ this.productSizes.splice(index,1);
 
 }
 }

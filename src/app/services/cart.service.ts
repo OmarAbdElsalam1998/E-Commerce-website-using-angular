@@ -14,7 +14,7 @@ export class CartService {
   CartProductsCounter:BehaviorSubject<number>;
   cartProducts:BehaviorSubject<any>;
   // CartTotal=0;
-  url:string="https://dummyjson.com/products";
+  url:string="http://localhost:3000/addproducts";
   url2:string="http://localhost:3000/cart";
   //  headers:HttpHeaders; 
   public productList=new BehaviorSubject<any>([]);
@@ -90,17 +90,33 @@ getProductById(prodId:any){
   }));
   
 }
-UpdateCart(productID:any,product:any){
-  return this.http.put(this.url2+"/"+productID,product).pipe(catchError((err)=>{
+// UpdateCart(productID:any,product:any){
+//   return this.http.put(this.url2+"/"+productID,product).pipe(catchError((err)=>{
+//     return throwError (()=>err.message ||"internal server error")
+//   }));
+// }
+// saveproduct(product:Cart){
+//   var headers= new HttpHeaders().set("Content-Type", "procademy");
+
+//   this.CartProductsCounter.next(this.CartProductsCounter.value+1)
+//    console.log(this.CartProductsCounter);  
+//       return this.http.post(this.url2,product).pipe(catchError ((err)=>{
+//       return throwError (()=>console.log(err))}))
+  
+  
+// }
+UpdateCartForSpecificCustomer(cartId:any,customerCart:any){
+  return this.http.put(this.url2+"/"+cartId,customerCart).pipe(catchError((err)=>{
     return throwError (()=>err.message ||"internal server error")
   }));
 }
-saveproduct(product:Cart){
+
+saveproduct(cartItemsForSpecificCustomer:any){
   var headers= new HttpHeaders().set("Content-Type", "procademy");
 
   this.CartProductsCounter.next(this.CartProductsCounter.value+1)
    console.log(this.CartProductsCounter);  
-      return this.http.post(this.url2,product).pipe(catchError ((err)=>{
+      return this.http.post(this.url2,cartItemsForSpecificCustomer).pipe(catchError ((err)=>{
       return throwError (()=>console.log(err))}))
   
   
@@ -108,6 +124,19 @@ saveproduct(product:Cart){
 
 
 
+//GetCartItems For Specific Customer
+
+getCartItemsForSpecificCustomer(UserId:number){
+  return this.http.get(this.url2+"?customerId="+UserId).pipe(catchError ((err)=>{
+    return throwError (()=>console.log(err))}))
+}
+
+
+//increase Cart Counter
+setCartCounter(value:number){
+  this.CartProductsCounter.next(value)
+
+}
 
 
 //Remove product one by one

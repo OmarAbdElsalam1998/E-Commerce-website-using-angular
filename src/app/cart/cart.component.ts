@@ -75,11 +75,11 @@ export class CartComponent implements OnInit {
       var cart = new Cart(this.selectedProduct.productId, this.selectedProduct.title, this.selectedProduct.price, this.selectedProduct.discount, this.selectedProduct.thumbnail,
        ++count);
        console.log(cart);
-        this.CartSER.UpdateCart(productId,cart).subscribe(data => {
+        //this.CartSER.UpdateCart(productId,cart).subscribe(data => {
                    
             this.ngOnInit();
        })
-    });
+   // });
     
      
   }
@@ -92,12 +92,12 @@ export class CartComponent implements OnInit {
       if (count > 1) {
         var cart = new Cart(this.selectedProduct.productId, this.selectedProduct.title, this.selectedProduct.price, this.selectedProduct.discount, this.selectedProduct.thumbnail,
           --count);
-           this.CartSER.UpdateCart(productId,cart).subscribe(data => {
+           //this.CartSER.UpdateCart(productId,cart).subscribe(data => {
             this.ngOnInit();
     
-           })  
+          //  })  
       }
-    });
+   });
    
   
   

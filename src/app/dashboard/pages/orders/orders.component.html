@@ -200,7 +200,16 @@
                     </div>
                     <div class="order-total px-3">{{order.totalPrice |number : '1.1-1'}} E.P</div>
 
-                    <div class="order-time px-3"> since 3 minutes ago</div>
+                    <div class="order-time px-3"> 
+                          <!-- Calculate Time  -->
+                          <span *ngIf="currentDateTime-order.createdAt<=59999">{{(currentDateTime-order.createdAt)/(1000) |number:'1.0-1'| slice:0:2 |number:'1.0-0'}} second ago</span>
+                          <span *ngIf="(currentDateTime-order.createdAt>59999 && currentDateTime-order.createdAt<=3599999)"> {{(currentDateTime-order.createdAt)/(1000*60) |number:'1.0-1'| slice:0:2 |number:'1.0-0'}} minutes ago</span>
+                          <span *ngIf="currentDateTime-order.createdAt>3599999 && currentDateTime-order.createdAt<=86399999"> {{(currentDateTime-order.createdAt)/(1000*60*60) |number:'1.0-1'| slice:0:2 |number:'1.0-0'}} hours ago</span>
+                          <span *ngIf="currentDateTime-order.createdAt>86399999 && currentDateTime-order.createdAt<=2591999999"> {{(currentDateTime-order.createdAt)/(1000*60*60*24) |number:'1.0-1' | slice:0:2 |number:'1.0-0'}} day ago</span>
+                          <span *ngIf="currentDateTime-order.createdAt>2591999999 && currentDateTime-order.createdAt<=31535999999"> {{(currentDateTime-order.createdAt)/(1000*60*60*24*365) |number:'1.0-1' | slice:0:2 |number:'1.0-0'}} month ago</span>
+                          <span *ngIf="currentDateTime-order.createdAt>31535999999 "> {{(currentDateTime-order.createdAt)/(1000*60*60*24*365) |number:'1.0-1' | slice:0:100 |number:'1.0-0'}} year ago</span>
+  
+                    </div>
             
            
                  

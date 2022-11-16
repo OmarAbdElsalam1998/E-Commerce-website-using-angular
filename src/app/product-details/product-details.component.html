@@ -21,7 +21,7 @@
                     <div class="images-container bg-white p-5">
                         <div class="row">
                             <div class="col-md-3">
-                                <div class="product-images">
+                                <div class="product-images d-flex d-md-block align-items-center justify-content-between ">
 
                                     <div  *ngFor="let image of product?.images | slice:0:4;index as i"class="image  mb-2" id="image1" [class.active]="mainImage===image" (click)="changeImage(image)">
                                       <img [src]="image">
@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="col-lg-7">
-                    <div class="product-details bg-white p-5">
+                    <div class="product-details bg-white p-5 ">
                    
                             <div class="product-info px-2 pt-2">
                                 <span>{{product?.brand}}</span>
@@ -68,14 +68,21 @@
                             </div> 
                                                            
                             
-                            <div class="add-to-cart px-2 pt-4 d-flex justify-content-center ">
-                                <div class="quantity d-flex me-4">
-                                    <div class="minus px-4 py-3"(click)="decreaseNumberOfItems(counter)"><i class="fa-solid fa-minus"></i></div>
-                                    <div class="num  bg-light fw-bold"><input #counter class="fw-bold px-4 py-3" style="width:70px;text-align: center;border:none ;" disabled type="text" [value]="counterValue"></div>
-                                    <div class="plus px-4 py-3 " (click)="increaseNumberOfItems(counter)"><i class="fa-solid fa-plus"></i></div>
-
-                                </div>  
-                                <button  class="custom-btn w-100" (click)="addToCart(product.id)"><i class="fa-light fa-cart-shopping fa-lg"></i> Add To Cart</button>
+                            <div class="add-to-cart px-2 pt-4  ">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="quantity d-flex mb-3 ">
+                                            <div class="minus px-4 py-3"(click)="decreaseNumberOfItems(counter)"><i class="fa-solid fa-minus"></i></div>
+                                            <div class="num  bg-light fw-bold"><input #counter class="fw-bold px-4 py-3" style="width:70px;text-align: center;border:none ;" disabled type="text" [value]="counterValue"></div>
+                                            <div class="plus px-4 py-3 " (click)="increaseNumberOfItems(counter)"><i class="fa-solid fa-plus"></i></div>
+        
+                                        </div> 
+                                    </div> 
+                                    <div class="col-md-8">
+                                        <button  class="custom-btn w-100 px-4 py-3" (click)="addToCart(product.id)"><i class="fa-light fa-cart-shopping fa-lg"></i> Add To Cart</button>
+    
+                                    </div>  
+                                </div>
                             </div>
                             
                        

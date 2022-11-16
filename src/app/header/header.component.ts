@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CartService } from '../services/cart.service';
 import { FavouriteService } from '../services/favourite.service';
 import { ProductsApiService } from '../services/products-api.service';
+import { ProductsService } from '../services/products.service';
 import { UserAuthService } from '../services/user-auth.service';
 
 @Component({
@@ -18,7 +19,7 @@ export class HeaderComponent implements OnInit {
   cartCounter:any;
 
   constructor(private userauth:UserAuthService,private router:Router,
-    private userAuth:UserAuthService,private productApi:ProductsApiService,
+    private userAuth:UserAuthService,private productApi:ProductsService,
     private cartService:CartService,private favouriteService:FavouriteService) { 
     this.isLoggedIn=this.userAuth.getLoggedStatus();
     console.log(this.username)
@@ -56,8 +57,12 @@ export class HeaderComponent implements OnInit {
   }
 
   search (keyword: any) 
-  { this.productApi.searchData(keyword.value);
+  { if(keyword.value!=""){
+    this.productApi.searchData(keyword.value);
     this.router.navigate(["search/" + keyword.value]);
+    keyword.value="";
+  }
+    
   }
 
   

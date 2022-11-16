@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { DashboardMainComponent } from 'src/app/dashboard/pages/dashboard-main/dashboard-main.component';
 import { CommentsService } from 'src/app/services/comments.service';
 
 @Component({
@@ -15,6 +16,8 @@ export class CommentsComponent implements OnInit {
   errorMsg:any;
   commentat:any;
   selectedId:any;
+  currentDateTime=Date.now();
+
   ngOnInit(): void {
     this.getcommentsbyid();
     // this.activatedRoute.paramMap.subscribe((params:ParamMap)=>{

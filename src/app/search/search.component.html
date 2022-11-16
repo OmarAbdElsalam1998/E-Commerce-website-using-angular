@@ -247,14 +247,14 @@
                     <div class="products ">
                         <div class="products-list">
                             <div class="row">
-                               <span>Results ({{productsList?.total}})</span>
+                               <span>Results ({{productsList.length}})</span>
                                 <!--Start Product  -->
-                                <div  class="col-md-6 col-lg-4" *ngFor="let product of productsList?.products;index as i" >
+                                <div  class="col-md-6 col-lg-4" *ngFor="let product of productsList;index as i" >
                                     <div class="product-box p-2 mb-3">
                                         <div class="product">
                                             <div class="overlay"></div>
                                             <div class="product-image">
-                                                <img class="img-fluid" [src]="product.thumbnail" >
+                                                <img class="img-fluid" [src]="product.images[0]" >
                                             </div>
                                             <div class="product-operations d-flex">
                                                 <div class="add-to-cart p-3"(click)="addToCart(product.id)" >
@@ -273,16 +273,29 @@
                                                 <h4 class=" m-0" [title]="product.title">{{product.title}}</h4>
                                   
                                             </div>
-                                            <div class="product-price px-2 pt-3 d-flex align-items-center">
-                                               <span class="new-price">EGP <span >{{product.price-product.price*product.discountPercentage/100 |number :'1.1-2'}}</span></span>
-                                               <span class="old-price ">EGP {{product.price | number}}</span>
-                                               
+                                            <div *ngIf="product.discound" >
+                                                <div class="product-price px-2 pt-3 d-flex align-items-center">
+                                                    <span class="new-price">EGP <span >{{product.price-product.price*product.discound/100 |number :'1.0-1'}}</span></span>
+                                                    <span class="old-price ">EGP {{product.price | number}}</span>
+                                                    
+                                                 </div>
+                                                 <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
+                                                     <span class="discount">{{product.discound/100  | percent  }} OFF</span>
+                                                     <!-- <span class="rate "><i class="fa-solid fa-star-sharp"></i>{{product.rating}} </span> -->
+                                                     
+                                                 </div> 
                                             </div>
-                                            <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
-                                                <span class="discount">{{product.discountPercentage/100  | percent }} OFF</span>
-                                                <span class="rate "><i class="fa-solid fa-star-sharp"></i>{{product.rating}} </span>
-                                                
-                                            </div> 
+                                            <div *ngIf="!product.discound" >
+                                                <div class="product-price px-2 pt-3 d-flex align-items-center">
+                                                    <span class="new-price">EGP {{product.price |number :'1.0-0'}}</span>
+                                                    
+                                                 </div>
+                                                 <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
+                                                     <!-- <span class="rate "><i class="fa-solid fa-star-sharp"></i>{{product.rating}} </span> -->
+                                                     
+                                                 </div> 
+                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>

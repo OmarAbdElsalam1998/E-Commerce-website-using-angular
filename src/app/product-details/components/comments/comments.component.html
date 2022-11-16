@@ -7,7 +7,7 @@
                 <img src="../../assets/images/person.jpg"class="rounded" style="width: 50px;height:50px" alt="">
             </div>
             <div class="">
-                <div class="customer-name">
+                <div class="customer-name pt-2">
                     <h3 class="fw-bold m-0" >{{comment.customerName}}</h3>
                     <!-- <h3 class="fw-bold m-0">omar abd elsalam</h3> -->
                 </div>
@@ -18,7 +18,15 @@
                     </span>
                     <span>
                         <i class="fa-regular fa-clock pe-2"></i>
-                        <span>{{comment.createdAt|date:'medium'}}</span>
+
+                        <!-- Calculate Time  -->
+                        <span *ngIf="currentDateTime-comment.createdAt<=59999">{{(currentDateTime-comment.createdAt)/(1000) |number:'1.0-1'| slice:0:2 |number:'1.0-0'}} second ago</span>
+                        <span *ngIf="(currentDateTime-comment.createdAt>59999 && currentDateTime-comment.createdAt<=3599999)"> {{(currentDateTime-comment.createdAt)/(1000*60) |number:'1.0-1'| slice:0:2 |number:'1.0-0'}} minutes ago</span>
+                        <span *ngIf="currentDateTime-comment.createdAt>3599999 && currentDateTime-comment.createdAt<=86399999"> {{(currentDateTime-comment.createdAt)/(1000*60*60) |number:'1.0-1'| slice:0:2 |number:'1.0-0'}} hour ago</span>
+                        <span *ngIf="currentDateTime-comment.createdAt>86399999 && currentDateTime-comment.createdAt<=2591999999"> {{(currentDateTime-comment.createdAt)/(1000*60*60*24) |number:'1.0-1' | slice:0:2 |number:'1.0-0'}} day ago</span>
+                        <span *ngIf="currentDateTime-comment.createdAt>2591999999 && currentDateTime-comment.createdAt<=31535999999"> {{(currentDateTime-comment.createdAt)/(1000*60*60*24*365) |number:'1.0-1' | slice:0:2 |number:'1.0-0'}} month ago</span>
+                        <span *ngIf="currentDateTime-comment.createdAt>31535999999 "> {{(currentDateTime-comment.createdAt)/(1000*60*60*24*365) |number:'1.0-1' | slice:0:100 |number:'1.0-0'}} year ago</span>
+
                     </span>
                 </div>
             </div>
@@ -33,6 +41,10 @@
                  officiis laborum dolorem sed, nam aut neque? Iusto?
             </p> -->
         </div>
+    </div>
+
+    <div class="p-5" *ngIf="commentat.length==0">
+       <span class="fw-bold">No Comments</span> 
     </div>
 
 
