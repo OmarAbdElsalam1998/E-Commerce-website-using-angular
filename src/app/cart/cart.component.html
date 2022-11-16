@@ -68,7 +68,7 @@
                                                     <span class="d-block mb-2" style="color: #ada6a6;font-weight: 500;">Quantity</span>
 
                                                 <div class="quantity d-flex align-items-center justify-content-center">
-                                                    <div class="minus px-3 py-2 rounded border" (click)=deceaseProductCounter(product.id,product.count)><i class="fa-solid fa-minus"></i></div>
+                                                    <div class="minus px-3 py-2 rounded border" (click)="deceaseProductCounter(product.id,product.count)"><i class="fa-solid fa-minus"></i></div>
                                                     <div class="num px-3 py-2 bg-light fw-bold  ">{{product.count}}</div>
                                                     
                                                     <div class="plus px-3 py-2 rounded border" (click)="increaseProductCounter(product.id,product.count)"><i class="fa-solid fa-plus"></i></div>

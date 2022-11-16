@@ -20,6 +20,7 @@ import { CategoriesComponent } from './pages/categories/categories.component';
 import { BrandsComponent } from './pages/brands/brands.component';
 import { EditproductsComponent } from './pages/editproducts/editproducts.component';
 import { UsersComponent } from './pages/users/users.component';
+import { SortPipe2 } from './pipes/sort.pipe';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { UsersComponent } from './pages/users/users.component';
     CategoriesComponent,
     BrandsComponent,
     EditproductsComponent,
-    UsersComponent
+    UsersComponent,
+    SortPipe2
   ],
   imports: [
     CommonModule,

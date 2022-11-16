@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, throwError } from 'rxjs';
-import { newProduct } from '../dashboard/newproduct';
+import { newProduct } from '../shares classes/newproduct';
 
 @Injectable({
   providedIn: 'root'
