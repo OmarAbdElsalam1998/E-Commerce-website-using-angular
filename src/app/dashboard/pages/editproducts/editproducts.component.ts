@@ -119,7 +119,7 @@ export class EditproductsComponent implements OnInit {
       )
     }
     Updateproduct(){
-      var newprd=new newProduct(this.addproductForm.value.brand!,this.category?.value! ,this.title?.value!,this.description?.value!,parseInt(this.numofitems?.value!),parseInt(this.price?.value!),parseInt(this.discound?.value!),this.productImages,this.overview?.value!,[],[]);
+      var newprd=new newProduct(this.addproductForm.value.brand!,this.category?.value!,"" ,this.title?.value!,this.description?.value!,parseInt(this.numofitems?.value!),parseInt(this.price?.value!),parseInt(this.discound?.value!),this.productImages,this.overview?.value!,[],[]);
       this.ProductService.putProduct(newprd,this.router2.snapshot.params['id'])
       .subscribe(data =>
         {

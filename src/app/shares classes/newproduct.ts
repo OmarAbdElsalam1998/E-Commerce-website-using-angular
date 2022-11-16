@@ -4,6 +4,7 @@ export class newProduct
         
         brand:string;
         category:string;
+        subCategory:string;
         title:string;
         description:string;
         numofitems:number;
@@ -14,9 +15,10 @@ export class newProduct
         sizes:string[];
         colors:string[];
 
-        constructor(brand:string,category:string,title:string,description:string,numofitems:number,price:number,discound:number,images:any,overview:string,sizes:[],colors:[]){
+        constructor(brand:string,category:string,subCategory:string,title:string,description:string,numofitems:number,price:number,discound:number,images:any,overview:string,sizes:[],colors:[]){
             this.brand=brand;
             this.category=category;
+            this.subCategory=subCategory;
             this.title=title;
             this.description=description;
             this.numofitems=numofitems;
