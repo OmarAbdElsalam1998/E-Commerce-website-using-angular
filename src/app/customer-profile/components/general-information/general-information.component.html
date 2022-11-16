@@ -116,11 +116,11 @@
                         <h3 class="fw-bold">Add Address</h3>
                         <div class="d-flex">
                             <div class="form-group  m-2 w-50">
-                                  <select formControlName="country" class="form-control fs-5" id="country" required="true">
-                                    <option value="" disabled selected>Select Country</option>
-                                      <div *ngIf="country?.invalid && country?.touched">
+                                  <select formControlName="country" class="form-control fs-5" id="country">
+                                    <div *ngIf="country?.invalid && country?.touched">
                                         <small class="text-danger" *ngIf="country?.errors?.['required']"> country is Required </small>
                                      </div>
+                                    <option value="" disabled selected>Select Country is REQUIRED</option>
                                      <option *ngFor="let country of countries" [value]="country.country">{{country.country}}</option>
 
                                   </select>
