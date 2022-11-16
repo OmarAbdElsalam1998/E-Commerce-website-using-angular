@@ -8,6 +8,7 @@ import { OrderTrackingComponent } from './components/order-tracking/order-tracki
 import { ReviewProductsComponent } from './components/review-products/review-products.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {  NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SettingsComponent } from './components/settings/settings.component';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import {  NgbModule } from '@ng-bootstrap/ng-bootstrap';
     GeneralInformationComponent,
     OrderTrackingComponent,
     ReviewProductsComponent,
+    SettingsComponent,
 
 
   ],

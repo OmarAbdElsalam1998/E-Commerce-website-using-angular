@@ -75,79 +75,9 @@
       "discount": 12.96,
       "count": 1,
       "id": 1
-    },
-    {
-      "productId": 28,
-      "title": "3D Embellishment Art Lamp",
-      "price": 20,
-      "thumbnail": "https://dummyjson.com/image/i/products/28/thumbnail.jpg",
-      "discount": 16.49,
-      "count": 1,
-      "id": 2
     }
   ],
-  "orders": [
-    {
-      "userId": 2,
-      "firstname": "ibrahem",
-      "lastname": "magdy",
-      "email": "omar@gmail.com",
-      "Phone": "011222322323",
-      "country": "Egypt",
-      "region": "cairo",
-      "city": "Giza",
-      "zipcode": "",
-      "street": "wewewewewewewew",
-      "subscribewhenreciving": "",
-      "subscribe": "",
-      "paymentMethod": "",
-      "orderStatus": "delivered",
-      "itemsList": [
-        {
-          "productId": 54,
-          "image": "https://dummyjson.com/image/i/products/54/thumbnail.jpg",
-          "name": "Pubg Printed Graphic T-Shirt",
-          "count": 1,
-          "totalPrice": 38.437599999999996
-        }
-      ],
-      "createdAt": "2022-11-14T16:28:15.819Z",
-      "subTotalPrice": 38.437599999999996,
-      "shippingCharge": 25,
-      "totalPrice": 63.437599999999996,
-      "id": 11
-    },
-    {
-      "userId": 2,
-      "firstname": "Ali",
-      "lastname": "Ibrahem",
-      "email": "mss@gmail.com",
-      "Phone": "01212212",
-      "country": "Egypt",
-      "region": "cairo",
-      "city": "cairo",
-      "zipcode": "",
-      "street": "dsdsdsdsdsdsdsdsdsd",
-      "subscribewhenreciving": "",
-      "subscribe": false,
-      "paymentMethod": "",
-      "orderStatus": "outForDelivery",
-      "itemsList": [
-        {
-          "productId": 28,
-          "image": "https://dummyjson.com/image/i/products/28/thumbnail.jpg",
-          "name": "3D Embellishment Art Lamp",
-          "count": 1,
-          "totalPrice": 16.701999999999998
-        }
-      ],
-      "createdAt": 1668453569792,
-      "subTotalPrice": 16.701999999999998,
-      "shippingCharge": 25,
-      "totalPrice": 41.702,
-      "id": 12
-    }
-  ],
+  "orders": [],
   "addproducts": [
     {
       "brand": "Apple",

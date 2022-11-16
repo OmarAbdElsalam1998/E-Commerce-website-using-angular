@@ -211,7 +211,7 @@
                 </div>
                 
                        
-               <pagination-controls  *ngIf="copyOrders.length>20" (pageChange)="page=($event)" class="text-end py-2"></pagination-controls>
+               <pagination-controls  previousLabel="Prev" nextLabel="Next"  *ngIf="copyOrders.length>20" (pageChange)="page=($event)" class="text-end py-2"></pagination-controls>
             </div>
               <!-- Modal -->
           <div *ngIf="selectedOrder.length>0" class="modal fade" id="changeStatus" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="true">

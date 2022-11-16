@@ -6,6 +6,20 @@ $brand_color:#1363DF;
     font-family: 'Roboto', sans-serif;
     min-height: 100vh;
     .customer-box{
+        .header{
+            background-color: #5872ff;
+
+        }
+        .customer-image{
+            margin-top: -40px;
+            img{
+                width: 120px;
+                height: 120px;
+                border: 10px solid #fff;
+                border-radius: 50%;
+                background: #FFF
+            }
+        }
 
     }
     .aside{

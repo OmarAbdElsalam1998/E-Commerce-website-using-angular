@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { error } from 'jquery';
@@ -17,9 +17,6 @@ export class CategoriesComponent implements OnInit {
   categories:any;
   copyCategories:any;
   subCategories:string[]=[];
-  actiontext:string="Add Category"
-  
-   
   categoryForm!:FormGroup;
   categoryModel:any;
   categoryDetails:any;
@@ -69,8 +66,8 @@ export class CategoriesComponent implements OnInit {
   }
   createcategoryForm(){
     this.categoryForm = this.fb.group({
-      Name:[''],
-      Img:[''],
+      Name:['',Validators.required],
+      Img:['',Validators.required],
       subCategories:[[]],
       
     });
@@ -120,7 +117,6 @@ export class CategoriesComponent implements OnInit {
     })
   }
   editCategorybefore(catid:number){
-    this.actiontext="Edit Category"
     this.showAddBtn=false;
     this.showUpdateBtn=true;
     this.categoriesservice.getcurrunetcategory(catid).subscribe((result:any) => {
@@ -138,7 +134,6 @@ export class CategoriesComponent implements OnInit {
   }
   updateafterEditetaked(catid:any){
     // this.categoryModel= Object.assign({}, this.categoryForm.value);
-    
     var cat =new Icategories ( this.categoryForm.value.Name,this.categoryImageUrl,this.subCategories);
     this.categoriesservice.updatecategroy(catid,cat).subscribe(res=>{
      
@@ -162,7 +157,6 @@ export class CategoriesComponent implements OnInit {
     })
   }
   reset(){
-    this.categoryModel.reset();
     this.categoryModel={};
   }
   search(event:any){

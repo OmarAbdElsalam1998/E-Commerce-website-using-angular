@@ -21,8 +21,9 @@ export class OrderdetailsComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(params=>{
        this.orderId=params.get("id");
        this.getOrderByID(this.orderId);
+       this.titleService.setTitle("Order | #"+this.orderId);
+
     });
-    this.titleService.setTitle("Order | #"+this.orderId);
 
   }
 
@@ -52,8 +53,8 @@ export class OrderdetailsComponent implements OnInit {
               res .subscribe,
               res .paymentMethod,
               status,
-              res.createdAt,
               res .itemsList,
+              res.createdAt,
               res .subTotalPrice,
               res .shippingCharge,
               res .totalPrice,

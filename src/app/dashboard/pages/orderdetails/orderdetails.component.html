@@ -11,7 +11,7 @@
                 <li class="breadcrumb-item d-flex align-items-center justify-content-between"><a [routerLink]="['/dashboard/orders']" routerLinkActive="router-link-active" >
                      <span class="fw-bold">Orders</span></a> 
                 </li>
-                <li class="breadcrumb-item active fw-bold">Order #{{orderDetails.id }}</li>
+                <li class="breadcrumb-item active fw-bold">Order #{{orderId }}</li>
                 
                 </ol>
             </nav>
@@ -33,7 +33,7 @@
                                 <div class="">
                                     <span class=" fs-5 fw-bold p-0 m-0 d-block">Order Number </span>
 
-                                    <span class="p-0 m-0">{{orderDetails.id}}</span>
+                                    <span class="p-0 m-0">{{orderDetails?.id}}</span>
                                 </div>
                             </div>
                            
@@ -48,7 +48,7 @@
                                 <div class="">
                                     <span class=" fs-5 fw-bold p-0 m-0 d-block">Order Date </span>
 
-                                    <span class="p-0 m-0">wed Nov 10 2022 11:21:08 pm</span>
+                                    <span class="p-0 m-0">{{orderDetails?.createdAt |date:'medium'}}</span>
                                 </div>
                             </div>
                            
@@ -63,30 +63,30 @@
                                 <div class="">
                                     <span class=" fs-5 fw-bold p-0 m-0 d-block">Order Status </span>
                                       
-                                    <span [ngSwitch]="orderDetails.orderStatus">
+                                    <span [ngSwitch]="orderDetails?.orderStatus">
                                         <span style="padding: 3px 10px;background: #ffc8467d;border-radius: 11px; color: #cda215;" *ngSwitchCase="'WaitingForReview'">
-                                            {{orderDetails.orderStatus}}
+                                            {{orderDetails?.orderStatus}}
                                         </span>
                                         <span style="padding: 3px 10px;border-radius: 11px; background: #a7beff7d;color: #050142;" *ngSwitchCase="'beingProcessed'">
-                                            {{orderDetails.orderStatus}}
+                                            {{orderDetails?.orderStatus}}
                                         </span>
                                         <span style="padding: 3px 10px;border-radius: 11px; background: #a7beff7d;color: #050142;" *ngSwitchCase="'prepared'">
-                                            {{orderDetails.orderStatus}}
+                                            {{orderDetails?.orderStatus}}
                                         </span>
                                         <span style="padding: 3px 10px;background: #96ec987d; border-radius: 11px;color: #4a9706;" *ngSwitchCase="'outForDelivery'">
                                             {{orderDetails.orderStatus}}
                                         </span>
                                         <span style="padding: 3px 10px;background: #96ec987d; border-radius: 11px;color: #4a9706;" *ngSwitchCase="'delivered'">
-                                            {{orderDetails.orderStatus}}
+                                            {{orderDetails?.orderStatus}}
                                         </span>
                                         <span style="padding: 3px 10px;background: #ff746c7d;border-radius: 11px;color: #c91d1d;" *ngSwitchCase="'cancelled'">
-                                            {{orderDetails.orderStatus}}
+                                            {{orderDetails?.orderStatus}}
                                         </span>
                                         <span style="padding: 3px 10px;background: #74fff47d;border-radius: 11px; color: #12acb3;" *ngSwitchCase="'beingRetrived'">
-                                            {{orderDetails.orderStatus}}
+                                            {{orderDetails?.orderStatus}}
                                         </span>
                                         <span style="padding: 3px 10px;background: #74fff47d;border-radius: 11px; color: #12acb3;" *ngSwitchCase="'retrived'">
-                                            {{orderDetails.orderStatus}}
+                                            {{orderDetails?.orderStatus}}
                                         </span>
                                       </span>  
                                       <!-- Example single danger button -->
@@ -123,9 +123,9 @@
                                 
                             </div>
                             <div class="customer-info p-2">
-                                <p>Name : {{orderDetails.firstname +" "+orderDetails.lastname}}</p>
-                                <p>Email : {{orderDetails.email}}</p>
-                                <p>Phone : {{orderDetails.Phone}}</p>
+                                <p>Name : {{orderDetails?.firstname +" "+orderDetails?.lastname}}</p>
+                                <p>Email : {{orderDetails?.email}}</p>
+                                <p>Phone : {{orderDetails?.Phone}}</p>
                             </div>
                         </div>
                     </div>
@@ -137,9 +137,9 @@
                                 
                             </div>
                             <div class="p-2">
-                                <span class="d-block fw-bold fs-5">{{orderDetails.country + ","+ orderDetails.city}} </span>  
+                                <span class="d-block fw-bold fs-5">{{orderDetails?.country + ","+ orderDetails?.city}} </span>  
 
-                                <p>{{orderDetails.street}} </p>  
+                                <p>{{orderDetails?.street}} </p>  
     
                              
                             </div>
@@ -155,18 +155,18 @@
                             
                         </div>
                         <div class="body p-2 d-flex align-items-center ">
-                            <span class="ps-2" [ngSwitch]="orderDetails.paymentMethod">
+                            <span class="ps-2" [ngSwitch]="orderDetails?.paymentMethod">
                                 <span  *ngSwitchCase="'visa'">
                                     <i class="fa-brands fa-cc-visa fa-lg"></i>
-                                   Paid With {{orderDetails.paymentMethod}}
+                                   Paid With {{orderDetails?.paymentMethod}}
                                 </span>
                                 <span  *ngSwitchCase="'payPal'">
                                     <i class="fa-brands fa-paypal fa-lg"></i>
-                                   Paid With  {{orderDetails.paymentMethod}}
+                                   Paid With  {{orderDetails?.paymentMethod}}
                                 </span>
-                                <span style="padding: 3px 10px;border-radius: 11px; background: #a7beff7d;color: #050142;" *ngSwitchCase="'payWhenRecive'">
+                                <span style="padding: 3px 10px;border-radius: 11px; background: #a7beff7d;color: #050142;" *ngSwitchCase="'payWhenReceive'">
                                     <i class="fa-duotone fa-money-bill fa-lg pe-3"></i>
-                                    {{orderDetails.paymentMethod}}
+                                    {{orderDetails?.paymentMethod}}
                                 </span>
                                 
                               </span>
@@ -197,7 +197,7 @@
                                 
                             </thead>
                             <tbody>
-                                <tr *ngFor="let item of orderDetails.itemsList">
+                                <tr *ngFor="let item of orderDetails?.itemsList">
                                    <td >
                                     <div class="d-flex align-items-between">
                                         <img [src]="item.image" style="width:80px;height:80px">
@@ -212,13 +212,13 @@
                                 </tr>
                                 
                                 <tr> <th colspan="4"  class="p-4">SubTotal</th>
-                                    <th>{{orderDetails.subTotalPrice |number:'1.0-0'}} E.P</th>
+                                    <th>{{orderDetails?.subTotalPrice |number:'1.0-0'}} E.P</th>
                                 </tr>
                                 <tr > <th colspan="4"  class="p-4">Shipping Charge</th>
-                                    <th>{{orderDetails.shippingCharge |number:'1.0-0'}} E.P</th>
+                                    <th>{{orderDetails?.shippingCharge |number:'1.0-0'}} E.P</th>
                                 </tr>
                                 <tr style="background-color:#e0e0e0;"> <th colspan="4"  class="p-4">Total</th>
-                                    <th>{{orderDetails.totalPrice |number:'1.0-0'}} E.P</th>
+                                    <th>{{orderDetails?.totalPrice |number:'1.0-0'}} E.P</th>
                                 </tr>
                             </tbody>
                         </table>
