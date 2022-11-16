@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { AdminRoleService } from 'src/app/services/admin-role.service';
 import { CustomerService } from 'src/app/services/customer.service';
@@ -15,6 +16,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./general-information.component.scss']
 })
 export class GeneralInformationComponent implements OnInit {
+  title="General Information"
   customerID:any;
   generalInfo = new GeneralInfo("","","","","")
   address = new Address("","","")
@@ -22,12 +24,20 @@ export class GeneralInformationComponent implements OnInit {
   userAddID:any;
   currentUser:any;
   closeForm:boolean=true;
+  countries :Address [] =[
+    { country: "Cairo"}, { country: "Alexandria"}, { country: "Giza"},{ country: "Assiut"}, { country: "Dakahlia"},{ country: "Sharqia"}, { country: "Port Said"},
+    { country: "Suez"}, { country: "Qalyubia	"}, { country: "Luxor"},{ country: "Gharbia	"}, { country: "Ismailia"},{ country: "Faiyum	"}, { country: "Damietta	"},
+    { country: "Aswan"}, { country: "Minya"}, { country: "Red Sea"},{ country: "Beni Suef	"}, { country: "Qena"},{ country: "Monufia	"}, { country: "Sohag"},
+    { country: "Beheira		"}, { country: "Qalyubia	"}, { country: "North Sinai"},{ country: "South Sinai"},
+
+  ]
 
 
-  constructor( private userAuth:UserAuthService , private adminRole:AdminRoleService,private customer:CustomerService , private fb:FormBuilder,private activateRoute:ActivatedRoute) { }
+  constructor( private userAuth:UserAuthService , private adminRole:AdminRoleService,private customer:CustomerService , 
+    private fb:FormBuilder,private activateRoute:ActivatedRoute , private titleService:Title) { }
 
   ngOnInit(): void {
-
+    this.titleService.setTitle(this.title);
     //get userID
     this.userAuth.getUserId().subscribe(data =>{
       this.customerID=data;
@@ -64,18 +74,18 @@ export class GeneralInformationComponent implements OnInit {
 
   addProfileForm=this.fb.group(
     {
-    userName:['',[Validators.required,Validators.maxLength(32),Validators.minLength(3)]],           //call simple validators
-    lastName:['',[Validators.required,Validators.maxLength(32),Validators.minLength(3)]],           //call simple validators
+    userName:['',[Validators.required,Validators.pattern("^[a-zA-Z]{3,32}$")]],           //call simple validators
+    lastName:['',[Validators.required,Validators.pattern("^[a-zA-Z]{3,32}$")]],           //call simple validators
     userEmail:['',[Validators.required,Validators.pattern("^([a-zA-Z0-9_-]+)@([a-zA-Z]+)\.(com|eg)$")]],
-    phone:[,[Validators.required,Validators.maxLength(11),Validators.minLength(11)]],           //call simple validators
-    DateOfBirth:['',[Validators.required,Validators.pattern("")]],
+    phone:[,[Validators.required,Validators.pattern("^[0-9]{11}$")]],           //call simple validators
+    DateOfBirth:['',[Validators.required]],
     })
 
     addAddressForm=this.fb.group(
       {
-      country:['',[Validators.required,Validators.maxLength(100),Validators.minLength(5)]],           //call simple validators
-      city:['',[Validators.required,Validators.maxLength(100),Validators.minLength(5)]],           //call simple validators
-      address:['',[Validators.required,Validators.maxLength(200),Validators.minLength(10)]],
+      country:['',[Validators.required,Validators.pattern("^[a-zA-Z]{3,100}$")]],           //call simple validators
+      city:['',[Validators.required,Validators.pattern("^[a-zA-Z]{3,100}$")]],           //call simple validators
+      address:['',[Validators.required,Validators.pattern("^[a-zA-Z]{10,100}$")]],
       })
 
   saveProfile(id:any)
@@ -145,10 +155,11 @@ export class GeneralInformationComponent implements OnInit {
         timer:1000
        })
   }
-  openFormToAddAddress()
+  openFormToAddaddress()
   {
     this.closeForm=false;
   }
+
 
   get userName()
   {

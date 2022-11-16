@@ -40,7 +40,7 @@
                         </div>
                         <div id="general-info" class="collapse p-4 " >
                             <div class="form-group m-2">
-                                <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold">Barnd</label>
+                                <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold">Brand</label>
                                 <select formControlName="brand" [class.is-invalid]=" brand?.invalid &&  brand?.touched"  class="form-select" aria-label="Default select example">
                                     <div *ngIf="(brand?.invalid &&  brand?.touched)">
                                         <small class="text-danger" *ngIf=" brand?.errors?.['required']">Brand Name is required</small>
@@ -128,7 +128,7 @@
                                 <small class="text-danger" *ngIf="discound?.invalid && discound?.touched"> Discount must be in percent</small> 
                             </div>
                             <div class="mb-3">
-                                <label for="addColors" class="form-label fw-bold">Colors(Optional)</label>
+                                <label for="addColors" class="form-label fs-5 fw-bold">Colors(Optional)</label>
                                 <select  class="form-control" id="addColors"(change)="addColors($event)">
                                     <option disabled>Select Color</option>
                                     <option *ngFor="let color of colors">{{color}}</option>
@@ -145,7 +145,7 @@
                                 </ul> 
                               </div>
                               <div class="mb-3">
-                                <label for="size" class="form-label fw-bold">Sizes (optional)</label>
+                                <label for="size" class="form-label fs-5 fw-bold">Sizes (optional)</label>
                                 <input type="text" class="form-control" id="size" value=""(keyup)="addSize($event)"  required>
                             </div>
                             <div class="tags p-3" *ngIf="productSizes?.length>0">

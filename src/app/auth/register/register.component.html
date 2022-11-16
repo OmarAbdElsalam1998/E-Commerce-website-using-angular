@@ -10,17 +10,16 @@
                             </div>
                             </div>
                             <div class="login-form p-3">
-                                <form [formGroup]="registerationForm"  (ngSubmit)="userRegistering()">
+                                <form [formGroup]="registerationForm" >
                                     <div class="form-group py-2">
                                         <input [class.is-invalid]="userName?.invalid && userName?.touched" formControlName="username" name="textname" type="text" class="input-field" placeholder=" ">
                                         <label class="placeholder-lable"><i class="fa-light fa-user fa-fw"></i> username</label>
                                         <div *ngIf="userName?.invalid && userName?.touched">
                                             <small *ngIf="userName?.errors?.['required']"  class="text-danger">Name is Required</small>
-                                            <small *ngIf="userName?.errors?.['minlength']"  class="text-danger">Name Length must be minimum 3 characters </small>
-                                            <small *ngIf="userName?.errors?.['maxlength']"  class="text-danger">Name Length must be maximum 32 characters</small>
-
-                                
+                                            <small *ngIf="userName?.errors?.['pattern']"  class="text-danger">Name should be letters only and Length must be 3-32 characters </small>
                                         </div>
+        
+
                                     </div>
                                     <div class="form-group py-2">
                                         <input [class.is-invalid]="userEmail?.invalid && userEmail?.touched" formControlName="email" name="textemail" type="text" class="input-field" placeholder=" ">
@@ -54,8 +53,7 @@
                                     </div>
                                     
                                     <div class="button d-flex justify-content-center align-items-center">
-                                        <button [disabled]="registerationForm.invalid" class=" my-button">Sign Up</button>
-                                        <!-- <button disabled="registerationForm.invalid" class=" my-button">Sign Up</button> -->
+                                        <button [disabled]="registerationForm.invalid" (click)="userRegistering()" class=" my-button">Sign Up</button>
                                         <!-- <input (click)="loadApiData()" type="Button" class="btn btn-danger" value="Sign Up">  -->
 
                                     </div>

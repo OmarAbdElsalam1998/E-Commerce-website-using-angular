@@ -22,8 +22,7 @@
                             <input [class.is-invalid]="userName?.invalid && userName?.touched" formControlName="userName" type="text" class="form-control">
                             <div *ngIf="userName?.invalid && userName?.touched">
                                 <small *ngIf="userName?.errors?.['required']"  class="text-danger">Name is Required</small>
-                                <small *ngIf="userName?.errors?.['minlength']"  class="text-danger">Name Length must be minimum 3 characters </small>
-                                <small *ngIf="userName?.errors?.['maxlength']"  class="text-danger">Name Length must be maximum 32 characters</small>
+                                <small *ngIf="userName?.errors?.['pattern']"  class="text-danger">Name should be letters only and length must be form 3-32 characters </small>
                               </div>
                         </div>  
                         <div class="form-group  m-2 w-50">
@@ -31,8 +30,7 @@
                             <input [class.is-invalid]="lastName?.invalid && lastName?.touched" formControlName="lastName" type="text" class="form-control">
                             <div *ngIf="lastName?.invalid && lastName?.touched">
                                 <small *ngIf="lastName?.errors?.['required']"  class="text-danger">Name is Required</small>
-                                <small *ngIf="lastName?.errors?.['minlength']"  class="text-danger">Name Length must be minimum 3 characters </small>
-                                <small *ngIf="lastName?.errors?.['maxlength']"  class="text-danger">Name Length must be maximum 32 characters</small>
+                                <small *ngIf="lastName?.errors?.['pattern']"  class="text-danger">Name should be letters only and length must be form 3-32 characters </small>
                               </div>
                         </div>
                     </div>
@@ -49,9 +47,9 @@
                             <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold"  >phone</label>
                             <input [class.is-invalid]="phone?.invalid && phone?.touched" formControlName="phone" type="text" class="form-control">
                                <div *ngIf="phone?.invalid && phone?.touched">
-                                        <small class="text-danger" *ngIf="phone?.errors?.['minlength']"> Phone should be 11 numbers</small>
-                                        <small class="text-danger" *ngIf="phone?.errors?.['maxlength']"> Phone should be 11 numbers </small>
                                         <small class="text-danger" *ngIf="phone?.errors?.['required']"> Phone is Required </small>
+                                        <small class="text-danger" *ngIf="phone?.errors?.['pattern']"> Phone should be 11 digits and numbers only </small>
+
                                 </div>
                         </div>  
                         <div class="form-group  m-2 w-50">
@@ -64,8 +62,6 @@
                     </div> 
                     <div class="form-group  m-2 w-50">
                         <button [disabled]="addProfileForm.invalid" (click)="saveProfile(customerID)" id="saveProfile" class="btn btn-primary">Save </button>
-
-                        <button (click)="cancelProfile()" id="closeProfile"  class="btn btn-primary"> cancel</button>
 
                     </div>   
                 </form>
@@ -89,7 +85,7 @@
                 <div class="addaddress-btn text-end">
 
                     <!-- ADD ADDRESS  -->
-                    <button (click)="openFormToAddAddress()" class="btn btn-success">
+                    <button (click)="openFormToAddaddress()" class="btn btn-success">
                         <i class="fa-solid fa-plus pe-2"></i>
                         add Address
                     </button>
@@ -120,21 +116,22 @@
                         <h3 class="fw-bold">Add Address</h3>
                         <div class="d-flex">
                             <div class="form-group  m-2 w-50">
-                                <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold"  >country</label>
-                                <input [class.is-invalid]="country?.invalid && country?.touched"  formControlName="country" type="text" class="form-control">
-                                <div *ngIf="country?.invalid && country?.touched">
-                                    <small class="text-danger" *ngIf="country?.errors?.['minlength']"> country should be minimum 10 digits</small>
-                                    <small class="text-danger" *ngIf="country?.errors?.['maxlength']"> country should be maximum 100 digits </small>
-                                    <small class="text-danger" *ngIf="country?.errors?.['required']"> country is Required </small>
-                            </div>
+                                  <select formControlName="country" class="form-control fs-5" id="country">
+                                    <div *ngIf="country?.invalid && country?.touched">
+                                        <small class="text-danger" *ngIf="country?.errors?.['required']"> country is Required </small>
+                                     </div>
+                                    <option value="" disabled selected>Select Country is REQUIRED</option>
+                                     <option *ngFor="let country of countries" [value]="country.country">{{country.country}}</option>
+
+                                  </select>
                             </div>  
                             <div class="form-group  m-2 w-50">
                                 <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold"  >city</label>
                                 <input [class.is-invalid]="city?.invalid && city?.touched"  formControlName="city" type="text" class="form-control">
                                 <div *ngIf="city?.invalid && city?.touched">
-                                    <small class="text-danger" *ngIf="city?.errors?.['minlength']"> city should be minimum 10 digits</small>
-                                    <small class="text-danger" *ngIf="city?.errors?.['maxlength']"> city should be maximum 100 digits </small>
                                     <small class="text-danger" *ngIf="city?.errors?.['required']"> city is Required </small>
+                                    <small class="text-danger" *ngIf="city?.errors?.['pattern']"  > city should be characters only (abc) and length should be 3-100 letters  </small>
+
                             </div>
                                 
                             </div>
@@ -143,9 +140,9 @@
                             <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold"  >Address</label>
                             <textarea [class.is-invalid]="addressForm?.invalid && addressForm?.touched"  formControlName="address" type="text" class="form-control" rows="4"></textarea>
                             <div *ngIf="addressForm?.invalid && addressForm?.touched">
-                                <small class="text-danger" *ngIf="addressForm?.errors?.['minlength']"> address should be minimum 10 digits</small>
-                                <small class="text-danger" *ngIf="addressForm?.errors?.['maxlength']"> address should be maximum 100 digits </small>
                                 <small class="text-danger" *ngIf="addressForm?.errors?.['required']"> address is Required </small>
+                                <small class="text-danger" *ngIf="addressForm?.errors?.['pattern']"  > address should be characters only (abc) and length should be 10-100 letters  </small>
+
                         </div>
                         </div>
                         
