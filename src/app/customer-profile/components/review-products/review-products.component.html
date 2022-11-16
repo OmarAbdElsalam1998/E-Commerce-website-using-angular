@@ -13,16 +13,22 @@
         </div>
         
     </div>
-    <form>
+    <form [formGroup]="CommentForm"  (ngSubmit)="addcomment()">
         <div class="order-rate m-3 border-bottom">
             <h4 class="fw-bold ">Add Prdouct Review</h4>
-            <ngb-rating [max]="5"></ngb-rating>
-        
+            <ngb-rating formControlName="rate" [class.is-invalid]=" rate?.invalid &&  rate?.touched"   [max]="5"></ngb-rating>
+            <div *ngIf="(rate?.invalid &&  rate?.touched)">
+                <small class="text-danger" *ngIf=" rate?.errors?.['required']">This field is required</small>
+            </div>
         </div>
         <div class="order-comment m-3 border-bottom">
             <h4 class="fw-bold ">Add Comment</h4>
             <div class="mb-3">
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="write Your comment here"></textarea>
+                <textarea formControlName="comment" [class.is-invalid]="comment?.invalid && comment?.touched" type="text" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="write Your comment here"></textarea>
+                <div *ngIf="(comment?.invalid &&comment?.touched)">
+                    <small class="text-danger" *ngIf=" comment?.errors?.['required']">This field is required</small>
+                    <small class="text-danger" *ngIf=" comment?.errors?.['minlength']">Comment must be at least 5 characters long</small>
+                </div>
             </div>        
         </div>
         <div class="public-name m-3">
@@ -32,14 +38,17 @@
                 <span class="icon"><i class="fa-regular fa-user fa-lg"></i> </span>
                 <div class="my-3 w-100">
 
-                    <input class="form-control" type="text">
+                    <input formControlName="customerName" [class.is-invalid]=" customerName?.invalid &&  customerName?.touched" class="form-control" type="text">
+                    <div *ngIf="(customerName?.invalid &&  customerName?.touched)">
+                        <small class="text-danger" *ngIf=" customerName?.errors?.['required']">This field is required</small>
+                    </div>
                 </div> 
 
             </div>
                    
         </div>
         <div class="m-3">
-            <button class="btn btn-success">Post a Review</button>      
+            <button [disabled]="CommentForm.invalid" class="btn btn-success">Post a Review</button>  
         </div>
     </form>
     

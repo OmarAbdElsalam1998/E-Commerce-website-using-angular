@@ -6,21 +6,21 @@ import { Injectable } from '@angular/core';
 })
 export class ProductsService {
   
-
+url="http://localhost:3000/addproducts/";
   constructor(private http:HttpClient) { }
   postProduct(data:any){
-    return this.http.post<any>("http://localhost:3000/addproducts/",data)
+    return this.http.post<any>(this.url,data)
   }
   getProduct(){
-    return this.http.get<any>("http://localhost:3000/addproducts/")
+    return this.http.get<any>(this.url)
   }
   putProduct(data:any,id:number){
-    return this.http.put<any>("http://localhost:3000/addproducts/"+id,data);
+    return this.http.put<any>(this.url+id,data);
   }
   deleteProduct(id:number){
-    return this.http.delete<any>("http://localhost:3000/addproducts/"+id);
+    return this.http.delete<any>(this.url+id);
   }
   getaddProductById(id:number){
-    return this.http.get<any>("http://localhost:3000/addproducts/"+id)
+    return this.http.get<any>(this.url+id)
   }
 }
