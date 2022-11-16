@@ -1,8 +1,8 @@
 export class Address
 {
-    public country:string;
-    public city:string;
-    public address:string;
+    public country?:string;
+    public city?:string;
+    public address?:string;
 
 
     constructor(country:string,city:string,address:string)

@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
 
   registerationForm =this.formB.group(
     {
-      username:['',[Validators.required,Validators.maxLength(32),Validators.minLength(5)]],           //call simple validators
+      username:['',[Validators.required,Validators.pattern("^[a-zA-Z]{3,32}$")]],           //call simple validators
       email:['',[Validators.required,Validators.pattern("^([a-zA-Z0-9_-]+)@([a-zA-Z]+)\.(com|eg)$")]],
       password:['',[Validators.required,Validators.pattern("^[a-zA-Z0-9_-]{6,32}$")]],
       confirmpassword:[''],
