@@ -1,13 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { GeneralInfo } from '../shares classes/generalInfo';
 import { UserRole } from '../shares classes/userRole';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AdminRoleService {
+export class CustomerService {
 
   constructor(private http:HttpClient ) { }
 
@@ -34,7 +33,7 @@ export class AdminRoleService {
   }
 
    //create new user 
-   postUser(user:any):Observable<any>
+   postUser(user:UserRole):Observable<any>
    {
     return this.http.post(this.url,user)
     .pipe(catchError((err)=>{
@@ -45,53 +44,21 @@ export class AdminRoleService {
     //update user by put
     putUser(user:UserRole ,id:any):Observable<any>
    {
-    const body={
-      userName:user.userName,
-      lastName:user.lastName,
-      userEmail:user.userEmail,
-      Password:user.Password,
-      role:user.role,
-      image:user.image,
-      // id:user.id,
-    }
-    return this.http.put(this.url+"/"+id, body)
+    return this.http.put(this.url+"/"+id, user)
     .pipe(catchError((err)=>{
       return throwError(() => err.message||"internal Server Error" )
     })) 
    }
 
-   //patch method
-  //  patchRequest(user:UserRole):Observable<any>
-  // {
-  //   return this.http.patch(this.url +"/"+user.id, user)
+
+    //delete by one user
+  //  deleteAddress(id:any):Observable<any>
+  //  {
+  //   return this.http.delete(this.url+"/"+id)
   //   .pipe(catchError((err)=>{
   //     return throwError(() => err.message||"internal Server Error" )
   //   })) 
- 
-  // }
-
-    //delete by one user
-   deleteUser(id:any):Observable<any>
-   {
-    return this.http.delete(this.url+"/"+id)
-    .pipe(catchError((err)=>{
-      return throwError(() => err.message||"internal Server Error" )
-    })) 
-   }
-
-   deleteProductFromCart(id:any):Observable<any>
-   {
-     return this.http.delete(this.url+"/"+id)
-   }
-
-    //delete ALL users
-   deleteAllUser():Observable<any>
-   {
-    return this.http.delete(this.url+"/")
-    .pipe(catchError((err)=>{
-      return throwError(() => err.message||"internal Server Error" )
-    })) 
-   }
+  //  }
 
   
 }

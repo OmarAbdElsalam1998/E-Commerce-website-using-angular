@@ -4,6 +4,8 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { AdminRoleService } from 'src/app/services/admin-role.service';
+import { Address } from 'src/app/shares classes/address';
+import { GeneralInfo } from 'src/app/shares classes/generalInfo';
 import { UserRole } from 'src/app/shares classes/userRole';
 import Swal from 'sweetalert2';
 import { ConfirmPasswordValidator } from './confirmPassword';
@@ -18,7 +20,7 @@ export class UsersComponent implements OnInit {
   userResponsipilities:string[]=[];
   constructor(private adminService: AdminRoleService , private activateRoute:ActivatedRoute, private fb:FormBuilder , private route:Router , private titleService : Title) { }
 
-  userRole :UserRole = new UserRole("","","","","","",[],"","");
+  // userRole :UserRole = new UserRole("","","","","","",{},"","",[]);
   userList:any;
   userId:any;
   count:any;
@@ -61,7 +63,8 @@ export class UsersComponent implements OnInit {
 
   UpdateUser(id:any)
   {
-    var user =new UserRole(this.addUserForm.value.userName,this.addUserForm.value.lastName,this.addUserForm.value.userEmail,this.addUserForm.value.phone,this.addUserForm.value.Password,this.addUserForm.value.confirmPassword,this.userResponsipilities,this.userImageUrl,"")
+    var user =new UserRole(this.addUserForm.value.userName,this.addUserForm.value.lastName,this.addUserForm.value.userEmail,this.addUserForm.value.phone,
+      this.addUserForm.value.role,this.addUserForm.value.Password,[new Address("","","")],new GeneralInfo("","","","",""),this.userImageUrl,this.userResponsipilities)
   //   // get userDetails by id
     this.adminService.putUser(user,id)
     .subscribe(
@@ -97,12 +100,6 @@ export class UsersComponent implements OnInit {
         this.userResponsipilities=result['role'];
     });
     }
-  
-    saveChanges(id:number)
-    {
-     this.UpdateUser(id);
-    }
-  
  
     resetForm()
     {
@@ -113,10 +110,10 @@ export class UsersComponent implements OnInit {
     
   addUser()
   {
-     var user =new UserRole(this.addUserForm.value.userName,this.addUserForm.value.lastName,this.addUserForm.value.userEmail,this.addUserForm.value.phone,this.addUserForm.value.Password,this.addUserForm.value.confirmPassword,this.userResponsipilities,this.userImageUrl,"")
+     var user =new UserRole(this.addUserForm.value.userName,this.addUserForm.value.lastName,this.addUserForm.value.userEmail,
+      this.addUserForm.value.phone,this.addUserForm.value.Password,this.addUserForm.value.role,[new Address("","","")],new GeneralInfo("","","","",""),this.userImageUrl,this.userResponsipilities)
     this.adminService.postUser(user).subscribe(
       data =>{
-        // this.userRole=data;
         this.addUserForm.reset();
         let close = document.getElementById('close');
         close?.click();
@@ -138,6 +135,7 @@ export class UsersComponent implements OnInit {
   search(event:any){
 
   }
+
   userImageUrl = '';
   onSelect(event:any) {
     let fileType = event.target.files[0].type;
@@ -160,7 +158,7 @@ export class UsersComponent implements OnInit {
 
      
   }
-  //remove sub category from Array Of sub Categries
+  //remove role from Array Of User Responsability
   removeUserResponsibilities(index:number){
    this.userResponsipilities.splice(index,1);
 

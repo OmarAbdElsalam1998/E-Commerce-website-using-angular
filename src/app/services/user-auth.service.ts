@@ -1,5 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
+import { Address } from '../shares classes/address';
+import { GeneralInfo } from '../shares classes/generalInfo';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +14,20 @@ export class UserAuthService {
    loader:BehaviorSubject<boolean>;
    userName:BehaviorSubject<string>;
 
-  constructor() {
+
+   url="http://localhost:3000/users";
+   generalInfo = new GeneralInfo("","","","","")
+   address = new Address("","","")
+
+
+
+   constructor(private http:HttpClient) {
     this.isLoogedSubject=new BehaviorSubject<boolean> (false);
     this.isAdminSubject=new BehaviorSubject<boolean> (false);
     this.loader=new BehaviorSubject<boolean>(false);
     this.userName=new BehaviorSubject<string>("");
     this.userId=new BehaviorSubject<number>(-1);
+
    }
 
 
@@ -65,4 +76,13 @@ export class UserAuthService {
     return this.userId;
   }
 
+   //add new profile
+   getInfo() :Observable<any>
+   {
+    return this.http.get(this.url)
+    .pipe(catchError((err)=>{
+      return throwError(() => err.message||"internal Server Error" )
+    })) 
+   }
+  
 }

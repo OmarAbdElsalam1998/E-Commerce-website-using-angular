@@ -17,7 +17,6 @@ export class CategoriesComponent implements OnInit {
   categories:any;
   copyCategories:any;
   subCategories:string[]=[];
-  actiontext:string="Add Category"
   
    
   categoryForm!:FormGroup;
@@ -120,7 +119,6 @@ export class CategoriesComponent implements OnInit {
     })
   }
   editCategorybefore(catid:number){
-    this.actiontext="Edit Category"
     this.showAddBtn=false;
     this.showUpdateBtn=true;
     this.categoriesservice.getcurrunetcategory(catid).subscribe((result:any) => {

@@ -13,41 +13,61 @@
             </div>
             <i class="fa-solid fa-chevron-down"></i>
         </div>
+        
         <div id="general-info" class="collapse p-4 " >
-                <form>
+                <form [formGroup]="addProfileForm">
                     <div class="d-flex">
                         <div class="form-group  m-2 w-50">
                             <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold"  >firstname</label>
-                            <input type="text" class="form-control">
-                            
+                            <input [class.is-invalid]="userName?.invalid && userName?.touched" formControlName="userName" type="text" class="form-control">
+                            <div *ngIf="userName?.invalid && userName?.touched">
+                                <small *ngIf="userName?.errors?.['required']"  class="text-danger">Name is Required</small>
+                                <small *ngIf="userName?.errors?.['minlength']"  class="text-danger">Name Length must be minimum 3 characters </small>
+                                <small *ngIf="userName?.errors?.['maxlength']"  class="text-danger">Name Length must be maximum 32 characters</small>
+                              </div>
                         </div>  
                         <div class="form-group  m-2 w-50">
                             <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold"  >lastname</label>
-                            <input type="text" class="form-control">
-                            
+                            <input [class.is-invalid]="lastName?.invalid && lastName?.touched" formControlName="lastName" type="text" class="form-control">
+                            <div *ngIf="lastName?.invalid && lastName?.touched">
+                                <small *ngIf="lastName?.errors?.['required']"  class="text-danger">Name is Required</small>
+                                <small *ngIf="lastName?.errors?.['minlength']"  class="text-danger">Name Length must be minimum 3 characters </small>
+                                <small *ngIf="lastName?.errors?.['maxlength']"  class="text-danger">Name Length must be maximum 32 characters</small>
+                              </div>
                         </div>
                     </div>
                     <div class="form-group  m-2 ">
                         <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold"  >Email</label>
-                        <input type="text" class="form-control">
-                        
+                        <input [class.is-invalid]="userEmail?.invalid && userEmail?.touched" formControlName="userEmail" type="text" class="form-control">
+                        <div *ngIf="userEmail?.invalid && userEmail?.touched">
+                            <small class="text-danger" *ngIf="userEmail?.errors?.['required']"> Email is Required</small>
+                            <small class="text-danger" *ngIf="userEmail?.errors?.['pattern']"  > Email should be in form xxx@gmail.com </small>
+                        </div>
                     </div>
                     <div class="d-flex">
                         <div class="form-group  m-2 w-50">
                             <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold"  >phone</label>
-                            <input type="text" class="form-control">
-                            
+                            <input [class.is-invalid]="phone?.invalid && phone?.touched" formControlName="phone" type="text" class="form-control">
+                               <div *ngIf="phone?.invalid && phone?.touched">
+                                        <small class="text-danger" *ngIf="phone?.errors?.['minlength']"> Phone should be 11 numbers</small>
+                                        <small class="text-danger" *ngIf="phone?.errors?.['maxlength']"> Phone should be 11 numbers </small>
+                                        <small class="text-danger" *ngIf="phone?.errors?.['required']"> Phone is Required </small>
+                                </div>
                         </div>  
                         <div class="form-group  m-2 w-50">
-                            <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold"  >Date OF Birth</label>
-                            <input type="date" class="form-control">
-                            
+                            <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold" >Date OF Birth</label>
+                            <input [class.is-invalid]="DateOfBirth?.invalid && DateOfBirth?.touched" formControlName="DateOfBirth" type="date" class="form-control">
+                            <div *ngIf="DateOfBirth?.invalid && DateOfBirth?.touched">
+                                <small class="text-danger" *ngIf="DateOfBirth?.errors?.['required']">Date OF Birth is required</small>
+                        </div>
                         </div> 
                     </div> 
                     <div class="form-group  m-2 w-50">
-                        <button class="btn btn-primary">Save</button>
-                        
-                    </div>  
+                        <button [disabled]="addProfileForm.invalid" (click)="saveProfile(customerID)" id="saveProfile" class="btn btn-primary">Save </button>
+
+                        <button (click)="cancelProfile()" id="closeProfile"  class="btn btn-primary"> cancel</button>
+
+                    </div>   
                 </form>
         </div>
     </div> 
@@ -69,21 +89,21 @@
                 <div class="addaddress-btn text-end">
 
                     <!-- ADD ADDRESS  -->
-                    <button class="btn btn-success">
+                    <button (click)="openFormToAddAddress()" class="btn btn-success">
                         <i class="fa-solid fa-plus pe-2"></i>
                         add Address
                     </button>
                     
                 </div>
                 <div class="addresses py-4">
-                    <div class="row">
+                      <div  class="row">
 
-                        <!-- ng for to display addresses -->
-                        <div class="col-md-6">
+                            <!-- ng for to display addresses -->
+                        <div class="col-md-6" *ngFor="let address of currentUser?.addresses">
                                 <div class="address-box  rounded p-3 mb-3 position-relative">
-                                    <h4 class="fw-bold">Egypt,Cairo</h4>
-                                    <p>12 mohamedali stmohamedalimohamedalimohamedal
-                                        imohamedalimohamedalimohamedali,</p>
+                                    <h4 class="fw-bold"> {{address.country}}</h4>
+                                    <p>{{address.city}}</p>
+                                    <p>{{address.address}}</p>
                                         <div class="editaddress position-absolute ">
                                             <i class="fa-solid fa-pen pe-2"></i>
                                             <i class="fa-solid fa-trash-can text-danger"></i>
@@ -91,46 +111,48 @@
                                 </div> 
                         </div>
                         <!-- ng for to display addresses -->
-
-
-                        <div class="col-md-6">
-                            <div class="address-box  rounded p-3 mb-3 position-relative">
-                                <h4 class="fw-bold">Egypt,Cairo</h4>
-                                <p>12 mohamedali stmohamedalimohamedalimohamedal
-                                    imohamedalimohamedalimohamedali,</p>
-                                    <div class="editaddress position-absolute ">
-                                        <i class="fa-solid fa-pen pe-2"></i>
-                                        <i class="fa-solid fa-trash-can text-danger"></i>
-                                    </div>
-                            </div> 
-                         </div>
                         
                     </div>
                 </div>
                 
-                <div *ngIf="true"  class="address-form border-top py-3">
-                    <form>
+                <div *ngIf="!closeForm" class="address-form border-top py-3">
+                    <form [formGroup]="addAddressForm">
                         <h3 class="fw-bold">Add Address</h3>
                         <div class="d-flex">
                             <div class="form-group  m-2 w-50">
                                 <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold"  >country</label>
-                                <input type="text" class="form-control">
-                                
+                                <input [class.is-invalid]="country?.invalid && country?.touched"  formControlName="country" type="text" class="form-control">
+                                <div *ngIf="country?.invalid && country?.touched">
+                                    <small class="text-danger" *ngIf="country?.errors?.['minlength']"> country should be minimum 10 digits</small>
+                                    <small class="text-danger" *ngIf="country?.errors?.['maxlength']"> country should be maximum 100 digits </small>
+                                    <small class="text-danger" *ngIf="country?.errors?.['required']"> country is Required </small>
+                            </div>
                             </div>  
                             <div class="form-group  m-2 w-50">
                                 <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold"  >city</label>
-                                <input type="text" class="form-control">
+                                <input [class.is-invalid]="city?.invalid && city?.touched"  formControlName="city" type="text" class="form-control">
+                                <div *ngIf="city?.invalid && city?.touched">
+                                    <small class="text-danger" *ngIf="city?.errors?.['minlength']"> city should be minimum 10 digits</small>
+                                    <small class="text-danger" *ngIf="city?.errors?.['maxlength']"> city should be maximum 100 digits </small>
+                                    <small class="text-danger" *ngIf="city?.errors?.['required']"> city is Required </small>
+                            </div>
                                 
                             </div>
                         </div>
                         <div class="form-group  m-2 ">
                             <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold"  >Address</label>
-                            <textarea type="text" class="form-control" rows="4"></textarea>
-                            
+                            <textarea [class.is-invalid]="addressForm?.invalid && addressForm?.touched"  formControlName="address" type="text" class="form-control" rows="4"></textarea>
+                            <div *ngIf="addressForm?.invalid && addressForm?.touched">
+                                <small class="text-danger" *ngIf="addressForm?.errors?.['minlength']"> address should be minimum 10 digits</small>
+                                <small class="text-danger" *ngIf="addressForm?.errors?.['maxlength']"> address should be maximum 100 digits </small>
+                                <small class="text-danger" *ngIf="addressForm?.errors?.['required']"> address is Required </small>
+                        </div>
                         </div>
                         
                         <div class="form-group  m-2 w-50">
-                            <button class="btn btn-primary">Save</button>
+                            <!-- <button (click)="saveAddressChanges(customerID)" id="updateAdd" class="btn btn-primary">Save Changes</button> -->
+                            <button [disabled]="addAddressForm.invalid" (click)="addAddress()" id="addAddress" class="btn btn-primary">Add Address</button>
+
                             
                         </div>  
                     </form>

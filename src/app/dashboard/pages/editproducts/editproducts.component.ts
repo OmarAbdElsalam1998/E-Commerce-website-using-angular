@@ -5,7 +5,7 @@ import { Title } from '@angular/platform-browser';
 import { Router,ActivatedRoute } from '@angular/router';
 import { CategoreisService } from 'src/app/services/categoreis.service';
 import { ProductsApiService } from 'src/app/services/products-api.service';
-import { newProduct } from '../../newproduct';
+import { newProduct } from '../../../shares classes/newproduct';
 import { ProductsService } from 'src/app/services/products.service';
 import Swal from 'sweetalert2';
 

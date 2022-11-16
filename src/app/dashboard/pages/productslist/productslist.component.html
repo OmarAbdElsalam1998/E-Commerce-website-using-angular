@@ -33,12 +33,12 @@
                 <h2 class="fw-bold text-md-center">Products <small class="fw-normal" style="font-size:1rem;">{{productdata.length}} items</small></h2>
                 <div class="search-box d-flex align-items-center p-2 border rounded text-md-center" >
                     <i class="fa-regular fa-search fa-1x pe-2"></i>
-                    <input id="search" placeholder="search" type="text" name="search" (keyup)="search($event)">
+                    <input id="search" placeholder="search" type="text" name="search"  (keyup)="search($event)">
         
                 </div>
                 <div class="d-flex align-items-center justify-content-between text-md-center">
                     <!-- Example split danger button -->
-                <div class="btn-group px-2">
+                <!-- <div class="btn-group px-2">
                     <span type="button" class="btn btn-default border outline-none p-2"><i class="fa-solid fa-filter pe-3"></i> Filter</span>
                     <button type="button" class="btn btn-default border outline-none dropdown-toggle dropdown-toggle-split p-2" data-bs-toggle="dropdown" aria-expanded="false">
                     <span class="visually-hidden">Toggle Dropdown</span>
@@ -50,22 +50,19 @@
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="#">Separated link</a></li>
                     </ul>
-                </div>
+                </div> -->
                 
                 
                     <!-- Example split danger button -->
                     <div class="btn-group px-2">
                         <span type="button" class="btn btn-default border outline-none p-2"><i class="fa-solid fa-sort pe-3"></i> Sorting</span>
-                        <button type="button" (change)="sort($event)" class="btn btn-default border outline-none dropdown-toggle dropdown-toggle-split p-2" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="visually-hidden">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Show Low to High Price</a></li>
-                        <li><a class="dropdown-item" href="#">Show High to Low Price</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Separated link</a></li>
-                        </ul>
+                        <select   class="form-select form-sel ect-sm w-auto" aria-label=".form-select-sm example" (change)="sort($event)">
+                            <option [selected]="true" disabled slected="true"></option>
+                            <option   value="LowPrice">Show Low to High Price</option>
+                            <option   value="HighPrice" >Show High to Low Price</option>
+                           
+                          </select>
+                       
                     </div>
                 
                     <span class="mx-2 p-2 border border rounded " [class.active-display-mode]="displayGrid" (click)="displayMode('grid')"><i class="fa-solid fa-grid fa-lg"></i></span> 
@@ -76,6 +73,12 @@
                 
                
             </div>
+
+            <div class="products-list p-3" >
+                <!-- <div  *ngIf="displayGrid;then gridView;else listView"> -->
+                              
+                                
+
             <div class="products-list p-3"   >
                 <div class="row" >
 
@@ -101,11 +104,58 @@
                         NO Products Founded
                     </div>
 
+
                 </div>
+                <ng-template #gridView>
+                    <div class="row" >
+                        <!-- Start Product -->
+                        <div class=" col-md-6  col-lg-4 col-xl-3" *ngFor="let item of productdata  " >
+                            <div class="product-box border rounded p-2 text-center mb-2">
+                                <div class="product-img">
+                                    <img src={{item.images[0]}} class="img-fluid">
+                                </div>
+                                <div class="product-info py-2 text-md-start text-center">
+                                    <h4 class="product-name fw-bold">{{item.title }}</h4>
+                                    <span>{{item.price|currency}}</span>
+                                </div>
+                                <div class="actions d-flex align-items-center justify-content-between w-100">
+                                    <button routerLink="/dashboard/productslist/editProduct/{{item.id}}" class="btn btn-default border rounded  me-1 w-50" ><i class="fa fa-edit pe-2"></i>Edit</button>
+                                    <button (click)="showConfirmAlert(item.id)"  class="btn btn-default border rounded ms-1 w-50" style="color: rgb(220, 31, 31);"><i class="fa fa-trash pe-2 "></i>Delete</button>
+                                </div>
+    
+                            </div>
+                        </div>
+                        <!-- End Product -->
+                    </div>
+                </ng-template>
+                <!-- <ng-template #listView>
+                     Start Product -->
+                        <!-- <div *ngFor="let item of productdata ">
+                            <div class="product-box border rounded p-2 text-center mb-2">
+                                <div class="product">
+                                    <div class="overlay"></div>
+                                    <div class="product-img">
+                                        <img src={{item.images[0]}} class="img-fluid">
+                                    </div>
+                                    <div class="product-info py-2 text-md-start text-center">
+                                        <h4 class="product-name fw-bold">{{item.title }}</h4>
+                                        <span>{{item.price|currency}}</span>
+                                    </div>
+                                    <div class="actions d-flex align-items-center justify-content-between w-100">
+                                        <button routerLink="/dashboard/productslist/editProduct/{{item.id}}" class="btn btn-default border rounded  me-1 w-50" ><i class="fa fa-edit pe-2"></i>Edit</button>
+                                        <button (click)="showConfirmAlert(item.id)"  class="btn btn-default border rounded ms-1 w-50" style="color: rgb(220, 31, 31);"><i class="fa fa-trash pe-2 "></i>Delete</button>
+                                    </div>
+                                </div>
+                              
+    
+                            </div>
+                        </div> -->
+                    
+                <!-- </ng-template>  -->
            
 
             </div>
         </div>
-    
+        </div>
     </div>
 </main>
