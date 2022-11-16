@@ -46,11 +46,11 @@ emptyCart(){
 goToPaymentPage(){
   this.router.navigate(['/cart/payment']);
 }
-increaseProductCounter(count:BehaviorSubject<number>){
-count.value+1;
+increaseProductCounter(productId:number,count:number){
+count=+1;
 console.log(count);
 }
-deceaseProductCounter(count:number){
+deceaseProductCounter(productId:number,count:number){
   
 }
 }

@@ -90,7 +90,7 @@ export class SearchComponent implements OnInit {
       });
     }
   seeDetails(id:any){
-     this.router.navigate(["products/",id]);
+     this.router.navigate(["product/",id]);
   }
 
   sort(event: any) {

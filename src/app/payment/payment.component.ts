@@ -119,7 +119,7 @@ export class PaymentComponent implements OnInit {
     console.log(data)
     var totalpriceOfoneItem=(parseFloat(data.price)-(parseFloat(data.price)*(parseFloat(data.discount)/100)))*parseFloat(data.count);
        console.log(totalpriceOfoneItem)
-       var obj={image:data.thumbnail,name:data.title,count:data.count,totalPrice:totalpriceOfoneItem}
+       var obj={productId:data.productId,image:data.thumbnail,name:data.title,count:data.count,totalPrice:totalpriceOfoneItem}
       this.newCartItems.push(obj);
       this.subTotalPrice+=totalpriceOfoneItem;
       this.totalPriceOfAllItems+=totalpriceOfoneItem;
@@ -150,7 +150,7 @@ addorder(){
   this.paymentForm.value.subTotalPrice=this.subTotalPrice;
   this.paymentForm.value.totalPrice=this.subTotalPrice+this.ShippingCharge;
   this.paymentForm.value.userId=this.userAuth.getUserId().value;
-  this.paymentForm.value.createdAt= new Date();
+  this.paymentForm.value.createdAt=Date.now();
   console.log(this.paymentForm.value);
   this.ProductService.saveorder(this.paymentForm.value)
     .subscribe(data => {

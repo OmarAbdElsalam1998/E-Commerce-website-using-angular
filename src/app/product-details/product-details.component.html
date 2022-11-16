@@ -88,10 +88,19 @@
 
 
     <!-- Setion class -->
-    <section class="discription">
+    <section class="overview-comments ">
         <div class="container">
-            <div class="links">
-
+            <div class="box bg-white   rounded overflow-hidden">
+                <div class="links   ">
+                    <ul class="custom-navbar">
+                        <li class="nav-item"><a class="nav-link" [routerLink]="overViewRouter" *ngIf="!router.url.includes('/comments')" routerLinkActive="activate-route">Overview</a> </li>
+                        <li class="nav-item"><a class="nav-link" [routerLink]="overViewRouter" *ngIf="router.url.includes('/comments')">Overview</a> </li>
+                        <li class="nav-item"><a class="nav-link" [routerLink]="commentsRouter" routerLinkActive="activate-route">Comments</a> </li>
+                    </ul>
+    
+                </div>
+                <router-outlet></router-outlet>
+                
             </div>
         </div>
     </section>

@@ -7,6 +7,7 @@ import { CategoreisService } from 'src/app/services/categoreis.service';
 import { ProductsApiService } from 'src/app/services/products-api.service';
 import { newProduct } from '../../../shares classes/newproduct';
 import { ProductsService } from 'src/app/services/products.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-editproducts',
@@ -124,8 +125,16 @@ export class EditproductsComponent implements OnInit {
         {
         this.message=true;
             this.addproductForm.reset();
-            // this.router.navigate(["products"])
+            this.router.navigate(["/dashboard/productslist"])
             this.productImages='';
+            Swal.fire({
+          
+              title:  'Updated Successfully',
+              icon:'success' ,
+              showConfirmButton:false,
+              timer:1000
+              
+             })
           },
        error =>{
           alert("Error")

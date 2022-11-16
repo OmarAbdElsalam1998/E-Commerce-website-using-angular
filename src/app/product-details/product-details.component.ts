@@ -15,17 +15,21 @@ declare function slider():void;
 export class ProductDetailsComponent implements OnInit {
    title:any;
   constructor(private titleService:Title,private productService:ProductsApiService,
-    private activatedRoute:ActivatedRoute,private router:Router,
+    private activatedRoute:ActivatedRoute,public router:Router,
     private cartService:CartService) { }
   productId:any;
   product:any;
   mainImage:any;
   selectedProduct:any;
   counterValue=1;
+  commentsRouter:string=""
+  overViewRouter:string=""
   ngOnInit(): void {
    //get product Id From url
    this.activatedRoute.paramMap.subscribe((params:ParamMap)=>{
     this.productId=params.get("id");
+    this.commentsRouter="/product/"+this.productId+"/comments";
+    this.overViewRouter="/product/"+this.productId;
 
 
     //get Product from Api
@@ -37,9 +41,23 @@ export class ProductDetailsComponent implements OnInit {
     },error=>{console.log(error)})
 
    });
+  
   }
    ngAfterViewInit(): void {
-   
+    if(localStorage.getItem("ProductYouSeeBefore")){
+      let arr=[];
+      var locaStorageData=localStorage.getItem("ProductYouSeeBefore");
+      arr=JSON.parse(locaStorageData!);
+      arr.push(this.productId);
+      window.localStorage.setItem("ProductYouSeeBefore",JSON.stringify(arr));
+
+    }
+    else{
+      let arr=[];
+      arr.push(this.productId);
+      window.localStorage.setItem("ProductYouSeeBefore",JSON.stringify(arr));
+
+    }
     
   }
 

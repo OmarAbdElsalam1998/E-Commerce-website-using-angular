@@ -15,28 +15,19 @@ import { SortPipe } from 'src/app/pipes/sort.pipe';
 })
 export class ProductslistComponent implements OnInit {
   displayGrid: boolean = true;
-  // productsList: any;
-  // products: any = [];
-  SortbyParams = '';
-  SortDirection = 'asc'
-  constructor(private router: Router, private ProductService: ProductsService, private titleService: Title) { }
+  productsList: any;
+  copyProductList:any;
+  
+  constructor(private router: Router, private ProductService: ProductsService,private titleService:Title) { }
   productdata: any = [];
-  searchText: any;
-
   ngOnInit(): void {
     this.titleService.setTitle("Products");
-    // this.ProductService.getProduct().subscribe((allData) => { 
     this.ProductService.getProduct().subscribe((allData) => {
-      console.log(allData);
-      this.productdata = allData;
-    });
-    // });
-    // this.ProductService.getProductData().subscribe((res) => {
-    //   // console.log(allData);
-    //   this.products = res;
-    // });
-  }
-
+    this.productdata = allData;
+      this.copyProductList=allData;
+  });
+}
+ 
   addProduct() {
     this.router.navigate(['/dashboard/productslist/addProduct']);
   }
@@ -108,28 +99,38 @@ export class ProductslistComponent implements OnInit {
 
   }
   sort(event: any) {
-    switch (event.target.value) {
-      case "LowPrice":
-        {
-          this.SortDirection = 'asc';
-          break;
-        }
+    // switch (event.target.value) {
+    //   case "LowPrice":
+    //     {
+    //       this.SortDirection = 'asc';
+    //       break;
+    //     }
   
-      case "HighPrice":
-        {
-          this.SortDirection = 'desc';
-          break;
-        }
+    //   case "HighPrice":
+    //     {
+    //       this.SortDirection = 'desc';
+    //       break;
+    //     }
     // if (this.SortDirection === 'desc') {
     //   this.SortDirection = 'asc';
     // } else {
     //   this.SortDirection = 'desc';
     // }
-      }
-      return this.productdata;
+  //     }
+  //     return this.productdata;
   }
-  search(event: any) {
+  search(event:any){
+    console.log(event.keyCode);
+    this.productsList = [...this.copyProductList];
+    if (event.target.value == "") {
+       this.ngOnInit();
+    }
+    else {
 
+      this.productdata = this.copyProductList.filter((res: any) => {
+        return res.title.toLocaleLowerCase().match(event.target.value.toLocaleLowerCase());
+      });
+    }
   }
 }
 

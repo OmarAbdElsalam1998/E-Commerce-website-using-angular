@@ -1,0 +1,48 @@
+.review-order{
+    font-family: 'Roboto', sans-serif;
+    .icon{
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        background-color: #005aff;
+        margin-right: 10px;
+        color: #FFF;
+    }
+
+    .header{
+        background-color: #f7f7f7;
+    }
+
+    // Start prodct style
+    .product{
+        .product-image{
+            img{
+                width:100px;
+                height: 100px;
+            }
+        }
+    }
+    .order-rate{
+        ngb-rating{
+            color:#FFC107;
+             font-size: 40px;
+        }
+    }
+    .public-name{
+        .icon{
+            
+            width: 60px;
+            height: 60px;
+            text-align: center;
+            line-height: 60px;
+            border-radius: 50%;
+            background-color:#F5F5F5;
+            color:#333
+        }
+    }
+   
+    //End Product Style
+
+}

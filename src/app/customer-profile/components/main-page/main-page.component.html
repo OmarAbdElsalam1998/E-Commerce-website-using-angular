@@ -1,16 +1,42 @@
 <main class="profile py-3">
     <div class="container">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-lg-3">
                 <div class="customer-box rounded p-3 bg-white mb-3">
                     ddd
                 </div>
-                <aside class="p-3 rounded bg-white">
-                    ddd
+                <aside class="aside  rounded bg-white">
+                    <ul class="links-navbar">
+                        <li class="nav-item"><a class="nav-link" href="" >sss</a></li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]="['/profile/general-info']" routerLinkActive="active-router">
+                                <i class="fa-light fa-memo-circle-info fa-lg pe-2"></i> General 
+                            </a> 
+                        </li>
+
+
+                        <li class="nav-item"><a class="nav-link" href="" >sss</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]="['/profile/tracking_Orders']" routerLinkActive="active-router">
+                                <i class="fa-light fa-cart-shopping fa-lg pe-2"></i>
+                                Your Orders
+                            </a>
+                         </li>
+                         <li class="nav-item">
+                            <a class="nav-link" [routerLink]="['/profile/settings']" routerLinkActive="active-router">
+                                <i class="fa-regular fa-gear fa-lg pe-2"></i>
+                                 settings
+                            </a>
+                         </li>
+
+
+                    </ul>
+                    
                 </aside>
             </div>
-            <div class="col-md-9">
-                <div class="bg-white">
+            <div class="col-lg-9">
+                <div class=" rounded p-2">
                     <router-outlet></router-outlet>
 
                 </div>

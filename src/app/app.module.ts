@@ -24,6 +24,8 @@ import { FooterComponent } from './footer/footer.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { Ng2OrderModule } from 'ng2-order-pipe';
+import { CommentsComponent } from './product-details/components/comments/comments.component';
+import { OverviewComponent } from './product-details/components/overview/overview.component';
 
 
 
@@ -42,7 +44,9 @@ import { Ng2OrderModule } from 'ng2-order-pipe';
    SearchComponent,
    FavouriteComponent,
    SortPipe,
-   FooterComponent
+   FooterComponent,
+   CommentsComponent,
+   OverviewComponent
 
     
   ],

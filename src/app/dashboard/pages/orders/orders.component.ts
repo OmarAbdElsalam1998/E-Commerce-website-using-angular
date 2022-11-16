@@ -196,6 +196,7 @@ export class OrdersComponent implements OnInit {
             res .paymentMethod,
             this.changeStatusForm.value.status!,
             res .itemsList,
+            res.createdAt,
             res .subTotalPrice,
             res .shippingCharge,
             res .totalPrice,

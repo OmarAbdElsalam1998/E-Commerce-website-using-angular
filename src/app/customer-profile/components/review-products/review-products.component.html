@@ -1,0 +1,46 @@
+<div class="review-order p-4 rounded bg-white">
+    <div class="header p-3 d-flex align-items-center rounded">
+        <span class="icon">  <i class="fa-regular fa-calendar-lines-pen"></i></span>
+        <h3 class="fw-bold">Write a Review</h3>
+    </div>
+
+    <div class="product d-flex align-items-center m-3 pb-3 border-bottom">
+        <div class="product-image pe-4">
+            <img src="../../../../assets/images/catrgories/furnature.jpg">
+        </div>
+        <div class="product-name">
+            <span class="fw-bold d-block">product name</span>
+        </div>
+        
+    </div>
+    <form>
+        <div class="order-rate m-3 border-bottom">
+            <h4 class="fw-bold ">Add Prdouct Review</h4>
+            <ngb-rating [max]="5"></ngb-rating>
+        
+        </div>
+        <div class="order-comment m-3 border-bottom">
+            <h4 class="fw-bold ">Add Comment</h4>
+            <div class="mb-3">
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="write Your comment here"></textarea>
+            </div>        
+        </div>
+        <div class="public-name m-3">
+            <h4 class="fw-bold ">Write your public name </h4>
+            <span>This is how you will appear to other customers</span>
+            <div class="d-flex align-items-center py-3">
+                <span class="icon"><i class="fa-regular fa-user fa-lg"></i> </span>
+                <div class="my-3 w-100">
+
+                    <input class="form-control" type="text">
+                </div> 
+
+            </div>
+                   
+        </div>
+        <div class="m-3">
+            <button class="btn btn-success">Post a Review</button>      
+        </div>
+    </form>
+    
+</div>

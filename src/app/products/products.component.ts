@@ -31,7 +31,9 @@ export class ProductsComponent implements OnInit {
   favouriteItem:any;
   items:any[] = [];
   products: any = [];
+  brands:any;
   displayGrid:boolean=true;
+
   constructor(private titleService:Title,private productService:ProductsApiService,private router:Router,
     private data1:HttpClient,private cart :CartService,private activatedRoute:ActivatedRoute,
     private favouriteService:FavouriteService
@@ -56,6 +58,7 @@ export class ProductsComponent implements OnInit {
      this.productService.getAllProducts().subscribe(data=>{
      this.productsList=data;
      this.categorieslist2=data;
+    
      },error=>{console.log(error)});
       
 
@@ -149,7 +152,7 @@ export class ProductsComponent implements OnInit {
   
   //go to the selected product to see getails
 seeDetails(id:any){
-   this.router.navigate(["products/",id]);
+   this.router.navigate(["product/",id]);
 }
   
 //get all items categories from api

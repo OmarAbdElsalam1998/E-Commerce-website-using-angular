@@ -73,7 +73,7 @@
                                         <span style="padding: 3px 10px;border-radius: 11px; background: #a7beff7d;color: #050142;" *ngSwitchCase="'prepared'">
                                             {{orderDetails.orderStatus}}
                                         </span>
-                                        <span style="padding: 3px 10px;background: #96ec987d; border-radius: 11px;color: #4a9706;" *ngSwitchCase="'deliveryInProgress'">
+                                        <span style="padding: 3px 10px;background: #96ec987d; border-radius: 11px;color: #4a9706;" *ngSwitchCase="'outForDelivery'">
                                             {{orderDetails.orderStatus}}
                                         </span>
                                         <span style="padding: 3px 10px;background: #96ec987d; border-radius: 11px;color: #4a9706;" *ngSwitchCase="'delivered'">
@@ -91,18 +91,18 @@
                                       </span>  
                                       <!-- Example single danger button -->
                                     <div class="btn-group text-end ms-4">
-                                        <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Action
+                                        <button type="button" class="btn btn-danger dropdown-toggle p-1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        change
                                         </button>
                                         <ul class="dropdown-menu" style="cursor: pointer">
-                                        <li class="dropdown-item" (click)="changeStatus('')">ًWiating For Review</li>
-                                        <li class="dropdown-item">Being Processed</li>
-                                        <li class="dropdown-item">Processed</li>
-                                        <li class="dropdown-item">Delivery In Progress</li>
-                                        <li class="dropdown-item">Delivered</li>
-                                        <li class="dropdown-item">Cancelled</li>
-                                        <li class="dropdown-item">Being Retrived</li>
-                                        <li class="dropdown-item">Retrived</li>
+                                        <li class="dropdown-item" (click)="changeStatus('WaitingForReview')">Wiating For Review</li>
+                                        <li class="dropdown-item" (click)="changeStatus('beingProcessed')">Being Processed</li>
+                                        <li class="dropdown-item" (click)="changeStatus('prepared')">Prepared</li>
+                                        <li class="dropdown-item" (click)="changeStatus('outForDelivery')">Out For Delivery</li>
+                                        <li class="dropdown-item" (click)="changeStatus('delivered')">Delivered</li>
+                                        <li class="dropdown-item" (click)="changeStatus('cancelled')">Cancelled</li>
+                                        <li class="dropdown-item" (click)="changeStatus('beingRetrived')">Being Retrived</li>
+                                        <li class="dropdown-item" (click)="changeStatus('retrived')">Retrived</li>
                                         </ul>
                                     </div>
                                       <!-- <button class="btn btn-primary ms-3" data-bs-toggle="modal" data-bs-target="#changeStatus">Change </button> -->

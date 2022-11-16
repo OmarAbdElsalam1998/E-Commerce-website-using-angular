@@ -128,8 +128,8 @@
                             <input id="search" placeholder="search" type="text" name="search" (keyup)="search($event)">
                 
                         </div>
-                        <div class="btn-group px-2">
-                            <span type="button" class="btn btn-primary  outline-none p-2"><i class="fa-solid fa-edit pe-3"></i> Edit</span>
+                        <div class="btn-group px-3">
+                            <span type="button" class="btn btn-primary  outline-none p-2"><i class="fa-solid fa-edit pe-2"></i> Edit</span>
                             <button type="button" class="btn btn-primary  outline-none dropdown-toggle dropdown-toggle-split p-2" data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="visually-hidden">Toggle Dropdown</span>
                             </button>
@@ -211,7 +211,7 @@
                 </div>
                 
                        
-               <pagination-controls  *ngIf="copyOrders.length>0" (pageChange)="page=($event)" class="text-end py-2"></pagination-controls>
+               <pagination-controls  *ngIf="copyOrders.length>20" (pageChange)="page=($event)" class="text-end py-2"></pagination-controls>
             </div>
               <!-- Modal -->
           <div *ngIf="selectedOrder.length>0" class="modal fade" id="changeStatus" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="true">
