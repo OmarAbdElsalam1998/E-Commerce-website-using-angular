@@ -34,7 +34,16 @@ export class ProductsService {
     return this.productList.asObservable();
   }
 
-
+  Getproductsbycategories(cat:string){
+    return this.http.get<any>(this.url+"?category="+cat).pipe(catchError((err)=>{
+      return throwError (()=>err.message ||"internal server error")
+    }));
+  }
+  GetproductsbySubcategories(cat:string){
+    return this.http.get<any>(this.url+"?subCategory="+cat).pipe(catchError((err)=>{
+      return throwError (()=>err.message ||"internal server error")
+    }));
+  }
   
   searchData(keyword:any){
        var data=this.http.get<any>(this.url+"?q="+keyword).pipe(catchError((err)=>{

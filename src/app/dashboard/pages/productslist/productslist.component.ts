@@ -17,6 +17,7 @@ export class ProductslistComponent implements OnInit {
   displayGrid: boolean = true;
   productsList: any;
   copyProductList:any;
+  page=1;
   
   constructor(private router: Router, private ProductService: ProductsService,private titleService:Title) { }
   productdata: any = [];
@@ -120,6 +121,7 @@ export class ProductslistComponent implements OnInit {
   //     return this.productdata;
   }
   search(event:any){
+    this.page=1;
     console.log(event.keyCode);
     this.productsList = [...this.copyProductList];
     if (event.target.value == "") {

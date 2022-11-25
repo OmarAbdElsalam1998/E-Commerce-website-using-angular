@@ -120,7 +120,7 @@ return this.addproductForm.get('price')
  addproduct(){
   //console.log(this.addproductForm.value)
        
-  var newprd=new newProduct(this.addproductForm.value.brand!,this.category?.value! ,this.subCategory?.value!,this.title?.value!,this.description?.value!,parseInt(this.numofitems?.value!),parseInt(this.price?.value!),parseInt(this.discound?.value!),this.productImages,this.overview?.value!,this.productSizes,this.selectedColors );
+  var newprd=new newProduct(this.addproductForm.value.brand!,this.category?.value! ,this.subCategory?.value!,this.title?.value!,this.description?.value!,parseInt(this.numofitems?.value!),parseInt(this.price?.value!),parseInt(this.discound?.value!),this.productImages,this.overview?.value!,this.productSizes,this.selectedColors,0 );
   
     this.ProductService.postProduct(newprd)
     .subscribe(data =>

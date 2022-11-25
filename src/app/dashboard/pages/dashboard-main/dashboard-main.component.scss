@@ -1,0 +1,33 @@
+.counter-box{
+    .header{
+        background-color: #5872ff;
+
+    }
+    .customer-image{
+        margin-top: -40px;
+        i{
+            width: 120px;
+            height: 120px;
+            text-align: center;
+            line-height: 120px;
+            border: 10px solid #fff;
+            border-radius: 50%;
+            background: #5d5ca5;
+            color: #ffffff;
+        }
+    }
+
+}
+.products{
+    background: linear-gradient(45deg, #604a93, #f1b53a);
+
+}
+.customer{
+    background: linear-gradient(45deg, #060607, #ffe635);
+}
+.order{
+    background: linear-gradient(45deg, #f62674, #3994a8);
+}
+.brand{
+    background: linear-gradient(45deg, #060f41d6, #3ce6d7)
+}

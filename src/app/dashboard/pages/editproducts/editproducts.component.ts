@@ -8,6 +8,7 @@ import { ProductsApiService } from 'src/app/services/products-api.service';
 import { newProduct } from '../../../shares classes/newproduct';
 import { ProductsService } from 'src/app/services/products.service';
 import Swal from 'sweetalert2';
+import { BrandsService } from 'src/app/services/brands.service';
 
 @Component({
   selector: 'app-editproducts',
@@ -15,16 +16,23 @@ import Swal from 'sweetalert2';
   styleUrls: ['./editproducts.component.scss']
 })
 export class EditproductsComponent implements OnInit {
-
-  productImages:any=[];  
   categories:any;
+  subCategories:any;
+  brands:any;
+  colors:string[]=['red','green','blue','black','white','orange'];
+  selectedColors:any=[];
+  productSizes:any=[];
+  ProductRating:any=0;
+  theirIsSubCategories:boolean=false;
+  productImages:any=[];  
   ckecked:boolean=false;
   message:boolean=false;
   currentProduct:any;
   
     constructor(private fb:FormBuilder,private catsrviece:CategoreisService,
       private http: HttpClient ,private ProductService: ProductsService,
-       private router2: ActivatedRoute ,private router:Router,private titleService:Title) {
+       private router2: ActivatedRoute ,private router:Router,private titleService:Title,
+       private brandService:BrandsService) {
    
   
     }
@@ -33,6 +41,7 @@ export class EditproductsComponent implements OnInit {
     {
     brand:['',Validators.required],
     category:['',Validators.required],
+    subCategory:[''],
     title:['',Validators.required], 
     description:['',Validators.required],
     numofitems:['',Validators.required],
@@ -53,17 +62,35 @@ export class EditproductsComponent implements OnInit {
        this.currentProduct=result;
      this.addproductForm.controls['brand'].setValue(result['brand']);
      this.addproductForm.controls['category'].setValue(result['category']);
+
+     this.addproductForm.controls['subCategory'].setValue(result['subCategory']);
      this.addproductForm.controls['title'].setValue(result['title']);
      this.addproductForm.controls['description'].setValue(result['description']);
      this.addproductForm.controls['price'].setValue(result['price']);
      this.addproductForm.controls['numofitems'].setValue(result['numofitems']);
      this.addproductForm.controls['discound'].setValue(result['discound']);
-     this.productImages=result['images']
+     this.productSizes=result['sizes'];
+     this.selectedColors=result['colors'];
+     this.ProductRating=result['rating'];
+     this.productImages=result['images'];
      this.addproductForm.controls['overview'].setValue(result['overview']);
      this.titleService.setTitle("Edit Product | "+result['title']);
-      })
+     this.catsrviece.getCategoryByName(result['category']).subscribe(res=>{
+      this.subCategories=res[0].subCategories;
+      if(this.subCategories.length>0){
+        this.subCategory?.setValidators(Validators.required);
+        this.theirIsSubCategories=true;
+      }
+  
+    
      
-    }
+      });
+      this.brandService.getAllbrands().subscribe(res=>{
+        this.brands=res;
+      });
+    });
+  }
+  
     get brand()
     {
       return this.addproductForm.get('brand')
@@ -71,6 +98,10 @@ export class EditproductsComponent implements OnInit {
     get category()
     {
       return this.addproductForm.get('category')
+    }
+    get subCategory()
+    {
+      return this.addproductForm.get('subCategory')
     }
     get title()
     {
@@ -119,7 +150,7 @@ export class EditproductsComponent implements OnInit {
       )
     }
     Updateproduct(){
-      var newprd=new newProduct(this.addproductForm.value.brand!,this.category?.value!,"" ,this.title?.value!,this.description?.value!,parseInt(this.numofitems?.value!),parseInt(this.price?.value!),parseInt(this.discound?.value!),this.productImages,this.overview?.value!,[],[]);
+      var newprd=new newProduct(this.addproductForm.value.brand!,this.category?.value!,this.subCategory?.value! ,this.title?.value!,this.description?.value!,parseInt(this.numofitems?.value!),parseInt(this.price?.value!),parseInt(this.discound?.value!),this.productImages,this.overview?.value!,this.productSizes,this.selectedColors,this.ProductRating);
       this.ProductService.putProduct(newprd,this.router2.snapshot.params['id'])
       .subscribe(data =>
         {
@@ -142,6 +173,20 @@ export class EditproductsComponent implements OnInit {
         
         )
    }
+
+   //get sub categoires of selected Category
+ getSubCategories(event:any)
+ {
+   this.catsrviece.getCategoryByName(event.target.value).subscribe(res=>{
+     this.subCategories=res[0].subCategories;
+     if(this.subCategories.length>0){
+       this.subCategory?.setValidators(Validators.required);
+       this.theirIsSubCategories=true;
+ 
+     }
+     console.log(this.subCategories);;
+   })
+ }
    removemessage(){
     this.message=false;
     this.router.navigate(["dashboard/productslist"])
@@ -172,6 +217,37 @@ export class EditproductsComponent implements OnInit {
     }
   
   }
+
+  //add list of Product colors
+addColors(event:any){
+  if(event.target.value){
+    this.selectedColors.push(event.target.value);
+  }
+  console.log(event.target.value +" "+event.which);
+
+   
+}
+//remove role from Array Of User Responsability
+removeColor(index:number){
+ this.selectedColors.splice(index,1);
+
+}
+
+//add list of products Sizes
+addSize(event:any){
+  if(event.which==13 && event.target.value.length>0){
+    this.productSizes.push(event.target.value);
+    event.target.value="";
+  }
+  console.log(event.target.value +" "+event.which);
+
+   
+}
+//
+removeSize(index:number){
+ this.productSizes.splice(index,1);
+
+}
   }
   
 

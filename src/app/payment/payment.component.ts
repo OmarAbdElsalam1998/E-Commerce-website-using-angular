@@ -5,6 +5,8 @@ import { ProductsApiService } from '../services/products-api.service';
 import { Title } from '@angular/platform-browser';
 import { CartService } from '../services/cart.service';
 import { UserAuthService } from '../services/user-auth.service';
+import { AdminRoleService } from '../services/admin-role.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-payment',
@@ -17,12 +19,14 @@ export class PaymentComponent implements OnInit {
   newCartItems:any=[];
   subTotalPrice=0;
   ShippingCharge:number=25;
+  currentUserid:any;
   totalPriceOfAllItems=this.subTotalPrice+this.ShippingCharge;
   title="payment";
 
   constructor(private fb: FormBuilder, private router: Router, 
     private ProductService: ProductsApiService,private titleService:Title,
-    private cartService:CartService,private userAuth:UserAuthService
+    private cartService:CartService,private userAuth:UserAuthService,
+    private customer:AdminRoleService
     
     ) { 
     this.titleService.setTitle(this.title);
@@ -52,7 +56,7 @@ export class PaymentComponent implements OnInit {
       city: ['', Validators.required],
       zipcode: [''],
       street: ['', Validators.required],
-      subscribewhenreciving: [true],
+      subscribewhenreciving: [false],
       subscribe: [false],
       paymentMethod:[''],
       orderStatus:["WaitingForReview"],
@@ -68,6 +72,26 @@ export class PaymentComponent implements OnInit {
     });
 
   ngOnInit(): void {
+    this.userAuth.getUserId().subscribe(id=>{
+      this.currentUserid=id;
+      this.customer.getUserById(this.currentUserid).subscribe(res=>{
+        console.log(res.addresses[0]);
+        this.paymentForm.controls['firstname'].setValue(res.generalInfo.userName);
+        this.paymentForm.controls['lastname'].setValue(res.generalInfo.lastName);
+        this.paymentForm.controls['email'].setValue(res.generalInfo.userEmail);
+        this.paymentForm.controls['Phone'].setValue(res.generalInfo.phone);
+        this.paymentForm.controls['country'].setValue(res.addresses[0].country);
+        this.paymentForm.controls['city'].setValue(res.addresses[0].city);
+        this.paymentForm.controls['region'].setValue(res.addresses[0].city);
+
+        this.paymentForm.controls['street'].setValue(res.addresses[0].address);
+
+    
+
+      });
+
+    })
+
   }
   get firstname() {
     return this.paymentForm.get('firstname')
@@ -111,18 +135,29 @@ export class PaymentComponent implements OnInit {
   get subscribewhenreciving(){
     return this.paymentForm.get("subscribewhenreciving")
   }
+
   
  ngAfterViewInit(): void {
   //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
   //Add 'implements AfterViewInit' to the class.
   for(let data of this.cartItems){
     console.log(data)
-    var totalpriceOfoneItem=(parseFloat(data.price)-(parseFloat(data.price)*(parseFloat(data.discount)/100)))*parseFloat(data.count);
+    if(data.discount>0){
+      var totalpriceOfoneItem=(parseFloat(data.price)-(parseFloat(data.price)*(parseFloat(data.discount)/100)))*parseFloat(data.count);
        console.log(totalpriceOfoneItem)
        var obj={productId:data.productId,image:data.thumbnail,name:data.title,count:data.count,totalPrice:totalpriceOfoneItem}
       this.newCartItems.push(obj);
       this.subTotalPrice+=totalpriceOfoneItem;
       this.totalPriceOfAllItems+=totalpriceOfoneItem;
+    }
+    else{
+      var totalpriceOfoneItem=parseFloat(data.price)*parseFloat(data.count);
+      console.log(totalpriceOfoneItem)
+      var obj={productId:data.productId,image:data.thumbnail,name:data.title,count:data.count,totalPrice:totalpriceOfoneItem}
+     this.newCartItems.push(obj);
+     this.subTotalPrice+=totalpriceOfoneItem;
+     this.totalPriceOfAllItems+=totalpriceOfoneItem;
+    }
       
     }
  }
@@ -151,11 +186,33 @@ addorder(){
   this.paymentForm.value.totalPrice=this.subTotalPrice+this.ShippingCharge;
   this.paymentForm.value.userId=this.userAuth.getUserId().value;
   this.paymentForm.value.createdAt=Date.now();
+  if(this.subscribewhenreciving){
+    this.paymentForm.value.paymentMethod="payWhenReceive";
+  }
+  else{
+    this.paymentForm.value.paymentMethod="visa";
+
+  }
   console.log(this.paymentForm.value);
   this.ProductService.saveorder(this.paymentForm.value)
     .subscribe(data => {
-      alert("your Order done Successfully")
+      Swal.fire({
+        
+        title: 'Done',
+        icon:'success' ,
+        showConfirmButton:false,
+        timer:1000
+        
+       })
       this.paymentForm.reset();
+      // this.cartService.getCartProducts().subscribe(res=>{
+      //   res.forEach((item:any)=>{
+      //     this.cartService.DeleteItemFromCart(item.id);
+      //   })
+        
+        
+       
+      //   })
       this.router.navigate([""])
       console.log(this.cartItems.id);
       // this.cartService.DeleteItemFromCart(this.cartItems.id);

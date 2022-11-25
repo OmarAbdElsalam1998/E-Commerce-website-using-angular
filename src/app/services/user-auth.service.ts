@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
+import Swal from 'sweetalert2';
 import { Address } from '../shares classes/address';
 import { GeneralInfo } from '../shares classes/generalInfo';
 
@@ -31,7 +32,7 @@ export class UserAuthService {
    }
 
 
-  logIn(id:number,username:any,password:string,role:string="user"){
+  logIn(id:number,username:any,password:string,role:string){
     let token="12345";
 //    localStorage.setItem("token",token);
     this.isLoogedSubject.next(true);
@@ -51,6 +52,13 @@ export class UserAuthService {
     this.isLoogedSubject.next(false);
     this.isAdminSubject.next(false);
     this.userName.next("");
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Logged Out  Successfully',
+      showConfirmButton: false,
+      timer: 1500
+    })
 
 
   }

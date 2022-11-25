@@ -90,11 +90,11 @@ getProductById(prodId:any){
   }));
   
 }
-// UpdateCart(productID:any,product:any){
-//   return this.http.put(this.url2+"/"+productID,product).pipe(catchError((err)=>{
-//     return throwError (()=>err.message ||"internal server error")
-//   }));
-// }
+UpdateCart(productID:any,product:any){
+  return this.http.put(this.url2+"/"+productID,product).pipe(catchError((err)=>{
+    return throwError (()=>err.message ||"internal server error")
+  }));
+}
 // saveproduct(product:Cart){
 //   var headers= new HttpHeaders().set("Content-Type", "procademy");
 

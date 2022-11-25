@@ -5,6 +5,7 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { UserAuthService } from 'src/app/services/user-auth.service';
+import Swal from 'sweetalert2';
 import { userLogin } from '../userLogin';
 
 @Component({
@@ -15,7 +16,7 @@ import { userLogin } from '../userLogin';
 export class LoginComponent implements OnInit {
   title="Sign IN";
   errorLogin=false;
-
+   isAdmin:boolean=false;
   constructor(
     private titleService:Title ,
      private fB: FormBuilder ,
@@ -68,15 +69,7 @@ export class LoginComponent implements OnInit {
       this.userService.getLogData().subscribe(data=>{             
       console.log(data)
       this.usersArr=data;
-     
-    },
-    error => 
-    {
-      console.log("Fail login")
-    }
-    )
-    
-    var checkUser=this.usersArr?.filter((user:any)=>
+      var checkUser=this.usersArr?.filter((user:any)=>
     user.userEmail== this.userEmail?.value && user.Password ==this.userPassword?.value
     )
     console.log(checkUser)
@@ -86,8 +79,33 @@ export class LoginComponent implements OnInit {
 
       console.log(checkUser[0])
       this.userAuth.logIn(checkUser[0].id, checkUser[0].userName ,checkUser[0].Password,checkUser[0].role);
-      console.log(this.userAuth.getLoggedStatus());
-      this.location.back();
+      
+        if(checkUser[0].role=="admin"){
+           
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Logged In Successfully',
+          showConfirmButton: false,
+          timer: 1500
+        })
+          this.router.navigate(['/dashboard']);
+        }
+        else if(checkUser[0].role=="customer"){
+          // this.router.navigate([""]);
+          this.location.back();
+          console.log(this.location);
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Logged In Successfully',
+            showConfirmButton: false,
+            timer: 1500
+          })
+  
+        }
+     
+      
 
 
     }
@@ -97,6 +115,16 @@ export class LoginComponent implements OnInit {
 
     
 
+
+     
+    },
+    error => 
+    {
+      console.log("Fail login")
+    }
+    )
+    
+    
 
 
   }

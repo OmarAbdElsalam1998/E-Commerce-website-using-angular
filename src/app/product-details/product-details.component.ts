@@ -5,6 +5,7 @@ import { ProductsApiService } from '../services/products-api.service';
 import * as $ from 'jquery';
 import { CartService } from '../services/cart.service';
 import { Cart } from '../shares classes/cart';
+import { ProductsService } from '../services/products.service';
 
 declare function slider(): void;
 @Component({
@@ -14,7 +15,7 @@ declare function slider(): void;
 })
 export class ProductDetailsComponent implements OnInit {
   title: any;
-  constructor(private titleService: Title, private productService: ProductsApiService,
+  constructor(private titleService: Title, private productService: ProductsService,
     private activatedRoute: ActivatedRoute, public router: Router,
     private cartService: CartService) { }
   productId: any;
@@ -25,6 +26,7 @@ export class ProductDetailsComponent implements OnInit {
   commentsRouter: string = ""
   overViewRouter: string = ""
   ngOnInit(): void {
+   
     //get product Id From url
     this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
       this.productId = params.get("id");
@@ -42,7 +44,7 @@ export class ProductDetailsComponent implements OnInit {
 
 
       //get Product from Api
-      this.productService.getProductById(this.productId).subscribe(data => {
+      this.productService.getaddProductById(this.productId).subscribe(data => {
         this.product = data,
           this.title = this.product.title;
         console.log(this.title)
@@ -53,6 +55,7 @@ export class ProductDetailsComponent implements OnInit {
 
   }
   ngAfterViewInit(): void {
+    window.scrollBy(0,0);
     if (localStorage.getItem("ProductYouSeeBefore")) {
       let arr = [];
       var locaStorageData = localStorage.getItem("ProductYouSeeBefore");
@@ -75,11 +78,11 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addToCart(productId: number) {
-    this.cartService.getProductById(productId).subscribe(res => {
+    this.productService.getaddProductById(productId).subscribe(res => {
       this.selectedProduct = res;
       console.log(res);
       console.log(this.selectedProduct)
-      var cart = new Cart(this.selectedProduct.id, this.selectedProduct.title, this.selectedProduct.price, this.selectedProduct.discountPercentage, this.selectedProduct.thumbnail, this.counterValue);
+      var cart = new Cart(this.selectedProduct.id, this.selectedProduct.title, this.selectedProduct.price, this.selectedProduct.discountPercentage, this.selectedProduct.images[0], this.counterValue);
       this.cartService.saveproduct(cart).subscribe(data => {
         // this.usersArr=data;
       },

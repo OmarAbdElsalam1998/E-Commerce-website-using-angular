@@ -15,7 +15,7 @@ export class FavouriteService {
   favouriteProductesCounter:BehaviorSubject<number>;
   favouriteProductes:BehaviorSubject<any>;
   // CartTotal=0;
-  url:string="https://dummyjson.com/products";
+  url:string="http://localhost:3000/addproducts";
   url2:string="http://localhost:3000/favourite";
   //  headers:HttpHeaders; 
   public productList=new BehaviorSubject<any>([]);

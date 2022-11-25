@@ -39,8 +39,9 @@ main{
     .product-details{
         height: 100%;
         .product-rate{
-            i{
+            .rate{
                 color:#31c230;
+                font-size: 25px;
             }
         }
         .new-price{

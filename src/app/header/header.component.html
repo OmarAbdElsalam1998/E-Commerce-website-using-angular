@@ -36,9 +36,8 @@
                                 <i class="fa-light fa-user fa-2x"></i>
                             </a>
                             <ul class="dropdown-menu">
-                              <li [hidden]="isLoggedIn" class=" dropdown-item PS-3"><i class="fa-regular fa-user"></i> Guest</li>
-                              <li [hidden]="!isLoggedIn"  class=" dropdown-item PS-3" ><i class="fa-regular fa-user pe-1"></i>{{ username}}</li>
-                              <li ><a class="dropdown-item "  routerLink="/dashboard" routerLinkActive="router-link-active"><i class="fa-solid fa-chart-line fa-1x"></i> Dashboard</a></li>
+                              <li [hidden]="isLoggedIn" class=" dropdown-item PS-3"><a class="dropdown-item"  routerLink="/profile" routerLinkActive="router-link-active"><i class="fa-regular fa-user pe-1"></i> Guest</a></li>
+                              <li [hidden]="!isLoggedIn"  class=" dropdown-item PS-3" ><a class="dropdown-item"  routerLink="/profile" routerLinkActive="router-link-active"><i class="fa-regular fa-user pe-1"></i>{{ username}}</a></li>
 
                               <li [hidden]="isLoggedIn"><a class="dropdown-item"  routerLink="/auth/login" routerLinkActive="router-link-active"><i class="fa-light fa-right-to-bracket"></i> Sign In</a></li>
                               <li [hidden]="!isLoggedIn" class="dropdown-item "  style="cursor:pointer" id="liveToastBtn" (click)="logOut()"><i class="fa-light fa-arrow-right-from-bracket"></i> LogOut</li>

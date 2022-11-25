@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http'
 import { userLogin } from '../auth/userLogin';
 import {userDataRegister} from '../auth/userRegister'
 import { map } from 'jquery';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, catchError, throwError } from 'rxjs';
+import { UserRole } from '../shares classes/userRole';
 // import * as data from '../Server/dB.json';
 
 
@@ -27,10 +28,12 @@ export class LoginService {
 
   getLogData()
   {
-    return this.http.get(this._url )
+    return this.http.get(this._url ).pipe(catchError((err)=>{
+      return throwError (()=>err.message ||"internal server error")
+    }));
   }
 
-  postRegData(user:userDataRegister)
+  postRegData(user:UserRole)
   {
     return this.http.post(this._url, user)
   }

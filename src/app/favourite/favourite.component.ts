@@ -40,7 +40,7 @@ favouriteList:any;
       this.item=res;
       console.log(res);
       console.log(this.item)
-      var cart =new Cart(this.item.id,this.item.title,this.item.price,this.item.discountPercentage,this.item.thumbnail,1);
+      var cart =new Cart(this.item.id,this.item.title,this.item.price,this.item.discountPercentage,this.item.images[0],1);
     this.cartService.saveproduct(cart).subscribe(data =>
       {
         this.removeFromFavourite(index);

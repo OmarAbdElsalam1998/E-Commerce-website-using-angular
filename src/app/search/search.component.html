@@ -249,64 +249,76 @@
                             <div class="row">
                                <span>Results ({{productsList.length}})</span>
                                 <!--Start Product  -->
-                                <div  class="col-md-6 col-lg-4" *ngFor="let product of productsList;index as i" >
-                                    <div class="product-box p-2 mb-3">
-                                        <div class="product">
-                                            <div class="overlay"></div>
-                                            <div class="product-image">
-                                                <img class="img-fluid" [src]="product.images[0]" >
-                                            </div>
-                                            <div class="product-operations d-flex">
-                                                <div class="add-to-cart p-3"(click)="addToCart(product.id)" >
-                                                    <i class="fa-light fa-cart-shopping fa-2x"></i>
+                                        <div class="col-md-6 col-lg-4" *ngFor="let product of productsList | paginate : {
+                                            itemsPerPage: 21,
+                                            currentPage: page,
+                                            totalItems: productsList?.length
+                                        };">
+                                            <div class="product-box p-2 mb-3">
+                                                <div class="product">
+                                                    <div class="overlay"></div>
+                                                    <div class="product-image">
+                                                        <img class="img-fluid" [src]="product.images[0]" >
+                                                    </div>
+                                                    <div class="product-operations d-flex">
+                                                        <div class="add-to-cart p-3"(click)="addToCart(product.id)" >
+                                                            <i class="fa-light fa-cart-shopping fa-2x"></i>
+                                                        </div>
+                                                        <div class="save p-3 "(click)="addToFavorites(product.id)">
+                                                            <i class="fa-light fa-heart fa-2x"></i>
+                                                        </div>
+                                                        <div class="details p-3 " (click)="seeDetails(product.id)" >
+                                                            <i class="fa-light fa-arrow-right fa-2x"></i>  
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="save p-3 " (click)="addToFavorites(product.id)">
-                                                    <i class="fa-light fa-heart fa-2x"></i>
-                                                </div>
-                                                <div class="details p-3 " (click)="seeDetails(product.id)" >
-                                                    <i class="fa-light fa-arrow-right fa-2x"></i>  
+                                                <div class="product-info py-3">
+                                                    <div class="product-name px-2 pt-2">
+                                                        <h4 class=" m-0" [title]="product.title">{{product.title}}</h4>
+                                          
+                                                    </div>
+                                                    
+                                                    <div *ngIf="product.discound" >
+                                                        <div class="product-price px-2 pt-3 d-flex align-items-center">
+                                                            <span class="new-price">EGP <span >{{product.price-product.price*product.discound/100 |number :'1.0-1'}}</span></span>
+                                                            <span class="old-price ">EGP {{product.price | number}}</span>
+                                                            
+                                                         </div>
+                                                         <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
+                                                             <span class="discount">{{product.discound/100  | percent  }} OFF</span>
+                                                             <ngb-rating class="rate" [max]="5" [rate]="product.rating" [readonly]="true"></ngb-rating>
+                                                             
+                                                         </div> 
+                                                    </div>
+                                                    <div *ngIf="!product.discound" >
+                                                        <div class="product-price px-2 pt-3 d-flex align-items-center">
+                                                            <span class="new-price">EGP {{product.price |number :'1.0-0'}}</span>
+                                                            
+                                                         </div>
+                                                         <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
+                                                            <span class="discount" style="visibility: hidden"> OFF</span>
+        
+                                                            <ngb-rating class="rate" [max]="5" [rate]="product.rating" [readonly]="true"></ngb-rating>
+                                                             
+                                                         </div> 
+                                                    </div> 
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="product-info py-3">
-                                            <div class="product-name px-2 pt-2">
-                                                <h4 class=" m-0" [title]="product.title">{{product.title}}</h4>
-                                  
-                                            </div>
-                                            <div *ngIf="product.discound" >
-                                                <div class="product-price px-2 pt-3 d-flex align-items-center">
-                                                    <span class="new-price">EGP <span >{{product.price-product.price*product.discound/100 |number :'1.0-1'}}</span></span>
-                                                    <span class="old-price ">EGP {{product.price | number}}</span>
-                                                    
-                                                 </div>
-                                                 <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
-                                                     <span class="discount">{{product.discound/100  | percent  }} OFF</span>
-                                                     <!-- <span class="rate "><i class="fa-solid fa-star-sharp"></i>{{product.rating}} </span> -->
-                                                     
-                                                 </div> 
-                                            </div>
-                                            <div *ngIf="!product.discound" >
-                                                <div class="product-price px-2 pt-3 d-flex align-items-center">
-                                                    <span class="new-price">EGP {{product.price |number :'1.0-0'}}</span>
-                                                    
-                                                 </div>
-                                                 <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
-                                                     <!-- <span class="rate "><i class="fa-solid fa-star-sharp"></i>{{product.rating}} </span> -->
-                                                     
-                                                 </div> 
-                                            </div>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Product -->
-                                
-                                
-                                
-                                
-                            </div>
-                        </div>
+                                        <!-- End Product -->
+                                        <div class="text-center  p-5" *ngIf="productsList.length==0">
+                                            NO Brands Found
                     
+                                        </div>
+                    
+                                    </div>
+                                    <pagination-controls *ngIf="productsList.length>21" (pageChange)="page=($event)" class="text-end py-2">
+                                        
+                                    </pagination-controls>
+                                
+                                
+                            
+                    </div>
                     </div>
                 </div>
             </div>

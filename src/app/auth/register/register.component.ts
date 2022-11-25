@@ -6,6 +6,8 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { UserAuthService } from 'src/app/services/user-auth.service';
+import { UserRole } from 'src/app/shares classes/userRole';
+import Swal from 'sweetalert2';
 import { LoginComponent } from '../login/login.component';
 import { userDataRegister } from '../userRegister';
 import { ConfirmPasswordValidator } from '../validators/confirmpassword';
@@ -33,44 +35,47 @@ export class RegisterComponent implements OnInit {
       email:['',[Validators.required,Validators.pattern("^([a-zA-Z0-9_-]+)@([a-zA-Z]+)\.(com|eg)$")]],
       password:['',[Validators.required,Validators.pattern("^[a-zA-Z0-9_-]{6,32}$")]],
       confirmpassword:[''],
-      role:['user'],
+      role:['customer'],
 
-    },
-    {validator:[ConfirmPasswordValidator,Validators.required]}                    //call Cross field validators (on all form Group not only control)
+    } ,{validator:[ConfirmPasswordValidator,Validators.required]}                  //call Cross field validators (on all form Group not only control)
 
   );
 
-  get userName()
+  get username()
   {
-    return this.registerationForm.get('userName')
+    return this.registerationForm.get('username')
   }
 
-   get userEmail()
+   get email()
   {
-    return this.registerationForm.get('userEmail')
+    return this.registerationForm.get('email')
   }
 
-  get Password()
+  get password()
   {
-    return this.registerationForm.get('Password')
+    return this.registerationForm.get('password')
   }
 
   get confirmPassword()
   {
-    return this.registerationForm.get('confirmPassword')
+    return this.registerationForm.get('confirmpassword')
   }    
         
 
-  usersArr:any;
-  userRegister : userDataRegister = new userDataRegister("","","","","User");             //initiat obj from class user.ts
   userRegistering()
   {
     console.log(this.registerationForm.value)
-    this.userService.postRegData(this.registerationForm.value).subscribe(data =>
+    var user =new UserRole(this.registerationForm?.value.username!,"",this.registerationForm?.value.email!,"",this.registerationForm?.value.password!,"customer",[],"",'',[]);
+    this.userService.postRegData(user).subscribe(data =>
       {
-        console.log(data)
-        this.registerationForm.reset();
-        this.location.back();
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Registered Successfully',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        this.router.navigate([""]);
 
           
         // this.usersArr=data;
@@ -82,23 +87,7 @@ export class RegisterComponent implements OnInit {
         )
       }
 
-        // let checkUser=this.usersArr?.filter((input:any)=>
-        // input.email == this.userEmail?.value && input.password == this.Password?.value
-        //   )
-
-        // console.log(checkUser)
-        // if(this.registerationForm.valid){
-        //   alert("Hello" + this.registerationForm.value.userName + "Registeration is Successfull");
-        //     this.registerationForm.reset();
-        //     this.router.navigate([""])
-        //   }
-
-        //   else
-        //   { 
-        //     alert("Registertraion is failed , Plz try another account as not registered before")
-        //   }        
-      
-        // }
+        
   
 
 }

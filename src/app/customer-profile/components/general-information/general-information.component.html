@@ -116,14 +116,12 @@
                         <h3 class="fw-bold">Add Address</h3>
                         <div class="d-flex">
                             <div class="form-group  m-2 w-50">
-                                  <select formControlName="country" class="form-control fs-5" id="country">
+                                <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold"  >Country</label>
+                                  <input type= "text"[class.is-invalid]="country?.invalid && country?.touched"  formControlName="country" class="form-control fs-5" id="country">
                                     <div *ngIf="country?.invalid && country?.touched">
                                         <small class="text-danger" *ngIf="country?.errors?.['required']"> country is Required </small>
                                      </div>
-                                    <option value="" disabled selected>Select Country is REQUIRED</option>
-                                     <option *ngFor="let country of countries" [value]="country.country">{{country.country}}</option>
-
-                                  </select>
+                                 
                             </div>  
                             <div class="form-group  m-2 w-50">
                                 <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold"  >city</label>
@@ -132,7 +130,7 @@
                                     <small class="text-danger" *ngIf="city?.errors?.['required']"> city is Required </small>
                                     <small class="text-danger" *ngIf="city?.errors?.['pattern']"  > city should be characters only (abc) and length should be 3-100 letters  </small>
 
-                            </div>
+                                 </div>
                                 
                             </div>
                         </div>
@@ -141,7 +139,7 @@
                             <textarea [class.is-invalid]="addressForm?.invalid && addressForm?.touched"  formControlName="address" type="text" class="form-control" rows="4"></textarea>
                             <div *ngIf="addressForm?.invalid && addressForm?.touched">
                                 <small class="text-danger" *ngIf="addressForm?.errors?.['required']"> address is Required </small>
-                                <small class="text-danger" *ngIf="addressForm?.errors?.['pattern']"  > address should be characters only (abc) and length should be 10-100 letters  </small>
+                                <!-- <small class="text-danger" *ngIf="addressForm?.errors?.['pattern']"  > address should be characters only (abc) and length should be 10-100 letters  </small> -->
 
                         </div>
                         </div>

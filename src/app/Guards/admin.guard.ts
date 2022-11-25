@@ -19,11 +19,11 @@ export class AdminGuard implements CanLoad {
         this.isAdmin=status;
         console.log(this.isAdmin)
        })
-    if(!this.isAdmin===true){
+    if(this.isAdmin===true){
         return true;
     }
     else{
-      this.router.navigate(['/error']);
+      //this.router.navigate(['/error']);
       return false
     }
   }

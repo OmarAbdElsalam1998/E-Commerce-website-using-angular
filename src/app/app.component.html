@@ -1,4 +1,4 @@
-<app-header *ngIf="!(router.url==='/auth/login' || router.url.includes('/dashboard'))"></app-header>
+<app-header *ngIf="!(router.url.includes('auth')|| router.url.includes('/dashboard'))"></app-header>
 <app-spinner></app-spinner>
 <router-outlet></router-outlet>
-<app-footer *ngIf="!(router.url==='/auth/login'|| router.url.includes('/dashboard')|| router.url.includes('/profile'))"></app-footer>
+<app-footer *ngIf="!(router.url.includes('auth')|| router.url.includes('/dashboard')|| router.url.includes('/profile')|| router.url=='/error')"></app-footer>

@@ -40,8 +40,8 @@ export class UsersComponent implements OnInit {
     phone:[,[Validators.required,Validators.maxLength(11),Validators.minLength(11)]],           //call simple validators
     Password:['',[Validators.required,Validators.pattern("^[a-zA-Z0-9_-]{6,32}$")]],        //call simple validators
     confirmPassword:[''],           //call simple validators
-    role:['',[Validators.required]], 
-    image:['',[Validators.required]],
+    role:[''], 
+    image:[''],
     
   },
   {validator:[ConfirmPasswordValidator,Validators.required]}                    //call Cross field validators (on all form Group not only control)
@@ -50,12 +50,12 @@ export class UsersComponent implements OnInit {
 
   loadData()
   {
-    this.adminService.getAllUsers().subscribe(
+    this.adminService.getAdmins().subscribe(
       data=>
       {
         this.userList=data;
         // this.count=this.userList.length;
-        console.log(this.count);
+        // console.log(this.count);
         console.log(this.userList);
       }
     )
@@ -63,8 +63,8 @@ export class UsersComponent implements OnInit {
 
   UpdateUser(id:any)
   {
-    var user =new UserRole(this.addUserForm.value.userName,this.addUserForm.value.lastName,this.addUserForm.value.userEmail,this.addUserForm.value.phone,
-      this.addUserForm.value.role,this.addUserForm.value.Password,[new Address("","","")],new GeneralInfo("","","","",""),this.userImageUrl,this.userResponsipilities)
+    var user =new UserRole(this.addUserForm.value.userName!,this.addUserForm.value.lastName!,this.addUserForm.value.userEmail!,
+      this.addUserForm.value.phone!,this.addUserForm.value.Password!,"admin",[],"",this.userImageUrl!,this.userResponsipilities!)
   //   // get userDetails by id
     this.adminService.putUser(user,id)
     .subscribe(
@@ -72,9 +72,9 @@ export class UsersComponent implements OnInit {
           user=data;
           console.log(data);
           this.loadData();
-          this.addUserForm.reset();
+          this.resetForm();
           let close = document.getElementById('close');
-        close?.click();
+           close?.click();
           Swal.fire({
         
             title:"Updated Successfully",
@@ -86,18 +86,20 @@ export class UsersComponent implements OnInit {
         }
       )
     }
-    openEdit(id:any){
+    editUser(id:any){
+      this.resetForm();
+      console.log("ddd")
       this.currentUser=id;
       this.adminService.getUserById(id).subscribe(result => {
         console.log(result);
-        this.addUserForm.controls['userName']?.setValue(result['userName']),
-        this.addUserForm.controls['lastName']?.setValue(result['lastName']),
-        this.addUserForm.controls['userEmail']?.setValue(result['userEmail']),
-        this.addUserForm.controls['phone']?.setValue(result['phone']),
-        this.addUserForm.controls['Password']?.setValue(result['Password']),
-        this.addUserForm.controls['confirmPassword']?.setValue(result['confirmPassword']),
-        this.userImageUrl=result['image'],
-        this.userResponsipilities=result['role'];
+        this.addUserForm.controls['userName']?.setValue(result['userName']);
+        this.addUserForm.controls['lastName']?.setValue(result['lastName']);
+        this.addUserForm.controls['userEmail']?.setValue(result['userEmail']);
+        this.addUserForm.controls['phone']?.setValue(result['phone']);
+        this.addUserForm.controls['Password']?.setValue(result['Password']);
+        this.addUserForm.controls['confirmPassword']?.setValue(result['Password']);
+        this.userImageUrl=result['image'];
+        this.userResponsipilities=result['responsability'];
     });
     }
  
@@ -111,10 +113,12 @@ export class UsersComponent implements OnInit {
   addUser()
   {
      var user =new UserRole(this.addUserForm.value.userName,this.addUserForm.value.lastName,this.addUserForm.value.userEmail,
-      this.addUserForm.value.phone,this.addUserForm.value.Password,this.addUserForm.value.role,[new Address("","","")],new GeneralInfo("","","","",""),this.userImageUrl,this.userResponsipilities)
+      this.addUserForm.value.phone,this.addUserForm.value.Password,"admin",[],"",this.userImageUrl,this.userResponsipilities)
     this.adminService.postUser(user).subscribe(
       data =>{
         this.addUserForm.reset();
+        this.resetForm();
+
         let close = document.getElementById('close');
         close?.click();
         Swal.fire({
