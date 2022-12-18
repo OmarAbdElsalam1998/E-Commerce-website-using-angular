@@ -18,7 +18,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-5 mb-3 mb-lg-0 ">
-                    <div class="images-container bg-white p-5">
+                    <div class="images-container bg-white p-5 h-100">
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="product-images d-flex d-md-block align-items-center justify-content-between ">
@@ -40,7 +40,7 @@
                 </div>
                 <div class="col-lg-7">
                     <div class="product-details bg-white p-5 ">
-                   
+                    
                             <div class="product-info px-2 pt-2">
                                 <span>{{product?.brand}}</span>
                                 <h2 class="d-block my-2 fw-bold ">{{product?.title}}</h2>
@@ -48,22 +48,26 @@
                   
                             </div>
                             <div class="product-rate px-2 pt-3 ">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star-half-stroke"></i>
-                                <span class="rate px-3">({{product?.rating}})</span>
+                                <ngb-rating class="rate" [max]="5" [rate]="product?.rating" [readonly]="true"></ngb-rating>
+                                <small>{{product?.rating}}</small>
+
                             </div> 
                            
-                            <div class="product-price px-2 pt-3 mb-2">
+                            <div *ngIf="product?.discound>0 "class="product-price px-2 pt-3 mb-2">
                                 <div class="new-price">
-                                <span class="new-price">EGP <span >{{product.price-product.price*product.discountPercentage/100 |number :'1.1-2'}}</span></span>
+                                <span class="new-price">EGP <span >{{product.price-product.price*product.discound/100 |number :'1.1-2'}}</span></span>
                                 </div>
                                 <div class="old-price pt-3">
                                     <span class="price pe-3 ">EGP {{product.price}}</span> 
-                                    <span class="discount">{{product.discountPercentage/100  | percent }} OFF</span>
+                                    <span class="discount">{{product.discound/100  | percent }} OFF</span>
                                 </div>
+                                
+                            </div> 
+                            <div *ngIf="product?.discound<=0 "class="product-price px-2 pt-3 mb-2">
+                                <div class="new-price">
+                                <span class="new-price">EGP <span >{{product.price |number :'1.1-1'}}</span></span>
+                                </div>
+                                
                                 
                             </div> 
                                                            

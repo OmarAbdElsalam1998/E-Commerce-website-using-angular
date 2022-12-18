@@ -14,8 +14,9 @@ export class newProduct
         overview:string;
         sizes:string[];
         colors:string[];
+        rating:number;
 
-        constructor(brand:string,category:string,subCategory:string,title:string,description:string,numofitems:number,price:number,discound:number,images:any,overview:string,sizes:[],colors:[]){
+        constructor(brand:string,category:string,subCategory:string,title:string,description:string,numofitems:number,price:number,discound:number,images:any,overview:string,sizes:[],colors:[],rating:number){
             this.brand=brand;
             this.category=category;
             this.subCategory=subCategory;
@@ -28,6 +29,7 @@ export class newProduct
             this.overview=overview;
             this.sizes=sizes;
             this.colors=colors;
+            this.rating=rating;
         
             }
 }

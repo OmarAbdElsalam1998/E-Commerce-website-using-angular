@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, MinLengthValidator, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router, RouterLink } from '@angular/router';
 import { CommentsService } from 'src/app/services/comments.service';
+import { ProductsService } from 'src/app/services/products.service';
 import { UserAuthService } from 'src/app/services/user-auth.service';
 import { comments } from 'src/app/shares classes/comments';
 import Swal from 'sweetalert2';
@@ -14,13 +15,14 @@ import Swal from 'sweetalert2';
 export class ReviewProductsComponent implements OnInit {
   customerID:any;
   productID:any;
+  currentProduct:any;
   createdAt:any=Date.now();
-  currentcomment: any;
+  currentcomment: any=[];
   // CommentForm:any;
   constructor(private userAuth:UserAuthService,private fb:FormBuilder,
     private commentservice:CommentsService,
     private activatedRoute:ActivatedRoute,
-    private router:Router) { }
+    private router:Router,private productService:ProductsService) { }
       CommentForm=this.fb.group(
       {
       rate:['',Validators.required],
@@ -50,14 +52,17 @@ export class ReviewProductsComponent implements OnInit {
 
     this.activatedRoute.paramMap.subscribe((params:ParamMap)=>{
       this.productID=params.get('id');
+      this.productService.getaddProductById(this.productID).subscribe(res=>{
+        this.currentProduct=res;
+      })
     });
 
     this.commentservice.getCommentForSpecificCustomerAndSpecificProduct(this.customerID,this.productID).subscribe(result=>{
       this.currentcomment=result;
 
-      console.log(this.currentcomment)
+      console.log(this.currentcomment[0])
 
-      if(this.currentcomment){
+      if(this.currentcomment[0]){
         this.CommentForm=this.fb.group(
           {
           rate:[this.currentcomment[0]['rate'],Validators.required],
@@ -80,8 +85,8 @@ export class ReviewProductsComponent implements OnInit {
  
 addcomment(){
   var comment=new comments(this.customerID,parseInt(this.productID),parseInt(this.rate?.value!),this.comment?.value!,this.customerName?.value!,this.createdAt);
-  console.log(this.currentcomment[0]?.length);
- if (this.currentcomment[0]?.length<=0){
+  // console.log(this.currentcomment[0]?.length);
+ if (!this.currentcomment[0]){
   this.commentservice.postComment(comment)
   .subscribe(data =>
     {

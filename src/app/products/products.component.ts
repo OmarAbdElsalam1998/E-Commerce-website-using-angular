@@ -6,6 +6,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { IProudct } from 'Shared Classes and types/IProduct';
 import { Product } from 'Shared Classes and types/model/product';
 import { CartService } from '../services/cart.service';
+import { CategoreisService } from '../services/categoreis.service';
 import { FavouriteService } from '../services/favourite.service';
 
 // import { IProudct } from 'Shared Classes and types/IProduct';
@@ -14,6 +15,7 @@ import { FavouriteService } from '../services/favourite.service';
 // import * as _ from 'lodash'
 // import * as _ from 'lodash';
 import { ProductsApiService } from '../services/products-api.service';
+import { ProductsService } from '../services/products.service';
 import { Cart } from '../shares classes/cart';
 import { Favourite } from '../shares classes/favourite';
 
@@ -24,6 +26,7 @@ import { Favourite } from '../shares classes/favourite';
 })
 export class ProductsComponent implements OnInit {
   title="Products Page";
+  page=1;
   productsList:any;
   categoryFromUrl:any;
   categories:any;
@@ -33,14 +36,15 @@ export class ProductsComponent implements OnInit {
   products: any = [];
   brands:any;
   displayGrid:boolean=true;
+  subCategories:any;
 
-  constructor(private titleService:Title,private productService:ProductsApiService,private router:Router,
+  constructor(private titleService:Title,private productService:ProductsService,private router:Router,
     private data1:HttpClient,private cart :CartService,private activatedRoute:ActivatedRoute,
-    private favouriteService:FavouriteService
+    private favouriteService:FavouriteService,private categoryService:CategoreisService
    ) { }
 
   categorieslist:any;
-  categorieslist2:any;
+  categorieslist2:any[]=[];
   brandlist:any;
   arrayes:any;
   uniqueObjectArray: any;
@@ -55,9 +59,10 @@ export class ProductsComponent implements OnInit {
     
      this.titleService.setTitle(this.title);
     
-     this.productService.getAllProducts().subscribe(data=>{
+     this.productService.getProduct().subscribe(data=>{
      this.productsList=data;
      this.categorieslist2=data;
+     console.log(data);
     
      },error=>{console.log(error)});
       
@@ -111,7 +116,7 @@ export class ProductsComponent implements OnInit {
       this.cartItem=res;
       console.log(res);
       console.log(this.cartItem)
-      var cart =new Cart(this.cartItem.id,this.cartItem.title,this.cartItem.price,this.cartItem.discountPercentage,this.cartItem.thumbnail,1);
+      var cart =new Cart(this.cartItem.id,this.cartItem.title,this.cartItem.price,this.cartItem.discound,this.cartItem.images[0],1);
     this.cart.saveproduct(cart).subscribe(data =>
       {
         // this.usersArr=data;
@@ -156,12 +161,14 @@ seeDetails(id:any){
 }
   
 //get all items categories from api
+
+
 Getallproductscategories()
 {
     this.titleService.setTitle(this.title); 
-    this.productService.Getallproductscategories().subscribe(res1=>{
-     this.categorieslist=res1;  
-     console.log(this.categorieslist)
+    this.categoryService.getAllcategroies().subscribe(res1=>{
+     this.categorieslist=res1;
+     
 
   },error=>{console.log(error)});
  
@@ -177,22 +184,27 @@ selectedcategoty="All";
 // this.selectedcategoty=value;
 
 // }
-filterByCategory(category:any)
+filterByCategory(category:any,index:number)
 {
-this.getcats(category);
-console.log(category);
-this.selectedcategoty=category;
+  this.categoryService.getCategoryByName(category).subscribe(res=>{
+    this.subCategories=res[0].subCategories;
 
+  })
+this.getcats(category);
+
+
+}
+filterBySubCategory(sub:any,index:any){
+  this.productService.GetproductsbySubcategories(sub).subscribe(res=>{
+    this.productList=[...res]
+    console.log(res);
+  })
 }
 getcats(keyword:string)
 {
   this.productService.Getproductsbycategories(keyword).subscribe(res=>{
     console.log(res)
-  this.categorieslist2=res;
-  this.productsList=res;
-  console.log(this.categorieslist2);
-  this.arrayes = Array.from(this.categorieslist2).sort();
-  console.log(this.arrayes);
+  this.productsList=res;  
   this.title=keyword;
   this.titleService.setTitle(this.title);
   
@@ -215,17 +227,15 @@ sort(event: any) {
   switch (event.target.value) {
     case "LowPrice":
       {
-         console.log(this.productsList.products.sort((a:any, b:any) => parseFloat(a.price) - parseFloat(b.price)));
+        this.productsList.sort((a:any, b:any) => parseFloat(a.price) - parseFloat(b.price));
 
-         //this.productList.products= this.productList?.products.sort((a:any, b:any) => parseFloat(a.price) - parseFloat(b.price));
          
         break;
       }
 
     case "HighPrice":
       {
-           console.log(this.productsList.products.sort((a:any, b:any) => parseFloat(b.price) - parseFloat(a.price)));
-          // this.productList?.products.sort((a:any, b:any) => parseFloat(b.price) - parseFloat(a.price));
+           this.productsList.sort((a:any, b:any) => parseFloat(b.price) - parseFloat(a.price));
          
          console.log(this.productsList.products);
         break;
@@ -233,17 +243,15 @@ sort(event: any) {
 
       case "LowRate":
         {
-           console.log(this.productsList.products.sort((a:any, b:any) => parseFloat(a.rating) - parseFloat(b.rating)));
+           this.productsList.sort((a:any, b:any) => parseFloat(a.rating) - parseFloat(b.rating));
   
-           //this.productList.products= this.productList?.products.sort((a:any, b:any) => parseFloat(a.price) - parseFloat(b.price));
            
           break;
         }
   
       case "HighRate":
         {
-             console.log(this.productsList.products.sort((a:any, b:any) => parseFloat(b.rating) - parseFloat(a.rating)));
-            // this.productList?.products.sort((a:any, b:any) => parseFloat(b.price) - parseFloat(a.price));
+            this.productsList.sort((a:any, b:any) => parseFloat(b.rating) - parseFloat(a.rating));
            
            console.log(this.productsList.products);
           break;
@@ -270,55 +278,5 @@ sort(event: any) {
 //   this.productListShow = filteredProductArray;
 //   console.log(this.productListShow);
 // }
-
-
-public colors: any[] = [
-  {
-    id: 1,
-    productColor: "Black",
-    selected: false,
-  },
-  {
-    id: 2,
-    productColor: "Green",
-    selected: false,
-  }
-  ]
-    PRODUCTS: any[] = [
-    {
-        id: 1,
-        productCat:'Jeans',
-        product: [
-            {
-                productId: '1',
-                productName: 'Trendy Jeans',
-                productColor: 'Green',
-            },
-            {
-                productId: '2',
-                productName: 'Black tapered Jeans',
-                productColor: 'Black',
-            },
-        ],
-    },
-    {
-        id: 2,
-        productCat:'Shirts',
-        product: [
-            {
-                productId: '1',
-                productName: 'Trendy Shirts',
-                productColor: 'Green',
-            },
-            {
-                productId: '2',
-                productName: 'Black Shirts',
-                productColor: 'Black',
-            },
-        ],
-    },
-]
-
   
-   
 }

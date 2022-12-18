@@ -52,6 +52,8 @@ get img() {
   return this.addbrandForm.get('Img');
 }
   search(e: any) {
+    this.page=1;
+
     console.log(e.keyCode);
     this.copyBrands = [...this.brands];
     if (e.target.value == "") {

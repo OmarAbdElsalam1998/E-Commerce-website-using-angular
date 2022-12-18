@@ -125,9 +125,10 @@ main{
                     color: #FFF;
                 }
                 .rate{
-                    color:$brand_color;
+                    color:#ffd428;
+                    font-size: 20px;
                     span{
-                           color:rgb(163, 161, 161);
+                           color:rgb(163, 161, 161 ) !important;
                         }
                     }
             }

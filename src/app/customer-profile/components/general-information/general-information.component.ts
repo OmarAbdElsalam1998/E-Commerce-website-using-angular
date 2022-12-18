@@ -85,7 +85,7 @@ export class GeneralInformationComponent implements OnInit {
       {
       country:['',[Validators.required,Validators.pattern("^[a-zA-Z]{3,100}$")]],           //call simple validators
       city:['',[Validators.required,Validators.pattern("^[a-zA-Z]{3,100}$")]],           //call simple validators
-      address:['',[Validators.required,Validators.pattern("^[a-zA-Z]{10,100}$")]],
+      address:['',[Validators.required]],
       })
 
   saveProfile(id:any)

@@ -38,22 +38,53 @@
                             <i class="fa-solid fa-chevron-down"></i>
                         </div>
                         <div id="general-info" class="collapse p-4 " >
+                            <div class="form-group m-2">
+                                <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold">Brand</label>
+                                <select formControlName="brand" [class.is-invalid]=" brand?.invalid &&  brand?.touched"  class="form-select" aria-label="Default select example">
+                                    <div *ngIf="(brand?.invalid &&  brand?.touched)">
+                                        <small class="text-danger" *ngIf=" brand?.errors?.['required']">Brand Name is required</small>
+                                    </div>
+                                    <option disabled>Open this select menu</option>
+                                    <option [value]="brand.name" *ngFor="let brand of brands">{{brand.name}}</option>
+                                  </select>
+                            </div>
                             <div class="d-flex">
-                                <div class="form-group w-50 m-2">
+                                <!-- <div class="form-group w-50 m-2">
                                     <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold"  >brand</label>
                                     <input formControlName="brand" [class.is-invalid]=" brand?.invalid &&  brand?.touched"  type="text" class="form-control ">
                                     <div *ngIf="(brand?.invalid &&  brand?.touched)">
                                         <small class="text-danger" *ngIf=" brand?.errors?.['required']">Brand Name is required</small>
                                     </div>
-                                </div>
+                                </div> -->
+                                
                                 <div class="form-group w-50 m-2">
                                     <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold">Category</label>
-                                    <select value="k" formControlName="category" [class.is-invalid]=" category?.invalid &&  category?.touched" class="form-select" aria-label="Default select example">
+                                    <select (change)="getSubCategories($event)" formControlName="category" [class.is-invalid]=" category?.invalid &&  category?.touched" class="form-select" aria-label="Default select example">
                                         <div *ngIf="(category?.invalid &&  category?.touched)">
                                             <small class="text-danger" *ngIf=" category?.errors?.['required']">Category Name is required</small>
                                         </div>
-                                        <option selected="selected">Open this select menu</option>
-                                        <option [value]="cat.Name" *ngFor="let cat of categories" >{{cat.Name}}</option>
+                                        <option disabled>Open this select menu</option>
+                                        <option [value]="cat.Name" *ngFor="let cat of categories">{{cat.Name}}</option>
+                                      </select>
+                                </div>
+                                <div class="form-group w-50 m-2" *ngIf="subCategories" >
+                                    <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold">Sub Category</label>
+                                    <select  [disabled]="true" formControlName="subCategory" [class.is-invalid]=" subCategory?.invalid &&  subCategory?.touched" class="form-select" aria-label="Default select example">
+                                        <div *ngIf="(subCategory?.invalid &&  subCategory?.touched)">
+                                            <small class="text-danger" *ngIf=" subCategory?.errors?.['required']">SubCategory Name is required</small>
+                                        </div>
+                
+                                        <option [value]="sub" *ngFor="let sub of subCategories">{{sub}}</option>
+                                      </select>
+                                </div>
+                                <div class="form-group w-50 m-2" *ngIf="subCategories?.length<=0" >
+                                    <label for="exampleFormControlInput1" class="form-label fs-5 fw-bold">Sub Category</label>
+                                    <select  [disabled]="true" formControlName="subCategory" [class.is-invalid]=" subCategory?.invalid &&  subCategory?.touched" class="form-select" aria-label="Default select example">
+                                        <div *ngIf="(subCategory?.invalid &&  subCategory?.touched)">
+                                            <small class="text-danger" *ngIf=" subCategory?.errors?.['required']">SubCategory Name is required</small>
+                                        </div>
+                
+                                        <option [value]="subCategory?.value">{{subCategory?.value}}</option>
                                       </select>
                                 </div>
                             </div>
@@ -105,6 +136,35 @@
                                 <label  for="exampleFormControlInput1" class="form-label fs-5 fw-bold">discount</label>
                                 <input formControlName="discound"[class.is-invalid]="discound?.invalid && discound?.touched" type="number"  class="form-control ">
                                 <small class="text-danger" *ngIf="discound?.invalid && discound?.touched"> Discount must be in percent</small> 
+                            </div>
+                            <div class="mb-3">
+                                <label for="addColors" class="form-label fs-5 fw-bold">Colors(Optional)</label>
+                                <select  class="form-control" id="addColors"(change)="addColors($event)">
+                                    <option disabled>Select Color</option>
+                                    <option *ngFor="let color of colors">{{color}}</option>
+                                </select>
+
+
+                            </div>
+                            <div class=" tags  p-3" *ngIf="selectedColors?.length>0">
+                                <ul class="list-unstyled" >
+                                    <li class="tag  align-items-center" *ngFor="let res of selectedColors;index as i">
+                                      <span class="pe-3">{{res}}</span>
+                                      <Span style="cursor:pointer;" (click)="removeColor(i)"> <i class="fa-solid fa-close" ></i></Span>
+                                    </li>
+                                </ul> 
+                              </div>
+                              <div class="mb-3">
+                                <label for="size" class="form-label fs-5 fw-bold">Sizes (optional)</label>
+                                <input type="text" class="form-control" id="size" value=""(keyup)="addSize($event)"  required>
+                            </div>
+                            <div class="tags p-3" *ngIf="productSizes?.length>0">
+                              <ul class="list-unstyled" >
+                                  <li class="tag  align-items-center" *ngFor="let size of productSizes;index as i">
+                                    <span class="pe-3">{{size}}</span>
+                                    <Span style="cursor:pointer;" (click)="removeSize(i)"> <i class="fa-solid fa-close" ></i></Span>
+                                  </li>
+                              </ul> 
                             </div>
                             
     

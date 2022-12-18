@@ -9,13 +9,13 @@ export class UserRole
     public phone:any;
     public Password:string;
     public role:string;
-    public addresses:Address[];
-    public generalInfo:GeneralInfo;
+    public addresses:any[];
+    public generalInfo:any;
     public image:string; 
     public responsability:string[]; 
 
 
-    constructor(userName:string,lastName:string,userEmail:string,phone:any,Password:string,role:string,addresses:Address[],generalInfo:GeneralInfo,image:string,responsability:string[])
+    constructor(userName:string,lastName:string,userEmail:string,phone:any,Password:string,role:string,addresses:any[],generalInfo:any,image:string,responsability:string[])
     {
         this.userName=userName;
         this.lastName=lastName;

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserAuthService } from 'src/app/services/user-auth.service';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor( ) { }
+  constructor( private userAuth:UserAuthService,private router:Router) { }
 
   ngOnInit(): void {
  
@@ -16,4 +18,9 @@ export class HeaderComponent implements OnInit {
    toggleSidebar(){
     document.body.classList.toggle("toggle-sidebar");
    }
+   logOut(){
+    this.userAuth.logOut();
+    this.router.navigate([""]);
+
+  }
 }

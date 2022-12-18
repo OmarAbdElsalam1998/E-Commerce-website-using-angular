@@ -103,177 +103,22 @@
         <section class="categories py-5 ">
            <div class="container">
             <owl-carousel-o [options]="customOptions">
-                <ng-template carouselSlide>
-                    <div class="category-box wow bounceInUp slide">
-                        <div class="category">
-                            <div class="overlay"></div>
-                            <div class="category-image">
-                                <img src="../../assets/images/catrgories/men.jpg">
-                            </div>
-                            <div class="category-name">
-                                <h4>Men's Fashion</h4>  
-                                 <a [routerLink]="['/category/mens-shirts']" routerLinkActive="router-link-active" >Shop Now!</a>
-                            </div>
-                        </div>
-                    </div>
-                </ng-template>
-                <ng-template carouselSlide>
+               
+                <ng-template carouselSlide *ngFor="let cat of categories">
                     <div class="category-box wow bounceInUp">
                         <div class="category">
                             <div class="overlay"></div>
                             <div class="category-image">
-                                <img src="../../assets/images/catrgories/women-desses.jpg">
+                                <img [src]="cat.Img">
                             </div>
                             <div class="category-name">
-                                <h4>Women's Fashion</h4>  
-                                <a [routerLink]="['/category/womens-dresses']" routerLinkActive="router-link-active" >Shop Now!</a>
+                                <h4>{{cat.Name}}</h4>  
+                                <a [routerLink]="'category/'+cat.Name" routerLinkActive="router-link-active" >Shop Now!</a>
                             </div>
                         </div>
                     </div>
                 </ng-template>
-                <ng-template carouselSlide>
-                    <div class="category-box wow bounceInUp">
-                        <div class="category">
-                            <div class="overlay"></div>
-                            <div class="category-image">
-                                <img src="../../assets/images/catrgories/smart-phones.jpg">
-                            </div>
-                            <div class="category-name">
-                                <h4>Smart Phones </h4>  
-                                <a [routerLink]="['/category/smartphones']" routerLinkActive="router-link-active" >Shop Now!</a>
-                            </div>
-                        </div>
-                       
-                    </div>
-                </ng-template>
-                <ng-template carouselSlide>
-                    <div class="category-box wow bounceInUp">
-                        <div class="category">
-                            <div class="overlay"></div>
-                            <div class="category-image">
-                                <img src="../../assets/images/catrgories/laptops.jpg">
-                            </div>
-                            <div class="category-name">
-                                <h4>Laptops</h4>  
-                                 <a [routerLink]="['/category/laptops']" routerLinkActive="router-link-active" >Shop Now!</a>
-                              
-                          
-                            </div>
-                        </div>
-                    </div>
-                </ng-template>
-                <ng-template carouselSlide>
-                    <div class="category-box wow bounceInUp">
-                        <div class="category">
-                            <div class="overlay"></div>
-                            <div class="category-image">
-                                <img src="../../assets/images/catrgories/watches.jpg">
-                            </div>
-                            <div class="category-name">
-                                <h4>Watches</h4>  
-                                <a [routerLink]="['/category/mens-watches']" routerLinkActive="router-link-active" >Shop Now!</a>
-                              
-                                
-                            </div>
-                        </div>
-                    </div>
-                </ng-template>
-                <ng-template carouselSlide>
-                    <div class="category-box wow bounceInUp">
-                        <div class="category">
-                            <div class="overlay"></div>
-                            <div class="category-image">
-                                <img src="../../assets/images/catrgories/sunglasses.jpg">
-                            </div>
-                            <div class="category-name">
-                                <h4>Sunglasses</h4>  
-                                <a [routerLink]="['/category/sunglasses']" routerLinkActive="router-link-active" >Shop Now!</a>
-                              
-                                  
-                            </div>
-                        </div>
-                    </div>
-                </ng-template>
-                <ng-template carouselSlide>
-                    <div class="category-box wow bounceInUp">
-                        <div class="category">
-                            <div class="overlay"></div>
-                            <div class="category-image">
-                                <img src="../../assets/images/catrgories/automotive.jpg">
-                            </div>
-                            <div class="category-name">
-                                <h4>Automotive</h4>  
-                                <a [routerLink]="['/category/automotive']" routerLinkActive="router-link-active" >Shop Now!</a>
-                              
-                                  
-                            </div>
-                        </div>
-                    </div>
-                </ng-template>
-                <ng-template carouselSlide>
-                    <div class="category-box wow bounceInUp">
-                        <div class="category">
-                            <div class="overlay"></div>
-                            <div class="category-image">
-                                <img src="../../assets/images/catrgories/motorcycle.jpg">
-                            </div>
-                            <div class="category-name">
-                                <h4>Motocycle</h4>  
-                                <a [routerLink]="['/category/motorcycle']" routerLinkActive="router-link-active" >Shop Now!</a>
-                              
-                                  
-                            </div>
-                        </div>
-                    </div>
-                </ng-template>
-                <ng-template carouselSlide>
-                    <div class="category-box wow bounceInUp">
-                        <div class="category">
-                            <div class="overlay"></div>
-                            <div class="category-image">
-                                <img src="../../assets/images/catrgories/furnature.jpg">
-                            </div>
-                            <div class="category-name">
-                                <h4>Furniture</h4>  
-                                <a [routerLink]="['/category/furniture']" routerLinkActive="router-link-active" >Shop Now!</a>
-                              
-                                  
-                            </div>
-                        </div>
-                    </div>
-                </ng-template>
-                <ng-template carouselSlide>
-                    <div class="category-box wow bounceInUp">
-                        <div class="category">
-                            <div class="overlay"></div>
-                            <div class="category-image">
-                                <img src="../../assets/images/catrgories/groceries.jpg">
-                            </div>
-                            <div class="category-name">
-                                <h4>Groceries</h4>  
-                                <a [routerLink]="['/category/groceries']" routerLinkActive="router-link-active" >Shop Now!</a>
-                              
-                                  
-                            </div>
-                        </div>
-                    </div>
-                </ng-template>
-                <ng-template carouselSlide>
-                    <div class="category-box wow bounceInUp">
-                        <div class="category">
-                            <div class="overlay"></div>
-                            <div class="category-image">
-                                <img src="../../assets/images/catrgories/skincare.jpg">
-                            </div>
-                            <div class="category-name">
-                                <h4>Skin Care</h4>  
-                                <a [routerLink]="['/category/skincare']" routerLinkActive="router-link-active" >Shop Now!</a>
-                              
-                                  
-                            </div>
-                        </div>
-                    </div>
-                </ng-template>
+               
               </owl-carousel-o>
             
            </div>
@@ -281,74 +126,24 @@
 
 
 
-        <!-- High Rated Products -->
-        <section class="high-rate-products py-3">
-            <div class="container">
-                <h2 class="special-heading fw-bold p-4">High Rated </h2>
-                <owl-carousel-o [options]="customOptions">
-                    <ng-template carouselSlide  *ngFor="let product of highRated" >
-                        <div class="product-box p-2 m-2">
-                            <div class="product">
-                                <div class="overlay"></div>
-                                <div class="product-image">
-                                    <img class="img-fluid" [src]="product.thumbnail">
-                                </div>
-                                <div class="product-operations d-flex">
-                                    <div class="add-to-cart p-3"(click)="addToCart(product.id)" >
-                                        <i class="fa-light fa-cart-shopping fa-2x"></i>
-                                    </div>
-                                    <div class="save p-3 "(click)="addToFavourite(product.id)">
-                                        <i class="fa-light fa-heart fa-2x"></i>
-                                    </div>
-                                    <div class="details p-3 " (click)="seeDetails(product.id)" >
-                                        <i class="fa-light fa-arrow-right fa-2x"></i>  
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-info py-3">
-                                <div class="product-name px-2 pt-2">
-                                    <h4 class=" m-0" [title]="product.title">{{product.title}}</h4>
-                      
-                                </div>
-                                <div class="product-price px-2 pt-3 d-flex align-items-center">
-                                    <span class="new-price">EGP <span >{{product.price-product.price*product.discountPercentage/100 |number :'1.1-2'}}</span></span>
-                                    <span class="old-price ">EGP {{product.price | number}}</span>
-                                   
-                                </div>
-                                <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
-                                    <span class="discount">{{product.discountPercentage/100  | percent }} OFF</span>
-                                    <ngb-rating class="rate" [max]="5" [rate]="product.rating" [readonly]="true"></ngb-rating>
-                                    <!-- <span class="rate "><i class="fa-solid fa-star-sharp"></i>{{product.rating}} </span> -->
-                                    
-                                </div> 
-                            </div>
-                        </div>
-                    </ng-template>
-                   
-                  
-                  </owl-carousel-o>
-              
-            </div>
-         </section>
-
          
         <!-- men shirts Products -->
-        <section class="men-shirts-products py-3">
+        <section class="men-shirts-products py-3 section-background">
             <div class="container">
-                <h2 class="special-heading  p-4">men's shirts </h2>
+                <h2 class="special-heading  p-4">men Fashion </h2>
                 <owl-carousel-o [options]="customOptions">
-                    <ng-template carouselSlide  *ngFor="let product of menShirts" >
+                    <ng-template carouselSlide  *ngFor="let product of menFashion" >
                         <div class="product-box p-2 m-2">
                             <div class="product">
                                 <div class="overlay"></div>
                                 <div class="product-image">
-                                    <img class="img-fluid"[src]="product.thumbnail">
+                                    <img class="img-fluid"[src]="product.images[0]">
                                 </div>
                                 <div class="product-operations d-flex">
                                     <div class="add-to-cart p-3"(click)="addToCart(product.id)" >
                                         <i class="fa-light fa-cart-shopping fa-2x"></i>
                                     </div>
-                                    <div class="save p-3 "(click)="addToFavourite(product.id)">
+                                    <div class="save p-3 "(click)="addToFavorites(product.id)">
                                         <i class="fa-light fa-heart fa-2x"></i>
                                     </div>
                                     <div class="details p-3 " (click)="seeDetails(product.id)" >
@@ -361,15 +156,29 @@
                                     <h4 class=" m-0" [title]="product.title">{{product.title}}</h4>
                       
                                 </div>
-                                <div class="product-price px-2 pt-3 d-flex align-items-center">
-                                    <span class="new-price">EGP <span >{{product.price-product.price*product.discountPercentage/100 |number :'1.1-2'}}</span></span>
-                                    <span class="old-price ">EGP {{product.price | number}}</span>
-                                   
+                                <div *ngIf="product.discound" >
+                                    <div class="product-price px-2 pt-3 d-flex align-items-center">
+                                        <span class="new-price">EGP <span >{{product.price-product.price*product.discound/100 |number :'1.0-1'}}</span></span>
+                                        <span class="old-price ">EGP {{product.price | number}}</span>
+                                        
+                                     </div>
+                                     <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
+                                         <span class="discount">{{product.discound/100  | percent  }} OFF</span>
+                                         <ngb-rating class="rate" [max]="5" [rate]="product.rating" [readonly]="true"></ngb-rating>
+                                         
+                                     </div> 
                                 </div>
-                                <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
-                                    <span class="discount">{{product.discountPercentage/100  | percent }} OFF</span>
-                                    <ngb-rating class="rate" [max]="5" [rate]="product.rating" [readonly]="true"></ngb-rating>
-                                    
+                                <div *ngIf="!product.discound" >
+                                    <div class="product-price px-2 pt-3 d-flex align-items-center">
+                                        <span class="new-price">EGP {{product.price |number :'1.0-0'}}</span>
+                                        
+                                     </div>
+                                     <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
+                                        <span class="discount" style="visibility: hidden"> OFF</span>
+
+                                        <ngb-rating class="rate" [max]="5" [rate]="product.rating" [readonly]="true"></ngb-rating>
+                                         
+                                     </div> 
                                 </div> 
                             </div>
                         </div>
@@ -383,22 +192,87 @@
          </section>
           
         <!-- strat women dresses Products -->
+        <section class="men-shirts-products py-3 ">
+            <div class="container">
+                <h2 class="special-heading  p-4">women Fashion </h2>
+                <owl-carousel-o [options]="customOptions">
+                    <ng-template carouselSlide  *ngFor="let product of womenFashion" >
+                        <div class="product-box p-2 m-2">
+                            <div class="product">
+                                <div class="overlay"></div>
+                                <div class="product-image">
+                                    <img class="img-fluid" [src]="product.images[0]">
+                                </div>
+                                <div class="product-operations d-flex">
+                                    <div class="add-to-cart p-3"(click)="addToCart(product.id)" >
+                                        <i class="fa-light fa-cart-shopping fa-2x"></i>
+                                    </div>
+                                    <div class="save p-3 "(click)="addToFavorites(product.id)">
+                                        <i class="fa-light fa-heart fa-2x"></i>
+                                    </div>
+                                    <div class="details p-3 " (click)="seeDetails(product.id)" >
+                                        <i class="fa-light fa-arrow-right fa-2x"></i>  
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-info py-3">
+                                <div class="product-name px-2 pt-2">
+                                    <h4 class=" m-0" [title]="product.title">{{product.title}}</h4>
+                      
+                                </div>
+                                <div *ngIf="product.discound" >
+                                    <div class="product-price px-2 pt-3 d-flex align-items-center">
+                                        <span class="new-price">EGP <span >{{product.price-product.price*product.discound/100 |number :'1.0-1'}}</span></span>
+                                        <span class="old-price ">EGP {{product.price | number}}</span>
+                                        
+                                     </div>
+                                     <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
+                                         <span class="discount">{{product.discound/100  | percent  }} OFF</span>
+                                         <ngb-rating class="rate" [max]="5" [rate]="product.rating" [readonly]="true"></ngb-rating>
+                                         
+                                     </div> 
+                                </div>
+                                <div *ngIf="!product.discound" >
+                                    <div class="product-price px-2 pt-3 d-flex align-items-center">
+                                        <span class="new-price">EGP {{product.price |number :'1.0-0'}}</span>
+                                        
+                                     </div>
+                                     <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
+                                        <span class="discount" style="visibility: hidden"> OFF</span>
+
+                                        <ngb-rating class="rate" [max]="5" [rate]="product.rating" [readonly]="true"></ngb-rating>
+                                         
+                                     </div> 
+                                </div> 
+                            </div>
+                        </div>
+                    </ng-template>
+                   
+                  
+                  </owl-carousel-o>
+
+            </div>
+         </section>
+        <!-- End women fashion products -->
+
+
+        <!-- strat Electronics  Products -->
         <section class="men-shirts-products py-3 section-background">
             <div class="container">
-                <h2 class="special-heading  p-4">women's dresses </h2>
+                <h2 class="special-heading  p-4">Electronics </h2>
                 <owl-carousel-o [options]="customOptions">
-                    <ng-template carouselSlide  *ngFor="let product of womenDresses" >
+                    <ng-template carouselSlide  *ngFor="let product of electronics" >
                         <div class="product-box p-2 m-2">
                             <div class="product">
                                 <div class="overlay"></div>
                                 <div class="product-image">
-                                    <img class="img-fluid" [src]="product.thumbnail">
+                                    <img class="img-fluid" [src]="product.images[0]">
                                 </div>
                                 <div class="product-operations d-flex">
                                     <div class="add-to-cart p-3"(click)="addToCart(product.id)" >
                                         <i class="fa-light fa-cart-shopping fa-2x"></i>
                                     </div>
-                                    <div class="save p-3 "(click)="addToFavourite(product.id)">
+                                    <div class="save p-3 "(click)="addToFavorites(product.id)">
                                         <i class="fa-light fa-heart fa-2x"></i>
                                     </div>
                                     <div class="details p-3 " (click)="seeDetails(product.id)" >
@@ -411,15 +285,29 @@
                                     <h4 class=" m-0" [title]="product.title">{{product.title}}</h4>
                       
                                 </div>
-                                <div class="product-price px-2 pt-3 d-flex align-items-center">
-                                    <span class="new-price">EGP <span >{{product.price-product.price*product.discountPercentage/100 |number :'1.1-2'}}</span></span>
-                                    <span class="old-price ">EGP {{product.price | number}}</span>
-                                   
+                                <div *ngIf="product.discound" >
+                                    <div class="product-price px-2 pt-3 d-flex align-items-center">
+                                        <span class="new-price">EGP <span >{{product.price-product.price*product.discound/100 |number :'1.0-1'}}</span></span>
+                                        <span class="old-price ">EGP {{product.price | number}}</span>
+                                        
+                                     </div>
+                                     <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
+                                         <span class="discount">{{product.discound/100  | percent  }} OFF</span>
+                                         <ngb-rating class="rate" [max]="5" [rate]="product.rating" [readonly]="true"></ngb-rating>
+                                         
+                                     </div> 
                                 </div>
-                                <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
-                                    <span class="discount">{{product.discountPercentage/100  | percent }} OFF</span>
-                                    <ngb-rating class="rate" [max]="5" [rate]="product.rating" [readonly]="true"></ngb-rating>
-                                    
+                                <div *ngIf="!product.discound" >
+                                    <div class="product-price px-2 pt-3 d-flex align-items-center">
+                                        <span class="new-price">EGP {{product.price |number :'1.0-0'}}</span>
+                                        
+                                     </div>
+                                     <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
+                                        <span class="discount" style="visibility: hidden"> OFF</span>
+
+                                        <ngb-rating class="rate" [max]="5" [rate]="product.rating" [readonly]="true"></ngb-rating>
+                                         
+                                     </div> 
                                 </div> 
                             </div>
                         </div>
@@ -430,24 +318,26 @@
 
             </div>
          </section>
-        <!-- End women dresses products -->
-        <!-- strat smartPhones Products -->
-        <section class="men-shirts-products py-3">
+        <!-- End electronics products -->
+
+        
+        <!-- High Rated Products -->
+        <section class=" py-3 ">
             <div class="container">
-                <h2 class="special-heading  p-4">SmartPhones </h2>
+                <h2 class="special-heading fw-bold p-4">SuperMarket </h2>
                 <owl-carousel-o [options]="customOptions">
-                    <ng-template carouselSlide  *ngFor="let product of smartPhones" >
+                    <ng-template carouselSlide  *ngFor="let product of superMarket" >
                         <div class="product-box p-2 m-2">
                             <div class="product">
                                 <div class="overlay"></div>
                                 <div class="product-image">
-                                    <img class="img-fluid" [src]="product.thumbnail">
+                                    <img class="img-fluid" [src]="product.images[0]">
                                 </div>
                                 <div class="product-operations d-flex">
                                     <div class="add-to-cart p-3"(click)="addToCart(product.id)" >
                                         <i class="fa-light fa-cart-shopping fa-2x"></i>
                                     </div>
-                                    <div class="save p-3 "(click)="addToFavourite(product.id)">
+                                    <div class="save p-3 "(click)="addToFavorites(product.id)">
                                         <i class="fa-light fa-heart fa-2x"></i>
                                     </div>
                                     <div class="details p-3 " (click)="seeDetails(product.id)" >
@@ -460,15 +350,29 @@
                                     <h4 class=" m-0" [title]="product.title">{{product.title}}</h4>
                       
                                 </div>
-                                <div class="product-price px-2 pt-3 d-flex align-items-center">
-                                    <span class="new-price">EGP <span >{{product.price-product.price*product.discountPercentage/100 |number :'1.1-2'}}</span></span>
-                                    <span class="old-price ">EGP {{product.price | number}}</span>
-                                   
+                                <div *ngIf="product.discound" >
+                                    <div class="product-price px-2 pt-3 d-flex align-items-center">
+                                        <span class="new-price">EGP <span >{{product.price-product.price*product.discound/100 |number :'1.0-1'}}</span></span>
+                                        <span class="old-price ">EGP {{product.price | number}}</span>
+                                        
+                                     </div>
+                                     <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
+                                         <span class="discount">{{product.discound/100  | percent  }} OFF</span>
+                                         <ngb-rating class="rate" [max]="5" [rate]="product.rating" [readonly]="true"></ngb-rating>
+                                         
+                                     </div> 
                                 </div>
-                                <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
-                                    <span class="discount">{{product.discountPercentage/100  | percent }} OFF</span>
-                                    <ngb-rating class="rate" [max]="5" [rate]="product.rating" [readonly]="true"></ngb-rating>
-                                    
+                                <div *ngIf="!product.discound" >
+                                    <div class="product-price px-2 pt-3 d-flex align-items-center">
+                                        <span class="new-price">EGP {{product.price |number :'1.0-0'}}</span>
+                                        
+                                     </div>
+                                     <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
+                                        <span class="discount" style="visibility: hidden"> OFF</span>
+
+                                        <ngb-rating class="rate" [max]="5" [rate]="product.rating" [readonly]="true"></ngb-rating>
+                                         
+                                     </div> 
                                 </div> 
                             </div>
                         </div>
@@ -476,27 +380,29 @@
                    
                   
                   </owl-carousel-o>
-
+              
             </div>
          </section>
-        <!-- End laptops products -->
-        <!-- strat laptops Products -->
+
+
+
+        <!-- strat Beauty-Health  Products -->
         <section class="men-shirts-products section-background py-3">
             <div class="container">
-                <h2 class="special-heading  p-4">Laptops </h2>
+                <h2 class="special-heading  p-4">Beauty-Health </h2>
                 <owl-carousel-o [options]="customOptions">
-                    <ng-template carouselSlide  *ngFor="let product of laptops" >
+                    <ng-template carouselSlide  *ngFor="let product of beautyAndHealth" >
                         <div class="product-box p-2 m-2">
                             <div class="product">
                                 <div class="overlay"></div>
                                 <div class="product-image">
-                                    <img class="img-fluid" [src]="product.thumbnail">
+                                    <img class="img-fluid" [src]="product.images[0]">
                                 </div>
                                 <div class="product-operations d-flex">
                                     <div class="add-to-cart p-3"(click)="addToCart(product.id)" >
                                         <i class="fa-light fa-cart-shopping fa-2x"></i>
                                     </div>
-                                    <div class="save p-3 "(click)="addToFavourite(product.id)">
+                                    <div class="save p-3 "(click)="addToFavorites(product.id)">
                                         <i class="fa-light fa-heart fa-2x"></i>
                                     </div>
                                     <div class="details p-3 " (click)="seeDetails(product.id)" >
@@ -509,16 +415,30 @@
                                     <h4 class=" m-0" [title]="product.title">{{product.title}}</h4>
                       
                                 </div>
-                                <div class="product-price px-2 pt-3 d-flex align-items-center">
-                                    <span class="new-price">EGP <span >{{product.price-product.price*product.discountPercentage/100 |number :'1.1-2'}}</span></span>
-                                    <span class="old-price ">EGP {{product.price | number}}</span>
-                                   
+                                <div *ngIf="product.discound" >
+                                    <div class="product-price px-2 pt-3 d-flex align-items-center">
+                                        <span class="new-price">EGP <span >{{product.price-product.price*product.discound/100 |number :'1.0-1'}}</span></span>
+                                        <span class="old-price ">EGP {{product.price | number}}</span>
+                                        
+                                     </div>
+                                     <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
+                                         <span class="discount">{{product.discound/100  | percent  }} OFF</span>
+                                         <ngb-rating class="rate" [max]="5" [rate]="product.rating" [readonly]="true"></ngb-rating>
+                                         
+                                     </div> 
                                 </div>
-                                <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
-                                    <span class="discount">{{product.discountPercentage/100  | percent }} OFF</span>
-                                    <ngb-rating class="rate" [max]="5" [rate]="product.rating" [readonly]="true"></ngb-rating>
-                                    
-                                </div> 
+                                <div *ngIf="!product.discound" >
+                                    <div class="product-price px-2 pt-3 d-flex align-items-center">
+                                        <span class="new-price">EGP {{product.price |number :'1.0-0'}}</span>
+                                        
+                                     </div>
+                                     <div class="product-discount-rate px-2 pt-3 d-flex justify-content-between">
+                                        <span class="discount" style="visibility: hidden"> OFF</span>
+
+                                        <ngb-rating class="rate" [max]="5" [rate]="product.rating" [readonly]="true"></ngb-rating>
+                                         
+                                     </div> 
+                                </div>  
                             </div>
                         </div>
                     </ng-template>
@@ -528,7 +448,27 @@
 
             </div>
          </section>
-        <!-- End women dresses products -->
+        <!-- End Beauty-Health  products -->
+
+
+        
+        <!-- strat Beauty-Health  Products -->
+        <section class="brands-products py-3">
+            <div class="container">
+                <h2 class="special-heading  p-4">Top Brands </h2>
+                <owl-carousel-o [options]="customOptions">
+                    <ng-template carouselSlide  *ngFor="let brand of brands" >
+                        <div class="brand-image my-4">
+                            <img class="img-fluid" [src]="brand.Img">
+                        </div>
+                    </ng-template>
+                   
+                  
+                  </owl-carousel-o>
+
+            </div>
+         </section>
+        <!-- End Beauty-Health  products -->
 
         
     </main>

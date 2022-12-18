@@ -33,6 +33,24 @@ export class AdminRoleService {
     })) 
   }
 
+     //get admins
+     getAdmins():Observable<any>
+     {
+       return this.http.get(this.url+"?role=admin")
+       .pipe(catchError((err)=>{
+         return throwError(() => err.message||"internal Server Error" )
+       })) 
+     }
+ //get admins
+ getCustomers():Observable<any>
+ {
+   return this.http.get(this.url+"?role=customer")
+   .pipe(catchError((err)=>{
+     return throwError(() => err.message||"internal Server Error" )
+   })) 
+ }
+
+
    //create new user 
    postUser(user:any):Observable<any>
    {
@@ -45,16 +63,8 @@ export class AdminRoleService {
     //update user by put
     putUser(user:UserRole ,id:any):Observable<any>
    {
-    const body={
-      userName:user.userName,
-      lastName:user.lastName,
-      userEmail:user.userEmail,
-      Password:user.Password,
-      role:user.role,
-      image:user.image,
-      // id:user.id,
-    }
-    return this.http.put(this.url+"/"+id, body)
+   
+    return this.http.put(this.url+"/"+id, user)
     .pipe(catchError((err)=>{
       return throwError(() => err.message||"internal Server Error" )
     })) 

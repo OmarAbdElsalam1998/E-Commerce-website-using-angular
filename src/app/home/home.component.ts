@@ -3,7 +3,14 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import * as $ from 'jquery';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { BrandsService } from '../services/brands.service';
+import { CartService } from '../services/cart.service';
+import { CategoreisService } from '../services/categoreis.service';
+import { FavouriteService } from '../services/favourite.service';
 import { ProductsApiService } from '../services/products-api.service';
+import { ProductsService } from '../services/products.service';
+import { Cart } from '../shares classes/cart';
+import { Favourite } from '../shares classes/favourite';
 
 @Component({
   selector: 'app-home',
@@ -12,13 +19,19 @@ import { ProductsApiService } from '../services/products-api.service';
 })
 export class HomeComponent implements OnInit {
    title="Market";
-   highRated:any;
-   menShirts:any;
-   womenDresses:any;
-   smartPhones:any;
-   laptops:any;
+   superMarket:any;
+   menFashion:any;
+   womenFashion:any;
+   electronics:any;
+   beautyAndHealth:any;
+   favouriteItem:any;
+   cartItem:any;
+   brands:any;
+   categories:any;
 
-  constructor(private titleService:Title,public ProductsServic:ProductsApiService,private router:Router) { }
+  constructor(private titleService:Title,public ProductsServic:ProductsService,private router:Router,
+    private brandService:BrandsService,private categoryService:CategoreisService,private favouriteService:FavouriteService
+    ,private cart:CartService) { }
   customOptions: OwlOptions = {
     loop: false,
     mouseDrag: true,
@@ -48,39 +61,85 @@ export class HomeComponent implements OnInit {
     this.titleService.setTitle(this.title);
 
     //get high ratrd products
-    this.ProductsServic.getAllProducts().subscribe(data=>{
-      this.highRated=data.products.sort((a:any,b:any)=>b.rating -a.rating);
+    this.ProductsServic.Getproductsbycategories("SuperMarket").subscribe(data=>{
+      // this.highRated=data.sort((a:any,b:any)=>b.rating -a.rating);
+      this.superMarket=data;
     });
 
 
     //get product from men shirts Categoty
-    this.ProductsServic.Getproductsbycategories("mens-shirts").subscribe(data=>{
-      this.menShirts=data.products;
+    this.ProductsServic.Getproductsbycategories("Men").subscribe(data=>{
+      this.menFashion=data;
       console.log(data);
     });
     //get product from womenDresses Categoty
-    this.ProductsServic.Getproductsbycategories("womens-dresses").subscribe(data=>{
-      this.womenDresses=data.products;
+    this.ProductsServic.Getproductsbycategories("Women").subscribe(data=>{
+      this.womenFashion=data;
       console.log(data);
     });
     //get product from men shirts Categoty
-    this.ProductsServic.Getproductsbycategories("smartphones").subscribe(data=>{
-      this.smartPhones=data.products;
+    this.ProductsServic.Getproductsbycategories("Electronics").subscribe(data=>{
+      this.electronics=data;
       console.log(data);
     });
     //get product from men shirts Categoty
-    this.ProductsServic.Getproductsbycategories("laptops").subscribe(data=>{
-      this.laptops=data.products;
+    this.ProductsServic.Getproductsbycategories("Beauty-Health").subscribe(data=>{
+      this.beautyAndHealth=data;
       console.log(data);
+    });
+
+    //Get our Brands
+    this.brandService.getAllbrands().subscribe(res=>{
+      this.brands=res;
+    })
+    this.categoryService.getAllcategroies().subscribe(res=>{
+      this.categories=res;
     });
 
   }
 
-  addToCart(productId:any){
+  addToCart(index:any){
+    
+    this.cart.getProductById(index).subscribe(res=>{
+      this.cartItem=res;
+      console.log(res);
+      console.log(this.cartItem)
+      var cart =new Cart(this.cartItem.id,this.cartItem.title,this.cartItem.price,this.cartItem.discound,this.cartItem.images[0],1);
+    this.cart.saveproduct(cart).subscribe(data =>
+      {
+        // this.usersArr=data;
+      },
+      error =>
+        {
+        }
+        );
+
+
+    });
+
+   
+    
 
   }
-  addToFavourite(productId:any){
 
+  //add item to favourite
+  addToFavorites(index:any){
+    this.favouriteService.getProductById(index).subscribe(res=>{
+      this.favouriteItem=res;
+      console.log(res);
+      console.log(this.favouriteItem)
+      var favourites =new Favourite(this.favouriteItem.id,this.favouriteItem.title,this.favouriteItem.images[0])
+    this.favouriteService.saveproduct(favourites).subscribe(data =>
+      {
+        // this.usersArr=data;
+      },
+      error =>
+        {
+        }
+        );
+
+
+    });
   }
   seeDetails(productId:any){
     this.router.navigate(["product/"+productId])

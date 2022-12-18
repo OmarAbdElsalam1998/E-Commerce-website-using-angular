@@ -60,3 +60,15 @@ $brand_color:#1363DF;
     text-decoration: none;
     background:none;
 }
+
+.tags{
+    .tag{
+        display: inline-block;
+        background: #0e9b0a;
+        color: #FFF;
+        border-radius: 8px;
+        padding: 5px 10px;
+        font-weight: bold;
+        margin: 0 2px 4px 2px;
+    }
+}

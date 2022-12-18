@@ -26,6 +26,16 @@
                         height: 200px;
                     }
                 }
+                .product-info{
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    .product-name{
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+
+                    }
+                }
             }
         }
     }

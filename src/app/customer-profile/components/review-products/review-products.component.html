@@ -1,3 +1,4 @@
+
 <div class="review-order p-4 rounded bg-white">
     <div class="header p-3 d-flex align-items-center rounded">
         <span class="icon">  <i class="fa-regular fa-calendar-lines-pen"></i></span>
@@ -6,10 +7,10 @@
 
     <div class="product d-flex align-items-center m-3 pb-3 border-bottom">
         <div class="product-image pe-4">
-            <img src="../../../../assets/images/catrgories/furnature.jpg">
+            <img [src]="currentProduct?.images[0]">
         </div>
         <div class="product-name">
-            <span class="fw-bold d-block">product name</span>
+            <span class="fw-bold d-block"> {{currentProduct?.title}}</span>
         </div>
         
     </div>
