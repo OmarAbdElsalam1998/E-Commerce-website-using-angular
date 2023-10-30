@@ -14,8 +14,8 @@ export class CartService {
   CartProductsCounter:BehaviorSubject<number>;
   cartProducts:BehaviorSubject<any>;
   // CartTotal=0;
-  url:string="http://localhost:3000/addproducts";
-  url2:string="http://localhost:3000/cart";
+  url:string="https://market-api.glitch.me/addproducts";
+  url2:string="https://market-api.glitch.me/cart";
   //  headers:HttpHeaders; 
   public productList=new BehaviorSubject<any>([]);
     constructor(private http:HttpClient) { 

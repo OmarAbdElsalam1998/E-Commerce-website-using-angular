@@ -6,7 +6,7 @@ import { catchError, Observable, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class CommentsService {
-  url="http://localhost:3000/comments";
+  url="https://market-api.glitch.me/comments";
   constructor(private http:HttpClient) { }
 
   postComment(comment:any){

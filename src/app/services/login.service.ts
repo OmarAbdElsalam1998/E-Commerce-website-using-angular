@@ -19,7 +19,7 @@ export class LoginService {
    }
   // _url:string="dB.json/save";
 
-  _url:string="http://localhost:3000/users";
+  _url:string="https://market-api.glitch.me/users";
 
   // ErrorMessage:string="";
   // dBfile:any={};

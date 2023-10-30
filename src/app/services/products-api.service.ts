@@ -14,10 +14,10 @@ export class ProductsApiService {
  prloader:BehaviorSubject<boolean>;
  searchResult:BehaviorSubject<any>;
    url:string="https://dummyjson.com/products";
-   url2:string="http://localhost:3000/addproducts";
+   url2:string="https://market-api.glitch.me/addproducts";
    url3:string="https://dummyjson.com/products/categories";
    url4:string="https://dummyjson.com/products/category";
-   url5:string="http://localhost:3000/orders";
+   url5:string="https://market-api.glitch.me/orders";
 
    httpOption;
   constructor(private http:HttpClient) { 

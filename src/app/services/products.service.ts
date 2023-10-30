@@ -6,7 +6,7 @@ import { BehaviorSubject, catchError, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductsService {
-  url:string="http://localhost:3000/addproducts";
+  url:string="https://market-api.glitch.me/addproducts";
   productList = new BehaviorSubject<any>([]);
   searchResult:BehaviorSubject<any>;
 

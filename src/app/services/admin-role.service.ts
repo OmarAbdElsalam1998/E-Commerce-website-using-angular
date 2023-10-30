@@ -11,7 +11,7 @@ export class AdminRoleService {
 
   constructor(private http:HttpClient ) { }
 
-  url="http://localhost:3000/users";
+  url="https://market-api.glitch.me/users";
 
   // userRole :UserRole = new UserRole("","","","","","",,"","",[])
 

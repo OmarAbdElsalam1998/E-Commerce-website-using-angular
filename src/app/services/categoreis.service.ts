@@ -9,7 +9,7 @@ import { Icategories } from '../shares classes/Icategories';
   providedIn: 'root'
 })
 export class CategoreisService {
-  url:string="http://localhost:3000/categories";
+  url:string="https://market-api.glitch.me/categories";
   constructor(private http:HttpClient) { }
 
   getAllcategroies():Observable<Icategories[]>

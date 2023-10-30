@@ -7,7 +7,7 @@ import { order } from '../shares classes/order';
   providedIn: 'root'
 })
 export class OrdersService {
-  url:string="http://localhost:3000/orders";
+  url:string="https://market-api.glitch.me/orders";
   constructor(private http:HttpClient) { }
 
   getOrders(){

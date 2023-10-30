@@ -10,7 +10,7 @@ export class BrandsService {
 
   
   constructor(private http: HttpClient) { }
-  baseUrl ="http://localhost:3000";
+  baseUrl ="https://market-api.glitch.me";
 
   Postbrand(data:brand){
     return this.http.post<brand>(this.baseUrl+'/brands', data);

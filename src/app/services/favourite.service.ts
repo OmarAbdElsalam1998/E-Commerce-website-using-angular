@@ -15,8 +15,8 @@ export class FavouriteService {
   favouriteProductesCounter:BehaviorSubject<number>;
   favouriteProductes:BehaviorSubject<any>;
   // CartTotal=0;
-  url:string="http://localhost:3000/addproducts";
-  url2:string="http://localhost:3000/favourite";
+  url:string="https://market-api.glitch.me/addproducts";
+  url2:string="https://market-api.glitch.me/favourite";
   //  headers:HttpHeaders; 
   public productList=new BehaviorSubject<any>([]);
     constructor(private http:HttpClient) { 
